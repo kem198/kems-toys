@@ -23,7 +23,10 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
 
   if (!birth.day) return null;
 
-  if (isSameMonth && isSameDay) {
+  if (
+    (isSameMonth && todaysEtrianDate.month.name === "鬼乎ノ日") ||
+    (isSameMonth && isSameDay)
+  ) {
     return (
       <span className="text-xs text-red-400">🎉お誕生日です！おめでとう！</span>
     );
@@ -48,6 +51,7 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
     );
   }
 
+  // TODO: 閏年の「鬼乎ノ日」の場合、2 日目ではなく 1 日目で計算する
   if (diffDays >= 1 && diffDays <= 30) {
     return (
       <span className="text-xs text-red-400">{`あと ${diffDays} 日でお誕生日です！`}</span>
