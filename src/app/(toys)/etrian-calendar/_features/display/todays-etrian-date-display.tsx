@@ -17,7 +17,7 @@ function TodaysEtrianDateDisplay() {
           {todaysEtrianDate.month.name}
           <rt className="font-normal">{todaysEtrianDate.month.kana}</rt>
         </ruby>
-        {`${todaysEtrianDate.day ? ` ${todaysEtrianDate.day} 日` : ""}`}
+        {`${todaysEtrianDate.month.name !== etrianNewYearsEve.name ? ` ${todaysEtrianDate.day} 日` : ""}`}
       </span>
       <span>です！</span>
     </p>
