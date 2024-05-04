@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import daisyui from 'daisyui';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -15,6 +17,24 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [daisyui],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          'primary': '#313539',
+          'secondary': '#009688',
+          'accent': '#67e8f9',
+          'neutral': '#01050b',
+          'base-100': '#fff4fc',
+          'info': '#38bdf8',
+          'success': '#4ade80',
+          'warning': '#fcd34d',
+          'error': '#fb7185',
+        },
+      },
+    ],
+    darkTheme: "dark"
+  },
 };
 export default config;
