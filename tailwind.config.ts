@@ -1,4 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+import typography from '@tailwindcss/typography';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import daisyui from 'daisyui';
 import type { Config } from 'tailwindcss';
 
@@ -17,7 +19,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [daisyui],
+  plugins: [typography, daisyui],
   daisyui: {
     themes: [
       {
