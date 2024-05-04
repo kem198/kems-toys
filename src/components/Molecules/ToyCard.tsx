@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function ToyCard({ title, description, link }) {
   return (
-    <div className="card w-48 bg-base-100 shadow-xl">
+    <div className="card w-48 bg-base-100 shadow-lg">
       <Link href={link}>
         <figure>
           <svg
