@@ -25,13 +25,13 @@ function FizzBuzz() {
    */
   const doFizzBuzz = (num: number) => {
     if (num % 3 === 0 && num % 5 === 0) {
-      return 'Fizz Buzz';
+      return 'Fizz Buzz!!';
     }
     if (num % 3 === 0) {
-      return 'Fizz';
+      return 'Fizz!';
     }
     if (num % 5 === 0) {
-      return 'Buzz';
+      return 'Buzz!';
     }
     return num.toString();
   };
@@ -40,23 +40,23 @@ function FizzBuzz() {
     <div>
       <button
         type="button"
-        className="mb-4 min-w-32 rounded border-b-4 border-blue-700 bg-blue-500 px-4 py-2 font-bold text-white hover:border-blue-500 hover:bg-blue-400"
+        className="btn btn-secondary w-32"
         onClick={handleClick}
       >
         {count}
       </button>
-      <p className="min-w-32 rounded bg-gray-500 px-4 py-2 text-center font-bold text-white">
-        {doFizzBuzz(count)}
-      </p>
+      <div className="mx-auto my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200">
+        <p>{doFizzBuzz(count)}</p>
+      </div>
     </div>
   );
 }
 
 export default function App() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="prose">
       <h1>Fizz Buzz</h1>
       <FizzBuzz />
-    </main>
+    </div>
   );
 }
