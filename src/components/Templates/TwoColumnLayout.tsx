@@ -1,12 +1,16 @@
 import ToyList from '@/components/Organisms/ToyList';
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
-export default function Navbar({ children }) {
+interface NavbarProps {
+  children: ReactNode;
+}
+
+export default function Navbar({ children }: NavbarProps) {
   return (
     <div>
       {/* Navbar */}
       <div className="navbar w-full bg-primary lg:min-h-fit">
-        {/* ハンバーガーアイコン */}
         <div className="flex-none lg:hidden">
           <label
             htmlFor="drawer-toggle"
