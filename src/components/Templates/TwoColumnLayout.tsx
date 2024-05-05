@@ -49,7 +49,7 @@ export default function Navbar({ title, link, children }) {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="menu min-h-full w-56 bg-base-200 p-4">
+          <div className="menu min-h-full w-64 bg-base-200 p-4">
             <ToyList />
           </div>
         </div>
