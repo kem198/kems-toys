@@ -1,6 +1,18 @@
 import Link from 'next/link';
 
-export default function ToyCard({ title, description, link, svgD }) {
+interface ToyCardProps {
+  title: string;
+  description: string;
+  link: string;
+  svgD: string;
+}
+
+export default function ToyCard({
+  title,
+  description,
+  link,
+  svgD,
+}: ToyCardProps) {
   return (
     <Link
       className="card w-48 border border-base-200 bg-base-100 shadow-lg"
