@@ -130,7 +130,7 @@ function EuclideanAlgorithm(): JSX.Element {
       <button
         type="button"
         className="btn btn-ghost w-24"
-        onClick={() => resetCounts()}
+        onClick={resetCounts}
       >
         リセット
       </button>
