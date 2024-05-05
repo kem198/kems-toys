@@ -24,17 +24,13 @@ export default function ToyList() {
           <Link href={toy.link} className={active}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
               fill="none"
               viewBox="0 0 24 24"
+              strokeWidth="1.25"
               stroke="currentColor"
+              className="h-5 w-5"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d={toy.svgD}
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d={toy.svgD} />
             </svg>
             {toy.title}
           </Link>

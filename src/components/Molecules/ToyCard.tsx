@@ -23,9 +23,9 @@ export default function ToyCard({
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth={1.25}
           stroke="currentColor"
-          className="m-8 h-16 w-16 stroke-1"
+          className="m-8 h-16 w-16"
         >
           <path strokeLinecap="round" strokeLinejoin="round" d={svgD} />
         </svg>
