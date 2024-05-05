@@ -9,7 +9,7 @@ export default function Navbar({ children }) {
         {/* ハンバーガーアイコン */}
         <div className="flex-none lg:hidden">
           <label
-            htmlFor="my-drawer-3"
+            htmlFor="drawer-toggle"
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
@@ -42,11 +42,11 @@ export default function Navbar({ children }) {
           <main className="container mx-auto my-4 px-4">{children}</main>
         </div>
         {/* サイドバーのトグル用 */}
-        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        <input id="drawer-toggle" type="checkbox" className="drawer-toggle" />
         {/* サイドバー */}
         <div className="drawer-side">
           <label
-            htmlFor="my-drawer-3"
+            htmlFor="drawer-toggle"
             aria-label="close sidebar"
             className="drawer-overlay"
           >
