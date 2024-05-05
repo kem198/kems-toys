@@ -32,7 +32,7 @@ function EuclideanAlgorithm(): JSX.Element {
    */
   const calcGcd = (m: number, n: number): number | string => {
     // 入力が自然数であるか評価する
-    if (m < 0 || n < 0) {
+    if (m <= 0 || n <= 0) {
       return 'm または n が自然数ではありません';
     }
     // 入力が m >= n であるか評価する
