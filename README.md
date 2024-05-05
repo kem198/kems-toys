@@ -1,8 +1,10 @@
 # KeM's Toys
 
+Next.js や TypeScript などの練習用に作成したツール集です。
+
 ## Deploy
 
-- [#](#)
+- [[KeM's Toys](https://kems-toys.vercel.app/)](https://kems-toys.vercel.app/)
 
 ## Reference
 
