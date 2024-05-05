@@ -4,7 +4,13 @@ Next.js や TypeScript などの練習用に作成したツール集です。
 
 ## Deploy
 
+[Vercel](https://vercel.com) にてビルドおよびデプロイを行っています。
+
 - [https://kems-toys.vercel.app/](https://kems-toys.vercel.app/)
+
+サブドメインを登録したため、次の URL でもアクセスできます。
+
+- [https://toys.kems-clew.net/](https://toys.kems-clew.net/)
 
 ## Reference
 
