@@ -24,6 +24,13 @@ function EuclideanAlgorithm(): JSX.Element {
   };
 
   /**
+   * m と n を初期値 (1) にリセットする関数
+   */
+  const resetCounts = () => {
+    setCounts({ m: 1, n: 1 });
+  };
+
+  /**
    * 最大公約数を計算する関数
    * @param {number} m - 自然数 m
    * @param {number} n - 自然数 n
@@ -118,6 +125,15 @@ function EuclideanAlgorithm(): JSX.Element {
       <div className="flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
         <p>{calcGcd(counts.m, counts.n)}</p>
       </div>
+
+      {/* リセット */}
+      <button
+        type="button"
+        className="btn btn-ghost w-24"
+        onClick={() => resetCounts()}
+      >
+        リセット
+      </button>
     </div>
   );
 }

@@ -43,6 +43,13 @@ function FizzBuzz() {
     setCount((prevCount) => prevCount + amount);
   };
 
+  /**
+   * count をリセットする関数
+   */
+  const resetCount = () => {
+    setCount(1);
+  };
+
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       {/* 加算減算させる UI */}
@@ -69,6 +76,15 @@ function FizzBuzz() {
       <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
         <p>{doFizzBuzz(count)}</p>
       </div>
+
+      {/* リセット */}
+      <button
+        type="button"
+        className="btn btn-ghost w-24"
+        onClick={() => resetCount()}
+      >
+        リセット
+      </button>
     </div>
   );
 }
