@@ -1,3 +1,4 @@
+import ToyList from '@/components/Organisms/ToyList';
 import Link from 'next/link';
 
 export default function Navbar({ title, link, children }) {
@@ -46,15 +47,10 @@ export default function Navbar({ title, link, children }) {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu min-h-full w-56 bg-base-200 p-4">
+          <div className="menu min-h-full w-56 bg-base-200 p-4">
             {/* Sidebar content here */}
-            <li>
-              <Link href={link}>{title}</Link>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul>
+            <ToyList />
+          </div>
         </div>
       </div>
     </div>
