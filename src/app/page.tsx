@@ -1,5 +1,5 @@
+import ToysData from '@/assets/toys.json';
 import ToyCard from '@/components/Molecules/ToyCard';
-import ToysData from './toys.json';
 
 // Toysオブジェクトの型をアノテーション
 const Toys = ToysData;
