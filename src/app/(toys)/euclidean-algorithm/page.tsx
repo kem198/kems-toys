@@ -4,12 +4,14 @@ import { MouseEventHandler, useState } from 'react';
 
 type UpdateCountFunction = MouseEventHandler<HTMLButtonElement>;
 
-function EuclideanAlgorithm() {
+function EuclideanAlgorithm(): JSX.Element {
+  // 状態フックを使用して m と n の状態を管理する
   const [counts, setCounts] = useState<{ m: number; n: number }>({
     m: 1,
     n: 1,
   });
 
+  // ボタンクリック時の処理関数
   const updateCount: UpdateCountFunction = (event) => {
     const { name = '', value = '0' } = event.currentTarget.dataset;
     const addNum = parseInt(value, 10);
@@ -22,14 +24,18 @@ function EuclideanAlgorithm() {
   };
 
   /**
-   * 2 つの自然数について最大公約数を求める関数
-   *
+   * 最大公約数を計算する関数
+   * @param {number} m - 自然数 m
+   * @param {number} n - 自然数 n
+   * @returns {number | string} - 最大公約数またはエラーメッセージ
    * @see https://ja.wikipedia.org/wiki/ユークリッドの互除法
    */
   const calcGcd = (m: number, n: number): number | string => {
+    // 入力が自然数であるか評価する
     if (m < 0 || n < 0) {
       return 'm または n が自然数ではありません';
     }
+    // 入力が m >= n であるか評価する
     if (!(m >= n)) {
       return 'm ≧ n ではありません';
     }

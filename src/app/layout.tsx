@@ -18,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <TwoColumnLayout title="Fizz Buzz" link="/fizz-buzz">
-          {children}
-        </TwoColumnLayout>
+        <TwoColumnLayout>{children}</TwoColumnLayout>
       </body>
     </html>
   );
