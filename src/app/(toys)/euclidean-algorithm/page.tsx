@@ -27,18 +27,22 @@ function EuclideanAlgorithm() {
       return 'm ≧ n ではありません';
     }
 
-    while (n !== 0) {
+    let tempM = m;
+    let tempN = n;
+
+    while (tempN !== 0) {
       // m と n の剰余を求める
-      const q = Math.floor(m % n);
-      // m と n の商を求める
-      const r = Math.floor(m / n);
-      // 表示
-      console.log(`${m} / ${n} = ${r} ... ${q}`);
+      const q = Math.floor(tempM % tempN);
+
+      // // m と n の商を求める
+      // const r = Math.floor(tempM / tempN);
+      // // 表示
+      // console.log(`${tempM} / ${tempN} = ${r} ... ${q}`);
 
       // 元の n を新たに m とする
-      m = n;
+      tempM = tempN;
       // m と n の剰余を新たに n とする
-      n = q;
+      tempN = q;
     }
 
     return m;

@@ -1,7 +1,7 @@
 import ToyList from '@/components/Organisms/ToyList';
 import Link from 'next/link';
 
-export default function Navbar({ title, link, children }) {
+export default function Navbar({ children }) {
   return (
     <div>
       {/* Navbar */}
@@ -13,6 +13,7 @@ export default function Navbar({ title, link, children }) {
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
+            {/* ハンバーガーアイコン */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -48,7 +49,9 @@ export default function Navbar({ title, link, children }) {
             htmlFor="my-drawer-3"
             aria-label="close sidebar"
             className="drawer-overlay"
-          ></label>
+          >
+            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          </label>
           <div className="menu min-h-full w-64 bg-base-200 p-4">
             <ToyList />
           </div>
