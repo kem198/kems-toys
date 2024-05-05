@@ -36,11 +36,13 @@ export default function Navbar({ title, link, children }) {
         </div>
       </div>
       <div className="drawer lg:drawer-open">
-        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        {/* メインコンテンツ */}
         <div className="drawer-content flex flex-col">
-          {/* Page content here */}
           <main className="container mx-auto my-4 px-4">{children}</main>
         </div>
+        {/* サイドバーのトグル用 */}
+        <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+        {/* サイドバー */}
         <div className="drawer-side">
           <label
             htmlFor="my-drawer-3"
@@ -48,7 +50,6 @@ export default function Navbar({ title, link, children }) {
             className="drawer-overlay"
           ></label>
           <div className="menu min-h-full w-56 bg-base-200 p-4">
-            {/* Sidebar content here */}
             <ToyList />
           </div>
         </div>
