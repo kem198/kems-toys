@@ -1,11 +1,11 @@
-import toysData from '@/assets/toys.json';
+import { toys } from '@/assets/toys';
 import ToyCard from '@/components/Molecules/ToyCard';
 
 export default function ToyCards() {
   // ToyCard コンポーネントをループ生成する関数
   const generateToyCards = () =>
-    Object.keys(toysData).map((key) => {
-      const toy = toysData[key];
+    Object.keys(toys).map((key) => {
+      const toy = toys[key];
       return (
         <ToyCard
           key={key}
