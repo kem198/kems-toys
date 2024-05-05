@@ -16,7 +16,7 @@ export default function ToyCard({ title, description, link, svgD }) {
             <path strokeLinecap="round" strokeLinejoin="round" d={svgD} />
           </svg>
         </figure>
-        <div className="card-body pt-0">
+        <div className="card-body p-6 pt-0">
           <h2 className="card-title">{title}</h2>
           <p className="prose prose-sm">{description}</p>
         </div>

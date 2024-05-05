@@ -32,7 +32,7 @@ function FizzBuzz() {
    */
   const doFizzBuzz = (num: number) => {
     if (num <= 0) {
-      return '1 以上の整数を入力してね';
+      return '1 以上の整数を入力してください';
     }
     if (num % 3 === 0 && num % 5 === 0) {
       return 'Fizz Buzz!!';
