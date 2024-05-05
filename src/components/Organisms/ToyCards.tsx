@@ -7,14 +7,13 @@ export default function ToyCards() {
     Object.keys(toysData).map((key) => {
       const toy = toysData[key];
       return (
-        <div key={key}>
-          <ToyCard
-            title={toy.title}
-            description={toy.description}
-            link={toy.link}
-            svgD={toy.svgD}
-          />
-        </div>
+        <ToyCard
+          key={key}
+          title={toy.title}
+          description={toy.description}
+          link={toy.link}
+          svgD={toy.svgD}
+        />
       );
     });
 
