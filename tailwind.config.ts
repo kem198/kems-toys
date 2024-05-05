@@ -18,6 +18,9 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    fontFamily: {
+      sans: ['var(--font-noto-sans-jp)'],
+    },
   },
   plugins: [typography, daisyui],
   daisyui: {
