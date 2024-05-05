@@ -1,19 +1,13 @@
-import ToysData from '@/assets/toys.json';
+import toysData from '@/assets/toys.json';
 import ToyCard from '@/components/Molecules/ToyCard';
 
-// Toysオブジェクトの型をアノテーション
-const Toys = ToysData;
-
 export default function Home() {
-  // ToyCardコンポーネントを生成する関数
+  // ToyCard コンポーネントをループ生成する関数
   const generateToyCards = () =>
-    Object.keys(Toys).map((key) => {
-      const toy = Toys[key];
+    Object.keys(toysData).map((key) => {
+      const toy = toysData[key];
       return (
-        <div
-          className="flex flex-wrap justify-center gap-4 lg:justify-normal"
-          key={key}
-        >
+        <div key={key}>
           <ToyCard
             title={toy.title}
             description={toy.description}
@@ -24,7 +18,7 @@ export default function Home() {
       );
     });
 
-  // ToyCardコンポーネントの配列を生成し、返す
+  // ToyCard コンポーネントの配列を生成して返す
   return (
     <div className="flex flex-wrap justify-center gap-4 lg:justify-normal">
       {generateToyCards()}
