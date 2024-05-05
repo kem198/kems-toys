@@ -1,15 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
+
+type UpdateCountFunction = MouseEventHandler<HTMLButtonElement>;
 
 function EuclideanAlgorithm() {
-  // mCount と nCount の状態を管理する
-  const [mCount, setMCount] = useState(1);
-  const [nCount, setNCount] = useState(1);
+  const [counts, setCounts] = useState<{ m: number; n: number }>({
+    m: 1,
+    n: 1,
+  });
 
-  // カウントを更新する関数
-  const updateCount = (countSetter, addNum) => () => {
-    countSetter((prevCount) => prevCount + addNum);
+  const updateCount: UpdateCountFunction = (event) => {
+    const { name = '', value = '0' } = event.currentTarget.dataset;
+    const addNum = parseInt(value, 10);
+    if (name === 'm' || name === 'n') {
+      setCounts((prevCounts) => ({
+        ...prevCounts,
+        [name]: prevCounts[name] + addNum,
+      }));
+    }
   };
 
   /**
@@ -17,13 +26,11 @@ function EuclideanAlgorithm() {
    *
    * @see https://ja.wikipedia.org/wiki/ユークリッドの互除法
    */
-  const calcGcd = (m: number, n: number) => {
-    // 入力が自然数であるか評価する
+  const calcGcd = (m: number, n: number): number | string => {
     if (m < 0 || n < 0) {
       return 'm または n が自然数ではありません';
     }
-    // 入力が m >= n であるか評価する
-    if (m < n) {
+    if (!(m >= n)) {
       return 'm ≧ n ではありません';
     }
 
@@ -45,7 +52,7 @@ function EuclideanAlgorithm() {
       tempN = q;
     }
 
-    return m;
+    return tempM;
   };
 
   return (
@@ -56,18 +63,22 @@ function EuclideanAlgorithm() {
           <button
             type="button"
             className="btn btn-secondary join-item w-24"
-            onClick={updateCount(setMCount, -1)}
+            onClick={updateCount}
+            data-name="m"
+            data-value="-1"
           >
             -1
           </button>
         </div>
         <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-          m = {mCount}
+          m = {counts.m}
         </div>
         <button
           type="button"
           className="btn btn-secondary join-item w-24"
-          onClick={updateCount(setMCount, 1)}
+          onClick={updateCount}
+          data-name="m"
+          data-value="1"
         >
           +1
         </button>
@@ -77,17 +88,21 @@ function EuclideanAlgorithm() {
         <button
           type="button"
           className="btn btn-secondary join-item w-24"
-          onClick={updateCount(setNCount, -1)}
+          onClick={updateCount}
+          data-name="n"
+          data-value="-1"
         >
           -1
         </button>
         <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-          n = {nCount}
+          n = {counts.n}
         </div>
         <button
           type="button"
           className="btn btn-secondary join-item w-24"
-          onClick={updateCount(setNCount, 1)}
+          onClick={updateCount}
+          data-name="n"
+          data-value="1"
         >
           +1
         </button>
@@ -95,7 +110,7 @@ function EuclideanAlgorithm() {
 
       {/* 結果表示領域 */}
       <div className="flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
-        <p>{calcGcd(mCount, nCount)}</p>
+        <p>{calcGcd(counts.m, counts.n)}</p>
       </div>
     </div>
   );
@@ -119,6 +134,7 @@ export default function App() {
           <a
             href="https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95"
             target="_blank"
+            rel="noreferrer"
           >
             ユークリッドの互除法 - Wikipedia
           </a>
