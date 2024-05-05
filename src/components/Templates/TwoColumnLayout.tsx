@@ -27,8 +27,9 @@ export default function Navbar({ title, link, children }) {
             </svg>
           </label>
         </div>
+        {/* サイト名 */}
         <div className="mx-2 flex-1">
-          <Link href="/" className="text-primary-content">
+          <Link href="/" className="prose text-primary-content lg:prose-sm">
             KeM&apos;s Toys
           </Link>
         </div>

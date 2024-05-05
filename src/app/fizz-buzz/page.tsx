@@ -6,7 +6,7 @@ function FizzBuzz() {
   const [count, setCount] = useState(1);
 
   /**
-   * count を 1 ずつ増加させる関数
+   * count を 1 ずつ加算させる関数
    */
   const increment = () => {
     setCount(count + 1);
@@ -47,7 +47,8 @@ function FizzBuzz() {
   };
 
   return (
-    <div className="my-8">
+    <div className="container my-8 w-fit max-lg:mx-auto">
+      {/* 加算減算させる UI */}
       <div className="join">
         <button
           type="button"
@@ -67,6 +68,7 @@ function FizzBuzz() {
           +1
         </button>
       </div>
+      {/* 結果表示 */}
       <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
         <p>{doFizzBuzz(count)}</p>
       </div>
