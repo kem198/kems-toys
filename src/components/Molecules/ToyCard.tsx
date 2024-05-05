@@ -15,7 +15,7 @@ export default function ToyCard({
 }: ToyCardProps) {
   return (
     <Link
-      className="card w-48 border border-base-200 bg-base-100 shadow-lg"
+      className="card w-48 border border-base-200 bg-base-100 shadow-lg transition hover:scale-105"
       href={link}
     >
       <figure>
