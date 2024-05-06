@@ -28,13 +28,37 @@ export default function App() {
   };
 
   return (
-    <article className="prose">
-      <h1>おめでとうボタン</h1>
+    <div>
+      <article className="prose">
+        <h1>おめでとうボタン</h1>
+      </article>
       <div className="container my-8 w-fit max-lg:mx-auto">
         <button type="button" className="btn btn-lg" onClick={showConfetti}>
           🥳 Congrats!
         </button>
       </div>
-    </article>
+      <article className="prose prose-sm">
+        <hr />
+        <p>使用ライブラリ:</p>
+        <ul>
+          <li>
+            <a
+              href="https://github.com/loonywizard/js-confetti"
+              target="_blank"
+            >
+              loonywizard/js-confetti
+            </a>{' '}
+            (
+            <a
+              href="https://github.com/loonywizard/js-confetti/blob/main/LICENSE"
+              target="_blank"
+            >
+              MIT License
+            </a>
+            )
+          </li>
+        </ul>
+      </article>
+    </div>
   );
 }

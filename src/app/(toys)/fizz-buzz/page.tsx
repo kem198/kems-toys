@@ -100,13 +100,19 @@ export default function App() {
           <li>5 で割り切れる場合は `Buzz!` を返す。</li>
           <li>両方で割り切れる場合は `Fizz Buzz!!` を返す。</li>
         </ul>
-        <p>
-          <a href="https://ja.wikipedia.org/wiki/Fizz_Buzz" target="_blank">
-            Fizz Buzz - Wikipedia
-          </a>
-        </p>
       </article>
       <FizzBuzz />
+      <article className="prose prose-sm">
+        <hr />
+        <p>参考文献:</p>
+        <ul>
+          <li>
+            <a href="https://ja.wikipedia.org/wiki/Fizz_Buzz" target="_blank">
+              Fizz Buzz - Wikipedia
+            </a>
+          </li>
+        </ul>
+      </article>
     </div>
   );
 }

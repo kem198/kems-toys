@@ -152,17 +152,31 @@ export default function App() {
             に戻る。
           </li>
         </ol>
-        <p>
-          <a
-            href="https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95"
-            target="_blank"
-            rel="noreferrer"
-          >
-            ユークリッドの互除法 - Wikipedia
-          </a>
-        </p>
       </article>
       <EuclideanAlgorithm />
+      <article className="prose prose-sm">
+        <hr />
+        <p>参考文献:</p>
+        <ul>
+          <li>
+            <a
+              href="https://ja.wikipedia.org/wiki/%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ユークリッドの互除法 - Wikipedia
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://zenn.dev/yend724/articles/20211126-ff73enfjjrxsaxyb"
+              target="_blank"
+            >
+              ユークリッドの互除法をCanvasで可視化する
+            </a>
+          </li>
+        </ul>
+      </article>
     </div>
   );
 }
