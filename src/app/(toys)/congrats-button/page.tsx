@@ -10,7 +10,7 @@ export default function App() {
    * new JSConfetti() はクライアント側で一度だけ呼ぶ必要があるが
    * useEffect() の中で生成するとインスタンスへスコープ外からアクセスできないため
    */
-  const [confetti, setConfetti] = useState();
+  const [confetti, setConfetti] = useState<JSConfetti | undefined>(undefined);
 
   // レンダリング時に一度だけ実行する
   useEffect(() => {
@@ -21,7 +21,10 @@ export default function App() {
 
   // ボタンクリック時に呼ばれる処理
   const showConfetti = () => {
-    confetti.addConfetti();
+    // confetti が undefined でないときのみ後続処理を実行する
+    if (confetti) {
+      confetti.addConfetti();
+    }
   };
 
   return (
