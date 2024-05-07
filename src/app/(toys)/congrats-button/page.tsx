@@ -92,6 +92,26 @@ export default function App() {
             )
           </li>
         </ul>
+        <p>参考文献:</p>
+        <ul>
+          <li>
+            <a
+              href="https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7"
+              target="_blank"
+            >
+              文字列を1文字ずつ配列化（サロゲートペアを考慮） #JavaScript -
+              Qiita
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://teratail.com/questions/rlpdvxzevvl1uq"
+              target="_blank"
+            >
+              JavaScript 文字列から絵文字のみを抽出し、配列できますか？
+            </a>
+          </li>
+        </ul>
       </article>
     </div>
   );
