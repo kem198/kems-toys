@@ -29,8 +29,13 @@ export default function App() {
       return;
     }
 
+    // 絵文字のみを取り出す正規表現
+    // https://teratail.com/questions/rlpdvxzevvl1uq
+    const regexEmojis =
+      /[\u{1F300}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F900}-\u{1F9FF}]/gu;
+
     /**
-     * フォームへ入力された文字列を評価する
+     * フォームへ入力された絵文字を評価する
      *
      * 真であればスプレッド構文で 1 文字ずつ配列化して addConfetti() へオブジェクトとして渡す
      * 偽であれば引数なしで実行する
@@ -38,7 +43,7 @@ export default function App() {
      * https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7
      * https://github.com/loonywizard/js-confetti?tab=readme-ov-file#customise-confetti
      */
-    const emojisText = emojiTextRef.current?.value;
+    const emojisText = emojiTextRef.current?.value.match(regexEmojis);
     if (emojisText) {
       confetti.addConfetti({ emojis: [...emojisText] });
     } else {
