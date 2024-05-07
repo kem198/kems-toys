@@ -38,7 +38,7 @@ export default function App() {
         </button>
       </div>
       <article className="prose prose-sm">
-        <hr />
+        <div className="divider" />
         <p>使用ライブラリ:</p>
         <ul>
           <li>

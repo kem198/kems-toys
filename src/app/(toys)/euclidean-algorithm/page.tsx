@@ -155,7 +155,7 @@ export default function App() {
       </article>
       <EuclideanAlgorithm />
       <article className="prose prose-sm">
-        <hr />
+        <div className="divider" />
         <p>参考文献:</p>
         <ul>
           <li>
