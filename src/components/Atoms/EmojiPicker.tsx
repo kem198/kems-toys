@@ -14,7 +14,7 @@ export default function EmojiPicker({
   // 絵文字がクリックされたときに呼ばれる関数
   const onEmojiClick: PickerProps['onEmojiClick'] = (emojiObject) => {
     // 選択された絵文字を親コンポーネントのテキストへ追加する
-    setter((prevText) => prevText + ` ${emojiObject.emoji}`);
+    setter((prevText) => `${prevText} ${emojiObject.emoji}`);
   };
 
   return (
