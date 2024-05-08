@@ -63,12 +63,12 @@ export default function App() {
       </article>
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
         <button type="button" className="btn btn-lg" onClick={showConfetti}>
-          🥳 Congrats!
+          🎉 Congrats!
         </button>
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">絵文字を入力してみよう</span>
+              <span className="label-text">好きな絵文字でお祝いしよう</span>
             </div>
             <div className="flex gap-2">
               <input
