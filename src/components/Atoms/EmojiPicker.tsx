@@ -3,20 +3,19 @@
 import Picker, { PickerProps } from 'emoji-picker-react';
 import { useState } from 'react';
 
-export default function EmojiPicker({
-  setter,
-  buttonIcon = '😊',
-}: {
+interface EmojiPickerProps {
   setter: React.Dispatch<React.SetStateAction<string>>;
   buttonIcon: string;
-}) {
+}
+
+export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmoji, setShowEmoji] = useState(false);
 
   // 絵文字がクリックされたときに呼ばれる関数
   const onEmojiClick: PickerProps['onEmojiClick'] = (emojiObject) => {
     // 選択された絵文字を親コンポーネントのテキストへ追加する
-    setter((prevText) => `${prevText} ${emojiObject.emoji}`);
+    setter((prevText) => `${prevText}${emojiObject.emoji} `);
   };
 
   return (
