@@ -25,7 +25,7 @@ export default function EmojiPicker({
         className="btn btn-circle text-lg"
         onClick={() => setShowEmoji(!showEmoji)}
       >
-        😂
+        🥰
       </button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
       {showEmoji && (
