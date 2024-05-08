@@ -103,6 +103,38 @@ export default function App() {
             </a>
             )
           </li>
+          <li>
+            <a
+              href="https://github.com/mathiasbynens/emoji-regex"
+              target="_blank"
+            >
+              mathiasbynens/emoji-regex
+            </a>{' '}
+            (
+            <a
+              href="https://github.com/mathiasbynens/emoji-regex/blob/main/LICENSE-MIT.txt"
+              target="_blank"
+            >
+              MIT License
+            </a>
+            )
+          </li>
+          <li>
+            <a
+              href="https://github.com/ealush/emoji-picker-react"
+              target="_blank"
+            >
+              ealush/emoji-picker-react
+            </a>{' '}
+            (
+            <a
+              href="https://github.com/ealush/emoji-picker-react/blob/master/LICENSE"
+              target="_blank"
+            >
+              MIT License
+            </a>
+            )
+          </li>
         </ul>
         <p>参考文献:</p>
         <ul>
@@ -117,10 +149,18 @@ export default function App() {
           </li>
           <li>
             <a
-              href="https://teratail.com/questions/rlpdvxzevvl1uq"
+              href="https://zenn.dev/catnose99/scraps/79012f2617ffd9"
               target="_blank"
             >
-              JavaScript 文字列から絵文字のみを抽出し、配列できますか？
+              絵文字をひとつだけ取り出す技術
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://zenn.dev/masa5714/articles/0e8663e9f98082"
+              target="_blank"
+            >
+              JavaScriptで絵文字を手軽かつ正確にカウントする
             </a>
           </li>
           <li>
