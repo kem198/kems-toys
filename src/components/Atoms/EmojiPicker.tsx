@@ -6,7 +6,7 @@ import { useState } from 'react';
 export default function EmojiPicker({
   setter,
 }: {
-  setter: (text: string) => void;
+  setter: React.Dispatch<React.SetStateAction<string>>;
 }) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmoji, setShowEmoji] = useState(false);
