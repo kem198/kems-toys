@@ -78,7 +78,7 @@ export default function App() {
                 onChange={handleChange}
               />
               <div>
-                <EmojiPicker setter={setEmojiText} />
+                <EmojiPicker setter={setEmojiText} buttonIcon="🥳" />
               </div>
             </div>
           </label>

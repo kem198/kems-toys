@@ -5,8 +5,10 @@ import { useState } from 'react';
 
 export default function EmojiPicker({
   setter,
+  buttonIcon = '😊',
 }: {
   setter: React.Dispatch<React.SetStateAction<string>>;
+  buttonIcon: string;
 }) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmoji, setShowEmoji] = useState(false);
@@ -25,7 +27,7 @@ export default function EmojiPicker({
         className="btn btn-circle text-lg"
         onClick={() => setShowEmoji(!showEmoji)}
       >
-        🥰
+        {buttonIcon}
       </button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
       {showEmoji && (
