@@ -1,7 +1,8 @@
 'use client';
 
+import EmojiPicker from '@/components/Atoms/EmojiPicker';
 import JSConfetti from 'js-confetti';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
   /**
@@ -19,8 +20,12 @@ export default function App() {
     setConfetti(instance);
   }, []);
 
-  // 絵文字入力用フォームの参照を定義
-  const emojiTextRef = useRef<HTMLInputElement>(null);
+  // 絵文字入力用フォームの変数とセッターを定義
+  const [emojiText, setEmojiText] = useState<string>('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmojiText(event.target.value);
+  };
 
   // ボタンクリック時に呼ばれる処理
   const showConfetti = () => {
@@ -43,7 +48,7 @@ export default function App() {
      * https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7
      * https://github.com/loonywizard/js-confetti?tab=readme-ov-file#customise-confetti
      */
-    const emojisText = emojiTextRef.current?.value.match(regexEmojis);
+    const emojisText = emojiText.match(regexEmojis);
     if (emojisText) {
       confetti.addConfetti({ emojis: [...emojisText] });
     } else {
@@ -60,16 +65,24 @@ export default function App() {
         <button type="button" className="btn btn-lg" onClick={showConfetti}>
           🥳 Congrats!
         </button>
-        <label className="form-control w-full max-w-xs">
-          <div className="label">
-            <span className="label-text">絵文字を入力してみよう</span>
-          </div>
-          <input
-            type="text"
-            className="input input-bordered w-full max-w-xs"
-            ref={emojiTextRef}
-          />
-        </label>
+        <div>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">絵文字を入力してみよう</span>
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                className="input input-bordered w-full max-w-xs"
+                value={emojiText}
+                onChange={handleChange}
+              />
+              <div>
+                <EmojiPicker setter={setEmojiText} />
+              </div>
+            </div>
+          </label>
+        </div>
       </div>
       <article className="prose prose-sm">
         <div className="divider" />
@@ -109,6 +122,23 @@ export default function App() {
               target="_blank"
             >
               JavaScript 文字列から絵文字のみを抽出し、配列できますか？
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://medium.com/designly/create-an-emoji-selector-for-next-js-forms-using-tailwind-daisyui-24f5caf17626"
+              target="_blank"
+            >
+              Create an Emoji Selector for Next.js Forms using Tailwind +
+              DaisyUI | by Designly | Designly | Medium
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://zenn.dev/angelecho/articles/38f8ca72ddb8a8"
+              target="_blank"
+            >
+              絵文字ピッカー emoji-picker-react の導入方法まとめ
             </a>
           </li>
         </ul>
