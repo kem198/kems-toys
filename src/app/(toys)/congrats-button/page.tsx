@@ -3,6 +3,7 @@
 import EmojiPicker from '@/components/Atoms/EmojiPicker';
 import JSConfetti from 'js-confetti';
 import { useEffect, useState } from 'react';
+import emojiRegex from 'emoji-regex';
 
 export default function App() {
   /**
@@ -35,9 +36,7 @@ export default function App() {
     }
 
     // 絵文字のみを取り出す正規表現
-    // https://teratail.com/questions/rlpdvxzevvl1uq
-    const regexEmojis =
-      /[\u{1F300}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F900}-\u{1F9FF}]/gu;
+    const emojiRe = emojiRegex()
 
     /**
      * フォームへ入力された絵文字を評価する
@@ -48,7 +47,7 @@ export default function App() {
      * https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7
      * https://github.com/loonywizard/js-confetti?tab=readme-ov-file#customise-confetti
      */
-    const emojisText = emojiText.match(regexEmojis);
+    const emojisText = emojiText.match(emojiRe);
     if (emojisText) {
       confetti.addConfetti({ emojis: [...emojisText] });
     } else {
@@ -104,6 +103,38 @@ export default function App() {
             </a>
             )
           </li>
+          <li>
+            <a
+              href="https://github.com/mathiasbynens/emoji-regex"
+              target="_blank"
+            >
+              mathiasbynens/emoji-regex
+            </a>{' '}
+            (
+            <a
+              href="https://github.com/mathiasbynens/emoji-regex/blob/main/LICENSE-MIT.txt"
+              target="_blank"
+            >
+              MIT License
+            </a>
+            )
+          </li>
+          <li>
+            <a
+              href="https://github.com/ealush/emoji-picker-react"
+              target="_blank"
+            >
+              ealush/emoji-picker-react
+            </a>{' '}
+            (
+            <a
+              href="https://github.com/ealush/emoji-picker-react/blob/master/LICENSE"
+              target="_blank"
+            >
+              MIT License
+            </a>
+            )
+          </li>
         </ul>
         <p>参考文献:</p>
         <ul>
@@ -118,10 +149,18 @@ export default function App() {
           </li>
           <li>
             <a
-              href="https://teratail.com/questions/rlpdvxzevvl1uq"
+              href="https://zenn.dev/catnose99/scraps/79012f2617ffd9"
               target="_blank"
             >
-              JavaScript 文字列から絵文字のみを抽出し、配列できますか？
+              絵文字をひとつだけ取り出す技術
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://zenn.dev/masa5714/articles/0e8663e9f98082"
+              target="_blank"
+            >
+              JavaScriptで絵文字を手軽かつ正確にカウントする
             </a>
           </li>
           <li>
