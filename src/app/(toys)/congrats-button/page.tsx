@@ -70,14 +70,14 @@ export default function App() {
             <div className="label">
               <span className="label-text">絵文字を入力してみよう</span>
             </div>
-            <div className="relative flex">
+            <div className="flex gap-2">
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
                 value={emojiText}
                 onChange={handleChange}
               />
-              <div className="absolute left-64">
+              <div>
                 <EmojiPicker setter={setEmojiText} />
               </div>
             </div>

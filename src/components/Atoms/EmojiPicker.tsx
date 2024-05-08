@@ -18,7 +18,7 @@ export default function EmojiPicker({
   };
 
   return (
-    <div>
+    <div className="relative">
       {/* 絵文字ピッカーの表示を切り替えるボタン */}
       <button
         type="button"
@@ -28,7 +28,11 @@ export default function EmojiPicker({
         😂
       </button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
-      {showEmoji && <Picker onEmojiClick={onEmojiClick} className="mt-2" />}
+      {showEmoji && (
+        <div className="absolute max-lg:right-0">
+          <Picker onEmojiClick={onEmojiClick} className="mt-2" />
+        </div>
+      )}
     </div>
   );
 }
