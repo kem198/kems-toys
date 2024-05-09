@@ -49,8 +49,8 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
             data={data}
             onEmojiSelect={addSelectedEmojiToText}
             onClickOutside={toggleEmojiPicker}
-            perLine="8"
             locale="ja"
+            perLine="8"
             className="mt-2"
           />
         </div>
