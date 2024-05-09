@@ -5,7 +5,7 @@ import Picker from '@emoji-mart/react';
 import { useState } from 'react';
 
 interface EmojiPickerProps {
-  setter: React.Dispatch<React.SetStateAction<string>>;
+  setText: React.Dispatch<React.SetStateAction<string>>;
   buttonIcon: string;
 }
 
@@ -18,14 +18,14 @@ interface EmojiData {
   shortcodes: string[];
 }
 
-export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
+export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
-  const [showEmoji, setShowEmoji] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   // EmojiData インターフェースを使用して型を修正
-  const onEmojiSelect = (EmojiData: EmojiData) => {
+  const handleEmojiSelect = (selectedEmoji: EmojiData) => {
     // 選択された絵文字を親コンポーネントのテキストへ追加する
-    setter((prevText) => `${prevText}${EmojiData.native}`);
+    setText((prevText) => `${prevText}${selectedEmoji.native}`);
   };
 
   return (
@@ -34,17 +34,18 @@ export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
       <button
         type="button"
         className="btn btn-circle text-lg"
-        onClick={() => setShowEmoji(!showEmoji)}
+        // クリックされるごとに EmojiPicker をトグルする
+        onClick={() => setShowEmojiPicker(!showEmojiPicker)}
       >
         {buttonIcon}
       </button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
-      {showEmoji && (
+      {showEmojiPicker && (
         <div className="absolute max-lg:right-0">
           <Picker
             data={data}
-            onEmojiSelect={onEmojiSelect}
-            className="mt-2 w-auto"
+            onEmojiSelect={handleEmojiSelect}
+            className="mt-2"
           />
         </div>
       )}

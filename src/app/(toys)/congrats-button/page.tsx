@@ -1,9 +1,9 @@
 'use client';
 
 import EmojiPicker from '@/components/Atoms/EmojiPicker';
+import emojiRegex from 'emoji-regex';
 import JSConfetti from 'js-confetti';
 import { useEffect, useState } from 'react';
-import emojiRegex from 'emoji-regex';
 
 export default function App() {
   /**
@@ -36,7 +36,7 @@ export default function App() {
     }
 
     // 絵文字のみを取り出す正規表現
-    const emojiRe = emojiRegex()
+    const emojiRe = emojiRegex();
 
     /**
      * フォームへ入力された絵文字を評価する
@@ -77,7 +77,7 @@ export default function App() {
                 onChange={handleChange}
               />
               <div>
-                <EmojiPicker setter={setEmojiText} buttonIcon="🥳" />
+                <EmojiPicker setText={setEmojiText} buttonIcon="🥳" />
               </div>
             </div>
           </label>
