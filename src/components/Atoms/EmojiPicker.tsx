@@ -27,9 +27,8 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  // 絵文字選択時に呼ばれる関数
+  // 選択された絵文字を親コンポーネントのテキストへ追加する関数
   const addSelectedEmojiToText = (selectedEmoji: EmojiData) => {
-    // 選択された絵文字を親コンポーネントのテキストへ追加する
     setText((prevText) => `${prevText}${selectedEmoji.native}`);
   };
 
