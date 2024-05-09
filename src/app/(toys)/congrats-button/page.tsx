@@ -103,7 +103,7 @@ export default function App() {
               href="https://github.com/loonywizard/js-confetti/blob/main/LICENSE"
               target="_blank"
             >
-              MIT License
+              MIT
             </a>
             )
           </li>
@@ -119,7 +119,7 @@ export default function App() {
               href="https://github.com/mathiasbynens/emoji-regex/blob/main/LICENSE-MIT.txt"
               target="_blank"
             >
-              MIT License
+              MIT
             </a>
             )
           </li>
@@ -132,7 +132,7 @@ export default function App() {
               href="https://github.com/missive/emoji-mart/blob/main/LICENSE"
               target="_blank"
             >
-              MIT License
+              MIT
             </a>
             )
           </li>
