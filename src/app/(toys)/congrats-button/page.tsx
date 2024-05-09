@@ -22,10 +22,10 @@ export default function App() {
   }, []);
 
   // 絵文字入力用フォームの変数とセッターを定義
-  const [emojiText, setEmojiText] = useState<string>('');
+  const [emojiFormText, setEmojiFormText] = useState<string>('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmojiText(event.target.value);
+    setEmojiFormText(event.target.value);
   };
 
   // ボタンクリック時に呼ばれる処理
@@ -47,7 +47,7 @@ export default function App() {
      * https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7
      * https://github.com/loonywizard/js-confetti?tab=readme-ov-file#customise-confetti
      */
-    const emojisText = emojiText.match(emojiRe);
+    const emojisText = emojiFormText.match(emojiRe);
     if (emojisText) {
       confetti.addConfetti({ emojis: [...emojisText] });
     } else {
@@ -73,11 +73,11 @@ export default function App() {
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
-                value={emojiText}
+                value={emojiFormText}
                 onChange={handleChange}
               />
               <div>
-                <EmojiPicker setText={setEmojiText} buttonIcon="🥳" />
+                <EmojiPicker setText={setEmojiFormText} buttonIcon="🥳" />
               </div>
             </div>
           </label>
