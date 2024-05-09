@@ -50,6 +50,7 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
             onEmojiSelect={addSelectedEmojiToText}
             onClickOutside={toggleEmojiPicker}
             perLine="8"
+            locale="ja"
             className="mt-2"
           />
         </div>
