@@ -120,15 +120,12 @@ export default function App() {
             )
           </li>
           <li>
-            <a
-              href="https://github.com/ealush/emoji-picker-react"
-              target="_blank"
-            >
-              ealush/emoji-picker-react
+            <a href="https://github.com/missive/emoji-mart" target="_blank">
+              missive/emoji-mart
             </a>{' '}
             (
             <a
-              href="https://github.com/ealush/emoji-picker-react/blob/master/LICENSE"
+              href="https://github.com/missive/emoji-mart/blob/main/LICENSE"
               target="_blank"
             >
               MIT License
@@ -170,14 +167,6 @@ export default function App() {
             >
               Create an Emoji Selector for Next.js Forms using Tailwind +
               DaisyUI | by Designly | Designly | Medium
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://zenn.dev/angelecho/articles/38f8ca72ddb8a8"
-              target="_blank"
-            >
-              絵文字ピッカー emoji-picker-react の導入方法まとめ
             </a>
           </li>
         </ul>
