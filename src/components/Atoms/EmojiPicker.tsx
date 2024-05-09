@@ -1,6 +1,7 @@
 'use client';
 
-import Picker, { PickerProps } from 'emoji-picker-react';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 import { useState } from 'react';
 
 interface EmojiPickerProps {
@@ -8,14 +9,23 @@ interface EmojiPickerProps {
   buttonIcon: string;
 }
 
+interface EmojiData {
+  id: string;
+  name: string;
+  native: string;
+  unified: string;
+  keywords: string[];
+  shortcodes: string[];
+}
+
 export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmoji, setShowEmoji] = useState(false);
 
-  // 絵文字がクリックされたときに呼ばれる関数
-  const onEmojiClick: PickerProps['onEmojiClick'] = (emojiObject) => {
+  // EmojiData インターフェースを使用して型を修正
+  const onEmojiSelect = (EmojiData: EmojiData) => {
     // 選択された絵文字を親コンポーネントのテキストへ追加する
-    setter((prevText) => `${prevText}${emojiObject.emoji}`);
+    setter((prevText) => `${prevText}${EmojiData.native}`);
   };
 
   return (
@@ -31,7 +41,11 @@ export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
       {showEmoji && (
         <div className="absolute max-lg:right-0">
-          <Picker onEmojiClick={onEmojiClick} className="mt-2" />
+          <Picker
+            data={data}
+            onEmojiSelect={onEmojiSelect}
+            className="mt-2 w-auto"
+          />
         </div>
       )}
     </div>
