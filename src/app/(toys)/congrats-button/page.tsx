@@ -1,9 +1,9 @@
 'use client';
 
 import EmojiPicker from '@/components/Atoms/EmojiPicker';
+import emojiRegex from 'emoji-regex';
 import JSConfetti from 'js-confetti';
 import { useEffect, useState } from 'react';
-import emojiRegex from 'emoji-regex';
 
 export default function App() {
   /**
@@ -22,10 +22,10 @@ export default function App() {
   }, []);
 
   // 絵文字入力用フォームの変数とセッターを定義
-  const [emojiText, setEmojiText] = useState<string>('');
+  const [emojiFormText, setEmojiFormText] = useState<string>('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmojiText(event.target.value);
+    setEmojiFormText(event.target.value);
   };
 
   // ボタンクリック時に呼ばれる処理
@@ -36,7 +36,7 @@ export default function App() {
     }
 
     // 絵文字のみを取り出す正規表現
-    const emojiRe = emojiRegex()
+    const emojiRe = emojiRegex();
 
     /**
      * フォームへ入力された絵文字を評価する
@@ -47,7 +47,7 @@ export default function App() {
      * https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7
      * https://github.com/loonywizard/js-confetti?tab=readme-ov-file#customise-confetti
      */
-    const emojisText = emojiText.match(emojiRe);
+    const emojisText = emojiFormText.match(emojiRe);
     if (emojisText) {
       confetti.addConfetti({ emojis: [...emojisText] });
     } else {
@@ -73,11 +73,11 @@ export default function App() {
               <input
                 type="text"
                 className="input input-bordered w-full max-w-xs"
-                value={emojiText}
+                value={emojiFormText}
                 onChange={handleChange}
               />
               <div>
-                <EmojiPicker setter={setEmojiText} buttonIcon="🥳" />
+                <EmojiPicker setText={setEmojiFormText} buttonIcon="🥳" />
               </div>
             </div>
           </label>
@@ -120,15 +120,12 @@ export default function App() {
             )
           </li>
           <li>
-            <a
-              href="https://github.com/ealush/emoji-picker-react"
-              target="_blank"
-            >
-              ealush/emoji-picker-react
+            <a href="https://github.com/missive/emoji-mart" target="_blank">
+              missive/emoji-mart
             </a>{' '}
             (
             <a
-              href="https://github.com/ealush/emoji-picker-react/blob/master/LICENSE"
+              href="https://github.com/missive/emoji-mart/blob/main/LICENSE"
               target="_blank"
             >
               MIT License
@@ -170,14 +167,6 @@ export default function App() {
             >
               Create an Emoji Selector for Next.js Forms using Tailwind +
               DaisyUI | by Designly | Designly | Medium
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://zenn.dev/angelecho/articles/38f8ca72ddb8a8"
-              target="_blank"
-            >
-              絵文字ピッカー emoji-picker-react の導入方法まとめ
             </a>
           </li>
         </ul>

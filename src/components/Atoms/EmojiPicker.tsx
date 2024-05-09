@@ -1,21 +1,35 @@
 'use client';
 
-import Picker, { PickerProps } from 'emoji-picker-react';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 import { useState } from 'react';
 
 interface EmojiPickerProps {
-  setter: React.Dispatch<React.SetStateAction<string>>;
+  setText: React.Dispatch<React.SetStateAction<string>>;
   buttonIcon: string;
 }
 
-export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
-  // 絵文字ピッカーの表示を切り替える変数とセッターを定義
-  const [showEmoji, setShowEmoji] = useState(false);
+interface EmojiData {
+  id: string;
+  name: string;
+  native: string;
+  unified: string;
+  keywords: string[];
+  shortcodes: string[];
+}
 
-  // 絵文字がクリックされたときに呼ばれる関数
-  const onEmojiClick: PickerProps['onEmojiClick'] = (emojiObject) => {
-    // 選択された絵文字を親コンポーネントのテキストへ追加する
-    setter((prevText) => `${prevText}${emojiObject.emoji}`);
+export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
+  // 絵文字ピッカーの表示を切り替える変数とセッターを定義
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  // 絵文字ピッカーの表示状態をトグルする関数
+  const toggleEmojiPicker = () => {
+    setShowEmojiPicker(!showEmojiPicker);
+  };
+
+  // 選択された絵文字を親コンポーネントのテキストへ追加する関数
+  const addSelectedEmojiToText = (selectedEmoji: EmojiData) => {
+    setText((prevText) => `${prevText}${selectedEmoji.native}`);
   };
 
   return (
@@ -24,14 +38,19 @@ export default function EmojiPicker({ setter, buttonIcon }: EmojiPickerProps) {
       <button
         type="button"
         className="btn btn-circle text-lg"
-        onClick={() => setShowEmoji(!showEmoji)}
+        onClick={toggleEmojiPicker}
       >
         {buttonIcon}
       </button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
-      {showEmoji && (
+      {showEmojiPicker && (
         <div className="absolute max-lg:right-0">
-          <Picker onEmojiClick={onEmojiClick} className="mt-2" />
+          <Picker
+            data={data}
+            onEmojiSelect={addSelectedEmojiToText}
+            onClickOutside={toggleEmojiPicker}
+            className="mt-2"
+          />
         </div>
       )}
     </div>
