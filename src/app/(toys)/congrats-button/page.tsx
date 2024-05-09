@@ -61,7 +61,11 @@ export default function App() {
         <h1>おめでとうボタン</h1>
       </article>
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-        <button type="button" className="btn btn-lg" onClick={showConfetti}>
+        <button
+          type="button"
+          className="btn btn-lg rounded-full"
+          onClick={showConfetti}
+        >
           🎉 Congrats!
         </button>
         <div>
