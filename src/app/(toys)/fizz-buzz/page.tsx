@@ -112,6 +112,10 @@ export default function App() {
             </a>
           </li>
         </ul>
+        <div className="join">
+          <div className="badge join-item badge-neutral">v0.1.0</div>
+          <div className="badge join-item badge-ghost">on 2024-05-07</div>
+        </div>
       </article>
     </div>
   );
