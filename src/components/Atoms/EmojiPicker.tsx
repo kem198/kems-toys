@@ -22,8 +22,13 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
-  // EmojiData インターフェースを使用して型を修正
-  const handleEmojiSelect = (selectedEmoji: EmojiData) => {
+  // 絵文字ピッカーの表示状態をトグルする関数
+  const toggleEmojiPicker = () => {
+    setShowEmojiPicker(!showEmojiPicker);
+  };
+
+  // 絵文字選択時に呼ばれる関数
+  const addSelectedEmojiToText = (selectedEmoji: EmojiData) => {
     // 選択された絵文字を親コンポーネントのテキストへ追加する
     setText((prevText) => `${prevText}${selectedEmoji.native}`);
   };
@@ -34,8 +39,7 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
       <button
         type="button"
         className="btn btn-circle text-lg"
-        // クリックされるごとに EmojiPicker をトグルする
-        onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+        onClick={toggleEmojiPicker}
       >
         {buttonIcon}
       </button>
@@ -44,7 +48,8 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
         <div className="absolute max-lg:right-0">
           <Picker
             data={data}
-            onEmojiSelect={handleEmojiSelect}
+            onEmojiSelect={addSelectedEmojiToText}
+            onClickOutside={toggleEmojiPicker}
             className="mt-2"
           />
         </div>
