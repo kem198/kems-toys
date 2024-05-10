@@ -1,4 +1,5 @@
 {
+  // Ref: https://dev.classmethod.jp/articles/vscode-custom-tab-labels-for-better-coding/
   "workbench.editor.customLabels.patterns": {
     "**/app/**/{*.tsx,route.ts,actions.ts}": "🅰 ${dirname}/${filename}.${extname}",
     "**/components/**/*": "🧩 ${filename}.${extname}"
