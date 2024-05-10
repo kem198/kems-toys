@@ -75,7 +75,7 @@ function EuclideanAlgorithm(): JSX.Element {
         <div className="join-item">
           <button
             type="button"
-            className="btn btn-secondary join-item w-24"
+            className="btn btn-primary join-item w-24"
             onClick={updateCount}
             data-name="m"
             data-value="-1"
@@ -88,7 +88,7 @@ function EuclideanAlgorithm(): JSX.Element {
         </div>
         <button
           type="button"
-          className="btn btn-secondary join-item w-24"
+          className="btn btn-primary join-item w-24"
           onClick={updateCount}
           data-name="m"
           data-value="1"
@@ -100,7 +100,7 @@ function EuclideanAlgorithm(): JSX.Element {
       <div className="join">
         <button
           type="button"
-          className="btn btn-secondary join-item w-24"
+          className="btn btn-primary join-item w-24"
           onClick={updateCount}
           data-name="n"
           data-value="-1"
@@ -112,7 +112,7 @@ function EuclideanAlgorithm(): JSX.Element {
         </div>
         <button
           type="button"
-          className="btn btn-secondary join-item w-24"
+          className="btn btn-primary join-item w-24"
           onClick={updateCount}
           data-name="n"
           data-value="1"

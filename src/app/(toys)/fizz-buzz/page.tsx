@@ -56,7 +56,7 @@ function FizzBuzz() {
       <div className="join">
         <button
           type="button"
-          className="btn btn-secondary join-item w-24"
+          className="btn btn-primary join-item w-24"
           onClick={() => updateCount(-1)}
         >
           -1
@@ -66,7 +66,7 @@ function FizzBuzz() {
         </div>
         <button
           type="button"
-          className="btn btn-secondary join-item w-24"
+          className="btn btn-primary join-item w-24"
           onClick={() => updateCount(1)}
         >
           +1

@@ -27,19 +27,18 @@ const config: Config = {
     themes: [
       {
         mytheme: {
-          'primary': '#313539',
-          'secondary': '#009688',
-          'accent': '#67e8f9',
+          'primary': '#009592',
+          'secondary': '#00ea78',
+          'accent': '#a33700',
           'neutral': '#313539',
-          'base-100': '#f3f4f6',
-          'info': '#38bdf8',
-          'success': '#4ade80',
-          'warning': '#fcd34d',
-          'error': '#fb7185',
+          'base-100': '#fcfcfc',
+          'info': '#0091ec',
+          'success': '#00ae80',
+          'warning': '#c09700',
+          'error': '#ff758d',
         },
       },
     ],
-    darkTheme: "dark"
   },
 };
 export default config;
