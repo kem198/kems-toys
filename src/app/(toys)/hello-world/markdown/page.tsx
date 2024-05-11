@@ -3,7 +3,7 @@ import Markdown from 'react-markdown';
 const mdSource = `
 # Markdown
 
-This page was written with **Markdown** !
+This page was written in **Markdown** !
 
 ## Used libraries
 
