@@ -30,6 +30,9 @@ export default function Page() {
   );
 }
 \`\`\`
+
+All codes: [kems-toys/src/app/(toys)/hello-world/markdown/page.tsx](https://github.com/kenkenpa198/kems-toys/blob/main/src/app/%28toys%29/hello-world/markdown/page.tsx)
+
 `;
 
 export default function Page() {
