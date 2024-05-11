@@ -18,7 +18,7 @@ const supplementSource = `
 - [Fizz Buzz - Wikipedia](https://ja.wikipedia.org/wiki/Fizz_Buzz)
 `;
 
-export default function App() {
+export default function Page() {
   return (
     <article>
       <StyledMarkdown source={bodySource} />

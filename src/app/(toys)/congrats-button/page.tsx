@@ -21,7 +21,7 @@ const supplementSource = `
 - [Create an Emoji Selector for Next.js Forms using Tailwind + DaisyUI | by Designly | Designly | Medium](https://medium.com/designly/create-an-emoji-selector-for-next-js-forms-using-tailwind-daisyui-24f5caf17626)
 `;
 
-export default function App() {
+export default function Page() {
   return (
     <article>
       <StyledMarkdown source={bodySource} />

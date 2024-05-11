@@ -19,7 +19,7 @@ const supplementSource = `
 - [ユークリッドの互除法をCanvasで可視化する](https://zenn.dev/yend724/articles/20211126-ff73enfjjrxsaxyb)
 `;
 
-export default function App() {
+export default function Page() {
   return (
     <article>
       <StyledMarkdown source={bodySource} />
