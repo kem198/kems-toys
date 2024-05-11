@@ -15,17 +15,20 @@ const isThreeMultiple = (num: number): boolean => num % 3 === 0;
  * @returns {boolean} - 3 を含む桁があれば true, そうでなければ false
  */
 const hasThreeDigits = (num: number): boolean => {
-  // 入力を絶対値へ変換する (e.g. -1234 ⇒ 1234)
+  // 入力を絶対値へ変換する
+  // e.g. -1234 ⇒ 1234
   let absNum = Math.abs(num);
 
   // 各桁を調べる
   while (absNum > 0) {
-    // 最下位の桁を取得して 3 と比較
+    // 最下位の桁を取得して 3 と比較する
+    // e.g. 1234 % 10 = 1230 ... 4 ⇒ 4 が最下位の桁となる
     const digit = absNum % 10;
     if (digit === 3) {
       return true;
     }
     // 最下位の桁を削除して次の桁へ移動
+    // e.g. 1234 / 10 = 123.4 ⇒ 123 を次の計算で使用する
     absNum = Math.floor(absNum / 10);
   }
 
