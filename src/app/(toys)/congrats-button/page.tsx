@@ -76,7 +76,7 @@ export default function App() {
             <div className="flex gap-2">
               <input
                 type="text"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full max-w-xs rounded-full"
                 value={emojiFormText}
                 onChange={handleChange}
               />
@@ -175,8 +175,8 @@ export default function App() {
           </li>
         </ul>
         <div className="join">
-          <div className="badge join-item badge-neutral">v0.1.1</div>
-          <div className="badge join-item badge-ghost">on 2024-05-09</div>
+          <div className="badge join-item badge-neutral">v0.1.2</div>
+          <div className="badge join-item badge-ghost">on 2024-05-11</div>
         </div>
       </article>
     </div>
