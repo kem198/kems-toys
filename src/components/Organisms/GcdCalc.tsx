@@ -58,6 +58,7 @@ export default function GcdCalc(): JSX.Element {
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
       {/* mCount の加減算 UI */}
       <IncDecForm
+        labelText="m"
         formNum={mCount}
         setFormNum={setMCount}
         decrementNum={-1}
@@ -65,6 +66,7 @@ export default function GcdCalc(): JSX.Element {
       />
       {/* nCount の加減算 UI */}
       <IncDecForm
+        labelText="n"
         formNum={nCount}
         setFormNum={setNCount}
         decrementNum={-1}

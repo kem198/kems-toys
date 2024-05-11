@@ -45,6 +45,7 @@ export default function FizzBuzzCalc() {
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       <IncDecForm
+        labelText="n"
         formNum={count}
         setFormNum={setCount}
         decrementNum={-1}

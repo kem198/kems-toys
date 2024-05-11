@@ -62,6 +62,7 @@ export default function NabeatsuAssessmenter() {
     <div className="container my-8 w-fit max-lg:mx-auto">
       {/* 加算減算させる UI */}
       <IncDecForm
+        labelText="n"
         formNum={count}
         setFormNum={setCount}
         decrementNum={-1}

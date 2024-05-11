@@ -1,4 +1,5 @@
 interface Props {
+  labelText: string;
   formNum: number;
   setFormNum: (num: number) => void;
   decrementNum: number;
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export default function IncDecForm({
+  labelText,
   formNum,
   setFormNum,
   decrementNum,
@@ -29,7 +31,7 @@ export default function IncDecForm({
         {decrementNum}
       </button>
       <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-        {formNum}
+        {labelText} = {formNum}
       </div>
       <button
         type="button"
