@@ -9,6 +9,9 @@ export default function HelloWorld() {
         <li>
           <Link href="/hello-world/sub-page/">Sub page</Link>
         </li>
+        <li>
+          <Link href="/hello-world/markdown/">Markdown</Link>
+        </li>
       </ul>
     </article>
   );
