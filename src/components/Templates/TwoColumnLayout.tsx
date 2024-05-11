@@ -1,7 +1,6 @@
 import ToyList from '@/components/Organisms/ToyList';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import Breadcrumbs from '../Atoms/Breadcrumbs';
 
 interface NavbarProps {
   children: ReactNode;
@@ -44,7 +43,6 @@ export default function Navbar({ children }: NavbarProps) {
       <div className="drawer lg:drawer-open">
         {/* メインコンテンツ */}
         <div className="drawer-content flex flex-col">
-          <Breadcrumbs />
           <main className="container mx-auto my-4 px-4">{children}</main>
         </div>
         {/* サイドバーのトグル用 */}

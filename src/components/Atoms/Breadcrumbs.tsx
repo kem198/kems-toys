@@ -11,7 +11,7 @@ function Breadcrumbs() {
   );
 
   return (
-    <div className="breadcrumbs px-2 text-sm text-neutral">
+    <div className="breadcrumbs pb-4 pt-0 text-sm text-stone-600">
       <ul>
         <li>
           <Link href="/">Home</Link>
@@ -19,7 +19,7 @@ function Breadcrumbs() {
         {pathnamesIgnoredRouteGroups.map((segment, index) => (
           <li key={index}>
             {index === pathnamesIgnoredRouteGroups.length - 1 ? (
-              <span>{segment}</span>
+              <span className="text-stone-400">{segment}</span>
             ) : (
               <Link
                 href={`/${pathnamesIgnoredRouteGroups.slice(0, index + 1).join('/')}`}
