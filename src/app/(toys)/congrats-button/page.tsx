@@ -26,11 +26,9 @@ export default function App() {
     <article>
       <StyledMarkdown source={bodySource} />
       <CongratsButton />
-      <article className="prose prose-sm">
-        <div className="divider" />
-        <StyledMarkdown source={supplementSource} />
-        <Version version="0.1.2" onDate="2024-05-11" />
-      </article>
+      <div className="divider" />
+      <StyledMarkdown source={supplementSource} />
+      <Version version="0.1.2" onDate="2024-05-11" />
     </article>
   );
 }
