@@ -8,6 +8,7 @@ import { useState } from 'react';
  * @returns {boolean} - 3 の倍数であれば true, そうでなければ false
  */
 const isThreeMultiple = (num: number): boolean => num % 3 === 0;
+
 /**
  * 入力値に 3 を含む桁が存在するか評価する関数
  * @param {number} num - 評価する数値
@@ -43,7 +44,7 @@ const hasThreeDigits = (num: number): boolean => {
 const isNabeatsu = (num: number): boolean =>
   isThreeMultiple(num) || hasThreeDigits(num);
 
-export default function NabeatsuCalc() {
+export default function NabeatsuAssessmenter() {
   const [count, setCount] = useState(0);
 
   /**
