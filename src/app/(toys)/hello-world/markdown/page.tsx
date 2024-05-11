@@ -3,12 +3,12 @@ import Markdown from 'react-markdown';
 const mdSource = `
 # Markdown
 
-This page was written in **Markdown** !
+This page was written with **Markdown** !
 
 ## Used libraries
 
-- [remarkjs/react-markdown](https://github.com/remarkjs/react-markdown?tab=readme-ov-file)
-- [tailwindlabs/tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)
+- [react-markdown](https://github.com/remarkjs/react-markdown?tab=readme-ov-file)
+- [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)
 
 ## Code
 
