@@ -2,11 +2,11 @@ import ToyList from '@/components/Organisms/ToyList';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-interface NavbarProps {
+interface Props {
   children: ReactNode;
 }
 
-export default function Navbar({ children }: NavbarProps) {
+export default function TwoColumnLayout({ children }: Props) {
   return (
     <div>
       {/* Navbar */}
