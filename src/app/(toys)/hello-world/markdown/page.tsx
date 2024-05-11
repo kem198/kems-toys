@@ -31,7 +31,7 @@ export default function Page() {
 }
 \`\`\`
 
-- [View this page's source](https://github.com/kenkenpa198/kems-toys/blob/main/src/app/%28toys%29/hello-world/markdown/page.tsx)
+- [Full source](https://github.com/kenkenpa198/kems-toys/blob/main/src/app/%28toys%29/hello-world/markdown/page.tsx)
 - [Arranged Component](https://github.com/kenkenpa198/kems-toys/blob/main/src/components/Atoms/StyledMarkdown.tsx)
 
 `;
