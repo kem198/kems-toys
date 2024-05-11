@@ -1,10 +1,10 @@
 import Markdown from 'react-markdown';
 
-interface MdProps {
+interface Props {
   source: string;
 }
 
-export default function StyledMarkdown({ source }: MdProps) {
+export default function StyledMarkdown({ source }: Props) {
   return (
     <div className="prose">
       <Markdown>{source}</Markdown>
