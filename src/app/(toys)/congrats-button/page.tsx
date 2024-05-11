@@ -1,6 +1,7 @@
 'use client';
 
 import EmojiPicker from '@/components/Atoms/EmojiPicker';
+import Version from '@/components/Atoms/Version';
 import emojiRegex from 'emoji-regex';
 import JSConfetti from 'js-confetti';
 import { useEffect, useState } from 'react';
@@ -174,10 +175,7 @@ export default function App() {
             </a>
           </li>
         </ul>
-        <div className="join">
-          <div className="badge join-item badge-neutral">v0.1.2</div>
-          <div className="badge join-item badge-ghost">on 2024-05-11</div>
-        </div>
+        <Version version="0.1.2" onDate="2024-05-11" />
       </article>
     </div>
   );

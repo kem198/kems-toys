@@ -1,5 +1,6 @@
 'use client';
 
+import Version from '@/components/Atoms/Version';
 import { useState } from 'react';
 
 /**
@@ -112,10 +113,7 @@ export default function App() {
             </a>
           </li>
         </ul>
-        <div className="join">
-          <div className="badge join-item badge-neutral">v0.1.0</div>
-          <div className="badge join-item badge-ghost">on 2024-05-07</div>
-        </div>
+        <Version version="0.1.0" onDate="2024-05-07" />
       </article>
     </div>
   );
