@@ -96,7 +96,7 @@ export default function App() {
               href="https://github.com/loonywizard/js-confetti"
               target="_blank"
             >
-              loonywizard/js-confetti
+              js-confetti
             </a>{' '}
             (
             <a
@@ -112,7 +112,7 @@ export default function App() {
               href="https://github.com/mathiasbynens/emoji-regex"
               target="_blank"
             >
-              mathiasbynens/emoji-regex
+              emoji-regex
             </a>{' '}
             (
             <a
@@ -125,7 +125,7 @@ export default function App() {
           </li>
           <li>
             <a href="https://github.com/missive/emoji-mart" target="_blank">
-              missive/emoji-mart
+              emoji-mart
             </a>{' '}
             (
             <a
