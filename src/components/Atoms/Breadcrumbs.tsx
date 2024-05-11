@@ -17,7 +17,7 @@ function Breadcrumbs() {
           <Link href="/">Home</Link>
         </li>
         {pathnamesIgnoredRouteGroups.map((segment, index) => (
-          <li key={index}>
+          <li key={segment}>
             {index === pathnamesIgnoredRouteGroups.length - 1 ? (
               <span className="text-stone-400">{segment}</span>
             ) : (
