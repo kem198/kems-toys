@@ -3,11 +3,26 @@
 import { useState } from 'react';
 
 /**
- * 3 を含む桁が存在するか評価する関数
+ * 入力値が 3 の倍数であるか評価する関数
  * @param {number} num - 評価する数値
- * @returns {boolean} - 3 を含む桁があれば true, そうでなければ false を返す
+ * @returns {boolean} - 3 の倍数であれば true, そうでなければ false
  */
-const hasThreeDigits = (num: number) => {
+const isThreeMultiple = (num: number): boolean => {
+  // 0 は 3 の倍数ではないため除外する
+  if (num === 0) {
+    return false;
+  }
+
+  // 入力値が 3 の倍数であるか評価して返す
+  return num % 3 === 0;
+};
+
+/**
+ * 入力値に 3 を含む桁が存在するか評価する関数
+ * @param {number} num - 評価する数値
+ * @returns {boolean} - 3 を含む桁があれば true, そうでなければ false
+ */
+const hasThreeDigits = (num: number): boolean => {
   // 入力を絶対値へ変換する (e.g. -1234 ⇒ 1234)
   const absNum = Math.abs(num);
 
@@ -25,29 +40,37 @@ const hasThreeDigits = (num: number) => {
   // 桁数を求める (e.g. 3 + 1 ⇒ 4)
   const numDigits = commonLogQuotient + 1;
 
-  // 桁の重みを求める (e.g. 10^3 ⇒ 1000)
-  const numDigitsWeight = 10 ** commonLogQuotient;
-
   // 桁数分だけ評価を繰り返す
   for (let i = 0; i < numDigits; i += 1) {
-    // 入力の絶対値を桁の重みで割り、商が 3 であれば true を返して終了する
-    if (Math.floor(numAbs / numDigitsWeight) === 3) {
-      return true;
-    } else {
-      // 負の場合は次のループで評価する値を再代入する
-      const deleteDigits =
-        Math.floor(numAbs / numDigitsWeight) * numDigitsWeight;
-      num = num - deleteDigits;
-    }
+    // 桁の重みを求める (e.g. 10^3 ⇒ 1000)
+    const numDigitsWeight = 10 ** commonLogQuotient;
 
-    return false;
+    // 桁の値を取得する
+    const digit = Math.floor(absNum / numDigitsWeight) % 10;
+
+    // 3 を含む桁があれば true を返して終了する
+    if (digit === 3) {
+      return true;
+    }
   }
+
+  // 3 を含む桁がなければ false を返す
+  return false;
 };
 
 /**
- * FizzBuzz コンポーネント
+ * 与えられた数値について次のいずれかの条件を満たすか評価する関数
+ *
+ * (A) 3 の倍数である
+ * (B) 3 を含む桁が存在する
+ *
+ * @param {number} num - 評価する数値
+ * @returns {boolean} - 条件を満たす場合は true, そうでなければ false
  */
-export default function FizzBuzzCalc() {
+const isNabeatsu = (num: number): boolean =>
+  isThreeMultiple(num) || hasThreeDigits(num);
+
+export default function NabeatsuCalc() {
   const [count, setCount] = useState(1);
 
   /**
@@ -89,7 +112,7 @@ export default function FizzBuzzCalc() {
       </div>
       {/* 結果表示 */}
       <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
-        <p>{func(count)}</p>
+        <p>{isNabeatsu(count) ? `${count}!!!` : count}</p>
       </div>
 
       {/* リセット */}
