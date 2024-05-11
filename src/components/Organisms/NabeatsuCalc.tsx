@@ -7,16 +7,7 @@ import { useState } from 'react';
  * @param {number} num - 評価する数値
  * @returns {boolean} - 3 の倍数であれば true, そうでなければ false
  */
-const isThreeMultiple = (num: number): boolean => {
-  // 0 は 3 の倍数ではないため除外する
-  if (num === 0) {
-    return false;
-  }
-
-  // 入力値が 3 の倍数であるか評価して返す
-  return num % 3 === 0;
-};
-
+const isThreeMultiple = (num: number): boolean => num % 3 === 0;
 /**
  * 入力値に 3 を含む桁が存在するか評価する関数
  * @param {number} num - 評価する数値
@@ -24,37 +15,19 @@ const isThreeMultiple = (num: number): boolean => {
  */
 const hasThreeDigits = (num: number): boolean => {
   // 入力を絶対値へ変換する (e.g. -1234 ⇒ 1234)
-  const absNum = Math.abs(num);
+  let absNum = Math.abs(num);
 
-  // 0 の場合除算で -Infinity を返すため処理を終了する
-  if (absNum === 0) {
-    return false;
-  }
-
-  // 常用対数を求める (e.g. 1234 ⇒ 3.091...)
-  const commonLog = Math.log10(absNum);
-
-  // 常用対数の商を求める (e.g. 3.091... ⇒ 3)
-  const commonLogQuotient = Math.floor(commonLog);
-
-  // 桁数を求める (e.g. 3 + 1 ⇒ 4)
-  const numDigits = commonLogQuotient + 1;
-
-  // 桁数分だけ評価を繰り返す
-  for (let i = 0; i < numDigits; i += 1) {
-    // 桁の重みを求める (e.g. 10^3 ⇒ 1000)
-    const numDigitsWeight = 10 ** commonLogQuotient;
-
-    // 桁の値を取得する
-    const digit = Math.floor(absNum / numDigitsWeight) % 10;
-
-    // 3 を含む桁があれば true を返して終了する
+  // 各桁を調べる
+  while (absNum > 0) {
+    // 最下位の桁を取得して 3 と比較
+    const digit = absNum % 10;
     if (digit === 3) {
       return true;
     }
+    // 最下位の桁を削除して次の桁へ移動
+    absNum = Math.floor(absNum / 10);
   }
 
-  // 3 を含む桁がなければ false を返す
   return false;
 };
 
@@ -71,7 +44,7 @@ const isNabeatsu = (num: number): boolean =>
   isThreeMultiple(num) || hasThreeDigits(num);
 
 export default function NabeatsuCalc() {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
 
   /**
    * count を指定された数値分だけ増加させる関数
@@ -85,7 +58,7 @@ export default function NabeatsuCalc() {
    * count をリセットする関数
    */
   const resetCount = () => {
-    setCount(1);
+    setCount(0);
   };
 
   return (
