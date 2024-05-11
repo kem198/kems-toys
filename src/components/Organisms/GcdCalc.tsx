@@ -1,33 +1,19 @@
 'use client';
 
-import { MouseEventHandler, useState } from 'react';
-
-type UpdateCountFunction = MouseEventHandler<HTMLButtonElement>;
+import { useState } from 'react';
+import IncDecForm from '../Molecules/IncDecForm';
 
 export default function GcdCalc(): JSX.Element {
   // 状態フックを使用して m と n の状態を管理する
-  const [counts, setCounts] = useState<{ m: number; n: number }>({
-    m: 1,
-    n: 1,
-  });
-
-  // ボタンクリック時の処理関数
-  const updateCount: UpdateCountFunction = (event) => {
-    const { name = '', value = '0' } = event.currentTarget.dataset;
-    const addNum = parseInt(value, 10);
-    if (name === 'm' || name === 'n') {
-      setCounts((prevCounts) => ({
-        ...prevCounts,
-        [name]: prevCounts[name] + addNum,
-      }));
-    }
-  };
+  const [mCount, setMCount] = useState(1);
+  const [nCount, setNCount] = useState(1);
 
   /**
    * m と n を初期値 (1) にリセットする関数
    */
   const resetCounts = () => {
-    setCounts({ m: 1, n: 1 });
+    setMCount(1);
+    setNCount(1);
   };
 
   /**
@@ -71,61 +57,23 @@ export default function GcdCalc(): JSX.Element {
   return (
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
       {/* mCount の加減算 UI */}
-      <div className="join">
-        <div className="join-item">
-          <button
-            type="button"
-            className="btn btn-primary join-item w-24"
-            onClick={updateCount}
-            data-name="m"
-            data-value="-1"
-          >
-            -1
-          </button>
-        </div>
-        <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-          m = {counts.m}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={updateCount}
-          data-name="m"
-          data-value="1"
-        >
-          +1
-        </button>
-      </div>
+      <IncDecForm
+        formNum={mCount}
+        setFormNum={setMCount}
+        decrementNum={-1}
+        incrementNum={1}
+      />
       {/* nCount の加減算 UI */}
-      <div className="join">
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={updateCount}
-          data-name="n"
-          data-value="-1"
-        >
-          -1
-        </button>
-        <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-          n = {counts.n}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={updateCount}
-          data-name="n"
-          data-value="1"
-        >
-          +1
-        </button>
-      </div>
-
+      <IncDecForm
+        formNum={nCount}
+        setFormNum={setNCount}
+        decrementNum={-1}
+        incrementNum={1}
+      />
       {/* 結果表示領域 */}
       <div className="flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
-        <p>{calcGcd(counts.m, counts.n)}</p>
+        <p>{calcGcd(mCount, nCount)}</p>
       </div>
-
       {/* リセット */}
       <button
         type="button"

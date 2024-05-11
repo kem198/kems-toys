@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import IncDecForm from '../Molecules/IncDecForm';
 
 /**
  * 入力値が 3 の倍数であるか評価する関数
@@ -51,14 +52,6 @@ export default function NabeatsuAssessmenter() {
   const [count, setCount] = useState(0);
 
   /**
-   * count を指定された数値分だけ増加させる関数
-   * @param {number} amount - 増加させる数値
-   */
-  const updateCount = (amount: number) => {
-    setCount((prevCount) => prevCount + amount);
-  };
-
-  /**
    * count をリセットする関数
    */
   const resetCount = () => {
@@ -68,25 +61,12 @@ export default function NabeatsuAssessmenter() {
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       {/* 加算減算させる UI */}
-      <div className="join">
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={() => updateCount(-1)}
-        >
-          -1
-        </button>
-        <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-          {count}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={() => updateCount(1)}
-        >
-          +1
-        </button>
-      </div>
+      <IncDecForm
+        formNum={count}
+        setFormNum={setCount}
+        decrementNum={-1}
+        incrementNum={1}
+      />
       {/* 結果表示 */}
       <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
         <p>{isNabeatsu(count) ? `${count}!!!` : count}</p>

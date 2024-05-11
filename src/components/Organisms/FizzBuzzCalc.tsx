@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import IncDecForm from '../Molecules/IncDecForm';
 
 /**
  * Fizz Buzz を評価する関数
@@ -34,15 +35,6 @@ const doFizzBuzz = (num: number) => {
  */
 export default function FizzBuzzCalc() {
   const [count, setCount] = useState(1);
-
-  /**
-   * count を指定された数値分だけ増加させる関数
-   * @param {number} amount - 増加させる数値
-   */
-  const updateCount = (amount: number) => {
-    setCount((prevCount) => prevCount + amount);
-  };
-
   /**
    * count をリセットする関数
    */
@@ -52,26 +44,12 @@ export default function FizzBuzzCalc() {
 
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
-      {/* 加算減算させる UI */}
-      <div className="join">
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={() => updateCount(-1)}
-        >
-          -1
-        </button>
-        <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
-          {count}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-24"
-          onClick={() => updateCount(1)}
-        >
-          +1
-        </button>
-      </div>
+      <IncDecForm
+        formNum={count}
+        setFormNum={setCount}
+        decrementNum={-1}
+        incrementNum={1}
+      />
       {/* 結果表示 */}
       <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
         <p>{doFizzBuzz(count)}</p>
