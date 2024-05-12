@@ -2,17 +2,101 @@
 
 This page was written in **Markdown** !
 
+## Used libraries
+
+- [@next/mdx](https://www.npmjs.com/package/@next/mdx)
+- [@tailwindcss/typography](https://www.npmjs.com/package/@tailwindcss/typography)
+- [rehype-pretty-code](https://www.npmjs.com/package/rehype-pretty-code?activeTab=readme)
+- [shiki](https://www.npmjs.com/package/shiki)
+
 ## Reference
 
 - [Configuring: MDX | Next.js](https://nextjs.org/docs/pages/building-your-application/configuring/mdx)
 - [Rehype Pretty Code](https://rehype-pretty.pages.dev/#installation)
+- [tailwindlabs/tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - [Nextjsで@next/mdxを使ったマークダウンの変換でシンタックスハイライトを実装する #Next.js - Qiita](https://qiita.com/KokiSakano/items/571130652864432b8489)
 
-## Code
+<div className="divider my-16">Below for display check</div>
 
-```ts
-// src/app/(toys)/hello-world/md/page.tsx
+# Heading 1 / 見出し 1
 
+Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph
+
+段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落
+
+## Heading 2 / 見出し 2
+
+Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph
+
+段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落
+
+### Heading 3 / 見出し 3
+
+Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph
+
+段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落
+
+#### Heading 4 / 見出し 4
+
+Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph
+
+段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落
+
+##### Heading 5 / 見出し 5
+
+Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph
+
+段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落
+
+###### Heading 6 / 見出し 6
+
+Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph Paragraph
+
+段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落 段落
+
+## Decoration
+
+**Bold** / **太字**
+
+_Italic_ / _斜体_
+
+**_Strong_** / **_強調_**
+
+~~Not~~ / ~~打ち消し線~~ (unsupported)
+
+## Link
+
+[example.com](https://example.com/)
+
+## Image
+
+![next.svg](/next.svg)
+
+## Ordered List
+
+1. Ordered List
+2. Ordered List
+3. Ordered List
+   1. Ordered List
+   2. Ordered List
+   3. Ordered List
+
+## Unordered List
+
+- Unordered List
+- Unordered List
+- Unordered List
+  - Unordered List
+  - Unordered List
+  - Unordered List
+
+## Inline code
+
+`Hello World!` / `こんにちは世界！`
+
+## Code block
+
+```tsx
 import MdBody from './page.body.mdx';
 
 export default function Page() {
@@ -24,11 +108,30 @@ export default function Page() {
 }
 ```
 
-```md
-<!-- src/app/(toys)/hello-world/md/page.body.mdx -->
+## Blockquote
 
-# Markdown
+> Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote Blockquote
 
-This page was written in **Markdown** !
-...
-```
+> 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用 引用
+
+## Table
+
+(unsupported)
+
+| Rule Name     | Menu          | Description                                |
+| ------------- | ------------- | ------------------------------------------ |
+| Turf War      | Regular Match | Cover the turf with ink!                   |
+| Splat Zones   | Ranked Match  | Control the zones and hold them!           |
+| Tower Control | Ranked Match  | Ride the tower into the enemy's base!      |
+| Rainmaker     | Ranked Match  | Carry the Rainmaker into the enemy's base! |
+
+| ルール名       | メニュー         | 説明                                 |
+| -------------- | ---------------- | ------------------------------------ |
+| ナワバリバトル | レギュラーマッチ | たくさんナワバリを確保しろ！         |
+| ガチエリア     | バンカラマッチ   | ガチエリアを確保して守りぬけ！       |
+| ガチヤグラ     | バンカラマッチ   | ガチヤグラを相手ゴールに運べ！       |
+| ガチアサリ     | バンカラマッチ   | ガチアサリを相手ゴールに投げ入れろ！ |
+
+## Horizon
+
+---
