@@ -8,7 +8,7 @@ export default function ToysLayout({
   return (
     <div>
       <Breadcrumbs />
-      <article className="prose">{children}</article>
+      <article className="prose max-w-2xl">{children}</article>
     </div>
   );
 }
