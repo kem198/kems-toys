@@ -75,7 +75,7 @@ export default function NabeatsuAssessmenter() {
         incrementNum={1}
       />
       {/* 結果表示 */}
-      <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
+      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
         <p>{isNabeatsu(count) ? `${count}!!!` : count}</p>
       </div>
 

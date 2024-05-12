@@ -73,7 +73,7 @@ export default function GcdCalc(): JSX.Element {
         incrementNum={1}
       />
       {/* 結果表示領域 */}
-      <div className="flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
+      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
         <p>{calcGcd(mCount, nCount)}</p>
       </div>
       {/* リセット */}

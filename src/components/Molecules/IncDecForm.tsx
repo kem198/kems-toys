@@ -30,7 +30,7 @@ export default function IncDecForm({
       >
         {decrementNum}
       </button>
-      <div className="join-item mx-auto flex w-24 place-items-center items-center justify-center rounded-box bg-base-200">
+      <div className="join-item mx-auto flex w-32 place-items-center items-center justify-center rounded-box bg-base-200">
         {labelText} = {formNum}
       </div>
       <button

@@ -5,7 +5,7 @@ import FizzBuzzCalc from '@/components/Organisms/FizzBuzzCalc';
 const bodySource = `
 # Fizz Buzz
 
-1 以上の整数について、
+与えられた自然数 n について、
 
 - 3 で割り切れる場合は \`Fizz!\` を返す。
 - 5 で割り切れる場合は \`Buzz!\` を返す。

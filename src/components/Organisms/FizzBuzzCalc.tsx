@@ -16,7 +16,7 @@ import IncDecForm from '../Molecules/IncDecForm';
  */
 const doFizzBuzz = (num: number) => {
   if (num <= 0) {
-    return '1 以上の整数を入力してください';
+    return '入力が自然数 (1 以上の整数) ではありません';
   }
   if (num % 3 === 0 && num % 5 === 0) {
     return 'Fizz Buzz!!';
@@ -52,7 +52,7 @@ export default function FizzBuzzCalc() {
         incrementNum={1}
       />
       {/* 結果表示 */}
-      <div className="my-4 flex h-20 w-72 place-items-center items-center justify-center rounded-box bg-base-200">
+      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
         <p>{doFizzBuzz(count)}</p>
       </div>
 
