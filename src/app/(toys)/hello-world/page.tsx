@@ -12,6 +12,9 @@ export default function HelloWorld() {
         <li>
           <Link href="/hello-world/md/">Markdown</Link>
         </li>
+        <li>
+          <Link href="/hello-world/loading/">Loading</Link>
+        </li>
       </ul>
     </article>
   );
