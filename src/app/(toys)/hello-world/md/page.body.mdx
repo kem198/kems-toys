@@ -1,0 +1,32 @@
+# Markdown
+
+This page was written in **Markdown** !
+
+## Reference
+
+- [Configuring: MDX | Next.js](https://nextjs.org/docs/pages/building-your-application/configuring/mdx)
+
+## Code
+
+```ts
+// src/app/(toys)/hello-world/md/page.tsx
+
+import MdBody from './page.body.mdx';
+
+export default function Page() {
+  return (
+    <article>
+      <MdBody />
+    </article>
+  );
+}
+```
+
+```md
+<!-- src/app/(toys)/hello-world/md/page.body.mdx -->
+
+# Markdown
+
+This page was written in **Markdown** !
+...
+```

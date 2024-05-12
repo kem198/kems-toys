@@ -6,9 +6,9 @@ export default function ToysLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <article>
+    <div>
       <Breadcrumbs />
-      {children}
-    </article>
+      <article className="prose">{children}</article>
+    </div>
   );
 }
