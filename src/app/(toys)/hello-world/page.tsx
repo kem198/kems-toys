@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function HelloWorld() {
   return (
-    <article className="prose">
+    <article>
       <h1>Hello World</h1>
       <p>スタイルやルーティングなどの確認用ページ。</p>
       <ul>
@@ -10,7 +10,7 @@ export default function HelloWorld() {
           <Link href="/hello-world/sub-page/">Sub page</Link>
         </li>
         <li>
-          <Link href="/hello-world/markdown/">Markdown</Link>
+          <Link href="/hello-world/md/">Markdown</Link>
         </li>
       </ul>
     </article>
