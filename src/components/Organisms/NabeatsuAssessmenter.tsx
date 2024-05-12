@@ -28,9 +28,11 @@ const hasThreeDigits = (num: number): boolean => {
     if (digit === 3) {
       return true;
     }
-    // 最下位の桁を削除して次の桁へ移動
-    // e.g. 1234 / 10 = 123.4 ⇒ 123 を次の計算で使用する
-    absNum = Math.floor(absNum / 10);
+
+    // 見つからなかったら最下位の桁を削除して次の桁へ移動する
+    // 入力を 10 で割って整数部を取り出すと削除できる
+    // e.g. `1234 / 10 = 123.4` ⇒ `123` を次の計算で使用する
+    absNum = Math.trunc(absNum / 10);
   }
 
   return false;
