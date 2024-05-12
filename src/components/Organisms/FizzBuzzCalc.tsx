@@ -16,7 +16,7 @@ import IncDecForm from '../Molecules/IncDecForm';
  */
 const doFizzBuzz = (num: number) => {
   if (num <= 0) {
-    return '入力が自然数 (1 以上の整数) ではありません';
+    return '入力が自然数ではありません';
   }
   if (num % 3 === 0 && num % 5 === 0) {
     return 'Fizz Buzz!!';
