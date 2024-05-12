@@ -21,7 +21,8 @@
     "js-confetti": "^0.12.0",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "rehype-pretty-code": "^0.13.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
