@@ -7,7 +7,7 @@ const source = `
 
 [KeM's Toys](https://toys.kems-clew.net) (以下「当サイト」) は、管理人である KeM198 が制作・公開しているウェブサイトです。ウェブフロントエンド系技術の練習用として制作されました。
 
-当サイトの構築情報は GitHub にて公開しています。
+当サイトのソースコードは GitHub にて公開しています。
 
 - [kenkenpa198/kems-toys](https://github.com/kenkenpa198/kems-toys)
 
