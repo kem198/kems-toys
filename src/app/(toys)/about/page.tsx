@@ -31,13 +31,16 @@ const source = `
 
 - [TypeScript](https://www.typescriptlang.org/)
 
-### ライブラリ
+### UI 構築
 
 - [React](https://react.dev/)
-- [react-markdown](https://remarkjs.github.io/react-markdown/)
+
+### スタイリング
+
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Tailwind CSS Typography](https://tailwindcss-typography.vercel.app/)
 - [daisyUI](https://daisyui.com/)
+- [react-markdown](https://remarkjs.github.io/react-markdown/)
 
 ### フォント
 
