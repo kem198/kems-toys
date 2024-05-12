@@ -4,7 +4,7 @@ export default function HelloWorld() {
   return (
     <article>
       <h1>Hello World</h1>
-      <p>スタイルやルーティングなどの確認用ページ。</p>
+      <p>スタイルやルーティングなどのテスト用ページ。</p>
       <ul>
         <li>
           <Link href="/hello-world/sub-page/">Sub page</Link>
