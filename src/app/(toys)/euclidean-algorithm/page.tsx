@@ -26,7 +26,7 @@ export default function Page() {
       <GcdCalc />
       <div className="divider" />
       <StyledMarkdown source={supplementSource} />
-      <Version version="0.1.0" onDate="2024-05-07" />
+      <Version version="0.1.1" onDate="2024-05-12" />
     </article>
   );
 }
