@@ -2,7 +2,7 @@
 
 This page was written in **Markdown** !
 
-```md
+```mdx
 # Markdown
 
 This page was written in **Markdown** !
@@ -21,6 +21,7 @@ This page was written in **Markdown** !
 - [Rehype Pretty Code](https://rehype-pretty.pages.dev/#installation)
 - [tailwindlabs/tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - [Nextjsで@next/mdxを使ったマークダウンの変換でシンタックスハイライトを実装する #Next.js - Qiita](https://qiita.com/KokiSakano/items/571130652864432b8489)
+- [Markdown を拡張する MDX はドキュメント作成の新たな可能性？](https://zenn.dev/spring_raining/articles/3eb62ff93df1eb)
 
 <div className="divider my-16">Below for display check</div>
 
@@ -145,3 +146,47 @@ export default function Page() {
 ## Horizon
 
 ---
+
+## Use JSX
+
+The source file type is ".md**x**". So you can use JavaScript and React.Component.
+
+### DOM
+
+```mdx
+<div className="bg-primary">
+  <h4>This is JSX</h4>
+</div>
+```
+
+<div className="bg-primary">
+  <h4>This is JSX</h4>
+</div>
+
+### Call Components
+
+```mdx
+import Version from '@/components/Atoms/Version';
+
+<Version version="0.1.0" onDate="1970-01-01" />
+```
+
+import Version from '@/components/Atoms/Version';
+
+<Version version="0.1.0" onDate="1970-01-01" />
+
+### Expression
+
+```mdx
+> {1 + 1}
+
+> {1 + 1 === 2 ? 'TRUE' : 'FALSE'}
+
+> {'mdx'.toUpperCase()}
+```
+
+> {1 + 1}
+
+> {1 + 1 === 2 ? 'TRUE' : 'FALSE'}
+
+> {'mdx'.toUpperCase()}
