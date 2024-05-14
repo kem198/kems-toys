@@ -1,5 +1,5 @@
+import { Version } from '@/components/Atoms/Version';
 import React from 'react';
-import Version from '../Atoms/Version';
 
 interface Props {
   title: string;
@@ -10,22 +10,22 @@ interface Props {
   SupplementComponent: React.ComponentType;
 }
 
-export default function ToyLayout({
+const ToyLayout = ({
   title,
   version,
   onDate,
   BodyComponent,
   ToyComponent,
   SupplementComponent,
-}: Props) {
-  return (
-    <article>
-      <h1>{title}</h1>
-      <BodyComponent />
-      <ToyComponent />
-      <div className="divider" />
-      <SupplementComponent />
-      <Version version={version} onDate={onDate} />
-    </article>
-  );
-}
+}: Props) => (
+  <article>
+    <h1>{title}</h1>
+    <BodyComponent />
+    <ToyComponent />
+    <div className="divider" />
+    <SupplementComponent />
+    <Version version={version} onDate={onDate} />
+  </article>
+);
+
+export { ToyLayout };

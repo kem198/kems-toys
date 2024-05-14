@@ -1,11 +1,11 @@
 'use client';
 
-import EmojiPicker from '@/components/Atoms/EmojiPicker';
+import { EmojiPicker } from '@/components/Atoms/EmojiPicker';
 import emojiRegex from 'emoji-regex';
 import JSConfetti from 'js-confetti';
 import { useEffect, useState } from 'react';
 
-export default function CongratsButton() {
+const CongratsButton = () => {
   /**
    * confetti インスタンス用の変数とセッターを定義する
    *
@@ -86,4 +86,6 @@ export default function CongratsButton() {
       </div>
     </div>
   );
-}
+};
+
+export { CongratsButton };

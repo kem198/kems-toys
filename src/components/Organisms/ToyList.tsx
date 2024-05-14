@@ -4,7 +4,7 @@ import { toys } from '@/assets/toys';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function ToyList() {
+const ToyList = () => {
   // 現在のパスを取得しておく
   const pathname = usePathname();
 
@@ -40,4 +40,6 @@ export default function ToyList() {
 
   // コンポーネントの配列を返す
   return <ul>{generateToyList()}</ul>;
-}
+};
+
+export { ToyList };

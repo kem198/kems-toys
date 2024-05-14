@@ -1,9 +1,9 @@
 'use client';
 
+import { IncDecForm } from '@/components/Molecules/IncDecForm';
 import { useState } from 'react';
-import IncDecForm from '../Molecules/IncDecForm';
 
-export default function GcdCalc(): JSX.Element {
+const GcdCalc = (): JSX.Element => {
   // 状態フックを使用して m と n の状態を管理する
   const [mCount, setMCount] = useState(1);
   const [nCount, setNCount] = useState(1);
@@ -86,4 +86,6 @@ export default function GcdCalc(): JSX.Element {
       </button>
     </div>
   );
-}
+};
+
+export { GcdCalc };

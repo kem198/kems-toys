@@ -1,7 +1,7 @@
 import { toys } from '@/assets/toys';
-import ToyCard from '@/components/Molecules/ToyCard';
+import { ToyCard } from '@/components/Molecules/ToyCard';
 
-export default function ToyCards() {
+const ToyCards = () => {
   // ToyCard コンポーネントをループ生成する関数
   const generateToyCards = () =>
     Object.keys(toys).map((key) => {
@@ -23,4 +23,6 @@ export default function ToyCards() {
       {generateToyCards()}
     </div>
   );
-}
+};
+
+export { ToyCards };

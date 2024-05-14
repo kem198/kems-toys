@@ -1,5 +1,5 @@
-import ToyCards from '@/components/Organisms/ToyCards';
+import { ToyCards } from '@/components/Organisms/ToyCards';
 
-export default function Home() {
-  return <ToyCards />;
-}
+const Home = () => <ToyCards />;
+
+export default Home;

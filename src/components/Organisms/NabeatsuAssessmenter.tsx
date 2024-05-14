@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import IncDecForm from '../Molecules/IncDecForm';
+import { IncDecForm } from '../Molecules/IncDecForm';
 
 /**
  * 入力値が 3 の倍数であるか評価する関数
@@ -54,7 +54,7 @@ const hasThreeDigits = (num: number): boolean => {
 const isNabeatsu = (num: number): boolean =>
   isThreeMultiple(num) || hasThreeDigits(num);
 
-export default function NabeatsuAssessmenter() {
+const NabeatsuAssessmenter = () => {
   const [count, setCount] = useState(0);
 
   /**
@@ -89,4 +89,6 @@ export default function NabeatsuAssessmenter() {
       </button>
     </div>
   );
-}
+};
+
+export { NabeatsuAssessmenter };

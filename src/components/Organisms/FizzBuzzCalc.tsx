@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import IncDecForm from '../Molecules/IncDecForm';
+import { IncDecForm } from '../Molecules/IncDecForm';
 
 /**
  * Fizz Buzz を評価する関数
@@ -33,7 +33,7 @@ const doFizzBuzz = (num: number) => {
 /**
  * FizzBuzz コンポーネント
  */
-export default function FizzBuzzCalc() {
+const FizzBuzzCalc = () => {
   const [count, setCount] = useState(1);
   /**
    * count をリセットする関数
@@ -66,4 +66,6 @@ export default function FizzBuzzCalc() {
       </button>
     </div>
   );
-}
+};
+
+export { FizzBuzzCalc };

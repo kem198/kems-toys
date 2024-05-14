@@ -1,16 +1,16 @@
-import Breadcrumbs from '@/components/Atoms/Breadcrumbs';
+import { Breadcrumbs } from '@/components/Atoms/Breadcrumbs';
 
-export default function ToysLayout({
+const ToysLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
-  return (
-    <div>
-      <Breadcrumbs />
-      <article className="prose max-w-2xl prose-blockquote:font-normal">
-        {children}
-      </article>
-    </div>
-  );
-}
+}>) => (
+  <div>
+    <Breadcrumbs />
+    <article className="prose max-w-2xl prose-blockquote:font-normal">
+      {children}
+    </article>
+  </div>
+);
+
+export default ToysLayout;

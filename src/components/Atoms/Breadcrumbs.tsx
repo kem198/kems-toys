@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useSelectedLayoutSegments } from 'next/navigation';
 
-function Breadcrumbs() {
+const Breadcrumbs = () => {
   // 呼び出されたページまでのセグメントを配列として取得する
   const pathnames = useSelectedLayoutSegments();
 
@@ -40,6 +40,6 @@ function Breadcrumbs() {
       </ul>
     </div>
   );
-}
+};
 
-export default Breadcrumbs;
+export { Breadcrumbs };

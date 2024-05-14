@@ -6,13 +6,13 @@ interface Props {
   incrementNum: number;
 }
 
-export default function IncDecForm({
+const IncDecForm = ({
   labelText,
   formNum,
   setFormNum,
   decrementNum,
   incrementNum,
-}: Props) {
+}: Props) => {
   /**
    * count を指定された数値分だけ増加させる関数
    * @param {number} amount - 増加させる数値
@@ -42,4 +42,6 @@ export default function IncDecForm({
       </button>
     </div>
   );
-}
+};
+
+export { IncDecForm };

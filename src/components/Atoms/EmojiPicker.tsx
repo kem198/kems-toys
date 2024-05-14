@@ -18,7 +18,7 @@ interface EmojiData {
   shortcodes: string[];
 }
 
-export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
+const EmojiPicker = ({ setText, buttonIcon }: EmojiPickerProps) => {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
@@ -57,4 +57,6 @@ export default function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
       )}
     </div>
   );
-}
+};
+
+export { EmojiPicker };

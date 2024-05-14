@@ -10,6 +10,9 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    // default export の強制を無効化
+    // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/prefer-default-export.md
+    "import/prefer-default-export": "off",
     // label, input 要素の使用時にネストのみでも可とする
     // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/label-has-associated-control.md
     // https://zenn.dev/krntmm/articles/756fdf2f8fcdff
@@ -22,6 +25,15 @@
         "assert": "either",
         "depth": 25
       }
-    ]
+    ],
+    // 名前付きエクスポートにアロー関数を強制する
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/function-component-definition.md
+    "react/function-component-definition": [
+      "warn",
+      { "namedComponents": "arrow-function" }
+    ],
+    // defaultProps の強制をオフ
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
+    "react/require-default-props": "off"
   }
 }
