@@ -6,11 +6,12 @@ import MdSupplement from './page.supplement.mdx';
 export default function Page() {
   return (
     <ToyLayout
+      title="おめでとうボタン"
+      version="0.1.2"
+      onDate="2024-05-11"
       ToyComponent={CongratsButton}
       BodyComponent={MdBody}
       SupplementComponent={MdSupplement}
-      version="0.1.2"
-      onDate="2024-05-11"
     />
   );
 }

@@ -6,6 +6,7 @@ import MdSupplement from './page.supplement.mdx';
 export default function Page() {
   return (
     <ToyLayout
+      title="ユークリッドの互除法"
       ToyComponent={GcdCalc}
       BodyComponent={MdBody}
       SupplementComponent={MdSupplement}

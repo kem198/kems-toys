@@ -2,22 +2,25 @@ import React from 'react';
 import Version from '../Atoms/Version';
 
 interface Props {
+  title: string;
+  version: string;
+  onDate: string;
   ToyComponent: React.ComponentType;
   BodyComponent: React.ComponentType;
   SupplementComponent: React.ComponentType;
-  version: string;
-  onDate: string;
 }
 
 export default function ToyLayout({
+  title,
+  version,
+  onDate,
   BodyComponent,
   ToyComponent,
   SupplementComponent,
-  version,
-  onDate,
 }: Props) {
   return (
     <article>
+      <h1>{title}</h1>
       <BodyComponent />
       <ToyComponent />
       <div className="divider" />

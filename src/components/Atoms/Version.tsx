@@ -5,7 +5,7 @@ interface VersionProps {
 
 export default function Version({ version, onDate }: VersionProps) {
   return (
-    <div className="join my-4">
+    <div className="join">
       <div className="badge join-item badge-neutral">v{version}</div>
       <div className="badge join-item badge-ghost">on {onDate}</div>
     </div>

@@ -6,6 +6,7 @@ import MdSupplement from './page.supplement.mdx';
 export default function Page() {
   return (
     <ToyLayout
+      title="ナベアツ判定機"
       ToyComponent={NabeatsuAssessmenter}
       BodyComponent={MdBody}
       SupplementComponent={MdSupplement}

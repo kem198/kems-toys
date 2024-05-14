@@ -6,6 +6,7 @@ import MdSupplement from './page.supplement.mdx';
 export default function Page() {
   return (
     <ToyLayout
+      title="Fizz Buzz"
       ToyComponent={FizzBuzzCalc}
       BodyComponent={MdBody}
       SupplementComponent={MdSupplement}
