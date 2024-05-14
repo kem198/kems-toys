@@ -47,3 +47,7 @@ Next.js や TypeScript などの練習用に作成したツール集です。
   - [Install · Prettier](https://prettier.io/docs/en/install)
 - [prettier-plugin-organize-imports - npm](https://www.npmjs.com/package/prettier-plugin-organize-imports)
 - [prettier-plugin-organize-imports で import 文を自動フォーマットする](https://zenn.dev/wakamsha/articles/prettier-plugin-organize-imports)
+
+### Others
+
+- [Next.js + MUIのスタイル再定義とアトミックデザインの話｜やっくん](https://note.com/pk_yakkun/n/ne1bc79d699be)
