@@ -1,3 +1,5 @@
+import { NumberInput } from '@/components/Atoms/NumberInput';
+
 interface Props {
   labelText: string;
   count: number;
@@ -21,36 +23,21 @@ const IncDecForm = ({
     setCount(count + amount);
   };
 
-  /**
-   * 入力フィールドの値を更新する関数
-   * @param {React.ChangeEvent<HTMLInputElement>} event - 入力イベント
-   */
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newNum = parseInt(event.target.value, 10);
-    if (!Number.isNaN(newNum)) {
-      setCount(newNum);
-    }
-  };
-
   return (
     <div className="join">
       <button
         type="button"
-        className="btn btn-primary join-item w-24"
+        className="btn btn-primary join-item w-16"
         onClick={() => updateCount(decrementNum)}
       >
         {decrementNum}
       </button>
-      <input
-        type="number"
-        value={count}
-        onChange={handleInputChange}
-        className="join-item mx-auto flex w-32 place-items-center items-center justify-center rounded-box bg-base-200"
-      />
-      {labelText} = {count}
+      <div className="grow">
+        <NumberInput labelText={labelText} count={count} setCount={setCount} />
+      </div>
       <button
         type="button"
-        className="btn btn-primary join-item w-24"
+        className="btn btn-primary join-item w-16"
         onClick={() => updateCount(incrementNum)}
       >
         +{incrementNum}

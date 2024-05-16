@@ -1,7 +1,7 @@
 'use client';
 
+import { NumberInput } from '@/components/Atoms/NumberInput';
 import { useState } from 'react';
-import { IncDecForm } from '../Molecules/IncDecForm';
 
 /**
  * 入力値が 3 の倍数であるか評価する関数
@@ -55,27 +55,21 @@ const isNabeatsu = (num: number): boolean =>
   isThreeMultiple(num) || hasThreeDigits(num);
 
 const NabeatsuAssessmenter = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    setCount(0);
+    setCount(1);
   };
 
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       {/* 加算減算させる UI */}
-      <IncDecForm
-        labelText="n"
-        count={count}
-        setCount={setCount}
-        decrementNum={-1}
-        incrementNum={1}
-      />
+      <NumberInput labelText="n" count={count} setCount={setCount} />
       {/* 結果表示 */}
-      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
+      <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
         <p>{isNabeatsu(count) ? `${count}!!!` : count}</p>
       </div>
 

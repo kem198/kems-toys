@@ -1,7 +1,7 @@
 'use client';
 
+import { NumberInput } from '@/components/Atoms/NumberInput';
 import { useState } from 'react';
-import { IncDecForm } from '../Molecules/IncDecForm';
 
 /**
  * Fizz Buzz を評価する関数
@@ -46,15 +46,9 @@ const FizzBuzzCalc = () => {
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       {/* 数値増減用フォーム */}
-      <IncDecForm
-        labelText="n"
-        count={count}
-        setCount={setCount}
-        decrementNum={-1}
-        incrementNum={1}
-      />
+      <NumberInput labelText="n" count={count} setCount={setCount} />
       {/* 結果表示 */}
-      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
+      <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
         <p>{doFizzBuzz(count)}</p>
       </div>
 

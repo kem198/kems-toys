@@ -1,6 +1,6 @@
 'use client';
 
-import { IncDecForm } from '@/components/Molecules/IncDecForm';
+import { NumberInput } from '@/components/Atoms/NumberInput';
 import { useState } from 'react';
 
 const GcdCalc = (): JSX.Element => {
@@ -57,23 +57,11 @@ const GcdCalc = (): JSX.Element => {
   return (
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
       {/* mCount の加減算 UI */}
-      <IncDecForm
-        labelText="m"
-        count={mCount}
-        setCount={setMCount}
-        decrementNum={-1}
-        incrementNum={1}
-      />
+      <NumberInput labelText="m" count={mCount} setCount={setMCount} />
       {/* nCount の加減算 UI */}
-      <IncDecForm
-        labelText="n"
-        count={nCount}
-        setCount={setNCount}
-        decrementNum={-1}
-        incrementNum={1}
-      />
+      <NumberInput labelText="n" count={nCount} setCount={setNCount} />
       {/* 結果表示領域 */}
-      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
+      <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
         <p>{calcGcd(mCount, nCount)}</p>
       </div>
       {/* リセット */}
