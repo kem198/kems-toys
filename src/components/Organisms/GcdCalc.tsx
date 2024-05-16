@@ -59,16 +59,16 @@ const GcdCalc = (): JSX.Element => {
       {/* mCount の加減算 UI */}
       <IncDecForm
         labelText="m"
-        formNum={mCount}
-        setFormNum={setMCount}
+        count={mCount}
+        setCount={setMCount}
         decrementNum={-1}
         incrementNum={1}
       />
       {/* nCount の加減算 UI */}
       <IncDecForm
         labelText="n"
-        formNum={nCount}
-        setFormNum={setNCount}
+        count={nCount}
+        setCount={setNCount}
         decrementNum={-1}
         incrementNum={1}
       />

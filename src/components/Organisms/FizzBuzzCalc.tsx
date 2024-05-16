@@ -35,6 +35,7 @@ const doFizzBuzz = (num: number) => {
  */
 const FizzBuzzCalc = () => {
   const [count, setCount] = useState(1);
+
   /**
    * count をリセットする関数
    */
@@ -44,10 +45,11 @@ const FizzBuzzCalc = () => {
 
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
+      {/* 数値増減用フォーム */}
       <IncDecForm
         labelText="n"
-        formNum={count}
-        setFormNum={setCount}
+        count={count}
+        setCount={setCount}
         decrementNum={-1}
         incrementNum={1}
       />
@@ -56,12 +58,8 @@ const FizzBuzzCalc = () => {
         <p>{doFizzBuzz(count)}</p>
       </div>
 
-      {/* リセット */}
-      <button
-        type="button"
-        className="btn btn-ghost w-24"
-        onClick={() => resetCount()}
-      >
+      {/* リセットボタン */}
+      <button type="button" className="btn btn-ghost w-24" onClick={resetCount}>
         リセット
       </button>
     </div>

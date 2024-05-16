@@ -1,15 +1,15 @@
 interface Props {
   labelText: string;
-  formNum: number;
-  setFormNum: (num: number) => void;
+  count: number;
+  setCount: (num: number) => void;
   decrementNum: number;
   incrementNum: number;
 }
 
 const IncDecForm = ({
   labelText,
-  formNum,
-  setFormNum,
+  count,
+  setCount,
   decrementNum,
   incrementNum,
 }: Props) => {
@@ -18,7 +18,18 @@ const IncDecForm = ({
    * @param {number} amount - 増加させる数値
    */
   const updateCount = (amount: number) => {
-    setFormNum(formNum + amount);
+    setCount(count + amount);
+  };
+
+  /**
+   * 入力フィールドの値を更新する関数
+   * @param {React.ChangeEvent<HTMLInputElement>} event - 入力イベント
+   */
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newNum = parseInt(event.target.value, 10);
+    if (!Number.isNaN(newNum)) {
+      setCount(newNum);
+    }
   };
 
   return (
@@ -30,9 +41,13 @@ const IncDecForm = ({
       >
         {decrementNum}
       </button>
-      <div className="join-item mx-auto flex w-32 place-items-center items-center justify-center rounded-box bg-base-200">
-        {labelText} = {formNum}
-      </div>
+      <input
+        type="number"
+        value={count}
+        onChange={handleInputChange}
+        className="join-item mx-auto flex w-32 place-items-center items-center justify-center rounded-box bg-base-200"
+      />
+      {labelText} = {count}
       <button
         type="button"
         className="btn btn-primary join-item w-24"

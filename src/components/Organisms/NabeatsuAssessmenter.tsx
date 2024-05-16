@@ -69,8 +69,8 @@ const NabeatsuAssessmenter = () => {
       {/* 加算減算させる UI */}
       <IncDecForm
         labelText="n"
-        formNum={count}
-        setFormNum={setCount}
+        count={count}
+        setCount={setCount}
         decrementNum={-1}
         incrementNum={1}
       />
