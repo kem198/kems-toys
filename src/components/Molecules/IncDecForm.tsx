@@ -3,7 +3,7 @@ import { NumberInput } from '@/components/Atoms/NumberInput';
 interface Props {
   labelText: string;
   count: number;
-  setCount: (num: number) => void;
+  setCount: (num: number | '') => void;
   decrementNum: number;
   incrementNum: number;
 }
