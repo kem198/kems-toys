@@ -34,13 +34,13 @@ const doFizzBuzz = (num: number) => {
  * FizzBuzz コンポーネント
  */
 const FizzBuzzCalc = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState<number | ''>('');
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    setCount(1);
+    setCount('');
   };
 
   return (
@@ -49,7 +49,7 @@ const FizzBuzzCalc = () => {
       <NumberInput labelText="n" count={count} setCount={setCount} />
       {/* 結果表示 */}
       <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{doFizzBuzz(count)}</p>
+        <p>{doFizzBuzz(Number(count))}</p>
       </div>
 
       {/* リセットボタン */}

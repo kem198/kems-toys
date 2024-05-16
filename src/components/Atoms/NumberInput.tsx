@@ -1,7 +1,7 @@
 interface Props {
   labelText: string;
-  count: number;
-  setCount: (num: number) => void;
+  count: number | '';
+  setCount: (num: number | '') => void;
 }
 
 const NumberInput = ({ labelText, count, setCount }: Props) => {
@@ -13,6 +13,8 @@ const NumberInput = ({ labelText, count, setCount }: Props) => {
     const newNum = parseInt(event.target.value, 10);
     if (!Number.isNaN(newNum)) {
       setCount(newNum);
+    } else {
+      setCount('');
     }
   };
 
@@ -21,9 +23,10 @@ const NumberInput = ({ labelText, count, setCount }: Props) => {
       {labelText} =
       <input
         type="number"
-        value={count}
+        value={count === '' ? '' : count}
         onChange={handleInputChange}
         className="grow text-right"
+        placeholder="0"
       />
     </label>
   );

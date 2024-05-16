@@ -5,15 +5,15 @@ import { useState } from 'react';
 
 const GcdCalc = (): JSX.Element => {
   // 状態フックを使用して m と n の状態を管理する
-  const [mCount, setMCount] = useState(1);
-  const [nCount, setNCount] = useState(1);
+  const [mCount, setMCount] = useState<number | ''>('');
+  const [nCount, setNCount] = useState<number | ''>('');
 
   /**
    * m と n を初期値 (1) にリセットする関数
    */
   const resetCounts = () => {
-    setMCount(1);
-    setNCount(1);
+    setMCount('');
+    setNCount('');
   };
 
   /**
@@ -62,7 +62,7 @@ const GcdCalc = (): JSX.Element => {
       <NumberInput labelText="n" count={nCount} setCount={setNCount} />
       {/* 結果表示領域 */}
       <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{calcGcd(mCount, nCount)}</p>
+        <p>{calcGcd(Number(mCount), Number(nCount))}</p>
       </div>
       {/* リセット */}
       <button

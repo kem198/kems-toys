@@ -55,13 +55,13 @@ const isNabeatsu = (num: number): boolean =>
   isThreeMultiple(num) || hasThreeDigits(num);
 
 const NabeatsuAssessmenter = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState<number | ''>('');
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    setCount(1);
+    setCount('');
   };
 
   return (
@@ -70,7 +70,7 @@ const NabeatsuAssessmenter = () => {
       <NumberInput labelText="n" count={count} setCount={setCount} />
       {/* 結果表示 */}
       <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{isNabeatsu(count) ? `${count}!!!` : count}</p>
+        <p>{isNabeatsu(Number(count)) ? `${count}!!!` : count}</p>
       </div>
 
       {/* リセット */}
