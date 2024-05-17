@@ -48,14 +48,14 @@ const App = () => {
         {/* "register" 関数を呼び出して入力をフックに登録する */}
         <input
           className="input input-bordered"
-          placeholder="non rules"
+          placeholder="example (non rules)"
           {...register('example')}
         />
 
         {/* 必須や他の標準的な HTML 検証ルールで検証を含める */}
         <input
           className="input input-bordered"
-          placeholder="required: true"
+          placeholder="exampleRequired (required: true)"
           {...register('exampleRequired', { required: true })}
         />
         {/* フィールド検証が失敗したときはエラーを表示する */}
