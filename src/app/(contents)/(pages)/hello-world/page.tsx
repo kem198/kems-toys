@@ -6,10 +6,10 @@ const Page = () => (
     <p>スタイルやルーティングなどのテスト用ページ。</p>
     <ul>
       <li>
-        <Link href="/hello-world/sub-page/">Sub page</Link>
+        <Link href="/hello-world/markdown/">Markdown</Link>
       </li>
       <li>
-        <Link href="/hello-world/md/">Markdown</Link>
+        <Link href="/hello-world/react-hook-form/">React Hook Form</Link>
       </li>
     </ul>
   </article>
