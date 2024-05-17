@@ -9,6 +9,9 @@ const Page = () => (
         <Link href="/hello-world/markdown/">Markdown</Link>
       </li>
       <li>
+        <Link href="/hello-world/react-hooks/">React Hooks</Link>
+      </li>
+      <li>
         <Link href="/hello-world/react-hook-form/">React Hook Form</Link>
       </li>
     </ul>
