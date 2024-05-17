@@ -8,7 +8,7 @@ type Inputs = {
   exampleRequired: string;
 };
 
-const App = () => {
+const BasicForm = () => {
   // useForm() の戻り値 (メソッド) を各変数へ代入して使用できるようにする
   const {
     // 検証ルールを適用するメソッド
@@ -41,8 +41,7 @@ const App = () => {
   // console.log(`exampleRequired: ${watch('exampleRequired')}`);
 
   return (
-    <article>
-      <h1>Basic usage</h1>
+    <div>
       {/* "handleSubmit" は "onSubmit" を呼び出す前に入力を検証する */}
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         {/* "register" 関数を呼び出して入力をフックに登録する */}
@@ -73,16 +72,8 @@ const App = () => {
       {/* Submit されたときのみ行う処理 */}
       <p>result:</p>
       {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
-      <h2>Reference</h2>
-      <ul>
-        <li>
-          <a href="https://www.react-hook-form.com/get-started">
-            Get Started | React Hook Form - Simple React forms validation
-          </a>
-        </li>
-      </ul>
-    </article>
+    </div>
   );
 };
 
-export default App;
+export { BasicForm };
