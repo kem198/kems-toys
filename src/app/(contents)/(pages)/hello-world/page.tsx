@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Page = () => (
   <article>
     <h1>Hello World</h1>
-    <p>スタイルやルーティングなどのテスト用ページ。</p>
+    <p>スタイルの確認やライブラリのテスト・練習用ページ。</p>
     <ul>
       <li>
         <Link href="/hello-world/markdown/">Markdown</Link>
