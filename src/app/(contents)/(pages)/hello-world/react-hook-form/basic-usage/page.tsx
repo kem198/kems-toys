@@ -61,7 +61,7 @@ const App = () => {
         {/* フィールド検証が失敗したときはエラーを表示する */}
         {errors.exampleRequired && <div>This field is required</div>}
 
-        <input className="btn" type="submit" value="検証する" />
+        <input className="btn" type="submit" value="Validate" />
       </form>
       <p>watch:</p>
       {/* 名前を指定して入力値を監視できる */}
