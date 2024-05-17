@@ -1,10 +1,11 @@
 'use client';
 
-import { NumberInput } from '@/components/Atoms/NumberInput';
+import { LabeledInput } from '@/components/Atoms/LabeledInput';
+import { ResetButton } from '@/components/Atoms/ResetButton';
+import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { useState } from 'react';
 
-const GcdCalc = (): JSX.Element => {
-  // 状態フックを使用して m と n の状態を管理する
+const GcdCalc = () => {
   const [mCount, setMCount] = useState<number | ''>('');
   const [nCount, setNCount] = useState<number | ''>('');
 
@@ -56,24 +57,23 @@ const GcdCalc = (): JSX.Element => {
 
   return (
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-      {/* mCount の加減算 UI */}
-      <NumberInput labelText="m" count={mCount} setCount={setMCount} />
-      {/* nCount の加減算 UI */}
-      <NumberInput labelText="n" count={nCount} setCount={setNCount} />
-      {/* 結果表示領域 */}
-      <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{calcGcd(Number(mCount), Number(nCount))}</p>
-      </div>
-      {/* リセット */}
-      <button
-        type="button"
-        className="btn btn-ghost w-24"
-        onClick={resetCounts}
-      >
-        リセット
-      </button>
+      <LabeledInput
+        labelText="m ="
+        count={mCount}
+        setCount={setMCount}
+        inputType="number"
+      />
+      <LabeledInput
+        labelText="n ="
+        count={nCount}
+        setCount={setNCount}
+        inputType="number"
+      />
+      <ResultDisplay
+        result={mCount && nCount && calcGcd(Number(mCount), Number(nCount))}
+      />
+      <ResetButton onClick={resetCounts} />
     </div>
   );
 };
-
 export { GcdCalc };

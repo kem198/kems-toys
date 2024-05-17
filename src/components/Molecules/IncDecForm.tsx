@@ -1,4 +1,4 @@
-import { NumberInput } from '@/components/Atoms/NumberInput';
+import { LabeledInput } from '@/components/Atoms/LabeledInput';
 
 interface Props {
   labelText: string;
@@ -33,7 +33,12 @@ const IncDecForm = ({
         {decrementNum}
       </button>
       <div className="grow">
-        <NumberInput labelText={labelText} count={count} setCount={setCount} />
+        <LabeledInput
+          labelText={labelText}
+          count={count}
+          setCount={setCount}
+          inputType="number"
+        />
       </div>
       <button
         type="button"

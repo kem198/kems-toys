@@ -1,7 +1,9 @@
 'use client';
 
-import { NumberInput } from '@/components/Atoms/NumberInput';
+import { LabeledInput } from '@/components/Atoms/LabeledInput';
 import { useState } from 'react';
+import { ResetButton } from '../Atoms/ResetButton';
+import { ResultDisplay } from '../Atoms/ResultDisplay';
 
 /**
  * 入力値が 3 の倍数であるか評価する関数
@@ -67,20 +69,16 @@ const NabeatsuAssessmenter = () => {
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       {/* 加算減算させる UI */}
-      <NumberInput labelText="n" count={count} setCount={setCount} />
-      {/* 結果表示 */}
-      <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{isNabeatsu(Number(count)) ? `${count}!!!` : count}</p>
-      </div>
-
-      {/* リセット */}
-      <button
-        type="button"
-        className="btn btn-ghost w-24"
-        onClick={() => resetCount()}
-      >
-        リセット
-      </button>
+      <LabeledInput
+        labelText="n ="
+        count={count}
+        setCount={setCount}
+        inputType="number"
+      />
+      <ResultDisplay
+        result={isNabeatsu(Number(count)) ? `${count}!!!` : count}
+      />
+      <ResetButton onClick={resetCount} />
     </div>
   );
 };

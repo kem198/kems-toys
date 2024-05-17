@@ -1,6 +1,8 @@
 'use client';
 
-import { NumberInput } from '@/components/Atoms/NumberInput';
+import { LabeledInput } from '@/components/Atoms/LabeledInput';
+import { ResetButton } from '@/components/Atoms/ResetButton';
+import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { useState } from 'react';
 
 /**
@@ -14,7 +16,10 @@ import { useState } from 'react';
  * @param {number} num - 評価対象の数値
  * @returns {string} - 評価結果の文字列
  */
-const doFizzBuzz = (num: number) => {
+const doFizzBuzz = (num: number | '') => {
+  if (num === '') {
+    return '数値を入力してください';
+  }
   if (num <= 0) {
     return '入力が自然数ではありません';
   }
@@ -45,17 +50,14 @@ const FizzBuzzCalc = () => {
 
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
-      {/* 数値増減用フォーム */}
-      <NumberInput labelText="n" count={count} setCount={setCount} />
-      {/* 結果表示 */}
-      <div className="my-4 flex h-20 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{doFizzBuzz(Number(count))}</p>
-      </div>
-
-      {/* リセットボタン */}
-      <button type="button" className="btn btn-ghost w-24" onClick={resetCount}>
-        リセット
-      </button>
+      <LabeledInput
+        labelText="n ="
+        count={count}
+        setCount={setCount}
+        inputType="number"
+      />
+      <ResultDisplay result={count && doFizzBuzz(Number(count))} />
+      <ResetButton onClick={resetCount} />
     </div>
   );
 };
