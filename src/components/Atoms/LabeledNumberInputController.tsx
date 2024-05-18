@@ -8,7 +8,7 @@ interface LabeledNumberInputProps {
   rules?: any;
 }
 
-const LabeledNumberInput: React.FC<LabeledNumberInputProps> = ({
+const LabeledNumberInputController: React.FC<LabeledNumberInputProps> = ({
   name,
   labelText,
   placeholder,
@@ -50,4 +50,4 @@ const LabeledNumberInput: React.FC<LabeledNumberInputProps> = ({
   );
 };
 
-export { LabeledNumberInput };
+export { LabeledNumberInputController };

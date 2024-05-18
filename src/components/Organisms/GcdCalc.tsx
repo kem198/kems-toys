@@ -1,6 +1,6 @@
 'use client';
 
-import { LabeledNumberInput } from '@/components/Atoms/LabeledNumberInput';
+import { LabeledNumberInputOld } from '@/components/Atoms/LabeledNumberInputOld';
 import { ResetButton } from '@/components/Atoms/ResetButton';
 import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { calcGcd } from '@/utilities/gcd';
@@ -48,8 +48,16 @@ const GcdCalc = () => {
 
   return (
     <div className="container my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
-      <LabeledNumberInput labelText="a =" count={aCount} setCount={setACount} />
-      <LabeledNumberInput labelText="b =" count={bCount} setCount={setBCount} />
+      <LabeledNumberInputOld
+        labelText="a ="
+        count={aCount}
+        setCount={setACount}
+      />
+      <LabeledNumberInputOld
+        labelText="b ="
+        count={bCount}
+        setCount={setBCount}
+      />
       <ResultDisplay>{result}</ResultDisplay>
       <div className="collapse bg-base-200">
         <input type="checkbox" />

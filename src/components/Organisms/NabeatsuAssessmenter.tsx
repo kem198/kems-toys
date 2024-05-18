@@ -1,6 +1,6 @@
 'use client';
 
-import { LabeledNumberInput } from '@/components/Atoms/LabeledNumberInput';
+import { LabeledNumberInputController } from '@/components/Atoms/LabeledNumberInputController';
 import { isNabeatsu } from '@/utilities/nabeatsu';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ResetButton } from '../Atoms/ResetButton';
@@ -42,7 +42,7 @@ const NabeatsuAssessmenter = () => {
     <FormProvider {...methods}>
       <div className="container my-8 max-w-sm max-lg:mx-auto">
         <form>
-          <LabeledNumberInput
+          <LabeledNumberInputController
             name="count"
             labelText="n ="
             placeholder="0"

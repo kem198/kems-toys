@@ -1,6 +1,6 @@
 'use client';
 
-import { LabeledNumberInput } from '@/components/Atoms/LabeledNumberInput';
+import { LabeledNumberInputController } from '@/components/Atoms/LabeledNumberInputController';
 import { ResetButton } from '@/components/Atoms/ResetButton';
 import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { doFizzBuzz } from '@/utilities/fizzbuzz';
@@ -45,7 +45,7 @@ const FizzBuzzCalc = () => {
     <FormProvider {...methods}>
       <div className="container my-8 max-w-sm max-lg:mx-auto">
         <form>
-          <LabeledNumberInput
+          <LabeledNumberInputController
             name="count"
             labelText="n ="
             placeholder="0"
