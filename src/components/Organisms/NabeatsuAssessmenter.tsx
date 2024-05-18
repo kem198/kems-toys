@@ -32,8 +32,8 @@ const NabeatsuAssessmenter = () => {
    * 結果を取得する関数
    */
   const getResult = () => {
-    if (count === null) {
-      return null;
+    if (count === '') {
+      return '';
     }
     return isNabeatsu(Number(count)) ? `${count}!!!` : count.toString();
   };

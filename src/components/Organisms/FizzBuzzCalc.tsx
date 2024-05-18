@@ -35,13 +35,10 @@ const FizzBuzzCalc = () => {
    */
   const calculateFizzBuzz = () => {
     const num = parseInt(count, 10);
-    if (!Number.isNaN(num) && num > 0) {
-      return doFizzBuzz(num);
+    if (Number.isNaN(num) || num <= 0) {
+      return '';
     }
-    if (!Number.isNaN(num) && num <= 0) {
-      return '入力値が自然数ではありません';
-    }
-    return null;
+    return doFizzBuzz(num);
   };
 
   return (
@@ -55,8 +52,8 @@ const FizzBuzzCalc = () => {
             rules={{
               required: 'このフィールドは必須です',
               validate: {
-                isNumber: (value: string) =>
-                  /^-?\d+$/.test(value) || '半角数字のみ入力できます',
+                isNaturalNumber: (value: string) =>
+                  /^[1-9]\d*$/.test(value) || '自然数を入力してください',
               },
             }}
           />
