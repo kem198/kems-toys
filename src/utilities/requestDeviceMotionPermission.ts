@@ -4,16 +4,19 @@ interface DeviceOrientationEventiOS extends DeviceOrientationEvent {
 }
 
 // iOS 13 でユーザーに "動作と方向" へのアクセス許可を求める関数
-function requestDeviceMotionPermission() {
-  // DeviceOrientationEvent を拡張した型定義でキャストして requestPermission メソッドを取り出す
+async function requestDeviceMotionPermission() {
+  // DeviceOrientationEventiOS を介して直接 requestPermission メソッドを取り出す
   const { requestPermission } =
     DeviceOrientationEvent as unknown as DeviceOrientationEventiOS;
 
-  // iOS Safari でのみ存在する関数のため定義されているかチェックする
-  if (requestPermission) {
-    requestPermission();
-  } else {
-    alert('DeviceMotionEvent.requestPermission is not found');
+  try {
+    if (requestPermission) {
+      await requestPermission(); // iOS Safari でのみ存在する関数があれば実行
+    } else {
+      throw new Error('DeviceMotionEvent.requestPermission is not found');
+    }
+  } catch (error) {
+    alert(error.message); // エラーメッセージをアラートで表示
   }
 }
 
