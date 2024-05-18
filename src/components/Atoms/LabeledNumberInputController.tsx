@@ -33,7 +33,7 @@ const LabeledNumberInputController: React.FC<LabeledNumberInputProps> = ({
               value={field.value === null ? '' : field.value}
               placeholder={placeholder}
               type="text"
-              className="grow"
+              className="grow text-right"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault(); // エンターキーによるデフォルトの動作をキャンセル
