@@ -1,12 +1,12 @@
 import { useLayoutEffect, useState } from 'react';
 
 const useDeviceOrientation = () => {
-  const [alpha, setAlpha] = useState(0);
-  const [beta, setBeta] = useState(0);
-  const [gamma, setGamma] = useState(0);
+  const [alpha, setAlpha] = useState<number | null>(null);
+  const [beta, setBeta] = useState<number | null>(null);
+  const [gamma, setGamma] = useState<number | null>(null);
 
   useLayoutEffect(() => {
-    function handleOrientation(event) {
+    function handleOrientation(event: DeviceOrientationEvent) {
       setAlpha(event.alpha);
       setBeta(event.beta);
       setGamma(event.gamma);

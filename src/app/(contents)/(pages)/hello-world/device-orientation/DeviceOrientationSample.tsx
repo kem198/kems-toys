@@ -3,7 +3,7 @@
 import { useDeviceOrientation } from '@/hooks/useDeviceOrientation';
 import { requestDeviceMotionPermission } from '@/utilities/requestDeviceMotionPermission';
 import { Container, Sprite, Stage, Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js';
+import { TextStyle } from '@pixi/text';
 
 const DeviceOrientationSample = () => {
   const { alpha, beta, gamma } = useDeviceOrientation();
@@ -27,7 +27,12 @@ const DeviceOrientationSample = () => {
       <Stage width={240} height={240} options={{ background: 0x1099bb }}>
         <Container anchor={0.5} position={[120, 120]}>
           <Text text="Hello World!" anchor={0.5} />
-          <Sprite image={bunnyUrl} anchor={0.5} x={gamma} y={beta} />
+          <Sprite
+            image={bunnyUrl}
+            anchor={0.5}
+            x={gamma ?? undefined}
+            y={beta ?? undefined}
+          />
         </Container>
         <Container position={[5, 5]}>
           <Text
