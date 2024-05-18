@@ -26,14 +26,14 @@ const LabeledNumberInputController: React.FC<LabeledNumberInputProps> = ({
       rules={rules}
       render={({ field, fieldState }) => (
         <>
-          <label className="input input-bordered flex items-center gap-2">
+          <label className="input input-bordered flex items-center justify-between gap-2">
             {labelText}
             <input
               {...field}
               value={field.value === null ? '' : field.value}
               placeholder={placeholder}
               type="text"
-              className="grow text-right"
+              className="max-w-52 grow text-right"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault(); // エンターキーによるデフォルトの動作をキャンセル

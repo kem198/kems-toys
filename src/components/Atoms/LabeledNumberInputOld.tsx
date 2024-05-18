@@ -21,12 +21,12 @@ const LabeledNumberInputOld = ({
   };
 
   return (
-    <label className="input input-bordered flex items-center gap-2">
+    <label className="input input-bordered flex items-center justify-between gap-2">
       {labelText}
       <input
         value={count === null ? '' : count}
         onChange={handleInputChange}
-        className="grow text-right"
+        className="max-w-52 grow text-right"
         placeholder="0"
         type="number"
       />
