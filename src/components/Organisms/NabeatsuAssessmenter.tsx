@@ -10,21 +10,21 @@ import { ResultDisplay } from '../Atoms/ResultDisplay';
  * NabeatsuAssessmenter コンポーネント
  */
 const NabeatsuAssessmenter = () => {
-  const [count, setCount] = useState<number | ''>('');
+  const [count, setCount] = useState<number | null>(null);
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    setCount('');
+    setCount(null);
   };
 
   /**
    * 結果を取得する関数
    */
-  const getResult = (): string => {
-    if (count === '') {
-      return '';
+  const getResult = () => {
+    if (count === null) {
+      return null;
     }
     return isNabeatsu(Number(count)) ? `${count}!!!` : count.toString();
   };
@@ -32,7 +32,7 @@ const NabeatsuAssessmenter = () => {
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       <LabeledNumberInput labelText="n =" count={count} setCount={setCount} />
-      <ResultDisplay result={getResult()} />
+      <ResultDisplay>{getResult()}</ResultDisplay>
       <ResetButton onClick={resetCount} />
     </div>
   );
