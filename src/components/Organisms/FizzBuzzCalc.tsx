@@ -32,7 +32,7 @@ const FizzBuzzCalc = () => {
   };
 
   return (
-    <div className="container my-8 w-fit max-lg:mx-auto">
+    <div className="container my-8 max-w-sm max-lg:mx-auto">
       <LabeledNumberInput labelText="n =" count={count} setCount={setCount} />
       <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
       <ResetButton onClick={resetCount} />

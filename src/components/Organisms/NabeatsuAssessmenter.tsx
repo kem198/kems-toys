@@ -30,7 +30,7 @@ const NabeatsuAssessmenter = () => {
   };
 
   return (
-    <div className="container my-8 w-fit max-lg:mx-auto">
+    <div className="container my-8 max-w-sm max-lg:mx-auto">
       <LabeledNumberInput labelText="n =" count={count} setCount={setCount} />
       <ResultDisplay>{getResult()}</ResultDisplay>
       <ResetButton onClick={resetCount} />
