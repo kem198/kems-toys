@@ -29,6 +29,12 @@
     // https://typescriptbook.jp/reference/statements/exception
     // "useUnknownInCatchVariables": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/(contents)/(pages)/hello-world/page.mdx"
+  ],
   "exclude": ["node_modules"]
 }

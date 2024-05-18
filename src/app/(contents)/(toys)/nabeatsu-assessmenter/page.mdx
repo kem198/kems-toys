@@ -1,5 +1,18 @@
-<details>
-<summary>補足 (クリックで展開):</summary>
+import { NabeatsuAssessmenter } from '@/components/Organisms/NabeatsuAssessmenter';
+import { Version } from '@/components/Atoms/Version';
+
+# ナベアツ判定機
+
+与えられた数値 n について、次の (A), (B) いずれかの条件を満たせば `[n]!!!` と出力する。
+
+- (A) 3 の倍数である
+- (B) 3 を含む桁が存在する
+
+<NabeatsuAssessmenter />
+
+---
+
+## メモ
 
 - 0 も 3 の倍数として評価している。
 - 「(A) 3 の倍数である」は、入力値が 3 で割り切れれば 3 の倍数であると評価する。Fizz Buzz と一緒。
@@ -52,9 +65,7 @@
     };
     ```
 
-</details>
-
-参考文献:
+## 参考文献
 
 - [Fizz Buzz - Wikipedia](https://ja.wikipedia.org/wiki/Fizz_Buzz)
 
@@ -71,3 +82,5 @@
 - [Math.trunc() - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc)
 - [【Ruby】10の位と1の位を取得する方法 #Ruby - Qiita](https://qiita.com/suzu12/items/d0b53838353d6a6e651e)
 - [0は何の倍数？ | 稲荷塾](https://inarijuku.com/2017/09/17/5521/)
+
+<Version version="0.2.0" onDate="2024-05-18" />

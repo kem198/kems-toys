@@ -1,16 +1,16 @@
-import { NabeatsuAssessmenter } from '@/components/Organisms/NabeatsuAssessmenter';
+import { CongratsButton } from '@/components/Organisms/CongratsButton';
 import { ToyLayout } from '@/components/Templates/ToyLayout';
 import MdBody from './page.body.mdx';
 import MdSupplement from './page.supplement.mdx';
 
 const Page = () => (
   <ToyLayout
-    title="ナベアツ判定機"
-    ToyComponent={NabeatsuAssessmenter}
+    title="ToyLayout"
+    ToyComponent={CongratsButton}
     BodyComponent={MdBody}
     SupplementComponent={MdSupplement}
-    version="0.2.0"
-    onDate="2024-05-18"
+    version="0.1.2"
+    onDate="2024-05-11"
   />
 );
 

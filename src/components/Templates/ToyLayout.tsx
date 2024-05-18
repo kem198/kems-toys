@@ -6,24 +6,24 @@ interface Props {
   version: string;
   onDate: string;
   ToyComponent: React.ComponentType;
-  BodyComponent: React.ComponentType;
-  SupplementComponent: React.ComponentType;
+  BodyComponent?: React.ComponentType;
+  SupplementComponent?: React.ComponentType;
 }
 
 const ToyLayout = ({
   title,
   version,
   onDate,
-  BodyComponent,
   ToyComponent,
+  BodyComponent,
   SupplementComponent,
 }: Props) => (
   <article>
     <h1>{title}</h1>
-    <BodyComponent />
+    {BodyComponent && <BodyComponent />}
     <ToyComponent />
     <div className="divider" />
-    <SupplementComponent />
+    {SupplementComponent && <SupplementComponent />}
     <Version version={version} onDate={onDate} />
   </article>
 );
