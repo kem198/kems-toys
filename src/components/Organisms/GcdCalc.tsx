@@ -14,7 +14,7 @@ const GcdCalc = () => {
   const [aCount, setACount] = useState<number | null>(null);
   const [bCount, setBCount] = useState<number | null>(null);
   const [result, setResult] = useState<string | null>(null);
-  const [steps, setSteps] = useState<string[]>([]);
+  const [stepMessages, setStepMessages] = useState<string[]>([]);
 
   /**
    * m と n をリセットする関数
@@ -23,7 +23,7 @@ const GcdCalc = () => {
     setACount(null);
     setBCount(null);
     setResult(null);
-    setSteps([]);
+    setStepMessages([]);
   };
 
   /**
@@ -34,15 +34,15 @@ const GcdCalc = () => {
       try {
         const { gcd, steps } = calcGcd(aCount, bCount);
         setResult(`GCD = ${gcd}`);
-        setSteps(steps);
+        setStepMessages(steps);
       } catch (error) {
         setResult((error as Error).message);
-        setSteps([]);
+        setStepMessages([]);
       }
     } else {
       // aCount または bCount が null の場合は結果をリセットする
       setResult(null);
-      setSteps([]);
+      setStepMessages([]);
     }
   }, [aCount, bCount]); // `aCount` または `bCount` の変更をトリガーとする
 
@@ -53,12 +53,12 @@ const GcdCalc = () => {
       <ResultDisplay>{result}</ResultDisplay>
       <div className="collapse bg-base-200">
         <input type="checkbox" />
-        <div className="collapse-title text-center font-medium">
-          計算の途中経過を表示する
+        <div className="collapse-title px-16 text-center font-medium">
+          計算ステップを表示する
         </div>
         <div className="collapse-content">
-          {steps.map((step, index) => (
-            <div key={index} className="step">
+          {stepMessages.map((step) => (
+            <div key={step} className="step">
               {step}
             </div>
           ))}
