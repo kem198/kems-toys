@@ -27,7 +27,7 @@ const GcdCalc = () => {
       <LabeledNumberInput labelText="a =" count={mCount} setCount={setMCount} />
       <LabeledNumberInput labelText="b =" count={nCount} setCount={setNCount} />
       <ResultDisplay>
-        {mCount !== null && nCount !== null && calcGcd(mCount, nCount)}
+        m = {mCount !== null && nCount !== null && calcGcd(mCount, nCount)}
       </ResultDisplay>
       <ResetButton onClick={resetCounts} />
     </div>
