@@ -57,11 +57,13 @@ const GcdCalc = () => {
           計算ステップを表示する
         </div>
         <div className="collapse-content">
-          {stepMessages.map((step) => (
-            <div key={step} className="step">
-              {step}
-            </div>
-          ))}
+          <ul>
+            {stepMessages.map((step) => (
+              <li key={step} className="step">
+                {step}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <ResetButton onClick={resetCounts} />
