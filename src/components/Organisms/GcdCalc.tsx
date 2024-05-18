@@ -6,25 +6,29 @@ import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { calcGcd } from '@/utilities/gcd';
 import { useState } from 'react';
 
+/**
+ * GCD (最大公約数) 計算コンポーネント
+ */
 const GcdCalc = () => {
-  const [mCount, setMCount] = useState<number>();
-  const [nCount, setNCount] = useState<number>();
+  // state 変数とセッターを定義
+  const [mCount, setMCount] = useState<number | null>(null);
+  const [nCount, setNCount] = useState<number | null>(null);
 
   /**
-   * m と n を初期値 (1) にリセットする関数
+   * m と n をリセットする関数
    */
   const resetCounts = () => {
-    setMCount(0);
-    setNCount(0);
+    setMCount(null);
+    setNCount(null);
   };
 
   return (
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-      <LabeledNumberInput labelText="m =" count={mCount} setCount={setMCount} />
-      <LabeledNumberInput labelText="n =" count={nCount} setCount={setNCount} />
-      <ResultDisplay
-        result={mCount && nCount && calcGcd(Number(mCount), Number(nCount))}
-      />
+      <LabeledNumberInput labelText="a =" count={mCount} setCount={setMCount} />
+      <LabeledNumberInput labelText="b =" count={nCount} setCount={setNCount} />
+      <ResultDisplay>
+        {mCount !== null && nCount !== null && calcGcd(mCount, nCount)}
+      </ResultDisplay>
       <ResetButton onClick={resetCounts} />
     </div>
   );

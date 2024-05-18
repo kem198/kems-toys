@@ -2,8 +2,8 @@ import { ChangeEvent } from 'react';
 
 interface LabeledNumberInputProps {
   labelText: string;
-  count: number | '';
-  setCount: (num: number | '') => void;
+  count: number | null;
+  setCount: (num: number | null) => void;
 }
 
 const LabeledNumberInput = ({
@@ -16,7 +16,7 @@ const LabeledNumberInput = ({
     if (!Number.isNaN(newNum)) {
       setCount(newNum);
     } else {
-      setCount('');
+      setCount(null);
     }
   };
 
@@ -24,7 +24,7 @@ const LabeledNumberInput = ({
     <label className="input input-bordered flex items-center gap-2">
       {labelText}
       <input
-        value={count === '' ? '' : count}
+        value={count === null ? '' : count}
         onChange={handleInputChange}
         className="grow text-right"
         placeholder="0"

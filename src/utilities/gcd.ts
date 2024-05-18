@@ -1,26 +1,23 @@
 /**
  * 最大公約数を計算する関数
+ *
  * @param {number} m - 自然数 m
  * @param {number} n - 自然数 n
- * @returns {number | string} - 最大公約数またはエラーメッセージ
+ * @returns {number | null} - 最大公約数を返す。入力が不正である場合は null を返す
  * @see https://ja.wikipedia.org/wiki/ユークリッドの互除法
  */
-const calcGcd = (m: number, n: number): number | string => {
+const calcGcd = (m: number, n: number): number | null => {
   // 入力が自然数であるか評価する
   if (m <= 0 || n <= 0) {
-    return 'm または n が自然数ではありません';
+    return null;
   }
-  // 入力が m >= n であるか評価する
-  if (!(m >= n)) {
-    return 'm ≧ n ではありません';
-  }
-
-  let tempM = m;
-  let tempN = n;
+  // より大きい値を TempM, 小さい値を TempN へ代入する
+  let tempM = Math.max(m, n);
+  let tempN = Math.min(m, n);
 
   while (tempN !== 0) {
     // m と n の剰余を求める
-    const q = Math.floor(tempM % tempN);
+    const q = tempM % tempN;
 
     // // m と n の商を求める
     // const r = Math.floor(tempM / tempN);
