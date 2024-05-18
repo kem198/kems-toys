@@ -4,7 +4,7 @@ import { LabeledNumberInput } from '@/components/Atoms/LabeledNumberInput';
 import { ResetButton } from '@/components/Atoms/ResetButton';
 import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { calcGcd } from '@/utilities/gcd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * GCD (最大公約数) 計算コンポーネント
@@ -13,6 +13,7 @@ const GcdCalc = () => {
   // state 変数とセッターを定義
   const [aCount, setACount] = useState<number | null>(null);
   const [bCount, setBCount] = useState<number | null>(null);
+  const [result, setResult] = useState<string | null>(null);
 
   /**
    * m と n をリセットする関数
@@ -20,15 +21,31 @@ const GcdCalc = () => {
   const resetCounts = () => {
     setACount(null);
     setBCount(null);
+    setResult(null);
   };
+
+  /**
+   * `aCount` または `bCount` が変更されるたびに最大公約数を計算する
+   */
+  useEffect(() => {
+    if (aCount !== null && bCount !== null) {
+      try {
+        const gcd = calcGcd(aCount, bCount);
+        setResult(`GCD = ${gcd}`);
+      } catch (error) {
+        setResult((error as Error).message);
+      }
+    } else {
+      // aCount または bCount が null の場合は結果をリセットする
+      setResult(null);
+    }
+  }, [aCount, bCount]); // `aCount` または `bCount` の変更をトリガーとする
 
   return (
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
       <LabeledNumberInput labelText="a =" count={aCount} setCount={setACount} />
       <LabeledNumberInput labelText="b =" count={bCount} setCount={setBCount} />
-      <ResultDisplay>
-        m = {aCount !== null && bCount !== null && calcGcd(aCount, bCount)}
-      </ResultDisplay>
+      <ResultDisplay>{result}</ResultDisplay>
       <ResetButton onClick={resetCounts} />
     </div>
   );
