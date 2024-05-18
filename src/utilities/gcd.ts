@@ -21,6 +21,7 @@ const calcGcd = (a: number, b: number): number => {
   let m = Math.max(AbsA, AbsB);
   let n = Math.min(AbsA, AbsB);
 
+  // ユークリッドの互除法
   while (n !== 0) {
     const q = m % n;
     m = n;
