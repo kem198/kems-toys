@@ -5,7 +5,7 @@ import { useState } from 'react';
 const Counter = () => {
   // count の値を保存する state 変数とセッターを定義
   const [count, setCount] = useState(0);
-  console.log(count);
+  // console.log(count);
 
   /**
    * count をインクリメントする関数

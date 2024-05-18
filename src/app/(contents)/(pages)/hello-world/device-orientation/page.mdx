@@ -1,0 +1,55 @@
+import { DeviceOrientationSample } from './DeviceOrientationSample';
+
+# Device orientation
+
+デバイスの [端末方向イベント](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events) を取得し、[ReactPixi](https://pixijs.io/pixi-react/) で描画するサンプルです。
+
+※ iOS では "動作と方向" へのアクセス許可が必要です。`Request permission (for iOS)` ボタンを押してください。
+
+<DeviceOrientationSample />
+
+## 動作確認済みの環境
+
+- iPhone XS (iOS 17.5)
+  - Safari
+  - Google Chrome 125.0.6422.51
+  - Brave 1.65
+- Zenfone 9 (Android 14)
+  - Google Chrome 125.0.6422.53
+  - Brave 1.65.133 (`設定` > `サイトの設定` > `モーションセンサー` を `許可` にする)
+
+## メモ
+
+モバイル端末には、一般的にジャイロスコープ、コンパス、加速度センサーなどが搭載されており、端末上で動作するアプリケーションが端末の方向や動きを検出できる。
+
+端末の方向や傾きは [地球座標フレーム](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained#%E7%AB%AF%E6%9C%AB%E5%BA%A7%E6%A8%99%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0) および [端末座標フレーム](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained#%E7%AB%AF%E6%9C%AB%E5%BA%A7%E6%A8%99%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0) を元に算出され、Web API では [端末方向イベント](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events) としてアクセスすることができる。
+
+当ページでは端末方向イベントのうち、[DeviceOrientationEvent](https://developer.mozilla.org/ja/docs/Web/API/DeviceOrientationEvent) から得られる下記の角度を表示している。
+
+- **alpha 回転角 (0 度 ~ 360 度)**
+  - 端末の東西南北方向への向き。
+  - 端末の上端が地球の北極をまっすぐ向いているときが 0 度。
+  - 端末が左へ回転するのに従って最大 360 度まで増加する。
+- **beta 回転角 (180 度 ~ -180 度)**
+  - 端末の縦方向の向き。
+  - 端末が地球表面と平行になっている (上端および下端から地球表面までの距離が同じ) ときが 0 度。
+  - 端末を前方へ傾けるのに従って 180 度まで増加、後方へ傾けるのに従って -180 度まで減少する。
+- **gamma 回転角 (90 度 ~ -90 度)**
+  - 端末の横方向の向き。
+  - 端末が地球表面と平行になっている (左端および右端から地球表面までの距離が同じ) ときが 0 度。
+  - 端末を右へ傾けるのに従って 90 度まで増加、左へ傾けるのに従って -90 度まで減少する。
+
+## 使用ライブラリ
+
+- [pixi.js](https://www.npmjs.com/package/pixi.js?ref=vanillalist) ([MIT](https://github.com/pixijs/pixijs/blob/dev/LICENSE))
+- [@pixi/react](https://www.npmjs.com/package/@pixi/react) ([MIT](https://github.com/pixijs/pixi-react/blob/master/LICENSE))
+
+## 参考文献
+
+- [端末方向イベント - Web API | MDN](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events)
+- [PixiJS \| The HTML5 Creation Engine \| PixiJS](https://pixijs.com/)
+- [About \| ReactPixi](https://pixijs.io/pixi-react/)
+- [スマホのブラウザから加速度を取得するdevicemotionイベントが動かない問題(iOS, Android) \| MoriokaLab](https://moriokalab.com/news/63)
+- [iOS13のSafariでデバイスの傾きを取得する - クワマイでもできる](https://kuwamai.hatenablog.com/entry/2019/09/25/221900)
+- [PixiJSで簡単なゲームを作ってみた](https://zenn.dev/tellernovel_inc/articles/8f47a24fc55f2c)
+- [PixiJS + React で実装する時のメモ](https://zenn.dev/ivgtr/scraps/f3c1a7ae0e3e5b)

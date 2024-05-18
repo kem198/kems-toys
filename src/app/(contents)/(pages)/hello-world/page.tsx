@@ -14,6 +14,9 @@ const Page = () => (
       <li>
         <Link href="/hello-world/react-hook-form/">React Hook Form</Link>
       </li>
+      <li>
+        <Link href="/hello-world/device-orientation/">Device orientation</Link>
+      </li>
     </ul>
   </article>
 );
