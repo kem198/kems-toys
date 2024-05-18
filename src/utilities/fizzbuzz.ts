@@ -9,11 +9,7 @@
  * @param {number} num - 評価対象の数値
  * @returns {string} - 評価結果の文字列
  */
-const doFizzBuzz = (num: number) => {
-  // 入力が自然数であるか評価する
-  if (num <= 0) {
-    return '入力値が自然数ではありません';
-  }
+const doFizzBuzz = (num: number): string => {
   if (num % 3 === 0 && num % 5 === 0) {
     return 'Fizz Buzz!!';
   }
@@ -23,7 +19,7 @@ const doFizzBuzz = (num: number) => {
   if (num % 5 === 0) {
     return 'Buzz!';
   }
-  return '';
+  return num.toString();
 };
 
 export { doFizzBuzz };

@@ -16,12 +16,25 @@ const FizzBuzzCalc = () => {
     setCount(null);
   };
 
+  /**
+   * FizzBuzz を計算する関数
+   *
+   * 入力値が自然数でない場合はエラーメッセージを設定する
+   */
+  const calculateFizzBuzz = () => {
+    if (count !== null && count > 0) {
+      return doFizzBuzz(count);
+    }
+    if (count !== null && count <= 0) {
+      return '入力値が自然数ではありません';
+    }
+    return null;
+  };
+
   return (
     <div className="container my-8 w-fit max-lg:mx-auto">
       <LabeledNumberInput labelText="n =" count={count} setCount={setCount} />
-      <ResultDisplay>
-        {count !== null && doFizzBuzz(Number(count))}
-      </ResultDisplay>
+      <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
       <ResetButton onClick={resetCount} />
     </div>
   );
