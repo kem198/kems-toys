@@ -5,7 +5,7 @@ import { requestDeviceMotionPermission } from '@/utilities/requestDeviceMotionPe
 import { Container, Sprite, Stage, Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js';
 
-const Page = () => {
+const DeviceOrientationSample = () => {
   const { alpha, beta, gamma } = useDeviceOrientation();
   const bunnyUrl = 'https://pixijs.io/pixi-react/img/bunny.png';
   const infoTextStyle = { fontSize: 12 };
@@ -45,4 +45,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export { DeviceOrientationSample };
