@@ -34,6 +34,9 @@
     ],
     // defaultProps の強制をオフ
     // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    // props 渡しでスプレッド構文を使用できるようにする
+    // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
+    "react/jsx-props-no-spreading": "off"
   }
 }

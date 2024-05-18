@@ -9,8 +9,8 @@ const Page = () => (
     ToyComponent={NabeatsuAssessmenter}
     BodyComponent={MdBody}
     SupplementComponent={MdSupplement}
-    version="0.1.0"
-    onDate="2024-05-12"
+    version="0.2.0"
+    onDate="2024-05-18"
   />
 );
 

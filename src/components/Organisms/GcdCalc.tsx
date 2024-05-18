@@ -1,89 +1,72 @@
 'use client';
 
-import { IncDecForm } from '@/components/Molecules/IncDecForm';
-import { useState } from 'react';
+import { LabeledNumberInput } from '@/components/Atoms/LabeledNumberInput';
+import { ResetButton } from '@/components/Atoms/ResetButton';
+import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
+import { calcGcd } from '@/utilities/gcd';
+import { useEffect, useState } from 'react';
 
-const GcdCalc = (): JSX.Element => {
-  // 状態フックを使用して m と n の状態を管理する
-  const [mCount, setMCount] = useState(1);
-  const [nCount, setNCount] = useState(1);
+/**
+ * GCD (最大公約数) 計算コンポーネント
+ */
+const GcdCalc = () => {
+  // state 変数とセッターを定義
+  const [aCount, setACount] = useState<number | null>(null);
+  const [bCount, setBCount] = useState<number | null>(null);
+  const [result, setResult] = useState<string | null>(null);
+  const [stepMessages, setStepMessages] = useState<string[]>([]);
 
   /**
-   * m と n を初期値 (1) にリセットする関数
+   * m と n をリセットする関数
    */
   const resetCounts = () => {
-    setMCount(1);
-    setNCount(1);
+    setACount(null);
+    setBCount(null);
+    setResult(null);
+    setStepMessages([]);
   };
 
   /**
-   * 最大公約数を計算する関数
-   * @param {number} m - 自然数 m
-   * @param {number} n - 自然数 n
-   * @returns {number | string} - 最大公約数またはエラーメッセージ
-   * @see https://ja.wikipedia.org/wiki/ユークリッドの互除法
+   * `aCount` または `bCount` が変更されるたびに最大公約数を計算する
    */
-  const calcGcd = (m: number, n: number): number | string => {
-    // 入力が自然数であるか評価する
-    if (m <= 0 || n <= 0) {
-      return 'm または n が自然数ではありません';
+  useEffect(() => {
+    if (aCount !== null && bCount !== null) {
+      try {
+        const { gcd, steps } = calcGcd(aCount, bCount);
+        setResult(`GCD = ${gcd}`);
+        setStepMessages(steps);
+      } catch (error) {
+        setResult((error as Error).message);
+        setStepMessages([]);
+      }
+    } else {
+      // aCount または bCount が null の場合は結果をリセットする
+      setResult(null);
+      setStepMessages([]);
     }
-    // 入力が m >= n であるか評価する
-    if (!(m >= n)) {
-      return 'm ≧ n ではありません';
-    }
-
-    let tempM = m;
-    let tempN = n;
-
-    while (tempN !== 0) {
-      // m と n の剰余を求める
-      const q = Math.floor(tempM % tempN);
-
-      // // m と n の商を求める
-      // const r = Math.floor(tempM / tempN);
-      // // 表示
-      // console.log(`${tempM} / ${tempN} = ${r} ... ${q}`);
-
-      // 元の n を新たに m とする
-      tempM = tempN;
-      // m と n の剰余を新たに n とする
-      tempN = q;
-    }
-
-    return tempM;
-  };
+  }, [aCount, bCount]); // `aCount` または `bCount` の変更をトリガーとする
 
   return (
     <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-      {/* mCount の加減算 UI */}
-      <IncDecForm
-        labelText="m"
-        formNum={mCount}
-        setFormNum={setMCount}
-        decrementNum={-1}
-        incrementNum={1}
-      />
-      {/* nCount の加減算 UI */}
-      <IncDecForm
-        labelText="n"
-        formNum={nCount}
-        setFormNum={setNCount}
-        decrementNum={-1}
-        incrementNum={1}
-      />
-      {/* 結果表示領域 */}
-      <div className="my-4 flex h-20 w-80 place-items-center items-center justify-center rounded-box bg-base-200 p-4">
-        <p>{calcGcd(mCount, nCount)}</p>
+      <LabeledNumberInput labelText="a =" count={aCount} setCount={setACount} />
+      <LabeledNumberInput labelText="b =" count={bCount} setCount={setBCount} />
+      <ResultDisplay>{result}</ResultDisplay>
+      <div className="collapse bg-base-200">
+        <input type="checkbox" />
+        <div className="collapse-title px-16 text-center font-medium">
+          計算ステップを表示する
+        </div>
+        <div className="collapse-content">
+          <ul>
+            {stepMessages.map((step) => (
+              <li key={step} className="step">
+                {step}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      {/* リセット */}
-      <button
-        type="button"
-        className="btn btn-ghost w-24"
-        onClick={resetCounts}
-      >
-        リセット
-      </button>
+      <ResetButton onClick={resetCounts} />
     </div>
   );
 };

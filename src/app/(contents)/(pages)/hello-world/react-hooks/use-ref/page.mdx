@@ -1,0 +1,52 @@
+import { RefCounter } from './RefCounter.tsx';
+
+# useRef
+
+レンダー時には不要な値を参照するための React フック。
+
+```ts
+const ref = useRef(initialValue);
+```
+
+## Basic usage
+
+useRef は次の形式のオブジェクトを返す。
+
+```ts
+const countRef = useRef(0);
+console.log(countRef);
+// => { current: 0 }
+```
+
+ref の現在の値には `ref.current` プロパティを通じてアクセスできる。
+
+```ts
+console.log(countRef.current);
+// => 0
+```
+
+```ts
+countRef.current += 1;
+console.log(countRef.current);
+// => 1
+```
+
+## Examples
+
+### RefCounter
+
+useRef で定義された変数の `ref.current` プロパティを更新しても **コンポーネントの再描画 (re-render) は行われない** 。ref はただの JavaScript オブジェクトであり、変更されたとしても React が検知することはできない。
+
+`ref.current` プロパティそのものは更新されているため、明示的に画面の再描画を行うことでページへ反映できる。次のコンポーネントは別途 useState フックで定義されたセッターを実行して再描画を行う例。
+
+<RefCounter />
+
+このため再描画されることが前提のコンポーネントであれば useState フックを使用する方が適切。
+
+useRef は再描画を必要としない場面 (DOM の参照や値の一時的保持 (公式では "避難ハッチ" (escape hatch) と呼ばれている) で有効。
+
+## Reference
+
+- [useRef – React](https://ja.react.dev/reference/react/useRef)
+- [ref で値を参照する – React](https://ja.react.dev/learn/referencing-values-with-refs)
+- [初心者にもわかるReact HookのuseRefの使い方 \| アールエフェクト](https://reffect.co.jp/react/react-hook-useref)
