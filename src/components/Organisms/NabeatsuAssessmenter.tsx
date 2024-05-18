@@ -2,21 +2,30 @@
 
 import { LabeledNumberInput } from '@/components/Atoms/LabeledNumberInput';
 import { isNabeatsu } from '@/utilities/nabeatsu';
-import { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { ResetButton } from '../Atoms/ResetButton';
 import { ResultDisplay } from '../Atoms/ResultDisplay';
 
-/**
- * NabeatsuAssessmenter コンポーネント
- */
+interface FormValues {
+  count: string;
+}
+
 const NabeatsuAssessmenter = () => {
-  const [count, setCount] = useState<number | null>(null);
+  const methods = useForm<FormValues>({
+    defaultValues: {
+      count: '',
+    },
+    mode: 'onChange',
+  });
+
+  const { reset, watch } = methods;
+  const count = watch('count');
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    setCount(null);
+    reset({ count: '' });
   };
 
   /**
@@ -30,11 +39,26 @@ const NabeatsuAssessmenter = () => {
   };
 
   return (
-    <div className="container my-8 max-w-sm max-lg:mx-auto">
-      <LabeledNumberInput labelText="n =" count={count} setCount={setCount} />
-      <ResultDisplay>{getResult()}</ResultDisplay>
-      <ResetButton onClick={resetCount} />
-    </div>
+    <FormProvider {...methods}>
+      <div className="container my-8 max-w-sm max-lg:mx-auto">
+        <form>
+          <LabeledNumberInput
+            name="count"
+            labelText="n ="
+            placeholder="0"
+            rules={{
+              required: 'このフィールドは必須です',
+              validate: {
+                isNumber: (value: string) =>
+                  /^-?\d+$/.test(value) || '半角数字のみ入力できます',
+              },
+            }}
+          />
+          <ResultDisplay>{getResult()}</ResultDisplay>
+          <ResetButton onClick={resetCount} />
+        </form>
+      </div>
+    </FormProvider>
   );
 };
 

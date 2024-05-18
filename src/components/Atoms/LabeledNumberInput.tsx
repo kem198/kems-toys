@@ -1,36 +1,47 @@
-import { ChangeEvent } from 'react';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 interface LabeledNumberInputProps {
+  name: string;
   labelText: string;
-  count: number | null;
-  setCount: (num: number | null) => void;
+  placeholder?: string;
+  rules?: any;
 }
 
-const LabeledNumberInput = ({
+const LabeledNumberInput: React.FC<LabeledNumberInputProps> = ({
+  name,
   labelText,
-  count,
-  setCount,
-}: LabeledNumberInputProps) => {
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const newNum = parseInt(event.target.value, 10);
-    if (!Number.isNaN(newNum)) {
-      setCount(newNum);
-    } else {
-      setCount(null);
-    }
-  };
+  placeholder,
+  rules,
+}) => {
+  // useFormContext フックを使用してフォームのコンテキストにアクセスする
+  // 親コンポーネントから渡されたプロパティやメソッドを使用できる
+  // これを Controller へ渡すことでフォームの状態と連携する
+  const { control } = useFormContext();
 
   return (
-    <label className="input input-bordered flex items-center gap-2">
-      {labelText}
-      <input
-        value={count === null ? '' : count}
-        onChange={handleInputChange}
-        className="grow text-right"
-        placeholder="0"
-        type="number"
-      />
-    </label>
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field, fieldState }) => (
+        <>
+          <label className="input input-bordered flex items-center gap-2">
+            {labelText}
+            <input
+              {...field}
+              value={field.value === null ? '' : field.value}
+              placeholder={placeholder}
+              type="text"
+              className="grow"
+            />
+          </label>
+          {fieldState.error && (
+            <span className="text-error">{fieldState.error.message}</span>
+          )}
+        </>
+      )}
+    />
   );
 };
 
