@@ -10,8 +10,9 @@
  * @returns {string} - 評価結果の文字列
  */
 const doFizzBuzz = (num: number) => {
-  if (num < 1) {
-    return '入力が自然数ではありません';
+  // 入力が自然数であるか評価する
+  if (num <= 0) {
+    return '入力値が自然数ではありません';
   }
   if (num % 3 === 0 && num % 5 === 0) {
     return 'Fizz Buzz!!';
