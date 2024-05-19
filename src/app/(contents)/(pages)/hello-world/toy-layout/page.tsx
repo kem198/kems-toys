@@ -1,7 +1,7 @@
-import { CongratsButton } from '@/components/Organisms/CongratsButton';
+import { CongratsButton } from '@/app/(contents)/(toys)/congrats-button/components/CongratsButton';
 import { ToyLayout } from '@/components/Templates/ToyLayout';
-import MdBody from './page.body.mdx';
-import MdSupplement from './page.supplement.mdx';
+import MdBody from './md/Body.mdx';
+import MdSupplement from './md/Supplement.mdx';
 
 const Page = () => (
   <ToyLayout

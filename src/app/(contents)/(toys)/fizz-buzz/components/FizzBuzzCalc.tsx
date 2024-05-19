@@ -1,21 +1,21 @@
 'use client';
 
+import { doFizzBuzz } from '@/app/(contents)/(toys)/fizz-buzz/utilities/fizzbuzz';
 import { LabeledNumberInputController } from '@/components/Atoms/LabeledNumberInputController';
-import { isNabeatsu } from '@/utilities/nabeatsu';
+import { ResetButton } from '@/components/Atoms/ResetButton';
+import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ResetButton } from '../Atoms/ResetButton';
-import { ResultDisplay } from '../Atoms/ResultDisplay';
 
 interface FormValues {
   count: string;
 }
 
-const NabeatsuAssessmenter = () => {
+const FizzBuzzCalc = () => {
   const methods = useForm<FormValues>({
     defaultValues: {
       count: '',
     },
-    mode: 'onChange',
+    mode: 'onChange', // バリデーションを onChange で実行する設定
   });
 
   const { reset, watch } = methods;
@@ -29,13 +29,16 @@ const NabeatsuAssessmenter = () => {
   };
 
   /**
-   * 結果を取得する関数
+   * FizzBuzz を計算する関数
+   *
+   * 入力値が自然数でない場合はエラーメッセージを設定する
    */
-  const getResult = () => {
-    if (count === '') {
+  const calculateFizzBuzz = () => {
+    const num = parseInt(count, 10);
+    if (Number.isNaN(num) || num <= 0) {
       return '';
     }
-    return isNabeatsu(Number(count)) ? `${count}!!!` : count.toString();
+    return doFizzBuzz(num);
   };
 
   return (
@@ -49,12 +52,12 @@ const NabeatsuAssessmenter = () => {
             rules={{
               required: 'このフィールドは必須です',
               validate: {
-                isNumber: (value: string) =>
-                  /^-?\d+$/.test(value) || '半角数字のみ入力できます',
+                isNaturalNumber: (value: string) =>
+                  /^[1-9]\d*$/.test(value) || '自然数を入力してください',
               },
             }}
           />
-          <ResultDisplay>{getResult()}</ResultDisplay>
+          <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
           <ResetButton onClick={resetCount} />
         </form>
       </div>
@@ -62,4 +65,4 @@ const NabeatsuAssessmenter = () => {
   );
 };
 
-export { NabeatsuAssessmenter };
+export { FizzBuzzCalc };

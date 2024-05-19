@@ -1,9 +1,9 @@
 'use client';
 
+import { calcGcd } from '@/app/(contents)/(toys)/euclidean-algorithm/utilities/gcd';
 import { LabeledNumberInputOld } from '@/components/Atoms/LabeledNumberInputOld';
 import { ResetButton } from '@/components/Atoms/ResetButton';
 import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
-import { calcGcd } from '@/utilities/gcd';
 import { useEffect, useState } from 'react';
 
 /**

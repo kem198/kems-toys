@@ -1,21 +1,21 @@
 'use client';
 
+import { isNabeatsu } from '@/app/(contents)/(toys)/nabeatsu-assessmenter/utilities/nabeatsu';
 import { LabeledNumberInputController } from '@/components/Atoms/LabeledNumberInputController';
 import { ResetButton } from '@/components/Atoms/ResetButton';
 import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
-import { doFizzBuzz } from '@/utilities/fizzbuzz';
 import { FormProvider, useForm } from 'react-hook-form';
 
 interface FormValues {
   count: string;
 }
 
-const FizzBuzzCalc = () => {
+const NabeatsuAssessmenter = () => {
   const methods = useForm<FormValues>({
     defaultValues: {
       count: '',
     },
-    mode: 'onChange', // バリデーションを onChange で実行する設定
+    mode: 'onChange',
   });
 
   const { reset, watch } = methods;
@@ -29,16 +29,13 @@ const FizzBuzzCalc = () => {
   };
 
   /**
-   * FizzBuzz を計算する関数
-   *
-   * 入力値が自然数でない場合はエラーメッセージを設定する
+   * 結果を取得する関数
    */
-  const calculateFizzBuzz = () => {
-    const num = parseInt(count, 10);
-    if (Number.isNaN(num) || num <= 0) {
+  const getResult = () => {
+    if (count === '') {
       return '';
     }
-    return doFizzBuzz(num);
+    return isNabeatsu(Number(count)) ? `${count}!!!` : count.toString();
   };
 
   return (
@@ -52,12 +49,12 @@ const FizzBuzzCalc = () => {
             rules={{
               required: 'このフィールドは必須です',
               validate: {
-                isNaturalNumber: (value: string) =>
-                  /^[1-9]\d*$/.test(value) || '自然数を入力してください',
+                isNumber: (value: string) =>
+                  /^-?\d+$/.test(value) || '半角数字のみ入力できます',
               },
             }}
           />
-          <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
+          <ResultDisplay>{getResult()}</ResultDisplay>
           <ResetButton onClick={resetCount} />
         </form>
       </div>
@@ -65,4 +62,4 @@ const FizzBuzzCalc = () => {
   );
 };
 
-export { FizzBuzzCalc };
+export { NabeatsuAssessmenter };
