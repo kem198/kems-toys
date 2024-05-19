@@ -4,14 +4,14 @@ import { Html, OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { Suspense } from 'react';
-import { GLTFLoader } from 'three/examples/jsm/Addons';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 /**
  * モデルの読み込みを行う関数
  */
 const Model = () => {
   // GLTFLoaderを使用してモデルを読み込む
-  const result = useLoader(GLTFLoader, '/assets/modane.glb');
+  const result = useLoader(GLTFLoader, '/gltf/modane.glb');
 
   // ロードされたモデルを表示する
   return <primitive object={result.scene} />;
