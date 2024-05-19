@@ -2,6 +2,7 @@
 
 import { Html, OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { Suspense } from 'react';
 import { GLTFLoader } from 'three/examples/jsm/Addons';
 
@@ -45,6 +46,10 @@ const ModaneThree = () => (
       <Suspense fallback={<FallbackComponent />}>
         <Model />
       </Suspense>
+      {/* postprocessing で効果をつける */}
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} height={300} />
+      </EffectComposer>
       {/* カメラ制御 */}
       <OrbitControls
         enableZoom
