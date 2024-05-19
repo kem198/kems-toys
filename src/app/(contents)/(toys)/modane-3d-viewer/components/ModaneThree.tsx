@@ -22,7 +22,7 @@ const Model = () => {
  */
 const FallbackComponent = () => (
   <Html>
-    <span className="loading loading-spinner loading-md" />
+    <span>Loading...</span>
   </Html>
 );
 
