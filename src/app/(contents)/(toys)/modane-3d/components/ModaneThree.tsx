@@ -56,7 +56,7 @@ const ModaneThree = () => (
         enableRotate
         minPolarAngle={Math.PI / 6} // 最小の緯度角 (ラジアン単位)
         maxPolarAngle={Math.PI / 1} // 最大の緯度角 (ラジアン単位)
-        minDistance={0.5} // カメラとターゲットの最小距離
+        minDistance={1} // カメラとターゲットの最小距離
         maxDistance={4} // カメラとターゲットの最大距離
         target={[0, 0.4, 0]} // カメラの注視点
       />
