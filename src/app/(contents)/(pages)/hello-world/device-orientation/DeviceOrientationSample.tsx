@@ -27,13 +27,13 @@ const DeviceOrientationSample = () => {
       // 初期化
       g.clear();
       // lineStyle(線の太さ, 色)
-      g.lineStyle(3, 0xff0000);
+      g.lineStyle(1, 0xff0000);
       // 横線
-      g.moveTo(-10, 0);
-      g.lineTo(10, 0);
+      g.moveTo(-16, 0);
+      g.lineTo(16, 0);
       // 縦線
-      g.moveTo(0, -10);
-      g.lineTo(0, 10);
+      g.moveTo(0, -16);
+      g.lineTo(0, 16);
     },
     [],
   );
