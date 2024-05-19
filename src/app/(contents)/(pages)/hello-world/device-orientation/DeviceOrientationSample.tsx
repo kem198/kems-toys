@@ -22,7 +22,7 @@ const DeviceOrientationSample = () => {
    * null の場合は 0 を設定する
    *
    */
-  const rotation = alpha !== null ? (-alpha * Math.PI) / 180 : 0;
+  const rotation = alpha !== null ? (alpha * Math.PI) / 180 : 0;
 
   // センサ情報の描画設定
   const infoTextStyle = { fontSize: 12 };
