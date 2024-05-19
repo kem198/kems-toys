@@ -9,7 +9,7 @@ interface Props {
 const TwoColumnLayout = ({ children }: Props) => (
   <div>
     {/* Navbar */}
-    <div className="navbar w-full bg-neutral lg:min-h-fit">
+    <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-fit lg:text-sm">
       <div className="flex-none lg:hidden">
         <label
           htmlFor="drawer-toggle"
@@ -21,7 +21,7 @@ const TwoColumnLayout = ({ children }: Props) => (
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            className="inline-block h-6 w-6 stroke-current text-neutral-content"
+            className="inline-block h-6 w-6 stroke-current"
           >
             <path
               strokeLinecap="round"
@@ -34,9 +34,7 @@ const TwoColumnLayout = ({ children }: Props) => (
       </div>
       {/* サイト名 */}
       <div className="mx-2 flex-1">
-        <Link href="/" className="prose text-neutral-content lg:prose-sm">
-          KeM&apos;s Toys
-        </Link>
+        <Link href="/">KeM&apos;s Toys</Link>
       </div>
     </div>
     <div className="drawer lg:drawer-open">
