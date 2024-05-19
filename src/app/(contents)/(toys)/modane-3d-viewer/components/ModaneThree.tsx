@@ -35,6 +35,7 @@ const ModaneThree = () => (
         width: '90vw',
         height: '80vh',
         background: 'linear-gradient(135deg, #f0f0f0, #d0d0da)',
+        borderRadius: '16px',
       }}
       className="border"
     >
