@@ -20,7 +20,6 @@ const DeviceOrientationSample = () => {
    * https://www.dainippon-tosho.co.jp/unit/list/radian.html
    *
    * null の場合は 0 を設定する
-   *
    */
   const rad = alpha !== null ? (alpha * Math.PI) / 180 : 0;
 
