@@ -22,10 +22,10 @@ const DeviceOrientationSample = () => {
    * null の場合は 0 を設定する
    *
    */
-  const rotation = alpha !== null ? (alpha * Math.PI) / 180 : 0;
+  const rad = alpha !== null ? (alpha * Math.PI) / 180 : 0;
 
   // センサ情報の描画設定
-  const infoTextStyle = { fontSize: 12 };
+  const infoTextStyle = { fontSize: 10 };
 
   // 十字線の描画設定
   const Crosshair = useCallback(
@@ -119,7 +119,7 @@ const DeviceOrientationSample = () => {
           />
           <Text
             text={`y (beta): ${beta}`}
-            y={15}
+            y={16}
             style={new TextStyle(infoTextStyle)}
           />
         </Container>
@@ -133,15 +133,17 @@ const DeviceOrientationSample = () => {
         <Container anchor={0.5} position={[120, 120]}>
           {/* <Text text="Hello World!" anchor={0.5} /> */}
           {/* ウサギ */}
-          <Sprite image={bunnyUrl} anchor={0.5} rotation={rotation} />
+          <Sprite image={bunnyUrl} anchor={0.5} rotation={rad} />
           {/* 円 */}
           <Graphics draw={Circle} />
         </Container>
 
         {/* 傾き情報のコンテナ */}
         <Container position={[5, 5]}>
+          <Text text={`alpha:${alpha}`} style={new TextStyle(infoTextStyle)} />
           <Text
-            text={`rotation ((alpha * π) / 180):\n${alpha}`}
+            text={`radian ((alpha * π) / 180):${rad}`}
+            y={16}
             style={new TextStyle(infoTextStyle)}
           />
         </Container>
