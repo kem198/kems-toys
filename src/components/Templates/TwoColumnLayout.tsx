@@ -8,16 +8,17 @@ interface Props {
 
 /**
  * FIXME:
- * 次の bg-base-*** と lg:h-[calc(...)] の指定で lg 幅の際の表示崩れを無理くり抑えている
+ * 次の指定で lg 幅の際の表示崩れを無理くり抑えている
  *
- * <div className="bg-base-200">
- * <div className="drawer-content flex flex-col bg-base-100">
- * <div className="drawer-side lg:h-[calc(100dvh_-_36px)]">
+ * <div className="bg-base-200">                                                          (bg-base-200)
+ * <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-10 lg:text-sm"> (lg:min-h-10) ※ 2.5rem 分
+ * <div className="drawer-content flex flex-col bg-base-100">                             (bg-base-100)
+ * <div className="drawer-side lg:h-[calc(100dvh_-_2.5rem)]">                             (lg:h-[calc(100dvh_-_2.5rem)])
  */
 const TwoColumnLayout = ({ children }: Props) => (
   <div className="bg-base-200">
     {/* Navbar */}
-    <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-fit lg:text-sm">
+    <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-10 lg:text-sm">
       <div className="flex-none lg:hidden">
         {/* ハンバーガーメニュー */}
         <label
@@ -53,7 +54,7 @@ const TwoColumnLayout = ({ children }: Props) => (
       {/* サイドバーのトグル用 */}
       <input id="drawer-toggle" type="checkbox" className="drawer-toggle" />
       {/* サイドバー */}
-      <div className="drawer-side lg:h-[calc(100dvh_-_36px)]">
+      <div className="drawer-side lg:h-[calc(100dvh_-_2.5rem)]">
         <label
           htmlFor="drawer-toggle"
           aria-label="close sidebar"
