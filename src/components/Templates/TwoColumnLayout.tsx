@@ -6,8 +6,16 @@ interface Props {
   children: ReactNode;
 }
 
+/**
+ * FIXME:
+ * 次の bg-base-*** と lg:h-[calc(...)] の指定で lg 幅の際の表示崩れを無理くり抑えている
+ *
+ * <div className="bg-base-200">
+ * <div className="drawer-content flex flex-col bg-base-100">
+ * <div className="drawer-side lg:h-[calc(100dvh_-_36px)]">
+ */
 const TwoColumnLayout = ({ children }: Props) => (
-  <div>
+  <div className="bg-base-200">
     {/* Navbar */}
     <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-fit lg:text-sm">
       <div className="flex-none lg:hidden">
@@ -39,13 +47,13 @@ const TwoColumnLayout = ({ children }: Props) => (
     </div>
     <div className="drawer lg:drawer-open">
       {/* メインコンテンツ */}
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col bg-base-100">
         <main className="container mx-auto my-4 px-4">{children}</main>
       </div>
       {/* サイドバーのトグル用 */}
       <input id="drawer-toggle" type="checkbox" className="drawer-toggle" />
       {/* サイドバー */}
-      <div className="drawer-side">
+      <div className="drawer-side lg:h-[calc(100dvh_-_36px)]">
         <label
           htmlFor="drawer-toggle"
           aria-label="close sidebar"
