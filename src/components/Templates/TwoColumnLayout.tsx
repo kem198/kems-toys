@@ -11,12 +11,12 @@ const TwoColumnLayout = ({ children }: Props) => (
     {/* Navbar */}
     <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-fit lg:text-sm">
       <div className="flex-none lg:hidden">
+        {/* ハンバーガーメニュー */}
         <label
           htmlFor="drawer-toggle"
           aria-label="open sidebar"
           className="btn btn-square btn-ghost"
         >
-          {/* ハンバーガーアイコン */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
