@@ -21,7 +21,7 @@ const Model = () => {
  */
 const FallbackComponent = () => (
   <Html>
-    <div>Loading...</div>
+    <span className="loading loading-spinner loading-md" />
   </Html>
 );
 
@@ -30,13 +30,17 @@ const ModaneThree = () => (
     {/* シーンの設定 */}
     <Canvas
       camera={{ fov: 30, near: 0.1, far: 2000, position: [40, 20, 0] }}
-      style={{ width: '90vw', height: '80vh' }}
+      style={{
+        width: '90vw',
+        height: '80vh',
+        background: 'linear-gradient(135deg, #f0f0f0, #d0d0da)',
+      }}
       className="border"
     >
       {/* 半球光源 (環境光) */}
-      <ambientLight intensity={1} />
+      <ambientLight color={0xfffef0} intensity={1.5} />
       {/* 平行光源 */}
-      <directionalLight color="white" position={[0, 0, 5]} />
+      <directionalLight color="white" position={[5, 5, 5]} intensity={0.5} />
       {/* モデルを非同期で読み込む */}
       <Suspense fallback={<FallbackComponent />}>
         <Model />
