@@ -13,6 +13,17 @@ const DeviceOrientationSample = () => {
   // ウサギの画像
   const bunnyUrl = 'https://pixijs.io/pixi-react/img/bunny.png';
 
+  /**
+   * alpha 角をラジアンに変換する計算
+   *
+   * 変換する際は角度にπ (円周率) を掛けて 180 で割る
+   * https://www.dainippon-tosho.co.jp/unit/list/radian.html
+   *
+   * null の場合は 0 を設定する
+   *
+   */
+  const rotation = alpha !== null ? (-alpha * Math.PI) / 180 : 0;
+
   // センサ情報の描画設定
   const infoTextStyle = { fontSize: 12 };
 
@@ -39,19 +50,29 @@ const DeviceOrientationSample = () => {
   );
 
   // 円の描画設定
-  const Circle = useCallback((g) => {
-    g.clear();
-    g.lineStyle(1, 0xff0000);
-    // 横線
-    g.moveTo(-40, 0);
-    g.lineTo(40, 0);
-    // 縦線
-    g.moveTo(0, -40);
-    g.lineTo(0, 40);
-    // 円の描画
-    g.drawCircle(0, 0, 32);
-    g.endFill();
-  }, []);
+  const Circle = useCallback(
+    (g: {
+      clear: () => void;
+      lineStyle: (arg0: number, arg1: number) => void;
+      moveTo: (arg0: number, arg1: number) => void;
+      lineTo: (arg0: number, arg1: number) => void;
+      drawCircle: (arg0: number, arg1: number, arg2: number) => void;
+      endFill: () => void;
+    }) => {
+      g.clear();
+      g.lineStyle(1, 0xff0000);
+      // 横線
+      g.moveTo(-40, 0);
+      g.lineTo(40, 0);
+      // 縦線
+      g.moveTo(0, -40);
+      g.lineTo(0, 40);
+      // 円の描画
+      g.drawCircle(0, 0, 32);
+      g.endFill();
+    },
+    [],
+  );
 
   return (
     <div>
@@ -112,11 +133,7 @@ const DeviceOrientationSample = () => {
         <Container anchor={0.5} position={[120, 120]}>
           {/* <Text text="Hello World!" anchor={0.5} /> */}
           {/* ウサギ */}
-          <Sprite
-            image={bunnyUrl}
-            anchor={0.5}
-            rotation={(alpha * Math.PI) / 180}
-          />
+          <Sprite image={bunnyUrl} anchor={0.5} rotation={rotation} />
           {/* 円 */}
           <Graphics draw={Circle} />
         </Container>
