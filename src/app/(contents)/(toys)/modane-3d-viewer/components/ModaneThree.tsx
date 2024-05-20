@@ -7,9 +7,7 @@ import { Suspense, useEffect } from 'react';
 import { CircleGeometry, Mesh, MeshStandardMaterial, Object3D } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-/**
- * モデルの読み込みを行う関数
- */
+// モデルの読み込みを行うコンポーネント
 const Model = () => {
   // GLTFLoaderを使用してモデルを読み込む
   const result = useLoader(GLTFLoader, '/gltf/modane.glb');
@@ -23,7 +21,7 @@ const Model = () => {
       if ((object as any).isMesh) {
         const mesh = object as Mesh;
         mesh.castShadow = true; // モデルの全てのメッシュに影のキャストを有効にする
-        mesh.receiveShadow = true; // 必要なら影の受け取りも有効にする
+        mesh.receiveShadow = true; // 影の受け取りを有効にする
       }
     });
   }, [result]);
@@ -32,33 +30,29 @@ const Model = () => {
   return <primitive object={result.scene} />;
 };
 
-/**
- * モデルのロード中に表示する関数
- */
+// ロード中に表示するコンポーネント
 const FallbackComponent = () => (
   <Html>
     <span>Loading...</span>
   </Html>
 );
 
-/**
- * 地面を作成する関数
- */
+// 地面を作成するコンポーネント
 const Ground = () => {
-  const geometry = new CircleGeometry(0.4, 64); // 地面のサイズ
-  const material = new MeshStandardMaterial({ color: '#cccce0' }); // 地面の色
+  const geometry = new CircleGeometry(0.4, 64);
+  const material = new MeshStandardMaterial({ color: '#cccce0' });
   const plane = new Mesh(geometry, material);
-  plane.rotation.x = -Math.PI / 2; // 地面を水平にするために回転
-  plane.position.y = 0; // 地面の位置
-  plane.receiveShadow = true; // 地面が影を受け取るように設定
+  plane.rotation.x = -Math.PI / 2;
+  plane.position.y = 0;
+  plane.receiveShadow = true;
   return <primitive object={plane} />;
 };
 
+// メインのコンポーネント
 const ModaneThree = () => (
   <div className="flex justify-center">
-    {/* シーンの設定 */}
     <Canvas
-      shadows // シャドウマッピングを有効にする
+      shadows
       camera={{ fov: 30, near: 0.1, far: 2000, position: [40, 20, 0] }}
       style={{
         width: '90vw',
@@ -76,21 +70,21 @@ const ModaneThree = () => (
         position={[20, 50, 20]}
         intensity={1.75}
         castShadow
-        shadow-mapSize-width={4096} // シャドウマップの解像度を高くする
-        shadow-mapSize-height={4096} // シャドウマップの解像度を高くする
+        shadow-mapSize-width={4096}
+        shadow-mapSize-height={4096}
         shadow-camera-near={0.5}
         shadow-camera-far={500}
         shadow-camera-left={-10}
         shadow-camera-right={10}
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
-        shadow-bias={-0.0001} // シャドウバイアスを微調整
+        shadow-bias={-0.0001} // シャドウアクネを防止する
       />
       {/* モデルを非同期で読み込む */}
       <Suspense fallback={<FallbackComponent />}>
         <Model />
       </Suspense>
-      {/* 地面を追加 */}
+      {/* 地面 */}
       <Ground />
       {/* postprocessing で効果をつける */}
       <EffectComposer>
