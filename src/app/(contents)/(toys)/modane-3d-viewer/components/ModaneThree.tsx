@@ -76,14 +76,15 @@ const ModaneThree = () => (
         position={[20, 50, 20]}
         intensity={1.75}
         castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize-width={4096} // シャドウマップの解像度を高くする
+        shadow-mapSize-height={4096} // シャドウマップの解像度を高くする
         shadow-camera-near={0.5}
         shadow-camera-far={500}
         shadow-camera-left={-10}
         shadow-camera-right={10}
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
+        shadow-bias={-0.0001} // シャドウバイアスを微調整
       />
       {/* モデルを非同期で読み込む */}
       <Suspense fallback={<FallbackComponent />}>
