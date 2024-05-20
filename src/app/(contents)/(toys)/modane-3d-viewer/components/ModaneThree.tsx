@@ -41,11 +41,16 @@ const FallbackComponent = () => (
 const Ground = () => {
   const geometry = new CircleGeometry(0.4, 64);
   const material = new MeshStandardMaterial({ color: '#cccce0' });
-  const plane = new Mesh(geometry, material);
-  plane.rotation.x = -Math.PI / 2;
-  plane.position.y = 0;
-  plane.receiveShadow = true;
-  return <primitive object={plane} />;
+  return (
+    <mesh
+      rotation={[-Math.PI / 2, 0, 0]} //  X 軸周りに -90 度回転させて平行にする
+      position={[0, 0, 0]}
+      receiveShadow
+    >
+      <primitive object={geometry} attach="geometry" />
+      <primitive object={material} attach="material" />
+    </mesh>
+  );
 };
 
 // メインのコンポーネント
