@@ -3,7 +3,7 @@
 import { Html, OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { CircleGeometry, Mesh, MeshStandardMaterial } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -13,6 +13,19 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const Model = () => {
   // GLTFLoaderを使用してモデルを読み込む
   const result = useLoader(GLTFLoader, '/gltf/modane.glb');
+
+  // モデルが読み込まれた後に実行する
+  useEffect(() => {
+    // scene.traverse 関数
+    // scene に配置されたすべて子要素や入れ子になっている孫要素などを引数として受け取る
+    // これを利用してメッシュ要素である場合はすべての要素に対して影を有効にする
+    result.scene.traverse((object) => {
+      if (object.isMesh) {
+        object.castShadow = true; // モデルの全てのメッシュに影のキャストを有効にする
+        object.receiveShadow = true; // 必要なら影の受け取りも有効にする
+      }
+    });
+  }, [result]);
 
   // ロードされたモデルを表示する
   return <primitive object={result.scene} />;
@@ -36,6 +49,7 @@ const Ground = () => {
   const plane = new Mesh(geometry, material);
   plane.rotation.x = -Math.PI / 2; // 地面を水平にするために回転
   plane.position.y = 0; // 地面の位置
+  plane.receiveShadow = true; // 地面が影を受け取るように設定
   return <primitive object={plane} />;
 };
 
@@ -43,6 +57,7 @@ const ModaneThree = () => (
   <div className="flex justify-center">
     {/* シーンの設定 */}
     <Canvas
+      shadows // シャドウマッピングを有効にする
       camera={{ fov: 30, near: 0.1, far: 2000, position: [40, 20, 0] }}
       style={{
         width: '90vw',
@@ -59,6 +74,15 @@ const ModaneThree = () => (
         color={0xf8ece0}
         position={[20, 50, 20]}
         intensity={1.75}
+        castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-near={0.5}
+        shadow-camera-far={500}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
       />
       {/* モデルを非同期で読み込む */}
       <Suspense fallback={<FallbackComponent />}>
