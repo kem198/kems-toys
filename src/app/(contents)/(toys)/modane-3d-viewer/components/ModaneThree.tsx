@@ -4,6 +4,7 @@ import { Html, OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { Suspense } from 'react';
+import { CircleGeometry, Mesh, MeshStandardMaterial } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 /**
@@ -26,6 +27,18 @@ const FallbackComponent = () => (
   </Html>
 );
 
+/**
+ * 地面を作成する関数
+ */
+const Ground = () => {
+  const geometry = new CircleGeometry(0.4, 64); // 地面のサイズ
+  const material = new MeshStandardMaterial({ color: '#cccce0' }); // 地面の色
+  const plane = new Mesh(geometry, material);
+  plane.rotation.x = -Math.PI / 2; // 地面を水平にするために回転
+  plane.position.y = 0; // 地面の位置
+  return <primitive object={plane} />;
+};
+
 const ModaneThree = () => (
   <div className="flex justify-center">
     {/* シーンの設定 */}
@@ -47,6 +60,8 @@ const ModaneThree = () => (
       <Suspense fallback={<FallbackComponent />}>
         <Model />
       </Suspense>
+      {/* 地面を追加 */}
+      <Ground />
       {/* postprocessing で効果をつける */}
       <EffectComposer>
         <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} height={300} />
