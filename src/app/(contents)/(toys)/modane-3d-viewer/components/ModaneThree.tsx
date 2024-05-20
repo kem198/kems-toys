@@ -4,7 +4,7 @@ import { Html, OrbitControls } from '@react-three/drei';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import { Suspense, useEffect } from 'react';
-import { CircleGeometry, Mesh, MeshStandardMaterial } from 'three';
+import { CircleGeometry, Mesh, MeshStandardMaterial, Object3D } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 /**
@@ -19,10 +19,11 @@ const Model = () => {
     // scene.traverse 関数
     // scene に配置されたすべて子要素や入れ子になっている孫要素などを引数として受け取る
     // これを利用してメッシュ要素である場合はすべての要素に対して影を有効にする
-    result.scene.traverse((object) => {
-      if (object.isMesh) {
-        object.castShadow = true; // モデルの全てのメッシュに影のキャストを有効にする
-        object.receiveShadow = true; // 必要なら影の受け取りも有効にする
+    result.scene.traverse((object: Object3D) => {
+      if ((object as any).isMesh) {
+        const mesh = object as Mesh;
+        mesh.castShadow = true; // モデルの全てのメッシュに影のキャストを有効にする
+        mesh.receiveShadow = true; // 必要なら影の受け取りも有効にする
       }
     });
   }, [result]);
