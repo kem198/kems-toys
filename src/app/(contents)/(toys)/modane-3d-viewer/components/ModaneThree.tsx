@@ -47,15 +47,19 @@ const ModaneThree = () => (
       style={{
         width: '90vw',
         height: '80vh',
-        background: 'linear-gradient(135deg, #f0f0f0, #d0d0da)',
+        background: 'linear-gradient(#e5e7ea, #f0f0f0)',
         borderRadius: '16px',
       }}
       className="border"
     >
       {/* 半球光源 (環境光) */}
-      <ambientLight color={0xfffef0} intensity={1.5} />
+      <ambientLight color={0xf8ece0} intensity={2} />
       {/* 平行光源 */}
-      <directionalLight color="white" position={[5, 5, 5]} intensity={0.5} />
+      <directionalLight
+        color={0xf8ece0}
+        position={[20, 50, 20]}
+        intensity={1.75}
+      />
       {/* モデルを非同期で読み込む */}
       <Suspense fallback={<FallbackComponent />}>
         <Model />
@@ -64,7 +68,7 @@ const ModaneThree = () => (
       <Ground />
       {/* postprocessing で効果をつける */}
       <EffectComposer>
-        <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} height={300} />
+        <Bloom luminanceThreshold={0.4} luminanceSmoothing={0.9} height={300} />
       </EffectComposer>
       {/* カメラ制御 */}
       <OrbitControls
