@@ -1,15 +1,17 @@
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-interface LabeledNumberInputProps {
+interface LabeledInputProps {
   name: string;
+  type: 'text' | 'number';
   labelText: string;
   placeholder?: string;
   rules?: any;
 }
 
-const LabeledNumberInputController: React.FC<LabeledNumberInputProps> = ({
+const LabeledInputController: React.FC<LabeledInputProps> = ({
   name,
+  type,
   labelText,
   placeholder,
   rules,
@@ -32,7 +34,7 @@ const LabeledNumberInputController: React.FC<LabeledNumberInputProps> = ({
               {...field}
               value={field.value === null ? '' : field.value}
               placeholder={placeholder}
-              type="text"
+              type={type}
               className="max-w-52 grow text-right"
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -50,4 +52,4 @@ const LabeledNumberInputController: React.FC<LabeledNumberInputProps> = ({
   );
 };
 
-export { LabeledNumberInputController };
+export { LabeledInputController };

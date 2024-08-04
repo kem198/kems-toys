@@ -1,7 +1,7 @@
 'use client';
 
 import { doFizzBuzz } from '@/app/(contents)/(toys)/fizz-buzz/utilities/fizzbuzz';
-import { LabeledNumberInputController } from '@/components/Atoms/LabeledNumberInputController';
+import { LabeledInputController } from '@/components/Atoms/LabeledInputController';
 import { ResetButton } from '@/components/Atoms/ResetButton';
 import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -45,8 +45,9 @@ const FizzBuzzCalc = () => {
     <FormProvider {...methods}>
       <div className="container my-8 max-w-sm max-lg:mx-auto">
         <form>
-          <LabeledNumberInputController
+          <LabeledInputController
             name="count"
+            type="number"
             labelText="n ="
             placeholder="0"
             rules={{
