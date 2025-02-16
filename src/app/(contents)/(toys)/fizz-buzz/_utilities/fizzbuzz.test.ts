@@ -13,7 +13,6 @@ describe("fizzBuzz", () => {
   });
 
   it("should return `Fizz Buzz!!` if the number is divisible by 3 and 5", () => {
-    expect(fizzBuzz(0)).toBe("Fizz Buzz!!");
     expect(fizzBuzz(15)).toBe("Fizz Buzz!!");
     expect(fizzBuzz(30)).toBe("Fizz Buzz!!");
   });
@@ -23,7 +22,7 @@ describe("fizzBuzz", () => {
     expect(fizzBuzz(2)).toBe("2");
   });
 
-  it("should throw error if the number is not a natural number", () => {
+  it("should throw error if the number is not a positive integer", () => {
     expect(() => fizzBuzz(-15)).toThrow(Error);
     expect(() => fizzBuzz(-5)).toThrow(Error);
     expect(() => fizzBuzz(-3)).toThrow(Error);
