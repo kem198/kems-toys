@@ -1,13 +1,14 @@
+/** @type {import('next').NextConfig} */
+
 /**
  * Reference
  * - mdx: https://nextjs.org/docs/app/building-your-application/configuring/mdx
  * - Syntax highlighting: https://qiita.com/KokiSakano/items/571130652864432b8489
  */
 import createMDX from "@next/mdx";
-import type { NextConfig } from "next";
 import rehypePrettyCode from "rehype-pretty-code";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
