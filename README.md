@@ -1,16 +1,12 @@
 # KeM's Toys
 
-Next.js や TypeScript などの練習用に作成したツール集です。
+[Next.js](https://nextjs.org/) , [React](https://react.dev/) , [TypeScript](https://www.typescriptlang.org/) , [Vitest](https://vitest.dev/) などの練習用に作成した小さなツール集。
 
-## Deploy
+URL はこちら。[^1]
 
-[Vercel](https://vercel.com) にてビルドおよびデプロイを行っています。
+- <https://toys.kem198.net>
 
-- [https://kems-toys.vercel.app](https://kems-toys.vercel.app)
-
-サブドメインを登録したため、次の URL でもアクセスできます。
-
-- [https://toys.kems-clew.net](https://toys.kems-clew.net)
+[^1]: [XServer Domain](https://www.xdomain.ne.jp/) で取得した独自ドメイン `kem198.net` へサブドメイン `toys` を設定し、[Vercel](https://vercel.com/) でホスティングして公開している。
 
 ## Development
 
