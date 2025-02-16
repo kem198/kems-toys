@@ -8,14 +8,14 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  NODE_VERSION: "22.14.0" # Match Node version with Volta section in package.json
-
 jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Extract Node.js version from package.json
+        id: extract-node-version
+        run: echo "NODE_VERSION=$(jq -r '.volta.node' package.json)" >> $GITHUB_ENV
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
