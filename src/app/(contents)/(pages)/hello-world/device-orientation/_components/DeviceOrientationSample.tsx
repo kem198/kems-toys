@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useDeviceOrientation } from '@/hooks/useDeviceOrientation';
-import { requestDeviceMotionPermission } from '@/utilities/requestDeviceMotionPermission';
-import { Container, Graphics, Sprite, Stage, Text } from '@pixi/react';
-import { TextStyle } from '@pixi/text';
-import { useCallback } from 'react';
+import { useDeviceOrientation } from "@/hooks/useDeviceOrientation";
+import { requestDeviceMotionPermission } from "@/utilities/requestDeviceMotionPermission";
+import { Container, Graphics, Sprite, Stage, Text } from "@pixi/react";
+import { TextStyle } from "@pixi/text";
+import { useCallback } from "react";
 
 const DeviceOrientationSample = () => {
   // カスタムフックからセンサ情報を取得
   const { alpha, beta, gamma } = useDeviceOrientation();
 
   // ウサギの画像
-  const bunnyUrl = 'https://pixijs.io/pixi-react/img/bunny.png';
+  const bunnyUrl = "https://pixijs.io/pixi-react/img/bunny.png";
 
   /**
    * alpha 角をラジアンに変換する計算

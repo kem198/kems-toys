@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import data from '@emoji-mart/data';
-import Picker from '@emoji-mart/react';
-import { useState } from 'react';
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { useState } from "react";
 
 interface EmojiPickerProps {
   setText: React.Dispatch<React.SetStateAction<string>>;

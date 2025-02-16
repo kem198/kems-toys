@@ -9,7 +9,7 @@
 const calcGcd = (a: number, b: number): { gcd: number; steps: string[] } => {
   // a と b が共に 0 の場合は定義されないので処理を中断する
   if (a === 0 && b === 0) {
-    throw new Error('両方の入力が 0 の場合、最大公約数は定義されません');
+    throw new Error("両方の入力が 0 の場合、最大公約数は定義されません");
   }
 
   // 計算ステップ記録用の配列を定義

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type Inputs = {
   example: string;
@@ -48,14 +48,14 @@ const BasicForm = () => {
         <input
           className="input input-bordered"
           placeholder="example (non rules)"
-          {...register('example')}
+          {...register("example")}
         />
 
         {/* 必須や他の標準的な HTML 検証ルールで検証を含める */}
         <input
           className="input input-bordered"
           placeholder="exampleRequired (required: true)"
-          {...register('exampleRequired', { required: true })}
+          {...register("exampleRequired", { required: true })}
         />
         {/* フィールド検証が失敗したときはエラーを表示する */}
         {errors.exampleRequired && <div>This field is required</div>}
@@ -65,9 +65,9 @@ const BasicForm = () => {
       <p>watch:</p>
       {/* 名前を指定して入力値を監視できる */}
       <pre>
-        {`example: ${watch('example')}`}
+        {`example: ${watch("example")}`}
         <br />
-        {`exampleRequired: ${watch('exampleRequired')}`}
+        {`exampleRequired: ${watch("exampleRequired")}`}
       </pre>
       {/* Submit されたときのみ行う処理 */}
       <p>result:</p>

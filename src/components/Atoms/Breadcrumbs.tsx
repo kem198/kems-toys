@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useSelectedLayoutSegments } from 'next/navigation';
+import Link from "next/link";
+import { useSelectedLayoutSegments } from "next/navigation";
 
 const Breadcrumbs = () => {
   // 呼び出されたページまでのセグメントを配列として取得する
@@ -9,7 +9,7 @@ const Breadcrumbs = () => {
 
   // ルートグループの要素を除去する
   const pathnamesIgnoredRouteGroups = pathnames.filter(
-    (pathname) => !pathname.startsWith('('),
+    (pathname) => !pathname.startsWith("("),
   );
 
   return (
@@ -30,7 +30,7 @@ const Breadcrumbs = () => {
               <span className="text-stone-400">{segment}</span>
             ) : (
               <Link
-                href={`/${pathnamesIgnoredRouteGroups.slice(0, index + 1).join('/')}`}
+                href={`/${pathnamesIgnoredRouteGroups.slice(0, index + 1).join("/")}`}
               >
                 {segment}
               </Link>

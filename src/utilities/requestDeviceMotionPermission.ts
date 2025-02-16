@@ -1,6 +1,6 @@
 // iOS でのみ存在する requestPermission メソッドの型を拡張する
 interface DeviceOrientationEventIOS extends DeviceOrientationEvent {
-  requestPermission?: () => Promise<'granted' | 'denied'>;
+  requestPermission?: () => Promise<"granted" | "denied">;
 }
 
 // iOS 13 でユーザーに "動作と方向" へのアクセス許可を求める関数
@@ -13,7 +13,7 @@ async function requestDeviceMotionPermission() {
     // iOS Safari でのみ存在する関数があれば実行する
     await requestPermission();
   } else {
-    alert('DeviceMotionEvent.requestPermission is not found');
+    alert("DeviceMotionEvent.requestPermission is not found");
   }
 }
 

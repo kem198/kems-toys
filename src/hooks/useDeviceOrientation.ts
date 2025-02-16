@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from "react";
 
 const useDeviceOrientation = () => {
   const [alpha, setAlpha] = useState<number | null>(null);
@@ -13,11 +13,11 @@ const useDeviceOrientation = () => {
     }
 
     // deviceorientation イベントを取得する
-    window.addEventListener('deviceorientation', handleOrientation);
+    window.addEventListener("deviceorientation", handleOrientation);
 
     // コンポーネントがアンマウントされるときにイベントリスナーをクリーンアップする
     return () => {
-      window.removeEventListener('deviceorientation', handleOrientation);
+      window.removeEventListener("deviceorientation", handleOrientation);
     };
   }, []);
 

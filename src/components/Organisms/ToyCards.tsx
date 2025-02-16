@@ -1,5 +1,5 @@
-import { toys } from '@/assets/toys';
-import { ToyCard } from '@/components/Molecules/ToyCard';
+import { toys } from "@/assets/toys";
+import { ToyCard } from "@/components/Molecules/ToyCard";
 
 const ToyCards = () => {
   // ToyCard コンポーネントをループ生成する関数

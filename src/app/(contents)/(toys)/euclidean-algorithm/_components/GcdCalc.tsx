@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { calcGcd } from '@/app/(contents)/(toys)/euclidean-algorithm/utilities/gcd';
-import { LabeledNumberInputOld } from '@/components/Atoms/LabeledNumberInputOld';
-import { ResetButton } from '@/components/Atoms/ResetButton';
-import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
-import { useEffect, useState } from 'react';
+import { calcGcd } from "@/app/(contents)/(toys)/euclidean-algorithm/_utilities/gcd";
+import { LabeledNumberInputOld } from "@/components/Atoms/LabeledNumberInputOld";
+import { ResetButton } from "@/components/Atoms/ResetButton";
+import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
+import { useEffect, useState } from "react";
 
 /**
  * GCD (最大公約数) 計算コンポーネント

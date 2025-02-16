@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useLoader } from '@react-three/fiber';
-import { useEffect } from 'react';
-import { Mesh, Object3D } from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { useLoader } from "@react-three/fiber";
+import { useEffect } from "react";
+import { Mesh, Object3D } from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 /** モデルの読み込みを行うコンポーネント */
 const Model = () => {
   // GLTFLoaderを使用してモデルを読み込む
-  const result = useLoader(GLTFLoader, '/gltf/modane.glb');
+  const result = useLoader(GLTFLoader, "/gltf/modane.glb");
 
   // モデルが読み込まれた後に実行する
   useEffect(() => {
