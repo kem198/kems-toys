@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { doFizzBuzz } from '@/app/(contents)/(toys)/fizz-buzz/utilities/fizzbuzz';
-import { LabeledInputController } from '@/components/Atoms/LabeledInputController';
-import { ResetButton } from '@/components/Atoms/ResetButton';
-import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
-import { FormProvider, useForm } from 'react-hook-form';
+import { doFizzBuzz } from "@/app/(contents)/(toys)/fizz-buzz/_utilities/fizzbuzz";
+import { LabeledInputController } from "@/components/Atoms/LabeledInputController";
+import { ResetButton } from "@/components/Atoms/ResetButton";
+import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
+import { FormProvider, useForm } from "react-hook-form";
 
 interface FormValues {
   count: string;
@@ -13,19 +13,19 @@ interface FormValues {
 const FizzBuzzCalc = () => {
   const methods = useForm<FormValues>({
     defaultValues: {
-      count: '',
+      count: "",
     },
-    mode: 'onChange', // バリデーションを onChange で実行する設定
+    mode: "onChange", // バリデーションを onChange で実行する設定
   });
 
   const { reset, watch } = methods;
-  const count = watch('count');
+  const count = watch("count");
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    reset({ count: '' });
+    reset({ count: "" });
   };
 
   /**
@@ -36,7 +36,7 @@ const FizzBuzzCalc = () => {
   const calculateFizzBuzz = () => {
     const num = parseInt(count, 10);
     if (Number.isNaN(num) || num <= 0) {
-      return '';
+      return "";
     }
     return doFizzBuzz(num);
   };
@@ -51,10 +51,10 @@ const FizzBuzzCalc = () => {
             labelText="n ="
             placeholder="0"
             rules={{
-              required: 'このフィールドは必須です',
+              required: "このフィールドは必須です",
               validate: {
                 isNaturalNumber: (value: string) =>
-                  /^[1-9]\d*$/.test(value) || '自然数を入力してください',
+                  /^[1-9]\d*$/.test(value) || "自然数を入力してください",
               },
             }}
           />

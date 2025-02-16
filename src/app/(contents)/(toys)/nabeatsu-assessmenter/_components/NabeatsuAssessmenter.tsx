@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { isNabeatsu } from '@/app/(contents)/(toys)/nabeatsu-assessmenter/utilities/nabeatsu';
-import { LabeledInputController } from '@/components/Atoms/LabeledInputController';
-import { ResetButton } from '@/components/Atoms/ResetButton';
-import { ResultDisplay } from '@/components/Atoms/ResultDisplay';
-import { FormProvider, useForm } from 'react-hook-form';
+import { isNabeatsu } from "@/app/(contents)/(toys)/nabeatsu-assessmenter/_utilities/nabeatsu";
+import { LabeledInputController } from "@/components/Atoms/LabeledInputController";
+import { ResetButton } from "@/components/Atoms/ResetButton";
+import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
+import { FormProvider, useForm } from "react-hook-form";
 
 interface FormValues {
   count: string;
@@ -13,27 +13,27 @@ interface FormValues {
 const NabeatsuAssessmenter = () => {
   const methods = useForm<FormValues>({
     defaultValues: {
-      count: '',
+      count: "",
     },
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const { reset, watch } = methods;
-  const count = watch('count');
+  const count = watch("count");
 
   /**
    * count をリセットする関数
    */
   const resetCount = () => {
-    reset({ count: '' });
+    reset({ count: "" });
   };
 
   /**
    * 結果を取得する関数
    */
   const getResult = () => {
-    if (count === '') {
-      return '';
+    if (count === "") {
+      return "";
     }
     return isNabeatsu(Number(count)) ? `${count}!!!` : count.toString();
   };
@@ -48,10 +48,10 @@ const NabeatsuAssessmenter = () => {
             labelText="n ="
             placeholder="0"
             rules={{
-              required: 'このフィールドは必須です',
+              required: "このフィールドは必須です",
               validate: {
                 isNumber: (value: string) =>
-                  /^-?\d+$/.test(value) || '半角数字のみ入力できます',
+                  /^-?\d+$/.test(value) || "半角数字のみ入力できます",
               },
             }}
           />
