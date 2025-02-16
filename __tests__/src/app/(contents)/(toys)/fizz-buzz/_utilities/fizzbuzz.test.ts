@@ -1,5 +1,5 @@
+import { fizzBuzz } from "@/app/(contents)/(toys)/fizz-buzz/_utilities/fizzbuzz";
 import { describe, expect, it } from "vitest";
-import { fizzBuzz } from "./fizzbuzz";
 
 describe("fizzBuzz", () => {
   it("should return `Fizz!` if the number is divisible by 3", () => {
