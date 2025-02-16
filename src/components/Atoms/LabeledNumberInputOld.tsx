@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent } from "react";
 
 interface LabeledNumberInputProps {
   labelText: string;
@@ -24,7 +24,7 @@ const LabeledNumberInputOld = ({
     <label className="input input-bordered flex items-center justify-between gap-2">
       {labelText}
       <input
-        value={count === null ? '' : count}
+        value={count === null ? "" : count}
         onChange={handleInputChange}
         className="max-w-52 grow text-right"
         placeholder="0"

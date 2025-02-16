@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { CircleGeometry, MeshStandardMaterial } from 'three';
+import { CircleGeometry, MeshStandardMaterial } from "three";
 
 /** 地面コンポーネント */
 const Ground = () => {
   const geometry = new CircleGeometry(0.4, 64);
-  const material = new MeshStandardMaterial({ color: '#cccce0' });
+  const material = new MeshStandardMaterial({ color: "#cccce0" });
   return (
     <mesh
       rotation={[-Math.PI / 2, 0, 0]} //  X 軸周りに -90 度回転させて平行にする

@@ -1,5 +1,5 @@
-import { Version } from '@/components/Atoms/Version';
-import React from 'react';
+import { Version } from "@/components/Atoms/Version";
+import React from "react";
 
 interface Props {
   title: string;

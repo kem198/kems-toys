@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { EmojiPicker } from '@/components/Atoms/EmojiPicker';
-import emojiRegex from 'emoji-regex';
-import JSConfetti from 'js-confetti';
-import { useEffect, useState } from 'react';
+import { EmojiPicker } from "@/components/Atoms/EmojiPicker";
+import emojiRegex from "emoji-regex";
+import JSConfetti from "js-confetti";
+import { useEffect, useState } from "react";
 
 const CongratsButton = () => {
   /**
@@ -22,7 +22,7 @@ const CongratsButton = () => {
   }, []);
 
   // 絵文字入力用フォームの変数とセッターを定義
-  const [emojiFormText, setEmojiFormText] = useState<string>('');
+  const [emojiFormText, setEmojiFormText] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmojiFormText(event.target.value);

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const IncDecCounter = () => {
   // count の値を保存する state 変数とセッターを定義

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { toys } from '@/assets/toys';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { toys } from "@/assets/toys";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ToyList = () => {
   // 現在のパスを取得しておく
@@ -17,7 +17,7 @@ const ToyList = () => {
       // Link > ClassName へ渡してプライマリカラーを表示する
       // https://zenn.dev/k_neko3/articles/8eda31133109fe
       // https://daisyui.com/components/menu/#menu-with-active-item
-      const active = pathname === toy.link ? 'active' : '';
+      const active = pathname === toy.link ? "active" : "";
 
       return (
         <li key={key}>

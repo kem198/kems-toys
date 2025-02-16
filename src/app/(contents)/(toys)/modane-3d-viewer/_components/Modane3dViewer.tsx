@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { OrbitControls } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
-import { Suspense } from 'react';
-import { FallbackMessage } from './FallbackMessage';
-import { Ground } from './Ground';
-import { Model } from './Model';
+import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { Suspense } from "react";
+import { FallbackMessage } from "./FallbackMessage";
+import { Ground } from "./Ground";
+import { Model } from "./Model";
 
 /** メインコンポーネント */
 const Modane3dViewer = () => (
@@ -15,10 +15,10 @@ const Modane3dViewer = () => (
       shadows
       camera={{ fov: 30, near: 0.1, far: 2000, position: [40, 20, 0] }}
       style={{
-        width: '90vw',
-        height: '80vh',
-        background: 'linear-gradient(#e5e7ea, #f0f0f0)',
-        borderRadius: '16px',
+        width: "90vw",
+        height: "80vh",
+        background: "linear-gradient(#e5e7ea, #f0f0f0)",
+        borderRadius: "16px",
       }}
     >
       {/* カメラ制御 */}

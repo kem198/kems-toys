@@ -1,9 +1,9 @@
-import React from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import React from "react";
+import { Controller, useFormContext } from "react-hook-form";
 
 interface LabeledInputProps {
   name: string;
-  type: 'text' | 'number';
+  type: "text" | "number";
   labelText: string;
   placeholder?: string;
   rules?: any;
@@ -32,12 +32,12 @@ const LabeledInputController: React.FC<LabeledInputProps> = ({
             {labelText}
             <input
               {...field}
-              value={field.value === null ? '' : field.value}
+              value={field.value === null ? "" : field.value}
               placeholder={placeholder}
               type={type}
               className="max-w-52 grow text-right"
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   e.preventDefault(); // エンターキーによるデフォルトの動作をキャンセル
                 }
               }}

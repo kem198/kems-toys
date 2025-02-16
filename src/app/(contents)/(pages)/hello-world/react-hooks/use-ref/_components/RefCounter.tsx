@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
 const RefCounter = () => {
   // countRef への参照を定義
