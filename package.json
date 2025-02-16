@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "cov": "vitest run --coverage",
     "format": "npx prettier . --write"
   },
   "dependencies": {
