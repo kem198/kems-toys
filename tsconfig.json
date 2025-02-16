@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -19,22 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    },
-    // スプレッド構文をコンパイル可能にする
-    // https://qiita.com/sounisi5011/items/aa2d747322aad4850fe7
-    // https://qiita.com/masakinihirota/items/797d95882355a709141e
-    "target": "es2015"
-    // 例外捕捉 catch(e) の e を unknown 型として扱う
-    // https://typescriptbook.jp/reference/tsconfig/useunknownincatchvariables
-    // https://typescriptbook.jp/reference/statements/exception
-    // "useUnknownInCatchVariables": true
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/app/(contents)/(pages)/hello-world/page.mdx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
