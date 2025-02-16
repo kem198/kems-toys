@@ -30,6 +30,7 @@ const fizzBuzz = (num: number): string => {
   if (isFizz(num) && isBuzz(num)) return "Fizz Buzz!!";
   if (isFizz(num)) return "Fizz!";
   if (isBuzz(num)) return "Buzz!";
+
   return num.toString();
 };
 
