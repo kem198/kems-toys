@@ -57,6 +57,10 @@ npm run dev
 - [Rehype Pretty Code](https://rehype-pretty.pages.dev/)
 - [Nextjsで@next/mdxを使ったマークダウンの変換でシンタックスハイライトを実装する \#Next.js - Qiita](https://qiita.com/KokiSakano/items/571130652864432b8489)
 
+### Design Pattern
+
+- [Next.js + MUIのスタイル再定義とアトミックデザインの話｜やっくん](https://note.com/pk_yakkun/n/ne1bc79d699be)
+
 ### Icons
 
 - [Heroicons](https://heroicons.com/)
@@ -73,6 +77,7 @@ npm run dev
 - [prettier-plugin-organize-imports - npm](https://www.npmjs.com/package/prettier-plugin-organize-imports)
 - [prettier-plugin-organize-imports で import 文を自動フォーマットする](https://zenn.dev/wakamsha/articles/prettier-plugin-organize-imports)
 
-### Others
+### Vitest
 
-- [Next.js + MUIのスタイル再定義とアトミックデザインの話｜やっくん](https://note.com/pk_yakkun/n/ne1bc79d699be)
+- [Vitest | Next Generation testing framework](https://vitest.dev/)
+    - [Getting Started | Guide | Vitest](https://vitest.dev/guide/)
