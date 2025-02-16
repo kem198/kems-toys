@@ -13,9 +13,20 @@ const isBuzz = (num: number): boolean => {
 };
 
 /**
+ * Checks if a number is positive integer.
+ */
+const isPositiveInteger = (num: number): boolean => {
+  return num > 0 && Number.isInteger(num);
+};
+
+/**
  * Determines the FizzBuzz result for a given number.
  */
 const fizzBuzz = (num: number): string => {
+  if (!isPositiveInteger(num)) {
+    throw new Error("The number must be a positive integer.");
+  }
+
   if (isFizz(num) && isBuzz(num)) return "Fizz Buzz!!";
   if (isFizz(num)) return "Fizz!";
   if (isBuzz(num)) return "Buzz!";
