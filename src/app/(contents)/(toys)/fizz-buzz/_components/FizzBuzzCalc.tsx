@@ -1,6 +1,6 @@
 "use client";
 
-import { doFizzBuzz } from "@/app/(contents)/(toys)/fizz-buzz/_utilities/fizzbuzz";
+import { fizzBuzz } from "@/app/(contents)/(toys)/fizz-buzz/_utilities/fizzbuzz";
 import { LabeledInputController } from "@/components/Atoms/LabeledInputController";
 import { ResetButton } from "@/components/Atoms/ResetButton";
 import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
@@ -15,30 +15,22 @@ const FizzBuzzCalc = () => {
     defaultValues: {
       count: "",
     },
-    mode: "onChange", // バリデーションを onChange で実行する設定
+    mode: "onChange",
   });
 
   const { reset, watch } = methods;
   const count = watch("count");
 
-  /**
-   * count をリセットする関数
-   */
   const resetCount = () => {
     reset({ count: "" });
   };
 
-  /**
-   * FizzBuzz を計算する関数
-   *
-   * 入力値が自然数でない場合はエラーメッセージを設定する
-   */
   const calculateFizzBuzz = () => {
     const num = parseInt(count, 10);
     if (Number.isNaN(num) || num <= 0) {
       return "";
     }
-    return doFizzBuzz(num);
+    return fizzBuzz(num);
   };
 
   return (

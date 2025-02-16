@@ -1,25 +1,37 @@
 /**
- * Fizz Buzz を評価する関数
- *
- * 3 で割り切れる場合は 'Fizz' を返す。
- * 5 で割り切れる場合は 'Buzz' を返す。
- * 3 または 5 で割り切れる場合は 'FizzBuzz' を返す。
- * どの数値でも割り切れない場合は引数を string 型に型変換して返す。
- *
- * @param {number} num - 評価対象の数値
- * @returns {string} - 評価結果の文字列
+ * Checks if a number is divisible by 3.
  */
-const doFizzBuzz = (num: number): string => {
-  if (num % 3 === 0 && num % 5 === 0) {
-    return "Fizz Buzz!!";
+const isFizz = (num: number): boolean => {
+  return num % 3 === 0;
+};
+
+/**
+ * Checks if a number is divisible by 5.
+ */
+const isBuzz = (num: number): boolean => {
+  return num % 5 === 0;
+};
+
+/**
+ * Checks if a number is positive integer.
+ */
+const isPositiveInteger = (num: number): boolean => {
+  return num > 0 && Number.isInteger(num);
+};
+
+/**
+ * Determines the FizzBuzz result for a given number.
+ */
+const fizzBuzz = (num: number): string => {
+  if (!isPositiveInteger(num)) {
+    throw new Error("The number must be a positive integer.");
   }
-  if (num % 3 === 0) {
-    return "Fizz!";
-  }
-  if (num % 5 === 0) {
-    return "Buzz!";
-  }
+
+  if (isFizz(num) && isBuzz(num)) return "Fizz Buzz!!";
+  if (isFizz(num)) return "Fizz!";
+  if (isBuzz(num)) return "Buzz!";
+
   return num.toString();
 };
 
-export { doFizzBuzz };
+export { fizzBuzz };
