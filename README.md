@@ -45,6 +45,7 @@ npm run dev
     - [Getting Started: Installation \| Next.js](https://nextjs.org/docs/getting-started/installation)
     - [Configuring: Debugging \| Next.js](https://nextjs.org/docs/pages/building-your-application/configuring/debugging#debugging-with-vs-code)
     - [Configuring: MDX \| Next.js](https://nextjs.org/docs/app/building-your-application/configuring/mdx)
+    - [Testing: Vitest \| Next.js](https://nextjs.org/docs/app/building-your-application/testing/vitest)
 - [Setup Next.js with Airbnb ESLint, Prettier, TypeScript and Tailwind CSS \| Max Shen Dev](https://m4xshen.dev/posts/setup-nextjs-with-airbnb-eslint-prettier-typescript-and-tailwindcss/)
 - [【完全版】Next.jsのSSG、SSR、ISR、CSRを図とコードでスッキリ理解する - らくらくエンジニア](https://rakuraku-engineer.com/posts/nextjs-app-ssgssr/)
 
