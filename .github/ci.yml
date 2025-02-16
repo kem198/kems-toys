@@ -1,0 +1,32 @@
+name: "CI"
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "22.14.0" # Match Node version with Volta section in package.json
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: "./package-lock.json"
+      - name: Install dependencies
+        run: npm ci
+      # - name: Run tests
+      #   run: npm test
+      # - name: Lint
+      #   run: npm run lint
+      - name: Build
+        run: npm run build
