@@ -1,3 +1,5 @@
+import { isPositiveInteger } from "@/utilities/math";
+
 /**
  * Checks if a number is divisible by 3.
  */
@@ -10,13 +12,6 @@ const isFizz = (num: number): boolean => {
  */
 const isBuzz = (num: number): boolean => {
   return num % 5 === 0;
-};
-
-/**
- * Checks if a number is positive integer.
- */
-const isPositiveInteger = (num: number): boolean => {
-  return num > 0 && Number.isInteger(num);
 };
 
 /**
