@@ -20,22 +20,22 @@ describe("fizzBuzz", () => {
     });
   });
 
-  describe("when the number is indivisible by 3 and 5", () => {
+  describe("when the number is not divisible by 3 and 5", () => {
     it("should return '1' if the number is 1", () => {
       expect(fizzBuzz(1)).toBe("1");
     });
   });
 
   describe("when the number is not a positive integer", () => {
-    it("should throw error if the number is -1", () => {
+    it("should throw an error if the number is -1", () => {
       expect(() => fizzBuzz(-1)).toThrow(Error);
     });
 
-    it("should throw error if the number is 0", () => {
+    it("should throw an error if the number is 0", () => {
       expect(() => fizzBuzz(0)).toThrow(Error);
     });
 
-    it("should throw error if the number is 3.1", () => {
+    it("should throw an error if the number is 3.1", () => {
       expect(() => fizzBuzz(3.1)).toThrow(Error);
     });
   });
