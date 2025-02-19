@@ -3,16 +3,12 @@ import { isPositiveInteger } from "@/utilities/math";
 /**
  * Checks if a number is divisible by 3.
  */
-const isFizz = (num: number): boolean => {
-  return num % 3 === 0;
-};
+const isFizz = (num: number): boolean => num % 3 === 0;
 
 /**
  * Checks if a number is divisible by 5.
  */
-const isBuzz = (num: number): boolean => {
-  return num % 5 === 0;
-};
+const isBuzz = (num: number): boolean => num % 5 === 0;
 
 /**
  * Determines the FizzBuzz result for a given number.
