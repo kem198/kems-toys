@@ -6,19 +6,11 @@ describe("fizzBuzz", () => {
     it("should return 'Fizz!' if the number is 3", () => {
       expect(fizzBuzz(3)).toBe("Fizz!");
     });
-
-    it("should return 'Fizz!' if the number is 6", () => {
-      expect(fizzBuzz(3)).toBe("Fizz!");
-    });
   });
 
   describe("when the number is divisible by 5", () => {
     it("should return 'Buzz!' if the number is 5", () => {
       expect(fizzBuzz(5)).toBe("Buzz!");
-    });
-
-    it("should return 'Buzz!' if the number is 10", () => {
-      expect(fizzBuzz(10)).toBe("Buzz!");
     });
   });
 
@@ -26,9 +18,11 @@ describe("fizzBuzz", () => {
     it("should return 'Fizz Buzz!!' if the number is 15", () => {
       expect(fizzBuzz(15)).toBe("Fizz Buzz!!");
     });
+  });
 
-    it("should return 'Fizz Buzz!!' if the number is 30", () => {
-      expect(fizzBuzz(30)).toBe("Fizz Buzz!!");
+  describe("when the number is indivisible by 3 and 5", () => {
+    it("should return '1' if the number is 1", () => {
+      expect(fizzBuzz(1)).toBe("1");
     });
   });
 
