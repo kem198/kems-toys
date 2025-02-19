@@ -1,6 +1,6 @@
 "use client";
 
-import { fizzBuzz } from "@/app/(contents)/(toys)/fizz-buzz/_utilities/fizzbuzz";
+import { fizzBuzz } from "@/app/(contents)/(toys)/fizz-buzz/_utilities/fizzBuzz";
 import { LabeledInputController } from "@/components/Atoms/LabeledInputController";
 import { ResetButton } from "@/components/Atoms/ResetButton";
 import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
