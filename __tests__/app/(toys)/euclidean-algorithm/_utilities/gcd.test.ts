@@ -9,7 +9,7 @@ describe("calcGcd", () => {
     expect(calcGcd(2, 3)).toBe(1);
   });
 
-  it("should return 3 if the numbers are 2 and 6", () => {
+  it("should return 2 if the numbers are 2 and 6", () => {
     expect(calcGcd(2, 6)).toBe(2);
   });
 
