@@ -1,4 +1,4 @@
-import { CongratsButton } from "@/app/(contents)/(toys)/congrats-button/_components/CongratsButton";
+import { CongratsButton } from "@/app/(toys)/congrats-button/_components/CongratsButton";
 import { ToyLayout } from "@/components/Templates/ToyLayout";
 import MdBody from "./md/Body.mdx";
 import MdSupplement from "./md/Supplement.mdx";
