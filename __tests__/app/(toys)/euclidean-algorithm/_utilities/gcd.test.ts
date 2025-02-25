@@ -10,6 +10,10 @@ describe("calcGcd", () => {
     expect(calcGcd(6, 9)).toBe(3);
   });
 
+  it("should return 1 if the numbers are 5 and 9", () => {
+    expect(calcGcd(5, 9)).toBe(1);
+  });
+
   it("should return 3 if the numbers are -6 and 9", () => {
     expect(calcGcd(-6, 9)).toBe(3);
   });
