@@ -1,6 +1,6 @@
 import { Toys } from "@/types/toys";
 
-const toys: Toys = {
+const TOYS: Toys = {
   about: {
     title: "About",
     description: "このサイトについて",
@@ -45,4 +45,4 @@ const toys: Toys = {
   },
 };
 
-export { toys };
+export { TOYS };

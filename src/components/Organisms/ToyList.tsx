@@ -1,6 +1,6 @@
 "use client";
 
-import { toys } from "@/constants/toys";
+import { TOYS } from "@/constants/toys";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,8 +10,8 @@ const ToyList = () => {
 
   // li 要素のコンポーネントをループ生成する関数
   const generateToyList = () =>
-    Object.keys(toys).map((key) => {
-      const toy = toys[key];
+    Object.keys(TOYS).map((key) => {
+      const toy = TOYS[key];
 
       // 現在のパスが toy.link と同じであれば 'active' をセットする
       // Link > ClassName へ渡してプライマリカラーを表示する
