@@ -2,24 +2,24 @@ import { calcGcd } from "@/app/(toys)/euclidean-algorithm/_utilities/gcd";
 import { describe, expect, it } from "vitest";
 
 describe("calcGcd", () => {
-  it("should return 1 if the numbers are 1 and 1", () => {
-    expect(calcGcd(1, 1)).toBe(1);
+  it("should return 1 if the numbers are 2 and 3", () => {
+    expect(calcGcd(2, 3)).toBe(1);
   });
 
-  it("should return 3 if the numbers are 6 and 9", () => {
-    expect(calcGcd(6, 9)).toBe(3);
+  it("should return 3 if the numbers are 2 and 6", () => {
+    expect(calcGcd(2, 6)).toBe(2);
   });
 
-  it("should return 1 if the numbers are 5 and 9", () => {
-    expect(calcGcd(5, 9)).toBe(1);
+  it("should return 3 if the numbers are 3 and 6", () => {
+    expect(calcGcd(3, 6)).toBe(3);
   });
 
-  it("should return 3 if the numbers are -6 and 9", () => {
-    expect(calcGcd(-6, 9)).toBe(3);
+  it("should return 3 if the numbers are -3 and 6", () => {
+    expect(calcGcd(-3, 6)).toBe(3);
   });
 
-  it("should return 3 if the numbers are -6 and -9", () => {
-    expect(calcGcd(-6, -9)).toBe(3);
+  it("should return 3 if the numbers are -6 and -6", () => {
+    expect(calcGcd(-3, -6)).toBe(3);
   });
 
   it("should throw an error if the numbers are 0 and 0", () => {
