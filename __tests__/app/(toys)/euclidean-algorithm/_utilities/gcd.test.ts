@@ -81,7 +81,6 @@ describe("calcGcdSteps", () => {
     describe("and relatively prime", () => {
       it("should return correct steps if the numbers are 2 and 3", () => {
         expect(calcGcdSteps(2, 3)).toEqual([
-          "2 ÷ 3 = 0 ... 2",
           "3 ÷ 2 = 1 ... 1",
           "2 ÷ 1 = 2 ... 0",
         ]);
@@ -89,7 +88,6 @@ describe("calcGcdSteps", () => {
 
       it("should return correct steps if the numbers are 17 and 19", () => {
         expect(calcGcdSteps(17, 19)).toEqual([
-          "17 ÷ 19 = 0 ... 17",
           "19 ÷ 17 = 1 ... 2",
           "17 ÷ 2 = 8 ... 1",
           "2 ÷ 1 = 2 ... 0",
@@ -98,7 +96,6 @@ describe("calcGcdSteps", () => {
 
       it("should return correct steps if the numbers are 14 and 25", () => {
         expect(calcGcdSteps(14, 25)).toEqual([
-          "14 ÷ 25 = 0 ... 14",
           "25 ÷ 14 = 1 ... 11",
           "14 ÷ 11 = 1 ... 3",
           "11 ÷ 3 = 3 ... 2",
@@ -110,17 +107,11 @@ describe("calcGcdSteps", () => {
 
     describe("and not relatively prime", () => {
       it("should return correct steps if the numbers are 2 and 6", () => {
-        expect(calcGcdSteps(2, 6)).toEqual([
-          "2 ÷ 6 = 0 ... 2",
-          "6 ÷ 2 = 3 ... 0",
-        ]);
+        expect(calcGcdSteps(2, 6)).toEqual(["6 ÷ 2 = 3 ... 0"]);
       });
 
       it("should return correct steps if the numbers are 3 and 6", () => {
-        expect(calcGcdSteps(3, 6)).toEqual([
-          "3 ÷ 6 = 0 ... 3",
-          "6 ÷ 3 = 2 ... 0",
-        ]);
+        expect(calcGcdSteps(3, 6)).toEqual(["6 ÷ 3 = 2 ... 0"]);
       });
 
       it("should return correct steps if the numbers are 123456 and 7890", () => {
@@ -143,10 +134,7 @@ describe("calcGcdSteps", () => {
 
   describe("when one or both numbers are negative", () => {
     it("should return correct steps if the numbers are -3 and 6", () => {
-      expect(calcGcdSteps(-3, 6)).toEqual([
-        "3 ÷ 6 = 0 ... 3",
-        "6 ÷ 3 = 2 ... 0",
-      ]);
+      expect(calcGcdSteps(-3, 6)).toEqual(["6 ÷ 3 = 2 ... 0"]);
     });
 
     it("should return correct steps if the numbers are -6 and -6", () => {

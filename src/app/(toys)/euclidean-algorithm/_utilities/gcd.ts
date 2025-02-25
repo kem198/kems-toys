@@ -45,6 +45,11 @@ const calcGcdSteps = (a: number, b: number): string[] => {
   let m = Math.abs(a);
   let n = Math.abs(b);
 
+  // m が n より小さい場合は入れ替える
+  if (m < n) {
+    [m, n] = [n, m];
+  }
+
   // ユークリッドの互除法
   while (n !== 0) {
     const r = Math.trunc(m / n);
