@@ -1,6 +1,9 @@
 "use client";
 
-import { calcGcd } from "@/app/(toys)/euclidean-algorithm/_utilities/gcd";
+import {
+  calcGcd,
+  calcGcdSteps,
+} from "@/app/(toys)/euclidean-algorithm/_utilities/gcd";
 import { LabeledNumberInputOld } from "@/components/Atoms/LabeledNumberInputOld";
 import { ResetButton } from "@/components/Atoms/ResetButton";
 import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
@@ -32,7 +35,8 @@ const GcdCalc = () => {
   useEffect(() => {
     if (aCount !== null && bCount !== null) {
       try {
-        const { gcd, steps } = calcGcd(aCount, bCount);
+        const gcd = calcGcd(aCount, bCount);
+        const steps = calcGcdSteps(aCount, bCount);
         setResult(`GCD = ${gcd}`);
         setStepMessages(steps);
       } catch (error) {
