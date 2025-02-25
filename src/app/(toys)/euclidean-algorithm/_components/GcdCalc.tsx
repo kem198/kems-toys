@@ -1,6 +1,6 @@
 "use client";
 
-import { calcGcd } from "@/app/(contents)/(toys)/euclidean-algorithm/_utilities/gcd";
+import { calcGcd } from "@/app/(toys)/euclidean-algorithm/_utilities/gcd";
 import { LabeledNumberInputOld } from "@/components/Atoms/LabeledNumberInputOld";
 import { ResetButton } from "@/components/Atoms/ResetButton";
 import { ResultDisplay } from "@/components/Atoms/ResultDisplay";

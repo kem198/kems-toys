@@ -1,41 +1,36 @@
 "use client";
 
-import { isNabeatsu } from "@/app/(contents)/(toys)/nabeatsu-assessmenter/_utilities/nabeatsu";
+import { fizzBuzz } from "@/app/(toys)/fizz-buzz/_utilities/fizzBuzz";
 import { LabeledInputController } from "@/components/Atoms/LabeledInputController";
 import { ResetButton } from "@/components/Atoms/ResetButton";
 import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
+import { isPositiveInteger } from "@/utilities/math";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface FormValues {
-  count: string;
+  num: string;
 }
 
-const NabeatsuAssessmenter = () => {
+const FizzBuzzCalc = () => {
   const methods = useForm<FormValues>({
     defaultValues: {
-      count: "",
+      num: "",
     },
     mode: "onChange",
   });
 
   const { reset, watch } = methods;
-  const count = watch("count");
 
-  /**
-   * count をリセットする関数
-   */
-  const resetCount = () => {
-    reset({ count: "" });
+  const num = watch("num");
+
+  const resetNum = () => {
+    reset({ num: "" });
   };
 
-  /**
-   * 結果を取得する関数
-   */
-  const getResult = () => {
-    if (count === "") {
-      return "";
-    }
-    return isNabeatsu(Number(count)) ? `${count}!!!` : count.toString();
+  const calculateFizzBuzz = () => {
+    const parsedNum = parseInt(num, 10);
+    if (Number.isNaN(parsedNum) || !isPositiveInteger(parsedNum)) return "";
+    return fizzBuzz(parsedNum);
   };
 
   return (
@@ -43,24 +38,24 @@ const NabeatsuAssessmenter = () => {
       <div className="container my-8 max-w-sm max-lg:mx-auto">
         <form>
           <LabeledInputController
-            name="count"
+            name="num"
             type="number"
             labelText="n ="
             placeholder="0"
             rules={{
               required: "このフィールドは必須です",
               validate: {
-                isNumber: (value: string) =>
-                  /^-?\d+$/.test(value) || "半角数字のみ入力できます",
+                isNaturalNumber: (value: string) =>
+                  /^[1-9]\d*$/.test(value) || "自然数を入力してください",
               },
             }}
           />
-          <ResultDisplay>{getResult()}</ResultDisplay>
-          <ResetButton onClick={resetCount} />
+          <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
+          <ResetButton onClick={resetNum} />
         </form>
       </div>
     </FormProvider>
   );
 };
 
-export { NabeatsuAssessmenter };
+export { FizzBuzzCalc };
