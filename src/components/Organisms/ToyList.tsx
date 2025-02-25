@@ -1,6 +1,6 @@
 "use client";
 
-import { toys } from "@/assets/toys";
+import { toys } from "@/constants/toys";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

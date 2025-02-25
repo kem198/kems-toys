@@ -1,13 +1,6 @@
-interface Props {
-  [key: string]: {
-    title: string;
-    description: string;
-    link: string;
-    svgD: string;
-  };
-}
+import { Toys } from "@/types/toys";
 
-const toys: Props = {
+const toys: Toys = {
   About: {
     title: "About",
     description: "このサイトについて",
