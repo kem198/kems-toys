@@ -21,7 +21,7 @@ describe("calcGcd", () => {
     expect(calcGcd(-3, 6)).toBe(3);
   });
 
-  it("should return 3 if the numbers are -6 and -6", () => {
+  it("should return 3 if the numbers are -3 and -6", () => {
     expect(calcGcd(-3, -6)).toBe(3);
   });
 
