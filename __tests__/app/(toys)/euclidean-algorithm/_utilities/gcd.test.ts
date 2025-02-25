@@ -6,36 +6,40 @@ import { describe, expect, it } from "vitest";
 
 describe("calcGcd", () => {
   describe("when both numbers are positive", () => {
-    it("should return 1 if the numbers are 2 and 3", () => {
-      expect(calcGcd(2, 3)).toBe(1);
+    describe("when numbers are relatively prime", () => {
+      it("should return 1 if the numbers are 2 and 3", () => {
+        expect(calcGcd(2, 3)).toBe(1);
+      });
+
+      it("should return 1 if the numbers are 17 and 19", () => {
+        expect(calcGcd(17, 19)).toBe(1);
+      });
+
+      it("should return 1 if the numbers are 14 and 25", () => {
+        expect(calcGcd(14, 25)).toBe(1);
+      });
     });
 
-    it("should return 2 if the numbers are 2 and 6", () => {
-      expect(calcGcd(2, 6)).toBe(2);
-    });
+    describe("when numbers are not relatively prime", () => {
+      it("should return 2 if the numbers are 2 and 6", () => {
+        expect(calcGcd(2, 6)).toBe(2);
+      });
 
-    it("should return 3 if the numbers are 3 and 6", () => {
-      expect(calcGcd(3, 6)).toBe(3);
-    });
+      it("should return 3 if the numbers are 3 and 6", () => {
+        expect(calcGcd(3, 6)).toBe(3);
+      });
 
-    it("should return 1000000 if the numbers are 1000000 and 1000000", () => {
-      expect(calcGcd(1000000, 1000000)).toBe(1000000);
-    });
+      it("should return 5 if the numbers are 25 and 5", () => {
+        expect(calcGcd(25, 5)).toBe(5);
+      });
 
-    it("should return 6 if the numbers are 123456 and 7890", () => {
-      expect(calcGcd(123456, 7890)).toBe(6);
-    });
+      it("should return 1000000 if the numbers are 1000000 and 1000000", () => {
+        expect(calcGcd(1000000, 1000000)).toBe(1000000);
+      });
 
-    it("should return 1 if the numbers are 17 and 19", () => {
-      expect(calcGcd(17, 19)).toBe(1);
-    });
-
-    it("should return 1 if the numbers are 14 and 25", () => {
-      expect(calcGcd(14, 25)).toBe(1);
-    });
-
-    it("should return 5 if the numbers are 25 and 5", () => {
-      expect(calcGcd(25, 5)).toBe(5);
+      it("should return 6 if the numbers are 123456 and 7890", () => {
+        expect(calcGcd(123456, 7890)).toBe(6);
+      });
     });
   });
 
