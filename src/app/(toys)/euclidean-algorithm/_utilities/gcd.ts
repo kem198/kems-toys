@@ -15,6 +15,11 @@ const calcGcd = (a: number, b: number): number => {
   let m = Math.abs(a);
   let n = Math.abs(b);
 
+  // m が n より小さい場合は入れ替える
+  if (m < n) {
+    [m, n] = [n, m];
+  }
+
   // ユークリッドの互除法
   while (n !== 0) {
     const q = m % n;
