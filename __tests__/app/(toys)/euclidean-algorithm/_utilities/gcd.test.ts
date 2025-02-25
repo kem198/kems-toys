@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 
 describe("calcGcd", () => {
   describe("when both numbers are positive", () => {
-    describe("when numbers are relatively prime", () => {
+    describe("and relatively prime", () => {
       it("should return 1 if the numbers are 2 and 3", () => {
         expect(calcGcd(2, 3)).toBe(1);
       });
@@ -20,7 +20,7 @@ describe("calcGcd", () => {
       });
     });
 
-    describe("when numbers are not relatively prime", () => {
+    describe("and not relatively prime", () => {
       it("should return 2 if the numbers are 2 and 6", () => {
         expect(calcGcd(2, 6)).toBe(2);
       });
