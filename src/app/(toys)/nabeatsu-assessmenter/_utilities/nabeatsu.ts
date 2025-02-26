@@ -3,14 +3,14 @@
  * @param {number} num - 評価する数値
  * @returns {boolean} - 3 の倍数であれば true, そうでなければ false
  */
-export const isThreeMultiple = (num: number): boolean => num % 3 === 0;
+const isThreeMultiple = (num: number): boolean => num % 3 === 0;
 
 /**
  * 入力値に 3 を含む桁が存在するか評価する関数
  * @param {number} num - 評価する数値
  * @returns {boolean} - 3 を含む桁があれば true, そうでなければ false
  */
-export const hasThreeDigits = (num: number): boolean => {
+const hasThreeDigits = (num: number): boolean => {
   // 入力を絶対値へ変換する
   let absNum = Math.abs(num);
 
