@@ -29,8 +29,8 @@ const hasThreeDigits = (num: number): boolean => {
 /**
  * 与えられた数値について次のいずれかの条件を満たすか評価する関数
  *
- * (A) 3 の倍数である
- * (B) 3 を含む桁が存在する
+ * - (A) 3 の倍数である
+ * - (B) 3 を含む桁が存在する
  *
  * @param {number} num - 評価する数値
  * @returns {boolean} - 条件を満たす場合は true, そうでなければ false
