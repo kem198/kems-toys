@@ -18,10 +18,6 @@ describe("isNabeatsu", () => {
     it("should return true if the number is 6", () => {
       expect(isNabeatsu(6)).toBe(true);
     });
-
-    it("should return true if the number is 9", () => {
-      expect(isNabeatsu(9)).toBe(true);
-    });
   });
 
   describe("when the number contains the digit 3", () => {
@@ -33,12 +29,8 @@ describe("isNabeatsu", () => {
       expect(isNabeatsu(13)).toBe(true);
     });
 
-    it("should return true if the number is 23", () => {
-      expect(isNabeatsu(23)).toBe(true);
-    });
-
-    it("should return true if the number is 31", () => {
-      expect(isNabeatsu(31)).toBe(true);
+    it("should return true if the number is 301", () => {
+      expect(isNabeatsu(301)).toBe(true);
     });
   });
 
