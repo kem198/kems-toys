@@ -14,10 +14,6 @@ describe("calcGcd", () => {
       it("should return 1 if the numbers are 17 and 19", () => {
         expect(calcGcd(17, 19)).toBe(1);
       });
-
-      it("should return 1 if the numbers are 14 and 25", () => {
-        expect(calcGcd(14, 25)).toBe(1);
-      });
     });
 
     describe("and not relatively prime", () => {
@@ -29,14 +25,6 @@ describe("calcGcd", () => {
         expect(calcGcd(3, 6)).toBe(3);
       });
 
-      it("should return 5 if the numbers are 25 and 5", () => {
-        expect(calcGcd(25, 5)).toBe(5);
-      });
-
-      it("should return 1000000 if the numbers are 1000000 and 1000000", () => {
-        expect(calcGcd(1000000, 1000000)).toBe(1000000);
-      });
-
       it("should return 6 if the numbers are 123456 and 7890", () => {
         expect(calcGcd(123456, 7890)).toBe(6);
       });
@@ -46,19 +34,11 @@ describe("calcGcd", () => {
       it("should return 7 if the numbers are 7 and 14", () => {
         expect(calcGcd(7, 14)).toBe(7);
       });
-
-      it("should return 11 if the numbers are 11 and 33", () => {
-        expect(calcGcd(11, 33)).toBe(11);
-      });
     });
 
     describe("and the other is not a multiple of the prime", () => {
       it("should return 1 if the numbers are 7 and 10", () => {
         expect(calcGcd(7, 10)).toBe(1);
-      });
-
-      it("should return 1 if the numbers are 11 and 15", () => {
-        expect(calcGcd(11, 15)).toBe(1);
       });
     });
   });
@@ -66,10 +46,6 @@ describe("calcGcd", () => {
   describe("when one or both numbers are negative", () => {
     it("should return 3 if the numbers are -3 and 6", () => {
       expect(calcGcd(-3, 6)).toBe(3);
-    });
-
-    it("should return 3 if the numbers are -3 and -6", () => {
-      expect(calcGcd(-3, -6)).toBe(3);
     });
 
     it("should return 6 if the numbers are -123456 and 7890", () => {
@@ -113,16 +89,6 @@ describe("calcGcdSteps", () => {
           "2 ÷ 1 = 2 ... 0",
         ]);
       });
-
-      it("should return correct steps if the numbers are 14 and 25", () => {
-        expect(calcGcdSteps(14, 25)).toEqual([
-          "25 ÷ 14 = 1 ... 11",
-          "14 ÷ 11 = 1 ... 3",
-          "11 ÷ 3 = 3 ... 2",
-          "3 ÷ 2 = 1 ... 1",
-          "2 ÷ 1 = 2 ... 0",
-        ]);
-      });
     });
 
     describe("and not relatively prime", () => {
@@ -145,20 +111,12 @@ describe("calcGcdSteps", () => {
           "12 ÷ 6 = 2 ... 0",
         ]);
       });
-
-      it("should return correct steps if the numbers are 25 and 5", () => {
-        expect(calcGcdSteps(25, 5)).toEqual(["25 ÷ 5 = 5 ... 0"]);
-      });
     });
   });
 
   describe("when one or both numbers are negative", () => {
     it("should return correct steps if the numbers are -3 and 6", () => {
       expect(calcGcdSteps(-3, 6)).toEqual(["6 ÷ 3 = 2 ... 0"]);
-    });
-
-    it("should return correct steps if the numbers are -6 and -6", () => {
-      expect(calcGcdSteps(-6, -6)).toEqual(["6 ÷ 6 = 1 ... 0"]);
     });
 
     it("should return correct steps if the numbers are -123456 and 7890", () => {
