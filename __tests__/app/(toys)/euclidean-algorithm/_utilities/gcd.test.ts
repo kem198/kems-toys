@@ -41,6 +41,26 @@ describe("calcGcd", () => {
         expect(calcGcd(123456, 7890)).toBe(6);
       });
     });
+
+    describe("and the other is a multiple of the prime", () => {
+      it("should return 7 if the numbers are 7 and 14", () => {
+        expect(calcGcd(7, 14)).toBe(7);
+      });
+
+      it("should return 11 if the numbers are 11 and 33", () => {
+        expect(calcGcd(11, 33)).toBe(11);
+      });
+    });
+
+    describe("and the other is not a multiple of the prime", () => {
+      it("should return 1 if the numbers are 7 and 10", () => {
+        expect(calcGcd(7, 10)).toBe(1);
+      });
+
+      it("should return 1 if the numbers are 11 and 15", () => {
+        expect(calcGcd(11, 15)).toBe(1);
+      });
+    });
   });
 
   describe("when one or both numbers are negative", () => {
