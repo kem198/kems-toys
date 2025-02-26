@@ -1,4 +1,4 @@
-import { ToyCards } from "@/components/Organisms/ToyCards";
+import { ToyCards } from "@/components/organisms/toy-cards";
 
 const Home = () => <ToyCards />;
 

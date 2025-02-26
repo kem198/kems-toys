@@ -1,4 +1,4 @@
-import { ToyCard } from "@/components/Molecules/ToyCard";
+import { ToyCard } from "@/components/molecules/toy-card";
 import { TOYS } from "@/constants/toys";
 
 const ToyCards = () => (

@@ -1,4 +1,4 @@
-import { ToyList } from "@/components/Organisms/ToyList";
+import { ToyList } from "@/components/organisms/toy-list";
 import Link from "next/link";
 import { ReactNode } from "react";
 

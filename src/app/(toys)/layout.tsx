@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/Atoms/Breadcrumbs";
+import { Breadcrumbs } from "@/components/atoms/breadcrumbs";
 
 const ToysLayout = ({
   children,

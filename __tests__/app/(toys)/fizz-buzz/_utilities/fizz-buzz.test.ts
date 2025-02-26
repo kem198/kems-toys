@@ -1,4 +1,4 @@
-import { fizzBuzz } from "@/app/(toys)/fizz-buzz/_utilities/fizzBuzz";
+import { fizzBuzz } from "@/app/(toys)/fizz-buzz/_utilities/fizz-buzz";
 import { describe, expect, it } from "vitest";
 
 describe("fizzBuzz", () => {

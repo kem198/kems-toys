@@ -1,4 +1,4 @@
-import { FizzBuzzCalc } from "@/app/(toys)/fizz-buzz/_components/FizzBuzzCalc";
+import { FizzBuzzCalc } from "@/app/(toys)/fizz-buzz/_components/fizz-buzz-calc";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, it } from "vitest";
 

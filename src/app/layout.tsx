@@ -1,4 +1,4 @@
-import { TwoColumnLayout } from "@/components/Templates/TwoColumnLayout";
+import { TwoColumnLayout } from "@/components/templates/two-column-layout";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
