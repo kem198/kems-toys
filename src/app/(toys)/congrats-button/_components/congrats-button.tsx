@@ -1,6 +1,6 @@
 "use client";
 
-import { EmojiPicker } from "@/components/Atoms/EmojiPicker";
+import { EmojiPicker } from "@/components/atoms/emoji-picker";
 import emojiRegex from "emoji-regex";
 import JSConfetti from "js-confetti";
 import { useEffect, useState } from "react";

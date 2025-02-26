@@ -4,9 +4,9 @@ import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import { Suspense } from "react";
-import { FallbackMessage } from "./FallbackMessage";
-import { Ground } from "./Ground";
-import { Model } from "./Model";
+import { FallbackMessage } from "./fallback-message";
+import { Ground } from "./ground";
+import { Model } from "./model";
 
 /** メインコンポーネント */
 const Modane3dViewer = () => (

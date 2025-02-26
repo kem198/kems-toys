@@ -1,7 +1,7 @@
 "use client";
 
-import { useDeviceOrientation } from "@/hooks/useDeviceOrientation";
-import { requestDeviceMotionPermission } from "@/utilities/requestDeviceMotionPermission";
+import { useDeviceOrientation } from "@/hooks/use-device-orientation";
+import { requestDeviceMotionPermission } from "@/utilities/request-device-motion-permission";
 import { Container, Graphics, Sprite, Stage, Text } from "@pixi/react";
 import { TextStyle } from "@pixi/text";
 import { useCallback } from "react";

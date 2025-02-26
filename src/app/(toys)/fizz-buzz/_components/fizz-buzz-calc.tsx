@@ -1,9 +1,9 @@
 "use client";
 
-import { fizzBuzz } from "@/app/(toys)/fizz-buzz/_utilities/fizzBuzz";
-import { LabeledInputController } from "@/components/Atoms/LabeledInputController";
-import { ResetButton } from "@/components/Atoms/ResetButton";
-import { ResultDisplay } from "@/components/Atoms/ResultDisplay";
+import { fizzBuzz } from "@/app/(toys)/fizz-buzz/_utilities/fizz-buzz";
+import { LabeledInputController } from "@/components/atoms/labeled-input-controller";
+import { ResetButton } from "@/components/atoms/reset-button";
+import { ResultDisplay } from "@/components/atoms/result-display";
 import { isPositiveInteger } from "@/utilities/math";
 import { FormProvider, useForm } from "react-hook-form";
 
