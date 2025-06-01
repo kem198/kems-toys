@@ -43,6 +43,12 @@ const TOYS: Toys = {
     link: "/modane-3d-viewer",
     svgD: "m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9",
   },
+  pseudoCompass: {
+    title: "コンパス",
+    description: "スマホのセンサを利用する",
+    link: "/compass",
+    svgD: "m15 11.25-3-3m0 0-3 3m3-3v7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
+  },
 };
 
 export { TOYS };
