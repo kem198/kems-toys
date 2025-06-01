@@ -1,5 +1,6 @@
 "use client";
 
+import { DeviceOrientationRequestPermissionButton } from "@/components/atoms/device-orientation-request-permission-button";
 import { useDeviceOrientation } from "@/hooks/use-device-orientation";
 import { requestDeviceMotionPermission } from "@/utilities/request-device-motion-permission";
 import { Container, Graphics, Sprite, Stage, Text } from "@pixi/react";
@@ -75,13 +76,9 @@ const DeviceOrientationSample = () => {
 
   return (
     <div>
-      <button
-        type="button"
-        className="btn"
+      <DeviceOrientationRequestPermissionButton
         onClick={requestDeviceMotionPermission}
-      >
-        Request permission (for iOS)
-      </button>
+      />
 
       <hr />
 
