@@ -7,6 +7,18 @@ import { requestDeviceMotionPermission } from "@/utilities/request-device-motion
 const Compass = () => {
   const { alpha } = useDeviceOrientation();
 
+  const getDirection = (a: number) => {
+    if (a >= 337.5 || a < 22.5) return "N";
+    if (a >= 22.5 && a < 67.5) return "NE";
+    if (a >= 67.5 && a < 112.5) return "E";
+    if (a >= 112.5 && a < 157.5) return "SE";
+    if (a >= 157.5 && a < 202.5) return "S";
+    if (a >= 202.5 && a < 247.5) return "SW";
+    if (a >= 247.5 && a < 292.5) return "W";
+    if (a >= 292.5 && a < 337.5) return "NW";
+    return "";
+  };
+
   return (
     <>
       <div
@@ -14,7 +26,7 @@ const Compass = () => {
         style={{ "--value": 100 - (alpha / 360) * 100 } as React.CSSProperties}
         role="progressbar"
       >
-        {Math.trunc(alpha)}
+        {getDirection(alpha)}
       </div>
       <div>
         <DeviceOrientationRequestPermissionButton
