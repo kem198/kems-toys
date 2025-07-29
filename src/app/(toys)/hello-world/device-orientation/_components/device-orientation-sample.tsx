@@ -10,8 +10,8 @@ const DeviceOrientationSample = () => {
   // カスタムフックからセンサ情報を取得
   const { alpha, beta, gamma } = useDeviceOrientation();
 
-  // ウサギの画像
-  const bunnyUrl = "https://pixijs.io/pixi-react/img/bunny.png";
+  // もだねの画像
+  const bunnyUrl = "/device-orientation-sample/modane.png";
 
   /**
    * alpha 角をラジアンに変換する計算
@@ -99,7 +99,7 @@ const DeviceOrientationSample = () => {
         {/* メインのコンテナ */}
         <Container anchor={0.5} position={[120, 120]}>
           {/* <Text text="Hello World!" anchor={0.5} /> */}
-          {/* ウサギ */}
+          {/* もだね */}
           <Sprite
             image={bunnyUrl}
             anchor={0.5}
@@ -131,7 +131,7 @@ const DeviceOrientationSample = () => {
         {/* メインのコンテナ */}
         <Container anchor={0.5} position={[120, 120]}>
           {/* <Text text="Hello World!" anchor={0.5} /> */}
-          {/* ウサギ */}
+          {/* もだね */}
           <Sprite image={bunnyUrl} anchor={0.5} rotation={rad} />
           {/* 円 */}
           <Graphics draw={Circle} />
