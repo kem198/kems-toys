@@ -1,10 +1,13 @@
 import { DeviceOrientationSample } from "./_components/device-orientation-sample";
+import { Version } from "@/components/atoms/version";
 
-# Device orientation
+# 傾き検知サンプル集
 
 デバイスの [端末方向イベント](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events) を取得し、[ReactPixi](https://pixijs.io/pixi-react/) で描画するサンプルです。
 
-※ iOS では "動作と方向" へのアクセス許可が必要です。`Request permission (for iOS)` ボタンを押してください。
+スマートフォンなど、傾き検知が利用できるデバイスでご利用ください。
+
+※ iOS では "動作と方向" へのアクセス許可が必要です。次のボタンを押して許可してください。
 
 <DeviceOrientationSample />
 
@@ -26,18 +29,35 @@ import { DeviceOrientationSample } from "./_components/device-orientation-sample
 
 当ページでは端末方向イベントのうち、[DeviceOrientationEvent](https://developer.mozilla.org/ja/docs/Web/API/DeviceOrientationEvent) から得られる下記の情報を利用している。
 
-- **alpha 回転角 (0 度 ~ 360 度)**
-  - 端末の東西南北方向への向き。
-  - 端末の上端が地球の北極をまっすぐ向いているときが 0 度。
-  - 端末が左へ回転するのに従って最大 360 度まで増加する。
-- **beta 回転角 (180 度 ~ -180 度)**
-  - 端末の縦方向の向き。
-  - 端末が地球表面と平行になっている (上端および下端から地球表面までの距離が同じ) ときが 0 度。
-  - 端末を前方へ傾けるのに従って 180 度まで増加、後方へ傾けるのに従って -180 度まで減少する。
-- **gamma 回転角 (90 度 ~ -90 度)**
-  - 端末の横方向の向き。
-  - 端末が地球表面と平行になっている (左端および右端から地球表面までの距離が同じ) ときが 0 度。
-  - 端末を右へ傾けるのに従って 90 度まで増加、左へ傾けるのに従って -90 度まで減少する。
+### alpha 回転角 (0 度 ~ 360 度)
+
+- 端末の **東西南北方向** への向き。
+- 端末の上端が地球の北極をまっすぐ向いているときが 0 度。
+- 端末が左へ回転するのに従って最大 360 度まで増加する。
+
+> ![alpha](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained/alpha.png)
+>
+> [方向および動きとして示されるデータ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained#アルファ)
+
+### beta 回転角 (180 度 ~ -180 度)
+
+- 端末の **縦方向** の向き。
+- 端末が地球表面と平行になっている (上端および下端から地球表面までの距離が同じ) ときが 0 度。
+- 端末を前方へ傾けるのに従って 180 度まで増加、後方へ傾けるのに従って -180 度まで減少する。
+
+> ![beta](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained/beta2.png)
+>
+> [方向および動きとして示されるデータ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained#ベータ)
+
+### gamma 回転角 (90 度 ~ -90 度)
+
+- 端末の **横方向** の向き。
+- 端末が地球表面と平行になっている (左端および右端から地球表面までの距離が同じ) ときが 0 度。
+- 端末を右へ傾けるのに従って 90 度まで増加、左へ傾けるのに従って -90 度まで減少する。
+
+> ![gamma](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained/gamma.png)
+>
+> [方向および動きとして示されるデータ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Device_orientation_events/Orientation_and_motion_data_explained#ガンマ)
 
 ## 使用ライブラリ
 
@@ -54,3 +74,5 @@ import { DeviceOrientationSample } from "./_components/device-orientation-sample
 - [PixiJSで簡単なゲームを作ってみた](https://zenn.dev/tellernovel_inc/articles/8f47a24fc55f2c)
 - [PixiJS + React で実装する時のメモ](https://zenn.dev/ivgtr/scraps/f3c1a7ae0e3e5b)
 - [ラジアン｜単位プラス｜大日本図書](https://www.dainippon-tosho.co.jp/unit/list/radian.html)
+
+<Version version="0.2.0" onDate="2025-07-30" />
