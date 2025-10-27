@@ -123,55 +123,63 @@ const DeviceOrientationSample = () => {
 
       <hr />
 
-      {/* ReactPixi で描画 (x, y 確認用) */}
-      <Stage width={240} height={240} options={{ background: 0x1099bb }}>
-        {/* メインのコンテナ */}
-        <Container anchor={0.5} position={[120, 120]}>
-          {/* <Text text="Hello World!" anchor={0.5} /> */}
-          {/* もだね */}
-          <Sprite image={bunnyUrl} anchor={0.5} x={gamma ?? 0} y={beta ?? 0} />
-          {/* 十字線 */}
-          <Graphics draw={Crosshair} />
-        </Container>
+      {/* ReactPixi の描画サンプル */}
+      <div className="flex flex-col gap-8">
+        {/* ReactPixi で描画 (x, y 確認用) */}
+        <Stage width={240} height={240} options={{ background: 0x1099bb }}>
+          {/* メインのコンテナ */}
+          <Container anchor={0.5} position={[120, 120]}>
+            {/* <Text text="Hello World!" anchor={0.5} /> */}
+            {/* もだね */}
+            <Sprite
+              image={bunnyUrl}
+              anchor={0.5}
+              x={gamma ?? 0}
+              y={beta ?? 0}
+            />
+            {/* 十字線 */}
+            <Graphics draw={Crosshair} />
+          </Container>
 
-        {/* 傾き情報のコンテナ */}
-        <Container position={[5, 5]}>
-          <Text
-            text={`x (gamma): ${gamma}`}
-            style={new TextStyle(infoTextStyle)}
-          />
-          <Text
-            text={`y (beta): ${beta}`}
-            y={16}
-            style={new TextStyle(infoTextStyle)}
-          />
-        </Container>
-      </Stage>
+          {/* 傾き情報のコンテナ */}
+          <Container position={[5, 5]}>
+            <Text
+              text={`x (gamma): ${gamma}`}
+              style={new TextStyle(infoTextStyle)}
+            />
+            <Text
+              text={`y (beta): ${beta}`}
+              y={16}
+              style={new TextStyle(infoTextStyle)}
+            />
+          </Container>
+        </Stage>
 
-      <hr />
+        {/* ReactPixi で描画 (rotation 確認用) */}
+        <Stage width={240} height={240} options={{ background: 0x1099bb }}>
+          {/* メインのコンテナ */}
+          <Container anchor={0.5} position={[120, 120]}>
+            {/* <Text text="Hello World!" anchor={0.5} /> */}
+            {/* もだね */}
+            <Sprite image={bunnyUrl} anchor={0.5} rotation={rad} />
+            {/* 円 */}
+            <Graphics draw={Circle} />
+          </Container>
 
-      {/* ReactPixi で描画 (rotation 確認用) */}
-      <Stage width={240} height={240} options={{ background: 0x1099bb }}>
-        {/* メインのコンテナ */}
-        <Container anchor={0.5} position={[120, 120]}>
-          {/* <Text text="Hello World!" anchor={0.5} /> */}
-          {/* もだね */}
-          <Sprite image={bunnyUrl} anchor={0.5} rotation={rad} />
-          {/* 円 */}
-          <Graphics draw={Circle} />
-        </Container>
-
-        {/* 傾き情報のコンテナ */}
-        <Container position={[5, 5]}>
-          <Text text={`alpha:${alpha}`} style={new TextStyle(infoTextStyle)} />
-          <Text
-            text={`radian ((alpha * π) / 180):${rad}`}
-            y={16}
-            style={new TextStyle(infoTextStyle)}
-          />
-        </Container>
-      </Stage>
-
+          {/* 傾き情報のコンテナ */}
+          <Container position={[5, 5]}>
+            <Text
+              text={`alpha:${alpha}`}
+              style={new TextStyle(infoTextStyle)}
+            />
+            <Text
+              text={`radian ((alpha * π) / 180):${rad}`}
+              y={16}
+              style={new TextStyle(infoTextStyle)}
+            />
+          </Container>
+        </Stage>
+      </div>
       <hr />
     </div>
   );
