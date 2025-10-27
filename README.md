@@ -82,3 +82,4 @@ npm run dev
 ### PWA
 
 - [kem198/practice-pwa](https://github.com/kem198/practice-pwa)
+- [Metadata Files: manifest.json \| Next.js](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
