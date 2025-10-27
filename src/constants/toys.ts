@@ -1,13 +1,11 @@
 import { Toys } from "@/types/toys";
 import {
-  Award,
   Box,
   Calculator,
-  CheckCircle,
-  FastForward,
-  Globe,
+  Earth,
   Info,
-  Smartphone,
+  PartyPopper,
+  Rotate3d,
 } from "lucide-react";
 
 const TOYS: Toys = {
@@ -21,13 +19,13 @@ const TOYS: Toys = {
     title: "Hello World",
     description: "テスト用ページ",
     link: "/hello-world",
-    Icon: Globe,
+    Icon: Earth,
   },
   fizzBuzz: {
     title: "Fizz Buzz",
     description: "よくあるやつ",
     link: "/fizz-buzz",
-    Icon: FastForward,
+    Icon: Calculator,
   },
   euclideanAlgorithm: {
     title: "ユークリッドの互除法",
@@ -39,13 +37,13 @@ const TOYS: Toys = {
     title: "ナベアツ判定機",
     description: "「3 の倍数である」または「3 を含む桁が存在する」か評価する",
     link: "/nabeatsu-assessmenter",
-    Icon: CheckCircle,
+    Icon: Calculator,
   },
   congratsButton: {
     title: "おめでとうボタン",
     description: "おめでたいときに",
     link: "/congrats-button",
-    Icon: Award,
+    Icon: PartyPopper,
   },
   modane3d: {
     title: "もだねちゃん 3D ビューワー",
@@ -57,7 +55,7 @@ const TOYS: Toys = {
     title: "傾き検知サンプル集",
     description: "デバイスの方向を取得して描画してみる",
     link: "/device-orientation",
-    Icon: Smartphone,
+    Icon: Rotate3d,
   },
 };
 
