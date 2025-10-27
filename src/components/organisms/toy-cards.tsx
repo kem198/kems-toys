@@ -9,7 +9,7 @@ const ToyCards = () => (
         title={toy.title}
         description={toy.description}
         link={toy.link}
-        svgD={toy.svgD}
+        Icon={toy.Icon}
       />
     ))}
   </div>

@@ -18,16 +18,7 @@ const ToyList = () => {
             // https://daisyui.com/components/menu/#menu-with-active-item
             className={pathname === toy.link ? "active" : ""}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.25"
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d={toy.svgD} />
-            </svg>
+            <toy.Icon className="h-5 w-5" />
             {toy.title}
           </Link>
         </li>
