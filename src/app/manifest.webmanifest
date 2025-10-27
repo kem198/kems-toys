@@ -3,7 +3,7 @@
   "display": "standalone",
   "start_url": "/",
   "background_color": "#313539",
-  "theme_color": "#1a1d20",
+  "theme_color": "#313539",
   "shortcuts": [
     {
       "name": "おめでとうボタン",
