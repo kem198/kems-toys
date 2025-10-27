@@ -3,6 +3,6 @@ export type Toys = {
     title: string;
     description: string;
     link: string;
-    svgD: string;
+    Icon: React.ComponentType<any>;
   };
 };
