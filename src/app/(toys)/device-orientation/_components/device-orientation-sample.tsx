@@ -37,7 +37,7 @@ const DeviceOrientationSample = () => {
     }) => {
       // 初期化
       g.clear();
-      // lineStyle(線の太さ, 色)
+      // 線の太さ, 色
       g.lineStyle(1, 0xff0000);
       // 横線
       g.moveTo(-16, 0);
@@ -60,6 +60,7 @@ const DeviceOrientationSample = () => {
       endFill: () => void;
     }) => {
       g.clear();
+      // 線の太さ, 色
       g.lineStyle(1, 0xff0000);
       // 横線
       g.moveTo(-40, 0);
