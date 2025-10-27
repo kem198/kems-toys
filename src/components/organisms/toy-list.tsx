@@ -18,7 +18,7 @@ const ToyList = () => {
             // https://daisyui.com/components/menu/#menu-with-active-item
             className={pathname === toy.link ? "active" : ""}
           >
-            <toy.Icon className="h-5 w-5" />
+            <toy.Icon className="h-5 w-5" strokeWidth={1.75} />
             {toy.title}
           </Link>
         </li>

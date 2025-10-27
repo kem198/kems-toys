@@ -13,7 +13,7 @@ const ToyCard = ({ title, description, link, Icon }: ToyCardProps) => (
     href={link}
   >
     <figure>
-      <Icon className="m-8 h-16 w-16" strokeWidth={1.5} />
+      <Icon className="m-8 h-16 w-16" strokeWidth={1.375} />
     </figure>
     <div className="card-body p-6 pt-0">
       <h2 className="card-title">{title}</h2>
