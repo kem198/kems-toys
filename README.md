@@ -33,7 +33,7 @@ npm install
 npm run dev
 ```
 
-## Reference
+## References
 
 ### Next.js
 
@@ -60,7 +60,7 @@ npm run dev
 
 ### Icons
 
-- [Heroicons](https://heroicons.com/)
+- [Lucide](https://lucide.dev/)
 
 ### ESLint
 
