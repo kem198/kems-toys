@@ -11,7 +11,7 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "KeM's Toys",
   description: "KeM198's tiny apps.",
-  manifest: "./manifest.json",
+  manifest: "/manifest.webmanifest",
 };
 
 const RootLayout = ({
