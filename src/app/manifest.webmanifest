@@ -4,6 +4,12 @@
   "start_url": "/",
   "background_color": "#313539",
   "theme_color": "#1a1d20",
+  "shortcuts": [
+    {
+      "name": "おめでとうボタン",
+      "url": "/congrats-button"
+    }
+  ],
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
