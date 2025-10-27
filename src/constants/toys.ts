@@ -1,8 +1,8 @@
 import { Toys } from "@/types/toys";
 import {
   Box,
-  Calculator,
   Earth,
+  GraduationCap,
   Info,
   PartyPopper,
   Rotate3d,
@@ -25,19 +25,19 @@ const TOYS: Toys = {
     title: "Fizz Buzz",
     description: "よくあるやつ",
     link: "/fizz-buzz",
-    Icon: Calculator,
+    Icon: GraduationCap,
   },
   euclideanAlgorithm: {
     title: "ユークリッドの互除法",
     description: "2 つの自然数について最大公約数を求める",
     link: "/euclidean-algorithm",
-    Icon: Calculator,
+    Icon: GraduationCap,
   },
   nabeatsuAssessmenter: {
     title: "ナベアツ判定機",
     description: "「3 の倍数である」または「3 を含む桁が存在する」か評価する",
     link: "/nabeatsu-assessmenter",
-    Icon: Calculator,
+    Icon: GraduationCap,
   },
   congratsButton: {
     title: "おめでとうボタン",
