@@ -78,3 +78,8 @@ npm run dev
 
 - [Vitest | Next Generation testing framework](https://vitest.dev/)
     - [Getting Started | Guide | Vitest](https://vitest.dev/guide/)
+
+### PWA
+
+- [kem198/practice-pwa](https://github.com/kem198/practice-pwa)
+- [Metadata Files: manifest.json \| Next.js](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/manifest)
