@@ -92,7 +92,7 @@ const DeviceOrientationSample = () => {
           <progress className="progress" value={alpha ?? 0} max="360" />
           <div className="flex items-center gap-2">
             <RotateCcw strokeWidth={1} />
-            alpha: {alpha}
+            alpha: {alpha ?? "端末方向イベントを読み取れませんでした"}
           </div>
         </div>
         <div>
@@ -104,7 +104,7 @@ const DeviceOrientationSample = () => {
           />
           <div className="flex items-center gap-2">
             <MoveVertical strokeWidth={1} />
-            beta: {beta}
+            beta: {beta ?? "端末方向イベントを読み取れませんでした"}
           </div>
         </div>
         <div>
@@ -116,7 +116,7 @@ const DeviceOrientationSample = () => {
           />
           <div className="flex items-center gap-2">
             <MoveHorizontal strokeWidth={1} />
-            gamma: {gamma}
+            gamma: {gamma ?? "端末方向イベントを読み取れませんでした"}
           </div>
         </div>
       </div>
