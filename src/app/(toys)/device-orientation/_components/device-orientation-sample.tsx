@@ -100,12 +100,7 @@ const DeviceOrientationSample = () => {
         <Container anchor={0.5} position={[120, 120]}>
           {/* <Text text="Hello World!" anchor={0.5} /> */}
           {/* もだね */}
-          <Sprite
-            image={bunnyUrl}
-            anchor={0.5}
-            x={gamma ?? undefined}
-            y={beta ?? undefined}
-          />
+          <Sprite image={bunnyUrl} anchor={0.5} x={gamma ?? 0} y={beta ?? 0} />
           {/* 十字線 */}
           <Graphics draw={Crosshair} />
         </Container>
