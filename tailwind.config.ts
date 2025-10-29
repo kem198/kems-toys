@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import typography from "@tailwindcss/typography";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import daisyui from "daisyui";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -22,23 +21,6 @@ const config: Config = {
       sans: ["var(--font-noto-sans-jp)"],
     },
   },
-  plugins: [typography, daisyui],
-  daisyui: {
-    themes: [
-      {
-        mytheme: {
-          primary: "#009592",
-          secondary: "#00ea78",
-          accent: "#a33700",
-          neutral: "#313539",
-          "base-100": "#fcfcfc",
-          info: "#0091ec",
-          success: "#00ae80",
-          warning: "#c09700",
-          error: "#ff758d",
-        },
-      },
-    ],
-  },
+  plugins: [typography],
 };
 export default config;

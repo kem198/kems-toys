@@ -49,8 +49,6 @@ npm run dev
 
 - [Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.](https://tailwindcss.com/)
 - [Tailwind CSS で要素やテキストを中央に寄せる方法 \| プログラミングと仕事論](https://shigotoron.com/tailwind-css-で要素やテキストを中央に寄せる方法/)
-- [daisyUI — Tailwind CSS Components ( version 4 update is here )](https://daisyui.com/)
-    - [daisyUI を Tailwind CSS プラグインとしてインストールします — Tailwind CSS Components ( version 4 update is here )](https://daisyui.com/docs/install/)
 - [Rehype Pretty Code](https://rehype-pretty.pages.dev/)
 - [Nextjsで@next/mdxを使ったマークダウンの変換でシンタックスハイライトを実装する \#Next.js - Qiita](https://qiita.com/KokiSakano/items/571130652864432b8489)
 
