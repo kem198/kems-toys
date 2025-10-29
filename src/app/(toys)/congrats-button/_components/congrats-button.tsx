@@ -2,6 +2,7 @@
 
 import { EmojiPicker } from "@/components/atoms/emoji-picker";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import emojiRegex from "emoji-regex";
 import JSConfetti from "js-confetti";
 import { useEffect, useState } from "react";
@@ -59,18 +60,15 @@ const CongratsButton = () => {
   return (
     <div>
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-        <Button className="btn btn-lg rounded-full" onClick={showConfetti}>
-          🎉 Congrats!
-        </Button>
+        <Button onClick={showConfetti}>🎉 Congrats!</Button>
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
               <span className="label-text">好きな絵文字でお祝いしよう</span>
             </div>
             <div className="flex gap-2">
-              <input
+              <Input
                 type="text"
-                className="input input-bordered w-full max-w-xs rounded-full"
                 value={emojiFormText}
                 onChange={handleChange}
               />
