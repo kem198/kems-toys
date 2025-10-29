@@ -1,6 +1,7 @@
 "use client";
 
 import { EmojiPicker } from "@/components/atoms/emoji-picker";
+import { Button } from "@/components/ui/button";
 import emojiRegex from "emoji-regex";
 import JSConfetti from "js-confetti";
 import { useEffect, useState } from "react";
@@ -58,13 +59,9 @@ const CongratsButton = () => {
   return (
     <div>
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-        <button
-          type="button"
-          className="btn btn-lg rounded-full"
-          onClick={showConfetti}
-        >
+        <Button className="btn btn-lg rounded-full" onClick={showConfetti}>
           🎉 Congrats!
-        </button>
+        </Button>
         <div>
           <label className="form-control w-full max-w-xs">
             <div className="label">
