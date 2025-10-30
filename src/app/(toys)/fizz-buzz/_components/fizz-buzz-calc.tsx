@@ -36,22 +36,20 @@ function FizzBuzzCalc() {
   return (
     <FormProvider {...methods}>
       <div className="my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
-        <form className="flex flex-col gap-4">
-          <LabeledInputController
-            name="num"
-            type="number"
-            labelText="n ="
-            placeholder="0"
-            rules={{
-              required: "このフィールドは必須です",
-              validate: {
-                isNaturalNumber: (value: string) =>
-                  /^[1-9]\d*$/.test(value) || "自然数を入力してください",
-              },
-            }}
-          />
-          <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
-        </form>
+        <LabeledInputController
+          name="num"
+          type="number"
+          labelText="n ="
+          placeholder="0"
+          rules={{
+            required: "このフィールドは必須です",
+            validate: {
+              isNaturalNumber: (value: string) =>
+                /^[1-9]\d*$/.test(value) || "自然数を入力してください",
+            },
+          }}
+        />
+        <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
         <ResetButton size="lg" className="w-24" onClick={resetNum} />
       </div>
     </FormProvider>

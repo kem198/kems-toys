@@ -40,24 +40,22 @@ function NabeatsuAssessmenter() {
 
   return (
     <FormProvider {...methods}>
-      <div className="my-8 max-w-sm max-lg:mx-auto">
-        <form className="flex flex-col gap-4">
-          <LabeledInputController
-            name="count"
-            type="number"
-            labelText="n ="
-            placeholder="0"
-            rules={{
-              required: "このフィールドは必須です",
-              validate: {
-                isNumber: (value: string) =>
-                  /^-?\d+$/.test(value) || "半角数字のみ入力できます",
-              },
-            }}
-          />
-          <ResultDisplay>{getResult()}</ResultDisplay>
-          <ResetButton size="lg" className="w-24" onClick={resetCount} />
-        </form>
+      <div className="my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
+        <LabeledInputController
+          name="count"
+          type="number"
+          labelText="n ="
+          placeholder="0"
+          rules={{
+            required: "このフィールドは必須です",
+            validate: {
+              isNumber: (value: string) =>
+                /^-?\d+$/.test(value) || "半角数字のみ入力できます",
+            },
+          }}
+        />
+        <ResultDisplay>{getResult()}</ResultDisplay>
+        <ResetButton size="lg" className="w-24" onClick={resetCount} />
       </div>
     </FormProvider>
   );
