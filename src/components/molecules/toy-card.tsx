@@ -18,7 +18,7 @@ function ToyCard({ title, description, link, Icon }: ToyCardProps) {
   return (
     <Item
       variant="outline"
-      className="block min-h-64 w-44 border shadow-lg transition ease-out hover:scale-105"
+      className="block min-h-64 w-40 border shadow-lg transition ease-out hover:scale-105 md:w-44"
       asChild
     >
       <Link href={link}>
