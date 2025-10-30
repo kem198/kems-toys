@@ -69,7 +69,7 @@ function GcdCalc() {
         setCount={setBCount}
       />
       <ResultDisplay>{result}</ResultDisplay>
-      <ResetButton className="w-24" onClick={resetCounts} />
+      <ResetButton size="lg" className="w-24" onClick={resetCounts} />
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1" className="border-none">
           <AccordionTrigger>計算ステップを表示する</AccordionTrigger>

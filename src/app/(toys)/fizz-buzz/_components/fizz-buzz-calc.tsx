@@ -35,7 +35,7 @@ function FizzBuzzCalc() {
 
   return (
     <FormProvider {...methods}>
-      <div className="my-8 max-w-sm max-lg:mx-auto">
+      <div className="my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
         <form className="flex flex-col gap-4">
           <LabeledInputController
             name="num"
@@ -51,8 +51,8 @@ function FizzBuzzCalc() {
             }}
           />
           <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
-          <ResetButton className="w-24" onClick={resetNum} />
         </form>
+        <ResetButton size="lg" className="w-24" onClick={resetNum} />
       </div>
     </FormProvider>
   );

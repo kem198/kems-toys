@@ -56,7 +56,7 @@ function NabeatsuAssessmenter() {
             }}
           />
           <ResultDisplay>{getResult()}</ResultDisplay>
-          <ResetButton className="w-24" onClick={resetCount} />
+          <ResetButton size="lg" className="w-24" onClick={resetCount} />
         </form>
       </div>
     </FormProvider>
