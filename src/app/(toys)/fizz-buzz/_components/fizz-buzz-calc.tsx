@@ -51,7 +51,7 @@ const FizzBuzzCalc = () => {
             }}
           />
           <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
-          <ResetButton onClick={resetNum} />
+          <ResetButton className="w-24" onClick={resetNum} />
         </form>
       </div>
     </FormProvider>

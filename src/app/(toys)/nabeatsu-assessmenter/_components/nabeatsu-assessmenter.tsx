@@ -41,7 +41,7 @@ const NabeatsuAssessmenter = () => {
   return (
     <FormProvider {...methods}>
       <div className="container my-8 max-w-sm max-lg:mx-auto">
-        <form>
+        <form className="flex flex-col gap-4">
           <LabeledInputController
             name="count"
             type="number"
@@ -56,7 +56,7 @@ const NabeatsuAssessmenter = () => {
             }}
           />
           <ResultDisplay>{getResult()}</ResultDisplay>
-          <ResetButton onClick={resetCount} />
+          <ResetButton className="w-24" onClick={resetCount} />
         </form>
       </div>
     </FormProvider>
