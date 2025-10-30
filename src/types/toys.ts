@@ -1,8 +1,8 @@
-export type Toys = {
-  [key: string]: {
-    title: string;
-    description: string;
-    link: string;
-    Icon: React.ComponentType<any>;
-  };
+export type Toy = {
+  title: string;
+  description: string;
+  link: string;
+  icon: React.ComponentType<any>;
 };
+
+export type Toys = Toy[];
