@@ -62,7 +62,7 @@ const CongratsButton = () => {
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
         <Button
           variant="secondary"
-          className="h-16 rounded-full transition ease-out active:scale-95"
+          className="h-16 rounded-full text-base transition ease-out active:scale-95"
           onClick={showConfetti}
         >
           🎉 Congrats!
