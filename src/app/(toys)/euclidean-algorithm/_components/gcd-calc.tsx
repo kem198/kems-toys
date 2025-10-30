@@ -57,7 +57,7 @@ const GcdCalc = () => {
   }, [aCount, bCount]); // `aCount` または `bCount` の変更をトリガーとする
 
   return (
-    <div className="container my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
+    <div className="my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
       <LabeledNumberInputOld
         labelText="a ="
         count={aCount}

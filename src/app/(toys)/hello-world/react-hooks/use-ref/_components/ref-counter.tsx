@@ -48,14 +48,14 @@ const RefCounter = () => {
   };
 
   return (
-    <div>
-      <div className="join">
-        <Button onClick={() => updateCount(decrementNum)}>
-          {decrementNum}
+    <div className="flex flex-col gap-4">
+      <div className="flex w-44 flex-col gap-2 text-center">
+        <Button variant="outline" onClick={() => updateCount(incrementNum)}>
+          +{incrementNum}
         </Button>
         <div>count: {countRef.current}</div>
-        <Button onClick={() => updateCount(incrementNum)}>
-          +{incrementNum}
+        <Button variant="outline" onClick={() => updateCount(decrementNum)}>
+          {decrementNum}
         </Button>
       </div>
       <div className="flex gap-4">

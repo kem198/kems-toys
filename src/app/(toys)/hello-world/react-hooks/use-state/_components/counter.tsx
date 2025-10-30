@@ -25,8 +25,8 @@ const Counter = () => {
   };
 
   return (
-    <div>
-      <Button className="" onClick={incrementCount}>
+    <div className="flex flex-col gap-4">
+      <Button variant="outline" size="lg" onClick={incrementCount}>
         You pressed me {count} times
       </Button>
       <div>

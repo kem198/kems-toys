@@ -40,7 +40,7 @@ const NabeatsuAssessmenter = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className="container my-8 max-w-sm max-lg:mx-auto">
+      <div className="my-8 max-w-sm max-lg:mx-auto">
         <form className="flex flex-col gap-4">
           <LabeledInputController
             name="count"

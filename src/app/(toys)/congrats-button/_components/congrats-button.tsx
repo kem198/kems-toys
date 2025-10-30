@@ -68,11 +68,12 @@ const CongratsButton = () => {
           🎉 Congrats!
         </Button>
 
-        <div>
-          <label className=" text-sm" htmlFor="emoji-input">
+        <div className="text-center">
+          <label className="text-sm" htmlFor="emoji-input">
             好きな絵文字でお祝いしよう
             <div className="flex gap-2">
               <Input
+                className="rounded-full"
                 id="emoji-input"
                 value={emojiFormText}
                 onChange={handleChange}

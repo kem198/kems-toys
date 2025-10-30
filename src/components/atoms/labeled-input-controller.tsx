@@ -33,7 +33,7 @@ const LabeledInputController: React.FC<LabeledInputProps> = ({
       control={control}
       rules={rules}
       render={({ field, fieldState }) => (
-        <>
+        <div>
           <InputGroup>
             <InputGroupAddon>
               <InputGroupText> {labelText}</InputGroupText>
@@ -56,7 +56,7 @@ const LabeledInputController: React.FC<LabeledInputProps> = ({
               {fieldState.error.message}
             </span>
           )}
-        </>
+        </div>
       )}
     />
   );
