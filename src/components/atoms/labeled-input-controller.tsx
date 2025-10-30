@@ -1,3 +1,9 @@
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -28,23 +34,27 @@ const LabeledInputController: React.FC<LabeledInputProps> = ({
       rules={rules}
       render={({ field, fieldState }) => (
         <>
-          <label className="input input-bordered flex items-center justify-between gap-2">
-            {labelText}
-            <input
+          <InputGroup>
+            <InputGroupAddon>
+              <InputGroupText> {labelText}</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupInput
               {...field}
               value={field.value === null ? "" : field.value}
               placeholder={placeholder}
               type={type}
-              className="max-w-52 grow text-right"
+              className="text-right"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault(); // エンターキーによるデフォルトの動作をキャンセル
                 }
               }}
             />
-          </label>
+          </InputGroup>
           {fieldState.error && (
-            <span className="text-error">{fieldState.error.message}</span>
+            <span className="text-sm text-destructive">
+              {fieldState.error.message}
+            </span>
           )}
         </>
       )}

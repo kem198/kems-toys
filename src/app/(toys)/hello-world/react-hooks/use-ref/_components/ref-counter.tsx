@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 
 const RefCounter = () => {
@@ -49,39 +50,19 @@ const RefCounter = () => {
   return (
     <div>
       <div className="join">
-        <button
-          type="button"
-          className="btn btn-primary join-item w-16"
-          onClick={() => updateCount(decrementNum)}
-        >
+        <Button onClick={() => updateCount(decrementNum)}>
           {decrementNum}
-        </button>
-        <div className="join-item bg-base-200 mx-auto flex min-w-32 place-items-center items-center justify-center px-4">
-          count: {countRef.current}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-16"
-          onClick={() => updateCount(incrementNum)}
-        >
+        </Button>
+        <div>count: {countRef.current}</div>
+        <Button onClick={() => updateCount(incrementNum)}>
           +{incrementNum}
-        </button>
+        </Button>
       </div>
       <div className="flex gap-4">
-        <button
-          type="button"
-          className="btn btn-secondary mt-4 w-24"
-          onClick={rerender}
-        >
-          再描写
-        </button>
-        <button
-          type="button"
-          className="btn btn-ghost mt-4 w-24"
-          onClick={resetCount}
-        >
+        <Button onClick={rerender}>再描写</Button>
+        <Button variant="ghost" onClick={resetCount}>
           リセット
-        </button>
+        </Button>
       </div>
     </div>
   );

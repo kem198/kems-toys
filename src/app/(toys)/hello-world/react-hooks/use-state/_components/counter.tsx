@@ -1,5 +1,8 @@
 "use client";
 
+/* eslint-disable react/jsx-no-bind */
+
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const Counter = () => {
@@ -23,17 +26,13 @@ const Counter = () => {
 
   return (
     <div>
-      <button type="button" className="btn mt-4" onClick={incrementCount}>
+      <Button className="" onClick={incrementCount}>
         You pressed me {count} times
-      </button>
+      </Button>
       <div>
-        <button
-          type="button"
-          className="btn btn-ghost mt-4 w-24"
-          onClick={resetCount}
-        >
+        <Button variant="ghost" onClick={resetCount}>
           リセット
-        </button>
+        </Button>
       </div>
     </div>
   );

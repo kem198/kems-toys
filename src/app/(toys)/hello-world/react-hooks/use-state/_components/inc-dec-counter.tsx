@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const IncDecCounter = () => {
@@ -28,32 +29,18 @@ const IncDecCounter = () => {
   return (
     <div>
       <div className="join">
-        <button
-          type="button"
-          className="btn btn-primary join-item w-16"
-          onClick={() => updateCount(decrementNum)}
-        >
+        <Button onClick={() => updateCount(decrementNum)}>
           {decrementNum}
-        </button>
-        <div className="join-item bg-base-200 mx-auto flex min-w-32 place-items-center items-center justify-center px-4">
-          count: {count}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-16"
-          onClick={() => updateCount(incrementNum)}
-        >
+        </Button>
+        <div>count: {count}</div>
+        <Button onClick={() => updateCount(incrementNum)}>
           +{incrementNum}
-        </button>
+        </Button>
       </div>
       <div>
-        <button
-          type="button"
-          className="btn btn-ghost mt-4 w-24"
-          onClick={resetCount}
-        >
+        <Button variant="ghost" onClick={resetCount}>
           リセット
-        </button>
+        </Button>
       </div>
     </div>
   );

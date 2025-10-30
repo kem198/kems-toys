@@ -7,7 +7,7 @@ interface Props {
 
 const ResultDisplay = ({ children, className }: Props) => (
   <div
-    className={`rounded-box bg-base-200 my-4 flex min-h-20 flex-col place-items-center items-center justify-center p-4 ${className}`}
+    className={`flex min-h-20 flex-col place-items-center items-center justify-center rounded bg-zinc-200 p-4 ${className}`}
   >
     {children}
   </div>

@@ -7,6 +7,12 @@ import {
 import { LabeledNumberInputOld } from "@/components/atoms/labeled-number-input-old";
 import { ResetButton } from "@/components/atoms/reset-button";
 import { ResultDisplay } from "@/components/atoms/result-display";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useEffect, useState } from "react";
 
 /**
@@ -63,22 +69,21 @@ const GcdCalc = () => {
         setCount={setBCount}
       />
       <ResultDisplay>{result}</ResultDisplay>
-      <div className="bg-base-200 collapse">
-        <input type="checkbox" />
-        <div className="collapse-title px-16 text-center font-medium">
-          計算ステップを表示する
-        </div>
-        <div className="collapse-content">
-          <ul>
-            {stepMessages.map((step) => (
-              <li key={step} className="step">
-                {step}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
       <ResetButton onClick={resetCounts} />
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1" className="border-none">
+          <AccordionTrigger>計算ステップを表示する</AccordionTrigger>
+          <AccordionContent>
+            <ul>
+              {stepMessages.map((step) => (
+                <li key={step} className="step">
+                  {step}
+                </li>
+              ))}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 };

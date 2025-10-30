@@ -1,3 +1,9 @@
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 import { ChangeEvent } from "react";
 
 interface LabeledNumberInputProps {
@@ -21,16 +27,18 @@ const LabeledNumberInputOld = ({
   };
 
   return (
-    <label className="input input-bordered flex items-center justify-between gap-2">
-      {labelText}
-      <input
+    <InputGroup>
+      <InputGroupAddon>
+        <InputGroupText> {labelText}</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput
         value={count === null ? "" : count}
         onChange={handleInputChange}
-        className="max-w-52 grow text-right"
+        className="text-right"
         placeholder="0"
         type="number"
       />
-    </label>
+    </InputGroup>
   );
 };
 

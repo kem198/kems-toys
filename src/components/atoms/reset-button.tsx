@@ -1,11 +1,13 @@
+import { Button } from "@/components/ui/button";
+
 interface ResetButtonProps {
   onClick: () => void;
 }
 
 const ResetButton = ({ onClick }: ResetButtonProps) => (
-  <button type="button" className="btn btn-ghost w-24" onClick={onClick}>
+  <Button variant="ghost" onClick={onClick}>
     リセット
-  </button>
+  </Button>
 );
 
 export { ResetButton };
