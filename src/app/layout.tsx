@@ -14,21 +14,23 @@ export const metadata: Metadata = {
   description: "KeM198's tiny apps.",
 };
 
-const RootLayout = ({
+function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => (
-  <html lang="ja">
-    <body className={notoSansJP.className}>
-      <SidebarProvider>
-        <div className="flex">
-          <AppSidebar />
-          <main className="p-6">{children}</main>
-        </div>
-      </SidebarProvider>
-    </body>
-  </html>
-);
+}>) {
+  return (
+    <html lang="ja">
+      <body className={notoSansJP.className}>
+        <SidebarProvider>
+          <div className="flex">
+            <AppSidebar />
+            <main className="p-6">{children}</main>
+          </div>
+        </SidebarProvider>
+      </body>
+    </html>
+  );
+}
 
 export default RootLayout;

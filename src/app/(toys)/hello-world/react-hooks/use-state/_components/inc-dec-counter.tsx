@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const IncDecCounter = () => {
+function IncDecCounter() {
   // count の値を保存する state 変数とセッターを定義
   const [count, setCount] = useState(0);
 
@@ -44,6 +44,6 @@ const IncDecCounter = () => {
       </div>
     </div>
   );
-};
+}
 
 export { IncDecCounter };

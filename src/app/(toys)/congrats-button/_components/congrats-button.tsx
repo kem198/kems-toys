@@ -7,7 +7,7 @@ import emojiRegex from "emoji-regex";
 import JSConfetti from "js-confetti";
 import { useEffect, useState } from "react";
 
-const CongratsButton = () => {
+function CongratsButton() {
   /**
    * confetti インスタンス用の変数とセッターを定義する
    *
@@ -87,6 +87,6 @@ const CongratsButton = () => {
       </div>
     </div>
   );
-};
+}
 
 export { CongratsButton };

@@ -10,7 +10,7 @@ interface FormValues {
   count: string;
 }
 
-const NabeatsuAssessmenter = () => {
+function NabeatsuAssessmenter() {
   const methods = useForm<FormValues>({
     defaultValues: {
       count: "",
@@ -61,6 +61,6 @@ const NabeatsuAssessmenter = () => {
       </div>
     </FormProvider>
   );
-};
+}
 
 export { NabeatsuAssessmenter };

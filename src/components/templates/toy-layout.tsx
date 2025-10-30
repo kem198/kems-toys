@@ -10,22 +10,24 @@ interface Props {
   SupplementComponent?: React.ComponentType;
 }
 
-const ToyLayout = ({
+function ToyLayout({
   title,
   version,
   onDate,
   ToyComponent,
   BodyComponent,
   SupplementComponent,
-}: Props) => (
-  <article>
-    <h1>{title}</h1>
-    {BodyComponent && <BodyComponent />}
-    <ToyComponent />
-    <div className="divider" />
-    {SupplementComponent && <SupplementComponent />}
-    <Version version={version} onDate={onDate} />
-  </article>
-);
+}: Props) {
+  return (
+    <article>
+      <h1>{title}</h1>
+      {BodyComponent && <BodyComponent />}
+      <ToyComponent />
+      <div className="divider" />
+      {SupplementComponent && <SupplementComponent />}
+      <Version version={version} onDate={onDate} />
+    </article>
+  );
+}
 
 export { ToyLayout };

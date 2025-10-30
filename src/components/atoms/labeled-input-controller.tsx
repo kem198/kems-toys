@@ -4,7 +4,6 @@ import {
   InputGroupInput,
   InputGroupText,
 } from "@/components/ui/input-group";
-import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 interface LabeledInputProps {
@@ -15,13 +14,13 @@ interface LabeledInputProps {
   rules?: any;
 }
 
-const LabeledInputController: React.FC<LabeledInputProps> = ({
+function LabeledInputController({
   name,
   type,
   labelText,
   placeholder,
   rules,
-}) => {
+}: LabeledInputProps) {
   // useFormContext フックを使用してフォームのコンテキストにアクセスする
   // 親コンポーネントから渡されたプロパティやメソッドを使用できる
   // これを Controller へ渡すことでフォームの状態と連携する
@@ -60,6 +59,6 @@ const LabeledInputController: React.FC<LabeledInputProps> = ({
       )}
     />
   );
-};
+}
 
 export { LabeledInputController };

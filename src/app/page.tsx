@@ -1,5 +1,7 @@
 import { ToyCards } from "@/components/organisms/toy-cards";
 
-const Home = () => <ToyCards />;
+function Home() {
+  return <ToyCards />;
+}
 
 export default Home;

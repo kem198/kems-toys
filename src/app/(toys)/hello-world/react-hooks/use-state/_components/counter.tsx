@@ -5,7 +5,7 @@
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const Counter = () => {
+function Counter() {
   // count の値を保存する state 変数とセッターを定義
   const [count, setCount] = useState(0);
   // console.log(count);
@@ -36,6 +36,6 @@ const Counter = () => {
       </div>
     </div>
   );
-};
+}
 
 export { Counter };

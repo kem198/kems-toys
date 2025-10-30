@@ -10,7 +10,7 @@ import {
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
 
-const Breadcrumbs = () => {
+function Breadcrumbs() {
   // 呼び出されたページまでのセグメントを配列として取得する
   const pathnames = useSelectedLayoutSegments();
 
@@ -54,6 +54,6 @@ const Breadcrumbs = () => {
       </BreadcrumbList>
     </Breadcrumb>
   );
-};
+}
 
 export { Breadcrumbs };

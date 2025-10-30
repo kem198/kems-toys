@@ -8,7 +8,7 @@ type Inputs = {
   exampleRequired: string;
 };
 
-const BasicForm = () => {
+function BasicForm() {
   // useForm() の戻り値 (メソッド) を各変数へ代入して使用できるようにする
   const {
     // 検証ルールを適用するメソッド
@@ -74,6 +74,6 @@ const BasicForm = () => {
       {result && <pre>{JSON.stringify(result, null, 2)}</pre>}
     </div>
   );
-};
+}
 
 export { BasicForm };

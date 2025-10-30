@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useRef, useState } from "react";
 
-const RefCounter = () => {
+function RefCounter() {
   // countRef への参照を定義
   const countRef = useRef<number>(0);
 
@@ -66,6 +66,6 @@ const RefCounter = () => {
       </div>
     </div>
   );
-};
+}
 
 export { RefCounter };

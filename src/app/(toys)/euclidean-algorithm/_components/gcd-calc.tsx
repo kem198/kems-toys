@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 /**
  * GCD (最大公約数) 計算コンポーネント
  */
-const GcdCalc = () => {
+function GcdCalc() {
   // state 変数とセッターを定義
   const [aCount, setACount] = useState<number | null>(null);
   const [bCount, setBCount] = useState<number | null>(null);
@@ -86,6 +86,6 @@ const GcdCalc = () => {
       </Accordion>
     </div>
   );
-};
+}
 
 export { GcdCalc };

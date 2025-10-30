@@ -9,7 +9,7 @@ import { TextStyle } from "@pixi/text";
 import { MoveHorizontal, MoveVertical, RotateCcw } from "lucide-react";
 import { useCallback } from "react";
 
-const DeviceOrientationSample = () => {
+function DeviceOrientationSample() {
   // カスタムフックからセンサ情報を取得
   const { alpha, beta, gamma } = useDeviceOrientation();
 
@@ -176,6 +176,6 @@ const DeviceOrientationSample = () => {
       <hr />
     </div>
   );
-};
+}
 
 export { DeviceOrientationSample };

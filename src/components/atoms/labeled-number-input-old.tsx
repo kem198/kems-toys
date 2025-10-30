@@ -12,11 +12,11 @@ interface LabeledNumberInputProps {
   setCount: (num: number | null) => void;
 }
 
-const LabeledNumberInputOld = ({
+function LabeledNumberInputOld({
   labelText,
   count,
   setCount,
-}: LabeledNumberInputProps) => {
+}: LabeledNumberInputProps) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newNum = parseInt(event.target.value, 10);
     if (!Number.isNaN(newNum)) {
@@ -40,6 +40,6 @@ const LabeledNumberInputOld = ({
       />
     </InputGroup>
   );
-};
+}
 
 export { LabeledNumberInputOld };

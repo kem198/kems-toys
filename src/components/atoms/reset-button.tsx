@@ -5,10 +5,12 @@ type ResetButtonProps = {
   onClick: () => void;
 } & React.ComponentProps<typeof Button>;
 
-const ResetButton = ({ onClick, ...rest }: ResetButtonProps) => (
-  <Button variant="ghost" onClick={onClick} {...rest}>
-    リセット
-  </Button>
-);
+function ResetButton({ onClick, ...rest }: ResetButtonProps) {
+  return (
+    <Button variant="ghost" onClick={onClick} {...rest}>
+      リセット
+    </Button>
+  );
+}
 
 export { ResetButton };

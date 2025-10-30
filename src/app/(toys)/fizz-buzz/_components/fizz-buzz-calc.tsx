@@ -11,7 +11,7 @@ interface FormValues {
   num: string;
 }
 
-const FizzBuzzCalc = () => {
+function FizzBuzzCalc() {
   const methods = useForm<FormValues>({
     defaultValues: {
       num: "",
@@ -56,6 +56,6 @@ const FizzBuzzCalc = () => {
       </div>
     </FormProvider>
   );
-};
+}
 
 export { FizzBuzzCalc };
