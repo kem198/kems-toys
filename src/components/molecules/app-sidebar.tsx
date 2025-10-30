@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -11,37 +13,57 @@ import {
 import { TOYS } from "@/constants/toys";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export const AppSidebar = () => (
-  <Sidebar>
-    <SidebarContent>
-      <SidebarGroup className="flex flex-col gap-2">
-        <SidebarHeader className="rounded-md bg-zinc-700 text-white">
-          <Link href="/" className="flex gap-2">
-            <Image
-              src="/icons/icon-192x192.png"
-              alt="icon"
-              width={24}
-              height={24}
-            />
-            {`KeM's Toys`}
+export const AppSidebar = () => {
+  const pathname = usePathname();
+
+  return (
+    <Sidebar>
+      <SidebarContent>
+        <SidebarGroup className="flex flex-col gap-2">
+          <Link href="/">
+            <SidebarHeader
+              className={`flex-row gap-2 rounded-md ${
+                pathname === "/" ? "bg-zinc-700 text-white" : ""
+              }`}
+            >
+              <Image
+                src="/icons/icon-192x192.png"
+                alt="icon"
+                width={24}
+                height={24}
+              />
+              <span>{`KeM's Toys`}</span>
+            </SidebarHeader>
           </Link>
-        </SidebarHeader>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {TOYS.map((toy) => (
-              <SidebarMenuItem key={toy.title}>
-                <SidebarMenuButton asChild>
-                  <a href={toy.link}>
-                    <toy.icon />
-                    <span>{toy.title}</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-    </SidebarContent>
-  </Sidebar>
-);
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {TOYS.map((toy) => (
+                <SidebarMenuItem key={toy.title}>
+                  <SidebarMenuButton
+                    isActive={pathname === toy.link}
+                    className={
+                      pathname === toy.link
+                        ? "hover:!bg-zinc-600 hover:!text-white data-[active=true]:bg-zinc-700 data-[active=true]:text-white"
+                        : ""
+                    }
+                    asChild
+                  >
+                    <Link
+                      href={toy.link}
+                      aria-current={pathname === toy.link ? "page" : undefined}
+                    >
+                      <toy.icon />
+                      <span>{toy.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+    </Sidebar>
+  );
+};
