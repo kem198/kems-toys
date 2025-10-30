@@ -60,15 +60,20 @@ const CongratsButton = () => {
   return (
     <div>
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-        <Button onClick={showConfetti}>🎉 Congrats!</Button>
+        <Button
+          variant="secondary"
+          className="h-16 rounded-full transition ease-out active:scale-95"
+          onClick={showConfetti}
+        >
+          🎉 Congrats!
+        </Button>
+
         <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">好きな絵文字でお祝いしよう</span>
-            </div>
+          <label className=" text-sm" htmlFor="emoji-input">
+            好きな絵文字でお祝いしよう
             <div className="flex gap-2">
               <Input
-                type="text"
+                id="emoji-input"
                 value={emojiFormText}
                 onChange={handleChange}
               />

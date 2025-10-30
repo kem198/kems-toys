@@ -36,7 +36,12 @@ const EmojiPicker = ({ setText, buttonIcon }: EmojiPickerProps) => {
   return (
     <div className="relative">
       {/* 絵文字ピッカーの表示を切り替えるボタン */}
-      <Button type="button" onClick={toggleEmojiPicker}>
+      <Button
+        variant="secondary"
+        size="icon"
+        className="rounded-full"
+        onClick={toggleEmojiPicker}
+      >
         {buttonIcon}
       </Button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
