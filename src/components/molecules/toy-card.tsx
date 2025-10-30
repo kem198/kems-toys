@@ -17,7 +17,7 @@ interface ToyCardProps {
 const ToyCard = ({ title, description, link, Icon }: ToyCardProps) => (
   <Item
     variant="outline"
-    className="w-44 border shadow-lg transition ease-out hover:scale-105"
+    className="block min-h-64 w-44 border shadow-lg transition ease-out hover:scale-105"
     asChild
   >
     <Link href={link}>
@@ -26,7 +26,9 @@ const ToyCard = ({ title, description, link, Icon }: ToyCardProps) => (
       </ItemHeader>
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>
-        <ItemDescription>{description}</ItemDescription>
+        <ItemDescription className="line-clamp-3">
+          {description}
+        </ItemDescription>
       </ItemContent>
     </Link>
   </Item>
