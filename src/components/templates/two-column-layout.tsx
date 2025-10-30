@@ -18,7 +18,7 @@ interface Props {
 const TwoColumnLayout = ({ children }: Props) => (
   <div className="bg-base-200">
     {/* Navbar */}
-    <div className="navbar w-full bg-neutral text-neutral-content lg:min-h-10 lg:text-sm">
+    <div className="navbar bg-neutral text-neutral-content w-full lg:min-h-10 lg:text-sm">
       <div className="flex-none lg:hidden">
         {/* ハンバーガーメニュー */}
         <label
@@ -48,7 +48,7 @@ const TwoColumnLayout = ({ children }: Props) => (
     </div>
     <div className="drawer lg:drawer-open">
       {/* メインコンテンツ */}
-      <div className="drawer-content flex flex-col bg-base-100">
+      <div className="drawer-content bg-base-100 flex flex-col">
         <main className="container mx-auto my-4 px-4">{children}</main>
       </div>
       {/* サイドバーのトグル用 */}
@@ -62,7 +62,7 @@ const TwoColumnLayout = ({ children }: Props) => (
         >
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         </label>
-        <div className="menu min-h-full w-64 bg-base-200 p-4">
+        <div className="menu bg-base-200 min-h-full w-64 p-4">
           <ToyList />
         </div>
       </div>

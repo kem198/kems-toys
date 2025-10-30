@@ -63,7 +63,7 @@ const GcdCalc = () => {
         setCount={setBCount}
       />
       <ResultDisplay>{result}</ResultDisplay>
-      <div className="collapse bg-base-200">
+      <div className="bg-base-200 collapse">
         <input type="checkbox" />
         <div className="collapse-title px-16 text-center font-medium">
           計算ステップを表示する

@@ -56,7 +56,7 @@ const RefCounter = () => {
         >
           {decrementNum}
         </button>
-        <div className="join-item mx-auto flex min-w-32 place-items-center items-center justify-center bg-base-200 px-4">
+        <div className="join-item bg-base-200 mx-auto flex min-w-32 place-items-center items-center justify-center px-4">
           count: {countRef.current}
         </div>
         <button
