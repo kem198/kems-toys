@@ -4,13 +4,13 @@ import { TOYS } from "@/constants/toys";
 
 const ToyCards = () => (
   <ItemGroup className="flex flex-row flex-wrap justify-center gap-4 lg:justify-normal">
-    {Object.entries(TOYS).map(([key, toy]) => (
+    {TOYS.map((toy) => (
       <ToyCard
-        key={key}
+        key={toy.title}
         title={toy.title}
         description={toy.description}
         link={toy.link}
-        Icon={toy.Icon}
+        Icon={toy.icon}
       />
     ))}
   </ItemGroup>
