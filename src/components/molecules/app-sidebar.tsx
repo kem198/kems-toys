@@ -42,9 +42,9 @@ export const AppSidebar = () => {
               {TOYS.map((toy) => (
                 <SidebarMenuItem key={toy.title}>
                   <SidebarMenuButton
-                    isActive={pathname === toy.link}
+                    isActive={pathname?.startsWith(toy.link)}
                     className={
-                      pathname === toy.link
+                      pathname?.startsWith(toy.link)
                         ? "hover:!bg-zinc-600 hover:!text-white data-[active=true]:bg-zinc-700 data-[active=true]:text-white"
                         : ""
                     }
@@ -52,7 +52,9 @@ export const AppSidebar = () => {
                   >
                     <Link
                       href={toy.link}
-                      aria-current={pathname === toy.link ? "page" : undefined}
+                      aria-current={
+                        pathname?.startsWith(toy.link) ? "page" : undefined
+                      }
                     >
                       <toy.icon />
                       <span>{toy.title}</span>
