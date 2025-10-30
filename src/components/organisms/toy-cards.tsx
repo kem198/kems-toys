@@ -1,8 +1,9 @@
 import { ToyCard } from "@/components/molecules/toy-card";
+import { ItemGroup } from "@/components/ui/item";
 import { TOYS } from "@/constants/toys";
 
 const ToyCards = () => (
-  <div className="flex flex-wrap justify-center gap-4 lg:justify-normal">
+  <ItemGroup className="flex flex-row flex-wrap justify-center gap-4 lg:justify-normal">
     {Object.entries(TOYS).map(([key, toy]) => (
       <ToyCard
         key={key}
@@ -12,7 +13,7 @@ const ToyCards = () => (
         Icon={toy.Icon}
       />
     ))}
-  </div>
+  </ItemGroup>
 );
 
 export { ToyCards };

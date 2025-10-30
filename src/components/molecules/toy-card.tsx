@@ -1,3 +1,10 @@
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemHeader,
+  ItemTitle,
+} from "@/components/ui/item";
 import Link from "next/link";
 
 interface ToyCardProps {
@@ -8,18 +15,21 @@ interface ToyCardProps {
 }
 
 const ToyCard = ({ title, description, link, Icon }: ToyCardProps) => (
-  <Link
-    className="card w-48 border border-base-200 bg-base-100 shadow-lg transition hover:scale-105"
-    href={link}
+  <Item
+    variant="outline"
+    className="w-44 border shadow-lg transition ease-out hover:scale-105"
+    asChild
   >
-    <figure>
-      <Icon className="m-8 h-16 w-16" strokeWidth={1.375} />
-    </figure>
-    <div className="card-body p-6 pt-0">
-      <h2 className="card-title">{title}</h2>
-      <p className="prose prose-sm">{description}</p>
-    </div>
-  </Link>
+    <Link href={link}>
+      <ItemHeader>
+        <Icon className="m-8 h-16 w-full" strokeWidth={1.375} />
+      </ItemHeader>
+      <ItemContent>
+        <ItemTitle>{title}</ItemTitle>
+        <ItemDescription>{description}</ItemDescription>
+      </ItemContent>
+    </Link>
+  </Item>
 );
 
 export { ToyCard };
