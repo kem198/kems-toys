@@ -1,4 +1,5 @@
-import { TwoColumnLayout } from "@/components/templates/two-column-layout";
+import { AppSidebar } from "@/components/molecules/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -20,7 +21,13 @@ const RootLayout = ({
 }>) => (
   <html lang="ja">
     <body className={notoSansJP.className}>
-      <TwoColumnLayout>{children}</TwoColumnLayout>
+      <SidebarProvider>
+        <AppSidebar />
+        <main>
+          <SidebarTrigger />
+          {children}
+        </main>
+      </SidebarProvider>
     </body>
   </html>
 );
