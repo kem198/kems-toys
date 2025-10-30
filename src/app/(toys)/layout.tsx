@@ -5,7 +5,7 @@ const ToysLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => (
-  <div>
+  <div className="flex flex-col gap-2">
     <Breadcrumbs />
     <article className="prose max-w-2xl prose-blockquote:font-normal">
       {children}

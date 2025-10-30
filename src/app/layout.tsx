@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/molecules/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
@@ -22,11 +22,10 @@ const RootLayout = ({
   <html lang="ja">
     <body className={notoSansJP.className}>
       <SidebarProvider>
-        <AppSidebar />
-        <main>
-          <SidebarTrigger />
-          {children}
-        </main>
+        <div className="flex">
+          <AppSidebar />
+          <main className="p-6">{children}</main>
+        </div>
       </SidebarProvider>
     </body>
   </html>
