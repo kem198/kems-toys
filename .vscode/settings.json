@@ -1,5 +1,6 @@
 {
   // Ref: https://dev.classmethod.jp/articles/vscode-custom-tab-labels-for-better-coding/
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "workbench.editor.customLabels.patterns": {
     "**/app/**/*": "🏠 ${dirname}/${filename}.${extname}",
     "**/components/**/*": "🧩 ${filename}.${extname}"
