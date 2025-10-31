@@ -14,7 +14,7 @@ import { ChevronDownIcon, Sprout, Sun } from "lucide-react";
 import React from "react";
 import { toEtrianDate } from "../_utils/etrian-utils";
 
-function EtrianCalendar() {
+export function SolarEtrianCalendarConverter() {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
 
@@ -76,5 +76,3 @@ function EtrianCalendar() {
     </div>
   );
 }
-
-export { EtrianCalendar };
