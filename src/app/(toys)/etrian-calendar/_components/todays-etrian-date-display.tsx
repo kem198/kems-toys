@@ -10,11 +10,10 @@ function TodaysEtrianDateDisplay() {
     <div className="flex items-end gap-2">
       <p className="mt-0">今日は</p>
       <p className="mt-0">
-        <span className="text-xs text-muted-foreground">
+        <div className="text-xs text-muted-foreground">
           {todaysEtrianDate.month.kana}
-        </span>
-        <br />
-        <span className="font-bold">{`${todaysEtrianDate.month.name} ${todaysEtrianDate.day && `${todaysEtrianDate.day} 日`}`}</span>
+        </div>
+        <div className="font-bold">{`${todaysEtrianDate.month.name} ${todaysEtrianDate.day && `${todaysEtrianDate.day} 日`}`}</div>
       </p>
       <p className="mt-0">です！</p>
     </div>
