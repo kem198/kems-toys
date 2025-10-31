@@ -6,7 +6,7 @@ function TodaysEtrianDateDisplay() {
 
   return (
     <div className="flex items-end gap-2">
-      <p className="mt-0">本日は</p>
+      <p className="mt-0">今日は</p>
       <p className="mt-0">
         <span className="text-xs text-muted-foreground">
           {todaysEtrianDate.month.kana}
