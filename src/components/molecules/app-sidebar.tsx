@@ -1,5 +1,6 @@
 "use client";
 
+import { Logo } from "@/components/atoms/logo";
 import {
   Sidebar,
   SidebarContent,
@@ -11,7 +12,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { TOYS } from "@/constants/toys";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -28,13 +28,7 @@ export function AppSidebar() {
                 pathname === "/" ? "bg-zinc-700 text-white" : ""
               }`}
             >
-              <Image
-                src="/icons/icon-192x192.png"
-                alt="icon"
-                width={24}
-                height={24}
-              />
-              <span>{`KeM's Toys`}</span>
+              <Logo />
             </SidebarHeader>
           </Link>
           <SidebarGroupContent>
