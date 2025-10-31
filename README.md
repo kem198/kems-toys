@@ -55,6 +55,7 @@ npm run dev
 ### Design Pattern
 
 - [Next.js + MUIのスタイル再定義とアトミックデザインの話｜やっくん](https://note.com/pk_yakkun/n/ne1bc79d699be)
+- [Reactフォルダ構造の最適解。コンポーネントの数に合わせて選ぶ基本方針 \| レバテックラボ（レバテックLAB）](https://levtech.jp/media/article/column/detail_711/)
 
 ### Icons
 
