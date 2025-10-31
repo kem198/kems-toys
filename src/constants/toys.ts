@@ -6,6 +6,7 @@ import {
   Info,
   PartyPopper,
   Rotate3d,
+  Sprout,
 } from "lucide-react";
 
 const TOYS: Toys = [
@@ -56,6 +57,12 @@ const TOYS: Toys = [
     description: "デバイスの方向を取得して描画してみる",
     link: "/device-orientation",
     icon: Rotate3d,
+  },
+  {
+    title: "世界樹の暦",
+    description: "今日は何ノ月？",
+    link: "/etrian-calendar",
+    icon: Sprout,
   },
 ];
 
