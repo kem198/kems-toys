@@ -9,11 +9,12 @@ function TodaysEtrianDateDisplay() {
   return (
     <div className="flex items-end gap-2">
       <p className="mt-0">今日は</p>
-      <p className="mt-0">
-        <div className="text-xs text-muted-foreground">
-          {todaysEtrianDate.month.kana}
-        </div>
-        <div className="font-bold">{`${todaysEtrianDate.month.name} ${todaysEtrianDate.day && `${todaysEtrianDate.day} 日`}`}</div>
+      <p className="mt-0 font-bold">
+        <ruby>
+          <span>{todaysEtrianDate.month.name}</span>
+          <rt className="font-normal">{todaysEtrianDate.month.kana}</rt>
+        </ruby>
+        {`${todaysEtrianDate.day && `${todaysEtrianDate.day} 日`}`}
       </p>
       <p className="mt-0">です！</p>
     </div>
