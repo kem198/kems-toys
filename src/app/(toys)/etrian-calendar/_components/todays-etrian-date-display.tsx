@@ -7,9 +7,9 @@ function TodaysEtrianDateDisplay() {
   const todaysEtrianDate = toEtrianDate(today);
 
   return (
-    <div className="flex items-end gap-1">
-      <p className="mt-0">今日は</p>
-      <p
+    <p className="flex items-end gap-1">
+      <span>今日は</span>
+      <span
         className={`mt-0 font-bold ${todaysEtrianDate.month.name === "鬼乎ノ日" ? "text-red-700" : ""}`}
       >
         <ruby>
@@ -17,9 +17,9 @@ function TodaysEtrianDateDisplay() {
           <rt className="font-normal">{todaysEtrianDate.month.kana}</rt>
         </ruby>
         {`${todaysEtrianDate.day ? ` ${todaysEtrianDate.day} 日` : ""}`}
-      </p>
-      <p className="mt-0">です！</p>
-    </div>
+      </span>
+      <span>です！</span>
+    </p>
   );
 }
 
