@@ -252,5 +252,13 @@ describe("etrian-utils tests", () => {
         month: { kana: "ものかのひ", name: "鬼乎ノ日" },
       });
     });
+
+    it("'2024-12-31 00:00:00' (閏年最終日) を与えた場合、'鬼乎ノ日' を返すこと", () => {
+      const realDate = new Date("2024-12-31 00:00:00");
+      const etrianDate = toEtrianDate(realDate);
+      expect(etrianDate).toEqual({
+        month: { kana: "ものかのひ", name: "鬼乎ノ日" },
+      });
+    });
   });
 });
