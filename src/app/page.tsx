@@ -1,4 +1,4 @@
-import { ToyCard } from "@/components/molecules/toy-card";
+import { ToyCard } from "@/components/shared/toy-card";
 import { ItemGroup } from "@/components/ui/item";
 import { TOYS } from "@/constants/toys";
 
