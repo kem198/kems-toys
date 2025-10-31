@@ -1,5 +1,8 @@
-import { etrianMonths, etrianNewYearsEve } from "../_constants/month";
-import { EtrianMonth } from "../types/month";
+import {
+  etrianMonths,
+  etrianNewYearsEve,
+} from "@/app/(toys)/etrian-calendar/_constants/month";
+import { EtrianMonth } from "@/app/(toys)/etrian-calendar/types/month";
 
 export function toEtrianDate(date: Date): {
   month: EtrianMonth;

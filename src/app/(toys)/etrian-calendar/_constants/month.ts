@@ -1,4 +1,4 @@
-import { EtrianMonth } from "../types/month";
+import { EtrianMonth } from "@/app/(toys)/etrian-calendar/types/month";
 
 export const etrianMonths: EtrianMonth[] = [
   {
