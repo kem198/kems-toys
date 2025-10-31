@@ -14,7 +14,7 @@ export function toEtrianDate(date: Date): {
       (date.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24),
     ) + 1;
 
-  if (dayOfYear === 365) {
+  if (dayOfYear >= 365) {
     return { month: etrianNewYearsEve };
   }
 
@@ -22,25 +22,4 @@ export function toEtrianDate(date: Date): {
   const day = ((dayOfYear - 1) % 28) + 1;
 
   return { month: etrianMonths[monthIndex], day };
-}
-
-export function toRealDate(
-  year: number,
-  month: EtrianMonth,
-  day?: number,
-): Date {
-  let dayOfYear: number;
-
-  if (month === etrianNewYearsEve) {
-    dayOfYear = 365;
-  } else {
-    const monthIndex = etrianMonths.indexOf(month as EtrianMonth);
-    if (monthIndex === -1 || !day) throw new Error("不正なゲーム暦");
-    dayOfYear = monthIndex * 28 + day;
-  }
-
-  const date = new Date(year, 0, 1);
-  date.setDate(dayOfYear);
-
-  return date;
 }
