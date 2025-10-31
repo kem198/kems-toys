@@ -4,7 +4,7 @@ import { TOYS } from "@/constants/toys";
 
 function ToyCards() {
   return (
-    <ItemGroup className="flex flex-row flex-wrap justify-center gap-4 lg:justify-normal">
+    <ItemGroup className="grid grid-cols-2 gap-4 md:flex md:flex-row md:flex-wrap md:justify-normal">
       {TOYS.map((toy) => (
         <ToyCard
           key={toy.title}
