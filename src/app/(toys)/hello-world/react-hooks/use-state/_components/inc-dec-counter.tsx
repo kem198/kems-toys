@@ -1,8 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const IncDecCounter = () => {
+function IncDecCounter() {
   // count の値を保存する state 変数とセッターを定義
   const [count, setCount] = useState(0);
 
@@ -26,37 +27,23 @@ const IncDecCounter = () => {
   };
 
   return (
-    <div>
-      <div className="join">
-        <button
-          type="button"
-          className="btn btn-primary join-item w-16"
-          onClick={() => updateCount(decrementNum)}
-        >
-          {decrementNum}
-        </button>
-        <div className="join-item mx-auto flex min-w-32 place-items-center items-center justify-center bg-base-200 px-4">
-          count: {count}
-        </div>
-        <button
-          type="button"
-          className="btn btn-primary join-item w-16"
-          onClick={() => updateCount(incrementNum)}
-        >
+    <div className="flex flex-col gap-4">
+      <div className="flex w-44 flex-col gap-2 text-center">
+        <Button variant="outline" onClick={() => updateCount(incrementNum)}>
           +{incrementNum}
-        </button>
+        </Button>
+        <div>count: {count}</div>
+        <Button variant="outline" onClick={() => updateCount(decrementNum)}>
+          {decrementNum}
+        </Button>
       </div>
       <div>
-        <button
-          type="button"
-          className="btn btn-ghost mt-4 w-24"
-          onClick={resetCount}
-        >
+        <Button variant="ghost" onClick={resetCount}>
           リセット
-        </button>
+        </Button>
       </div>
     </div>
   );
-};
+}
 
 export { IncDecCounter };

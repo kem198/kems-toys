@@ -8,55 +8,55 @@ import {
   Rotate3d,
 } from "lucide-react";
 
-const TOYS: Toys = {
-  about: {
+const TOYS: Toys = [
+  {
     title: "About",
     description: "このサイトについて",
     link: "/about",
-    Icon: Info,
+    icon: Info,
   },
-  helloWorld: {
+  {
     title: "Hello World",
     description: "テスト用ページ",
     link: "/hello-world",
-    Icon: Earth,
+    icon: Earth,
   },
-  fizzBuzz: {
+  {
     title: "Fizz Buzz",
     description: "よくあるやつ",
     link: "/fizz-buzz",
-    Icon: GraduationCap,
+    icon: GraduationCap,
   },
-  euclideanAlgorithm: {
+  {
     title: "ユークリッドの互除法",
     description: "2 つの自然数について最大公約数を求める",
     link: "/euclidean-algorithm",
-    Icon: GraduationCap,
+    icon: GraduationCap,
   },
-  nabeatsuAssessmenter: {
+  {
     title: "ナベアツ判定機",
     description: "「3 の倍数である」または「3 を含む桁が存在する」か評価する",
     link: "/nabeatsu-assessmenter",
-    Icon: GraduationCap,
+    icon: GraduationCap,
   },
-  congratsButton: {
+  {
     title: "おめでとうボタン",
     description: "おめでたいときに",
     link: "/congrats-button",
-    Icon: PartyPopper,
+    icon: PartyPopper,
   },
-  modane3d: {
+  {
     title: "もだねちゃん 3D ビューワー",
     description: "もだねちゃんを眺めまわそう",
     link: "/modane-3d-viewer",
-    Icon: Box,
+    icon: Box,
   },
-  deviceOrientation: {
+  {
     title: "傾き検知サンプル集",
     description: "デバイスの方向を取得して描画してみる",
     link: "/device-orientation",
-    Icon: Rotate3d,
+    icon: Rotate3d,
   },
-};
+];
 
 export { TOYS };

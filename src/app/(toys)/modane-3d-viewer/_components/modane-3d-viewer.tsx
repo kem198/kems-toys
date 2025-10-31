@@ -9,13 +9,13 @@ import { Ground } from "./ground";
 import { Model } from "./model";
 
 /** メインコンポーネント */
-const Modane3dViewer = () => (
-  <div className="flex justify-center">
+function Modane3dViewer() {
+  return (
     <Canvas
       shadows
       camera={{ fov: 30, near: 0.1, far: 2000, position: [40, 20, 0] }}
       style={{
-        width: "90vw",
+        maxWidth: "90vw",
         height: "80vh",
         background: "linear-gradient(#e5e7ea, #f0f0f0)",
         borderRadius: "16px",
@@ -60,7 +60,7 @@ const Modane3dViewer = () => (
         <Model />
       </Suspense>
     </Canvas>
-  </div>
-);
+  );
+}
 
 export { Modane3dViewer };

@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import { useDeviceOrientation } from "@/hooks/use-device-orientation";
 import { requestDeviceMotionPermission } from "@/utilities/request-device-motion-permission";
 import { Container, Graphics, Sprite, Stage, Text } from "@pixi/react";
@@ -7,7 +9,7 @@ import { TextStyle } from "@pixi/text";
 import { MoveHorizontal, MoveVertical, RotateCcw } from "lucide-react";
 import { useCallback } from "react";
 
-const DeviceOrientationSample = () => {
+function DeviceOrientationSample() {
   // カスタムフックからセンサ情報を取得
   const { alpha, beta, gamma } = useDeviceOrientation();
 
@@ -77,44 +79,34 @@ const DeviceOrientationSample = () => {
 
   return (
     <div>
-      <button
-        type="button"
-        className="btn"
+      <Button
+        variant="secondary"
+        size="lg"
         onClick={requestDeviceMotionPermission}
       >
         Request permission (for iOS)
-      </button>
+      </Button>
 
       <hr />
 
       {/* 取得した情報のリストアップ */}
       <div className="flex flex-col gap-4">
         <div>
-          <progress className="progress" value={alpha ?? 0} max="360" />
+          <Progress value={alpha ? (alpha / 360) * 100 : 0} />
           <div className="flex items-center gap-2">
             <RotateCcw strokeWidth={1} />
             alpha: {alpha ?? "端末方向イベントを読み取れませんでした"}
           </div>
         </div>
         <div>
-          <progress
-            className="progress "
-            // daisyUI の progress は最小値に対応していないため 値 + 180 & 最大値 360 とする
-            value={beta ? beta + 180 : 0}
-            max="360"
-          />
+          <Progress value={beta ? ((beta + 180) / 360) * 100 : 0} />
           <div className="flex items-center gap-2">
             <MoveVertical strokeWidth={1} />
             beta: {beta ?? "端末方向イベントを読み取れませんでした"}
           </div>
         </div>
         <div>
-          <progress
-            className="progress "
-            // daisyUI の progress は最小値に対応していないため 値 + 90 & 最大値 180 とする
-            value={gamma ? gamma + 90 : 0}
-            max="180"
-          />
+          <Progress value={gamma ? ((gamma + 90) / 180) * 100 : 0} />
           <div className="flex items-center gap-2">
             <MoveHorizontal strokeWidth={1} />
             gamma: {gamma ?? "端末方向イベントを読み取れませんでした"}
@@ -184,6 +176,6 @@ const DeviceOrientationSample = () => {
       <hr />
     </div>
   );
-};
+}
 
 export { DeviceOrientationSample };

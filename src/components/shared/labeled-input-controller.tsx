@@ -1,4 +1,9 @@
-import React from "react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 import { Controller, useFormContext } from "react-hook-form";
 
 interface LabeledInputProps {
@@ -9,13 +14,13 @@ interface LabeledInputProps {
   rules?: any;
 }
 
-const LabeledInputController: React.FC<LabeledInputProps> = ({
+function LabeledInputController({
   name,
   type,
   labelText,
   placeholder,
   rules,
-}) => {
+}: LabeledInputProps) {
   // useFormContext フックを使用してフォームのコンテキストにアクセスする
   // 親コンポーネントから渡されたプロパティやメソッドを使用できる
   // これを Controller へ渡すことでフォームの状態と連携する
@@ -27,29 +32,33 @@ const LabeledInputController: React.FC<LabeledInputProps> = ({
       control={control}
       rules={rules}
       render={({ field, fieldState }) => (
-        <>
-          <label className="input input-bordered flex items-center justify-between gap-2">
-            {labelText}
-            <input
+        <div>
+          <InputGroup>
+            <InputGroupAddon>
+              <InputGroupText> {labelText}</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupInput
               {...field}
               value={field.value === null ? "" : field.value}
               placeholder={placeholder}
               type={type}
-              className="max-w-52 grow text-right"
+              className="text-right"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault(); // エンターキーによるデフォルトの動作をキャンセル
                 }
               }}
             />
-          </label>
+          </InputGroup>
           {fieldState.error && (
-            <span className="text-error">{fieldState.error.message}</span>
+            <span className="text-sm text-destructive">
+              {fieldState.error.message}
+            </span>
           )}
-        </>
+        </div>
       )}
     />
   );
-};
+}
 
 export { LabeledInputController };

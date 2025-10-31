@@ -6,7 +6,7 @@ import { Mesh, Object3D } from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 /** モデルの読み込みを行うコンポーネント */
-const Model = () => {
+function Model() {
   // GLTFLoaderを使用してモデルを読み込む
   const result = useLoader(GLTFLoader, "/gltf/modane.glb");
 
@@ -26,6 +26,6 @@ const Model = () => {
 
   // ロードされたモデルを表示する
   return <primitive object={result.scene} />;
-};
+}
 
 export { Model };

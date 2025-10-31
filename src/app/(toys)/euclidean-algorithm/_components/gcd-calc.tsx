@@ -4,15 +4,21 @@ import {
   calcGcd,
   calcGcdSteps,
 } from "@/app/(toys)/euclidean-algorithm/_utilities/gcd";
-import { LabeledNumberInputOld } from "@/components/atoms/labeled-number-input-old";
-import { ResetButton } from "@/components/atoms/reset-button";
-import { ResultDisplay } from "@/components/atoms/result-display";
+import { LabeledNumberInputOld } from "@/components/shared/labeled-number-input-old";
+import { ResetButton } from "@/components/shared/reset-button";
+import { ResultDisplay } from "@/components/shared/result-display";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useEffect, useState } from "react";
 
 /**
  * GCD (最大公約数) 計算コンポーネント
  */
-const GcdCalc = () => {
+function GcdCalc() {
   // state 変数とセッターを定義
   const [aCount, setACount] = useState<number | null>(null);
   const [bCount, setBCount] = useState<number | null>(null);
@@ -51,7 +57,7 @@ const GcdCalc = () => {
   }, [aCount, bCount]); // `aCount` または `bCount` の変更をトリガーとする
 
   return (
-    <div className="container my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
+    <div className="my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
       <LabeledNumberInputOld
         labelText="a ="
         count={aCount}
@@ -63,24 +69,23 @@ const GcdCalc = () => {
         setCount={setBCount}
       />
       <ResultDisplay>{result}</ResultDisplay>
-      <div className="collapse bg-base-200">
-        <input type="checkbox" />
-        <div className="collapse-title px-16 text-center font-medium">
-          計算ステップを表示する
-        </div>
-        <div className="collapse-content">
-          <ul>
-            {stepMessages.map((step) => (
-              <li key={step} className="step">
-                {step}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <ResetButton onClick={resetCounts} />
+      <ResetButton size="lg" className="w-24" onClick={resetCounts} />
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1" className="border-none">
+          <AccordionTrigger>計算ステップを表示する</AccordionTrigger>
+          <AccordionContent>
+            <ul>
+              {stepMessages.map((step) => (
+                <li key={step} className="step">
+                  {step}
+                </li>
+              ))}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
-};
+}
 
 export { GcdCalc };

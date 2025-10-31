@@ -3,10 +3,12 @@
 import { Html } from "@react-three/drei";
 
 /** ロード中に表示するコンポーネント */
-const FallbackMessage = () => (
-  <Html>
-    <span>Loading...</span>
-  </Html>
-);
+function FallbackMessage() {
+  return (
+    <Html>
+      <span>Loading...</span>
+    </Html>
+  );
+}
 
 export { FallbackMessage };

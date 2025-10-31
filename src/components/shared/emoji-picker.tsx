@@ -3,6 +3,7 @@
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 interface EmojiPickerProps {
   setText: React.Dispatch<React.SetStateAction<string>>;
@@ -18,7 +19,7 @@ interface EmojiData {
   shortcodes: string[];
 }
 
-const EmojiPicker = ({ setText, buttonIcon }: EmojiPickerProps) => {
+function EmojiPicker({ setText, buttonIcon }: EmojiPickerProps) {
   // 絵文字ピッカーの表示を切り替える変数とセッターを定義
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
@@ -35,13 +36,14 @@ const EmojiPicker = ({ setText, buttonIcon }: EmojiPickerProps) => {
   return (
     <div className="relative">
       {/* 絵文字ピッカーの表示を切り替えるボタン */}
-      <button
-        type="button"
-        className="btn btn-circle text-lg"
+      <Button
+        variant="secondary"
+        size="icon"
+        className="rounded-full"
         onClick={toggleEmojiPicker}
       >
         {buttonIcon}
-      </button>
+      </Button>
       {/* showEmoji の条件付きで絵文字ピッカーをレンダリングする */}
       {showEmojiPicker && (
         <div className="absolute max-lg:right-0">
@@ -57,6 +59,6 @@ const EmojiPicker = ({ setText, buttonIcon }: EmojiPickerProps) => {
       )}
     </div>
   );
-};
+}
 
 export { EmojiPicker };
