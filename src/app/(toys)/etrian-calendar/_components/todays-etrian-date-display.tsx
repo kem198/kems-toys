@@ -11,9 +11,15 @@ function TodaysEtrianDateDisplay() {
       <p className="mt-0">今日は</p>
       <p className="mt-0 font-bold">
         <ruby>
-          <span>{todaysEtrianDate.month.name}</span>
+          <span
+            className={
+              todaysEtrianDate.month.name === "鬼乎ノ日" ? "text-red-800" : ""
+            }
+          >
+            {todaysEtrianDate.month.name}
+          </span>
           <rt className="font-normal">{todaysEtrianDate.month.kana}</rt>
-        </ruby>
+        </ruby>{" "}
         {`${todaysEtrianDate.day && `${todaysEtrianDate.day} 日`}`}
       </p>
       <p className="mt-0">です！</p>
