@@ -1,4 +1,6 @@
-import { toEtrianDate } from "../_utils/etrian-utils";
+"use client";
+
+import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
 
 function TodaysEtrianDateDisplay() {
   const today = new Date();
