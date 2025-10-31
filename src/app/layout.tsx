@@ -3,6 +3,8 @@ import { AppSidebar } from "@/components/molecules/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -25,8 +27,16 @@ function RootLayout({
       <body className={notoSansJP.className}>
         <SidebarProvider>
           <div className="flex flex-col">
-            <AppHeader className="md:hidden">
-              <SidebarTrigger />
+            <AppHeader className="flex justify-center md:hidden">
+              <SidebarTrigger className="absolute left-2" />
+              <Link href="/">
+                <Image
+                  src="/icons/icon-192x192.png"
+                  alt="icon"
+                  width={24}
+                  height={24}
+                />
+              </Link>
             </AppHeader>
             <div className="flex">
               <AppSidebar />
