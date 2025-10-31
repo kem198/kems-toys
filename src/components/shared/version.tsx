@@ -6,10 +6,10 @@ interface VersionProps {
 function Version({ version, onDate }: VersionProps) {
   return (
     <div className="flex text-sm">
-      <span className="rounded-l-full bg-zinc-700 px-2 text-white">
+      <span className="rounded-l-full bg-primary px-2 text-white">
         v{version}
       </span>
-      <span className="rounded-r-full bg-zinc-200 px-2 text-zinc-700">
+      <span className="rounded-r-full bg-zinc-200 px-2 text-primary">
         on {onDate}
       </span>
     </div>
