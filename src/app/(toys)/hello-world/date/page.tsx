@@ -3,14 +3,15 @@ import { DateOnServerSide } from "./_components/date-on-server-side";
 
 function DatePage() {
   return (
-    <>
+    <div>
       <h1>Date</h1>
 
-      <div className="flex flex-col gap-4">
-        <DateOnClientSide />
-        <DateOnServerSide />
-      </div>
-    </>
+      <h2>Date on Client side</h2>
+      <DateOnClientSide />
+
+      <h2>Date on Server side</h2>
+      <DateOnServerSide />
+    </div>
   );
 }
 
