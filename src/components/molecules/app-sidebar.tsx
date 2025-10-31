@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "@/components/atoms/logo";
+import { Logo } from "@/components/shared/logo";
 import {
   Sidebar,
   SidebarContent,

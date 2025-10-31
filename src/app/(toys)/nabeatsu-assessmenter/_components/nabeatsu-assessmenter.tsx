@@ -1,9 +1,9 @@
 "use client";
 
 import { isNabeatsu } from "@/app/(toys)/nabeatsu-assessmenter/_utilities/nabeatsu";
-import { LabeledInputController } from "@/components/atoms/labeled-input-controller";
-import { ResetButton } from "@/components/atoms/reset-button";
-import { ResultDisplay } from "@/components/atoms/result-display";
+import { LabeledInputController } from "@/components/shared/labeled-input-controller";
+import { ResetButton } from "@/components/shared/reset-button";
+import { ResultDisplay } from "@/components/shared/result-display";
 import { FormProvider, useForm } from "react-hook-form";
 
 interface FormValues {

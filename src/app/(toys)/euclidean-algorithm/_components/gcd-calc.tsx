@@ -4,9 +4,9 @@ import {
   calcGcd,
   calcGcdSteps,
 } from "@/app/(toys)/euclidean-algorithm/_utilities/gcd";
-import { LabeledNumberInputOld } from "@/components/atoms/labeled-number-input-old";
-import { ResetButton } from "@/components/atoms/reset-button";
-import { ResultDisplay } from "@/components/atoms/result-display";
+import { LabeledNumberInputOld } from "@/components/shared/labeled-number-input-old";
+import { ResetButton } from "@/components/shared/reset-button";
+import { ResultDisplay } from "@/components/shared/result-display";
 import {
   Accordion,
   AccordionContent,

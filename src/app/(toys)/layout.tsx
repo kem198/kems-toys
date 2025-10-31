@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/atoms/breadcrumbs";
+import { Breadcrumbs } from "@/components/shared/breadcrumbs";
 
 function ToysLayout({
   children,

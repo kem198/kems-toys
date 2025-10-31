@@ -1,6 +1,6 @@
 "use client";
 
-import { EmojiPicker } from "@/components/atoms/emoji-picker";
+import { EmojiPicker } from "@/components/shared/emoji-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import emojiRegex from "emoji-regex";
