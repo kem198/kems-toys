@@ -1,8 +1,11 @@
 "use client";
 
+/* eslint-disable react/jsx-no-bind */
+
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-const Counter = () => {
+function Counter() {
   // count の値を保存する state 変数とセッターを定義
   const [count, setCount] = useState(0);
   // console.log(count);
@@ -22,21 +25,17 @@ const Counter = () => {
   };
 
   return (
-    <div>
-      <button type="button" className="btn mt-4" onClick={incrementCount}>
+    <div className="flex flex-col gap-4">
+      <Button variant="outline" size="lg" onClick={incrementCount}>
         You pressed me {count} times
-      </button>
+      </Button>
       <div>
-        <button
-          type="button"
-          className="btn btn-ghost mt-4 w-24"
-          onClick={resetCount}
-        >
+        <Button variant="ghost" onClick={resetCount}>
           リセット
-        </button>
+        </Button>
       </div>
     </div>
   );
-};
+}
 
 export { Counter };

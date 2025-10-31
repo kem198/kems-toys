@@ -1,9 +1,9 @@
 "use client";
 
 import { fizzBuzz } from "@/app/(toys)/fizz-buzz/_utilities/fizz-buzz";
-import { LabeledInputController } from "@/components/atoms/labeled-input-controller";
-import { ResetButton } from "@/components/atoms/reset-button";
-import { ResultDisplay } from "@/components/atoms/result-display";
+import { LabeledInputController } from "@/components/shared/labeled-input-controller";
+import { ResetButton } from "@/components/shared/reset-button";
+import { ResultDisplay } from "@/components/shared/result-display";
 import { isPositiveInteger } from "@/utilities/math";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -11,7 +11,7 @@ interface FormValues {
   num: string;
 }
 
-const FizzBuzzCalc = () => {
+function FizzBuzzCalc() {
   const methods = useForm<FormValues>({
     defaultValues: {
       num: "",
@@ -35,27 +35,25 @@ const FizzBuzzCalc = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className="container my-8 max-w-sm max-lg:mx-auto">
-        <form>
-          <LabeledInputController
-            name="num"
-            type="number"
-            labelText="n ="
-            placeholder="0"
-            rules={{
-              required: "このフィールドは必須です",
-              validate: {
-                isNaturalNumber: (value: string) =>
-                  /^[1-9]\d*$/.test(value) || "自然数を入力してください",
-              },
-            }}
-          />
-          <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
-          <ResetButton onClick={resetNum} />
-        </form>
+      <div className="my-8 flex max-w-sm flex-col gap-4 max-lg:mx-auto">
+        <LabeledInputController
+          name="num"
+          type="number"
+          labelText="n ="
+          placeholder="0"
+          rules={{
+            required: "このフィールドは必須です",
+            validate: {
+              isNaturalNumber: (value: string) =>
+                /^[1-9]\d*$/.test(value) || "自然数を入力してください",
+            },
+          }}
+        />
+        <ResultDisplay>{calculateFizzBuzz()}</ResultDisplay>
+        <ResetButton size="lg" className="w-24" onClick={resetNum} />
       </div>
     </FormProvider>
   );
-};
+}
 
 export { FizzBuzzCalc };

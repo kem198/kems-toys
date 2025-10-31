@@ -28,10 +28,10 @@
     ],
     // 名前付きエクスポートにアロー関数を強制する
     // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/function-component-definition.md
-    "react/function-component-definition": [
-      "warn",
-      { "namedComponents": "arrow-function" }
-    ],
+    // "react/function-component-definition": [
+    //   "warn",
+    //   { "namedComponents": "arrow-function" }
+    // ],
     // defaultProps の強制をオフ
     // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
     "react/require-default-props": "off",

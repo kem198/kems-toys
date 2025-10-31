@@ -1,11 +1,13 @@
 "use client";
 
-import { EmojiPicker } from "@/components/atoms/emoji-picker";
+import { EmojiPicker } from "@/components/shared/emoji-picker";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import emojiRegex from "emoji-regex";
 import JSConfetti from "js-confetti";
 import { useEffect, useState } from "react";
 
-const CongratsButton = () => {
+function CongratsButton() {
   /**
    * confetti インスタンス用の変数とセッターを定義する
    *
@@ -58,22 +60,21 @@ const CongratsButton = () => {
   return (
     <div>
       <div className="container my-8 flex w-fit flex-col gap-4 max-lg:mx-auto">
-        <button
-          type="button"
-          className="btn btn-lg rounded-full"
+        <Button
+          variant="secondary"
+          className="h-16 rounded-full text-base transition ease-out active:scale-95"
           onClick={showConfetti}
         >
           🎉 Congrats!
-        </button>
-        <div>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">好きな絵文字でお祝いしよう</span>
-            </div>
+        </Button>
+
+        <div className="text-center">
+          <label className="text-sm" htmlFor="emoji-input">
+            好きな絵文字でお祝いしよう
             <div className="flex gap-2">
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs rounded-full"
+              <Input
+                className="rounded-full"
+                id="emoji-input"
                 value={emojiFormText}
                 onChange={handleChange}
               />
@@ -86,6 +87,6 @@ const CongratsButton = () => {
       </div>
     </div>
   );
-};
+}
 
 export { CongratsButton };

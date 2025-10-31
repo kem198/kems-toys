@@ -1,3 +1,9 @@
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
 import { ChangeEvent } from "react";
 
 interface LabeledNumberInputProps {
@@ -6,11 +12,11 @@ interface LabeledNumberInputProps {
   setCount: (num: number | null) => void;
 }
 
-const LabeledNumberInputOld = ({
+function LabeledNumberInputOld({
   labelText,
   count,
   setCount,
-}: LabeledNumberInputProps) => {
+}: LabeledNumberInputProps) {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newNum = parseInt(event.target.value, 10);
     if (!Number.isNaN(newNum)) {
@@ -21,17 +27,19 @@ const LabeledNumberInputOld = ({
   };
 
   return (
-    <label className="input input-bordered flex items-center justify-between gap-2">
-      {labelText}
-      <input
+    <InputGroup>
+      <InputGroupAddon>
+        <InputGroupText> {labelText}</InputGroupText>
+      </InputGroupAddon>
+      <InputGroupInput
         value={count === null ? "" : count}
         onChange={handleInputChange}
-        className="max-w-52 grow text-right"
+        className="text-right"
         placeholder="0"
         type="number"
       />
-    </label>
+    </InputGroup>
   );
-};
+}
 
 export { LabeledNumberInputOld };
