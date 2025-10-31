@@ -1,5 +1,10 @@
 "use client";
 
+// HACK: shadcn/ui 製コンポネのためエラー握り潰し
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable react/no-unstable-nested-components */
+
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
