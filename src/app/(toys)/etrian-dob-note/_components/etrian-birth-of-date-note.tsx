@@ -142,7 +142,7 @@ export function EtrianBirthOfDateNote() {
                       if (isSameMonth && isSameDay) {
                         return (
                           <span className="text-xs text-red-500">
-                            今日がお誕生日です！
+                            本日がお誕生日です！
                           </span>
                         );
                       }
