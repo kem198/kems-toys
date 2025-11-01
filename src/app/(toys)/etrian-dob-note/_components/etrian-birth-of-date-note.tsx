@@ -133,6 +133,8 @@ export function EtrianBirthOfDateNote() {
                 <ItemContent className="gap-1">
                   <ItemTitle>
                     {etrian.name}
+
+                    {/* TODO: これコンポネにする */}
                     {(() => {
                       const today = toEtrianDate(new Date());
                       const isSameMonth =
@@ -141,7 +143,7 @@ export function EtrianBirthOfDateNote() {
 
                       if (isSameMonth && isSameDay) {
                         return (
-                          <span className="text-xs text-red-500">
+                          <span className="text-xs text-red-400">
                             本日がお誕生日です！
                           </span>
                         );
@@ -149,7 +151,7 @@ export function EtrianBirthOfDateNote() {
 
                       if (isSameMonth) {
                         return (
-                          <span className="text-xs text-red-500">
+                          <span className="text-xs text-red-400">
                             今月がお誕生日です！
                           </span>
                         );
@@ -159,7 +161,7 @@ export function EtrianBirthOfDateNote() {
                     })()}
                   </ItemTitle>
                   <ItemDescription className="flex items-center gap-2">
-                    <Badge className="flex items-end gap-1 rounded-full bg-red-100 text-red-500">
+                    <Badge className="flex items-end gap-1 rounded-full bg-red-100 text-red-500 hover:bg-red-100">
                       <Cake strokeWidth={1.5} size={14} />
                       {etrian.birthOfDate.month}
                       {etrian.birthOfDate.month !== "鬼乎ノ日"
