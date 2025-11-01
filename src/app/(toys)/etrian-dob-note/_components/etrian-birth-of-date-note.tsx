@@ -39,7 +39,7 @@ const etrianBirthOfDateNoteData: Etrian[] = [
     guild: [{ name: "トロイメライ" }],
     dateOfBirth: {
       month: "皇帝ノ月",
-      day: 0,
+      day: 1,
     },
     orderNum: 0,
   },
@@ -49,7 +49,7 @@ const etrianBirthOfDateNoteData: Etrian[] = [
     guild: [{ name: "ブレイバント" }],
     dateOfBirth: {
       month: "火鳥ノ月",
-      day: 0,
+      day: 22,
     },
     orderNum: 0,
   },
