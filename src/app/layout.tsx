@@ -26,7 +26,7 @@ function RootLayout({
     <html lang="ja">
       <body className={notoSansJP.className}>
         <SidebarProvider>
-          <div className="flex flex-col">
+          <div className="flex grow flex-col">
             <AppHeader className="flex justify-center md:hidden">
               <SidebarTrigger className="absolute left-2" />
               <Link href="/">
