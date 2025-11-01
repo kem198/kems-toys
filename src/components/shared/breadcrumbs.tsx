@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
+import React from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,17 +23,15 @@ function Breadcrumbs() {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {/* ホームへのリンクは静的に作成する */}
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        {/* セグメントを map で繰り返し生成 */}
         {pathnamesIgnoredRouteGroups.map((segment, index) => (
-          <>
+          <React.Fragment key={segment}>
             <BreadcrumbSeparator />
-            <BreadcrumbItem key={segment}>
+            <BreadcrumbItem>
               {/**
                * 最後のセグメント以外はリンクとして表示する
                * 最後のセグメントはテキストとして表示する
@@ -42,14 +41,16 @@ function Breadcrumbs() {
               ) : (
                 <BreadcrumbLink asChild>
                   <Link
-                    href={`/${pathnamesIgnoredRouteGroups.slice(0, index + 1).join("/")}`}
+                    href={`/${pathnamesIgnoredRouteGroups
+                      .slice(0, index + 1)
+                      .join("/")}`}
                   >
                     {segment}
                   </Link>
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
-          </>
+          </React.Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>
