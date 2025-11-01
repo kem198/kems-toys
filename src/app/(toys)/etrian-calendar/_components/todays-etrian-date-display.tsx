@@ -8,7 +8,7 @@ function TodaysEtrianDateDisplay() {
 
   return (
     <p className="flex items-end gap-1">
-      <span>今日は</span>
+      <span>本日は</span>
       <span
         className={`mt-0 font-bold ${todaysEtrianDate.month.name === "鬼乎ノ日" ? "text-red-700" : ""}`}
       >

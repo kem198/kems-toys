@@ -1,11 +1,11 @@
 "use client";
 
-import { EtrianNewYearsEveName } from "@/app/(toys)/etrian-calendar/_constants/month";
-import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
 import {
-  Etrian,
   EtrianMonthName,
-} from "@/app/(toys)/etrian-calendar/types/month";
+  EtrianNewYearsEveName,
+} from "@/app/(toys)/etrian-calendar/_constants/month";
+import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
+import { Etrian } from "@/app/(toys)/etrian-calendar/types/month";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,7 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
-import { Cake, House, Pencil, Trash2 } from "lucide-react";
+import { Cake, House, Pencil, Trash2, UserRoundPlus } from "lucide-react";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
@@ -83,7 +83,7 @@ export function EtrianBirthOfDateNote() {
   const [newGuild, setNewGuild] = useState("");
   const [newBirthMonth, setNewBirthMonth] = useState<
     EtrianMonthName | EtrianNewYearsEveName
-  >();
+  >("皇帝ノ月");
   const [newBirthDate, setNewBirthDate] = useState<number>(1);
 
   useEffect(() => {
@@ -111,7 +111,10 @@ export function EtrianBirthOfDateNote() {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <Button>冒険者を登録する</Button>
+        <Button>
+          <UserRoundPlus />
+          冒険者を登録する
+        </Button>
       </div>
       <div className="not-prose flex w-full flex-col gap-6">
         <ItemGroup>
