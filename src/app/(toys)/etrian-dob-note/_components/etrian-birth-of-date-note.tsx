@@ -3,9 +3,9 @@
 import {
   EtrianMonthName,
   EtrianNewYearsEveName,
-} from "@/app/(toys)/etrian-calendar/_constants/month";
-import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/month";
+} from "@/app/(toys)/etrian-dob-note/_constants/month";
+import { toEtrianDate } from "@/app/(toys)/etrian-dob-note/_utils/etrian-utils";
+import { Etrian } from "@/app/(toys)/etrian-dob-note/types/month";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
