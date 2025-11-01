@@ -1,7 +1,7 @@
 import {
   etrianMonths,
   etrianNewYearsEve,
-} from "@/app/(toys)/etrian-dob-note/_constants/month";
+} from "@/app/(toys)/etrian-registry/_constants/month";
 
 export type EtrianMonthName = (typeof etrianMonths)[number]["name"];
 export type EtrianMonthNameKana = (typeof etrianMonths)[number]["kana"];

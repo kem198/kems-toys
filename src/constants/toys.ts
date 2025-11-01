@@ -61,7 +61,7 @@ const TOYS: Toys = [
   {
     title: "冒険者お誕生日台帳",
     description: "君は仲間を登録してもいいし、しなくてもいい",
-    link: "/etrian-dob-note",
+    link: "/etrian-registry",
     icon: Sprout,
   },
 ];

@@ -1,13 +1,13 @@
 import {
   etrianMonths,
   etrianNewYearsEve,
-} from "@/app/(toys)/etrian-dob-note/_constants/month";
+} from "@/app/(toys)/etrian-registry/_constants/month";
 import {
   EtrianMonthName,
   EtrianMonthNameKana,
   EtrianNewYearsEveName,
   EtrianNewYearsEveNameKana,
-} from "@/app/(toys)/etrian-dob-note/types/month";
+} from "@/app/(toys)/etrian-registry/types/month";
 
 export function toEtrianDate(date: Date): {
   month: {

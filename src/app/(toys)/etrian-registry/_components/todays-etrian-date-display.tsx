@@ -1,6 +1,6 @@
 "use client";
 
-import { toEtrianDate } from "@/app/(toys)/etrian-dob-note/_utils/etrian-utils";
+import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 
 function TodaysEtrianDateDisplay() {
   const today = new Date();

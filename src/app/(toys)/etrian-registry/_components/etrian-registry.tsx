@@ -1,7 +1,7 @@
 "use client";
 
-import { toEtrianDate } from "@/app/(toys)/etrian-dob-note/_utils/etrian-utils";
-import { Etrian } from "@/app/(toys)/etrian-dob-note/types/month";
+import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
+import { Etrian } from "@/app/(toys)/etrian-registry/types/month";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -65,7 +65,7 @@ const etrianBirthOfDateNoteData: Etrian[] = [
   },
 ];
 
-export function EtrianBirthOfDateNote() {
+export function EtrianRegistry() {
   const [etrians, setEtrians] = useState<Etrian[]>(() => {
     const stored = localStorage.getItem(KEY);
     try {
