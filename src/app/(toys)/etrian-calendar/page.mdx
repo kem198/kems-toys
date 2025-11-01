@@ -3,15 +3,13 @@ import { TodaysEtrianDateDisplay } from "./_components/todays-etrian-date-displa
 import { SolarEtrianCalendarConverter } from "./_components/solar-etrian-calendar-converter";
 import { Version } from "@/components/shared/version";
 
-# 世界樹の暦
+# 冒険者お誕生日台帳
 
 <TodaysEtrianDateDisplay />
 
-## 太陽暦 ⇒ 世界樹歴
-
 <SolarEtrianCalendarConverter />
 
-## ギルドお誕生日台帳
+---
 
 <EtrianBirthOfDateNote />
 
@@ -19,10 +17,12 @@ import { Version } from "@/components/shared/version";
 
 ## このアプリは何？
 
-[世界樹の迷宮](https://www.atlus.co.jp/series/sq/) シリーズに登場する暦 (以下 世界樹歴) と、私たちの暦 (以下 太陽暦) を変換するアプリケーションです。
+[世界樹の迷宮](https://www.atlus.co.jp/series/sq/) シリーズに登場する暦 (以下 世界樹歴) と、私たちの暦 (以下 太陽暦) を変換したり、誕生日を記録するアプリケーションです。
 
 ## メモ
 
+- 登録した情報はお使いのブラウザ (localStorage) に保存されます。
+  - 「Cookie およびその他のサイト データ」を削除すると記録も抹消されます。ご注意ください。
 - 太陽暦で閏年の場合、大晦日 (鬼乎ノ日) が 2 日続きます。
 
 ## 参考文献
@@ -49,5 +49,8 @@ import { Version } from "@/components/shared/version";
   > 鬼乎ノ日（ものかのひ）
   >
   > 出展『世界樹の迷宮Ⅳ伝承の巨人公式マスターズガイド）
+
+- [ウェブストレージ API - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API)
+  - [Window: localStorage プロパティ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage)
 
 <Version version="0.1.0" onDate="2025-10-30" />

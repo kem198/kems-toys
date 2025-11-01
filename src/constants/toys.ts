@@ -59,8 +59,8 @@ const TOYS: Toys = [
     icon: Rotate3d,
   },
   {
-    title: "世界樹の暦",
-    description: "今日は何ノ月？",
+    title: "冒険者お誕生日台帳",
+    description: "君は仲間を登録してもいいし、しなくてもいい",
     link: "/etrian-calendar",
     icon: Sprout,
   },
