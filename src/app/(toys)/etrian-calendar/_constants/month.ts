@@ -55,7 +55,11 @@ export const etrianMonths: EtrianMonth[] = [
   },
 ] as const;
 
-export const etrianNewYearsEve: EtrianMonth = {
+export type EtrianMonthName = (typeof etrianMonths)[number]["name"];
+
+export const etrianNewYearsEve = {
   name: "鬼乎ノ日",
   kana: "ものかのひ",
-};
+} as const;
+
+export type EtrianNewYearsEveName = (typeof etrianNewYearsEve)["name"];
