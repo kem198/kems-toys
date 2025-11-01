@@ -153,8 +153,8 @@ export function EtrianBirthOfDateNote() {
                     <Badge className="flex items-end gap-1 rounded-full bg-red-100 text-red-500 hover:bg-red-100">
                       <Cake strokeWidth={1.5} size={14} />
                       {etrian.dateOfBirth?.month !== "鬼乎ノ日"
-                        ? ` ${etrian.dateOfBirth?.day} 日`
-                        : ""}
+                        ? `${etrian.dateOfBirth?.month} ${etrian.dateOfBirth?.day} 日`
+                        : `${etrian.dateOfBirth?.month}`}
                     </Badge>
 
                     {(etrian.guild ?? []).map((g) => (
