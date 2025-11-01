@@ -52,6 +52,7 @@ export function Colors() {
         <Color className="bg-secondary text-secondary-foreground">
           secondary
         </Color>
+        <Color className="bg-tertiary text-tertiary-foreground">tertiary</Color>
         <Color className="bg-muted text-muted-foreground">muted</Color>
         <Color className="bg-accent text-accent-foreground">accent</Color>
         <Color className="bg-destructive text-destructive-foreground">
@@ -101,6 +102,7 @@ export function Colors() {
 
       <ColorBackground>
         <Color className="bg-personal text-personal-foreground">personal</Color>
+        <Color className="bg-modane text-modane-foreground">modane</Color>
       </ColorBackground>
     </>
   );
