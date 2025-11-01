@@ -3,7 +3,7 @@
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-registry/types/month";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
+import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -16,62 +16,160 @@ import {
   ItemSeparator,
   ItemTitle,
 } from "@/components/ui/item";
+import { cn } from "@/lib/utils";
 import { Cake, House, Pencil, Trash2, UserRoundPlus } from "lucide-react";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
-const KEY = "etrianBirthOfDateNoteData";
+type DateOfBirthBadgeProps = {
+  etrian: Etrian;
+} & BadgeProps;
 
-const etrianBirthOfDateNoteData: Etrian[] = [
-  {
-    id: "a",
-    name: "リン",
-    guild: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
-    dateOfBirth: {
-      month: "鬼乎ノ日",
-      day: 0,
-    },
-    orderNum: 0,
-  },
-  {
-    id: "b",
-    name: "クレシィ",
-    guild: [{ name: "トロイメライ" }],
-    dateOfBirth: {
-      month: "皇帝ノ月",
-      day: 1,
-    },
-    orderNum: 0,
-  },
-  {
-    id: "c",
-    name: "ジェッタ",
-    guild: [{ name: "ブレイバント" }],
-    dateOfBirth: {
-      month: "火鳥ノ月",
-      day: 22,
-    },
-    orderNum: 0,
-  },
-  {
-    id: "d",
-    name: "キサラギ",
-    guild: [{ name: "ブレイバント" }],
-    dateOfBirth: {
-      month: "火鳥ノ月",
-      day: 25,
-    },
-    orderNum: 0,
-  },
-];
+function DateOfBirthBadge({
+  etrian,
+  className,
+  ...props
+}: DateOfBirthBadgeProps) {
+  return (
+    <Badge
+      className={cn(
+        "flex items-end gap-1 rounded-full bg-red-100 text-red-500 hover:bg-red-100",
+        className,
+      )}
+      {...props}
+    >
+      <Cake strokeWidth={1.5} size={14} />
+      {etrian.dateOfBirth?.month !== "鬼乎ノ日"
+        ? `${etrian.dateOfBirth?.month} ${etrian.dateOfBirth?.day} 日`
+        : `${etrian.dateOfBirth?.month}`}
+    </Badge>
+  );
+}
+
+type BirthdayMessageProps = {
+  etrian: Etrian;
+};
+
+function BirthdayMessage({ etrian }: BirthdayMessageProps) {
+  return (() => {
+    const today = toEtrianDate(new Date());
+    const isSameMonth = etrian.dateOfBirth?.month === today.month.name;
+    const isSameDay = etrian.dateOfBirth?.day === today.day;
+
+    if (isSameMonth && isSameDay) {
+      return <span className="text-xs text-red-400">本日がお誕生日です！</span>;
+    }
+
+    if (isSameMonth) {
+      return <span className="text-xs text-red-400">今月がお誕生日です！</span>;
+    }
+
+    return null;
+  })();
+}
+
+type EtrianItemProps = {
+  etrian: Etrian;
+};
+
+function EtrianItem({ etrian }: EtrianItemProps) {
+  return (
+    <Item>
+      <ItemMedia>
+        <Avatar>
+          <AvatarImage
+            src={`https://github.com/${etrian.name.toLowerCase()}.png`}
+            className="grayscale"
+          />
+          <AvatarFallback>{etrian.name.charAt(0)}</AvatarFallback>
+        </Avatar>
+      </ItemMedia>
+
+      <ItemContent className="gap-1">
+        <ItemTitle>
+          {etrian.name}
+          <BirthdayMessage etrian={etrian} />
+        </ItemTitle>
+
+        <ItemDescription className="flex items-center gap-2">
+          <DateOfBirthBadge etrian={etrian} />
+
+          {(etrian.guild ?? []).map((g) => (
+            <Badge
+              variant="outline"
+              className="flex items-end gap-1 rounded-full font-normal"
+              key={g.name}
+            >
+              <House strokeWidth={1.5} size={14} />
+              {g.name}
+            </Badge>
+          ))}
+        </ItemDescription>
+      </ItemContent>
+
+      <ItemActions>
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <Pencil />
+        </Button>
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <Trash2 />
+        </Button>
+      </ItemActions>
+    </Item>
+  );
+}
 
 export function EtrianRegistry() {
+  const KEY = "etrianRegistryData";
+  const etrianRegistryData: Etrian[] = [
+    {
+      id: "a",
+      name: "リン",
+      guild: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
+      dateOfBirth: {
+        month: "鬼乎ノ日",
+        day: 0,
+      },
+      orderNum: 0,
+    },
+    {
+      id: "b",
+      name: "クレシィ",
+      guild: [{ name: "トロイメライ" }],
+      dateOfBirth: {
+        month: "皇帝ノ月",
+        day: 1,
+      },
+      orderNum: 0,
+    },
+    {
+      id: "c",
+      name: "ジェッタ",
+      guild: [{ name: "ブレイバント" }],
+      dateOfBirth: {
+        month: "火鳥ノ月",
+        day: 22,
+      },
+      orderNum: 0,
+    },
+    {
+      id: "d",
+      name: "キサラギ",
+      guild: [{ name: "ブレイバント" }],
+      dateOfBirth: {
+        month: "火鳥ノ月",
+        day: 25,
+      },
+      orderNum: 0,
+    },
+  ];
+
   const [etrians, setEtrians] = useState<Etrian[]>(() => {
     const stored = localStorage.getItem(KEY);
     try {
-      return stored ? JSON.parse(stored) : etrianBirthOfDateNoteData;
+      return stored ? JSON.parse(stored) : etrianRegistryData;
     } catch {
-      return etrianBirthOfDateNoteData;
+      return etrianRegistryData;
     }
   });
 
@@ -109,75 +207,7 @@ export function EtrianRegistry() {
         <ItemGroup>
           {etrians.map((etrian, index) => (
             <React.Fragment key={etrian.id}>
-              <Item>
-                <ItemMedia>
-                  <Avatar>
-                    <AvatarImage
-                      src={`https://github.com/${etrian.name.toLowerCase()}.png`}
-                      className="grayscale"
-                    />
-                    <AvatarFallback>{etrian.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                </ItemMedia>
-                <ItemContent className="gap-1">
-                  <ItemTitle>
-                    {etrian.name}
-
-                    {/* TODO: これコンポネにする */}
-                    {(() => {
-                      const today = toEtrianDate(new Date());
-                      const isSameMonth =
-                        etrian.dateOfBirth?.month === today.month.name;
-                      const isSameDay = etrian.dateOfBirth?.day === today.day;
-
-                      if (isSameMonth && isSameDay) {
-                        return (
-                          <span className="text-xs text-red-400">
-                            本日がお誕生日です！
-                          </span>
-                        );
-                      }
-
-                      if (isSameMonth) {
-                        return (
-                          <span className="text-xs text-red-400">
-                            今月がお誕生日です！
-                          </span>
-                        );
-                      }
-
-                      return null;
-                    })()}
-                  </ItemTitle>
-                  <ItemDescription className="flex items-center gap-2">
-                    <Badge className="flex items-end gap-1 rounded-full bg-red-100 text-red-500 hover:bg-red-100">
-                      <Cake strokeWidth={1.5} size={14} />
-                      {etrian.dateOfBirth?.month !== "鬼乎ノ日"
-                        ? `${etrian.dateOfBirth?.month} ${etrian.dateOfBirth?.day} 日`
-                        : `${etrian.dateOfBirth?.month}`}
-                    </Badge>
-
-                    {(etrian.guild ?? []).map((g) => (
-                      <Badge
-                        variant="outline"
-                        className="flex items-end gap-1 rounded-full font-normal"
-                        key={g.name}
-                      >
-                        <House strokeWidth={1.5} size={14} />
-                        {g.name}
-                      </Badge>
-                    ))}
-                  </ItemDescription>
-                </ItemContent>
-                <ItemActions>
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <Pencil />
-                  </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full">
-                    <Trash2 />
-                  </Button>
-                </ItemActions>
-              </Item>
+              <EtrianItem etrian={etrian} />
               {index !== etrians.length - 1 && <ItemSeparator />}
             </React.Fragment>
           ))}
