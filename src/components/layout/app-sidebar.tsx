@@ -25,7 +25,7 @@ export function AppSidebar() {
           <Link href="/">
             <SidebarHeader
               className={`flex-row gap-2 rounded-md ${
-                pathname === "/" ? "bg-zinc-700 text-white" : ""
+                pathname === "/" ? "bg-primary text-white" : ""
               }`}
             >
               <Logo />
@@ -39,7 +39,7 @@ export function AppSidebar() {
                     isActive={pathname?.startsWith(toy.link)}
                     className={
                       pathname?.startsWith(toy.link)
-                        ? "hover:!bg-zinc-600 hover:!text-white data-[active=true]:bg-zinc-700 data-[active=true]:text-white"
+                        ? "hover:!text-white data-[active=true]:bg-primary data-[active=true]:text-white"
                         : ""
                     }
                     asChild

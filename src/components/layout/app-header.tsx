@@ -9,7 +9,7 @@ export function AppHeader({ className, children, ...props }: AppHeaderProps) {
   return (
     <header
       className={cn(
-        "flex h-12 w-full items-center gap-2 bg-zinc-700 p-2 text-white",
+        "flex h-12 w-full items-center gap-2 bg-primary p-2 text-white",
         className,
       )}
       {...props}
