@@ -1,24 +1,24 @@
 import {
-  EtrianMonthName,
-  EtrianNewYearsEveName,
+  etrianMonths,
+  etrianNewYearsEve,
 } from "@/app/(toys)/etrian-dob-note/_constants/month";
 
-export type EtrianMonth = {
+export type EtrianMonthName = (typeof etrianMonths)[number]["name"];
+export type EtrianMonthNameKana = (typeof etrianMonths)[number]["kana"];
+export type EtrianNewYearsEveName = (typeof etrianNewYearsEve)["name"];
+export type EtrianNewYearsEveNameKana = (typeof etrianNewYearsEve)["kana"];
+
+export type Guild = {
   name: string;
-  kana: string;
 };
 
 export type Etrian = {
   id: string;
   name: string;
-  birthOfDate: {
-    month: EtrianMonthName | EtrianNewYearsEveName;
-    date: number;
-  };
-  orderNum: number;
   guild: Guild[];
-};
-
-export type Guild = {
-  name: string;
+  orderNum: number;
+  dateOfBirth?: {
+    month: EtrianMonthName | EtrianNewYearsEveName;
+    day?: number;
+  };
 };

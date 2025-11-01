@@ -2,10 +2,18 @@ import {
   etrianMonths,
   etrianNewYearsEve,
 } from "@/app/(toys)/etrian-dob-note/_constants/month";
-import { EtrianMonth } from "@/app/(toys)/etrian-dob-note/types/month";
+import {
+  EtrianMonthName,
+  EtrianMonthNameKana,
+  EtrianNewYearsEveName,
+  EtrianNewYearsEveNameKana,
+} from "@/app/(toys)/etrian-dob-note/types/month";
 
 export function toEtrianDate(date: Date): {
-  month: EtrianMonth;
+  month: {
+    name: EtrianMonthName | EtrianNewYearsEveName;
+    kana: EtrianMonthNameKana | EtrianNewYearsEveNameKana;
+  };
   day?: number;
 } {
   const startOfYear = new Date(date.getFullYear(), 0, 1);

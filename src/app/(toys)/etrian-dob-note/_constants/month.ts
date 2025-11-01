@@ -1,6 +1,4 @@
-import { EtrianMonth } from "@/app/(toys)/etrian-dob-note/types/month";
-
-export const etrianMonths: EtrianMonth[] = [
+export const etrianMonths = [
   {
     name: "皇帝ノ月",
     kana: "こうていのつき",
@@ -55,11 +53,7 @@ export const etrianMonths: EtrianMonth[] = [
   },
 ] as const;
 
-export type EtrianMonthName = (typeof etrianMonths)[number]["name"];
-
 export const etrianNewYearsEve = {
   name: "鬼乎ノ日",
   kana: "ものかのひ",
 } as const;
-
-export type EtrianNewYearsEveName = (typeof etrianNewYearsEve)["name"];
