@@ -48,6 +48,7 @@ export function Colors() {
         <Color className="bg-background text-foreground">background</Color>
         <Color className="bg-card text-card-foreground">card</Color>
         <Color className="bg-popover text-popover-foreground">popover</Color>
+        <Color className="bg-primary text-primary-foreground">primary</Color>
         <Color className="bg-secondary text-secondary-foreground">
           secondary
         </Color>
@@ -93,6 +94,13 @@ export function Colors() {
         </Color>
         <Color className="bg-sidebar-border">sidebar-border</Color>
         <Color className="bg-sidebar-ring text-white">sidebar-ring</Color>
+      </ColorBackground>
+
+      <h2>Other colors</h2>
+      <p>Shows other colors.</p>
+
+      <ColorBackground>
+        <Color className="bg-personal text-personal-foreground">personal</Color>
       </ColorBackground>
     </>
   );

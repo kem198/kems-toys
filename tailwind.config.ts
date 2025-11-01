@@ -73,6 +73,10 @@ const config: Config = {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        personal: {
+          DEFAULT: "hsl(var(--personal))",
+          foreground: "hsl(var(--personal-foreground))",
+        },
       },
       keyframes: {
         "accordion-down": {
