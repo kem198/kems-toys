@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  EtrianMonthName,
-  EtrianNewYearsEveName,
-} from "@/app/(toys)/etrian-dob-note/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-dob-note/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-dob-note/types/month";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -31,9 +27,9 @@ const etrianBirthOfDateNoteData: Etrian[] = [
     id: "a",
     name: "リン",
     guild: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
-    birthOfDate: {
+    dateOfBirth: {
       month: "鬼乎ノ日",
-      date: 0,
+      day: 0,
     },
     orderNum: 0,
   },
@@ -41,9 +37,9 @@ const etrianBirthOfDateNoteData: Etrian[] = [
     id: "b",
     name: "クレシィ",
     guild: [{ name: "トロイメライ" }],
-    birthOfDate: {
+    dateOfBirth: {
       month: "皇帝ノ月",
-      date: 0,
+      day: 0,
     },
     orderNum: 0,
   },
@@ -51,9 +47,9 @@ const etrianBirthOfDateNoteData: Etrian[] = [
     id: "c",
     name: "ジェッタ",
     guild: [{ name: "ブレイバント" }],
-    birthOfDate: {
+    dateOfBirth: {
       month: "火鳥ノ月",
-      date: 0,
+      day: 0,
     },
     orderNum: 0,
   },
@@ -61,16 +57,16 @@ const etrianBirthOfDateNoteData: Etrian[] = [
     id: "d",
     name: "キサラギ",
     guild: [{ name: "ブレイバント" }],
-    birthOfDate: {
+    dateOfBirth: {
       month: "火鳥ノ月",
-      date: 25,
+      day: 25,
     },
     orderNum: 0,
   },
 ];
 
 export function EtrianBirthOfDateNote() {
-  const [etrianData, setEtrianData] = useState<Etrian[]>(() => {
+  const [etrians, setEtrians] = useState<Etrian[]>(() => {
     const stored = localStorage.getItem(KEY);
     try {
       return stored ? JSON.parse(stored) : etrianBirthOfDateNoteData;
@@ -81,28 +77,20 @@ export function EtrianBirthOfDateNote() {
 
   const [newName, setNewName] = useState("");
   const [newGuild, setNewGuild] = useState("");
-  const [newBirthMonth, setNewBirthMonth] = useState<
-    EtrianMonthName | EtrianNewYearsEveName
-  >("皇帝ノ月");
-  const [newBirthDate, setNewBirthDate] = useState<number>(1);
 
   useEffect(() => {
-    localStorage.setItem(KEY, JSON.stringify(etrianData));
-  }, [etrianData]);
+    localStorage.setItem(KEY, JSON.stringify(etrians));
+  }, [etrians]);
 
   const addEtrian = () => {
     if (newName.trim() && newGuild.trim()) {
       const newEtrian: Etrian = {
         id: crypto.randomUUID(),
         name: newName.trim(),
-        guild: [{ name: newGuild.trim() }],
-        birthOfDate: {
-          month: newBirthMonth,
-          date: newBirthDate,
-        },
+        guild: [],
         orderNum: 0,
       };
-      setEtrianData([...etrianData, newEtrian]);
+      setEtrians([...etrians, newEtrian]);
       setNewName("");
       setNewGuild("");
     }
@@ -110,15 +98,16 @@ export function EtrianBirthOfDateNote() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <Button>
-          <UserRoundPlus />
-          冒険者を登録する
-        </Button>
-      </div>
       <div className="not-prose flex w-full flex-col gap-6">
+        <div className="flex gap-2">
+          <Input name="todoTitle" type="text" placeholder="ししょー" />
+          <Button onClick={addEtrian}>
+            <UserRoundPlus />
+            登録
+          </Button>
+        </div>
         <ItemGroup>
-          {etrianData.map((etrian, index) => (
+          {etrians.map((etrian, index) => (
             <React.Fragment key={etrian.id}>
               <Item>
                 <ItemMedia>
@@ -138,8 +127,8 @@ export function EtrianBirthOfDateNote() {
                     {(() => {
                       const today = toEtrianDate(new Date());
                       const isSameMonth =
-                        etrian.birthOfDate.month === today.month.name;
-                      const isSameDay = etrian.birthOfDate.date === today.day;
+                        etrian.dateOfBirth?.month === today.month.name;
+                      const isSameDay = etrian.dateOfBirth?.day === today.day;
 
                       if (isSameMonth && isSameDay) {
                         return (
@@ -163,13 +152,12 @@ export function EtrianBirthOfDateNote() {
                   <ItemDescription className="flex items-center gap-2">
                     <Badge className="flex items-end gap-1 rounded-full bg-red-100 text-red-500 hover:bg-red-100">
                       <Cake strokeWidth={1.5} size={14} />
-                      {etrian.birthOfDate.month}
-                      {etrian.birthOfDate.month !== "鬼乎ノ日"
-                        ? ` ${etrian.birthOfDate.date} 日`
+                      {etrian.dateOfBirth?.month !== "鬼乎ノ日"
+                        ? ` ${etrian.dateOfBirth?.day} 日`
                         : ""}
                     </Badge>
 
-                    {etrian.guild.map((g) => (
+                    {(etrian.guild ?? []).map((g) => (
                       <Badge
                         variant="outline"
                         className="flex items-end gap-1 rounded-full font-normal"
@@ -190,40 +178,10 @@ export function EtrianBirthOfDateNote() {
                   </Button>
                 </ItemActions>
               </Item>
-              {index !== etrianData.length - 1 && <ItemSeparator />}
+              {index !== etrians.length - 1 && <ItemSeparator />}
             </React.Fragment>
           ))}
         </ItemGroup>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <Input
-          placeholder="パラ子"
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-        />
-        <Input
-          placeholder="アトラス"
-          value={newGuild}
-          onChange={(e) => setNewGuild(e.target.value)}
-        />
-        <Input
-          placeholder="皇帝ノ月"
-          value={newBirthMonth}
-          onChange={(e) => setNewBirthMonth(e.target.value)}
-        />
-        <Input
-          placeholder="1"
-          value={newBirthDate}
-          type="number"
-          onChange={(e) => setNewBirthDate(Number(e.target.value))}
-        />
-        <Button
-          onClick={addEtrian}
-          disabled={!newName.trim() || !newGuild.trim()}
-        >
-          追加
-        </Button>
       </div>
     </div>
   );
