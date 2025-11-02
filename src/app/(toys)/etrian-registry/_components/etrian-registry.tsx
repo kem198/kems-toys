@@ -250,11 +250,12 @@ function EditDialog({ children, ...props }: DialogProps) {
                 </FieldLabel>
                 <Input
                   id="checkout-7j9-card-number-uw1"
-                  placeholder="{ギルド名}、エトリア、世界樹の迷宮 III、etc..."
+                  placeholder="{ギルド名},エトリア,etc..."
                   required
                 />
                 <FieldDescription>
-                  所属ギルドや居住地などを設定してください
+                  所属ギルドや居住地などを入力してください
+                  <br />, で区切ると、複数の所属を登録できます
                 </FieldDescription>
               </Field>
               <Field>
@@ -374,18 +375,18 @@ function EtrianItem({ etrian }: EtrianItemProps) {
         <ItemDescription className="flex items-center gap-2">
           <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.affiliations ?? []).map((tag) => {
-            const Icon = tag.icon
-              ? ICONS[tag.icon as keyof typeof ICONS]
+          {(etrian.affiliations ?? []).map((affiliation) => {
+            const Icon = affiliation.icon
+              ? ICONS[affiliation.icon as keyof typeof ICONS]
               : undefined;
             return (
               <Badge
                 variant="outline"
                 className="flex items-end gap-1 rounded-full font-normal"
-                key={tag.name}
+                key={affiliation.name}
               >
                 {Icon ? <Icon strokeWidth={1.5} size={14} /> : null}
-                <span>{tag.name}</span>
+                <span>{affiliation.name}</span>
               </Badge>
             );
           })}
@@ -469,7 +470,7 @@ export function EtrianRegistry() {
     EtrianMonthName | EtrianNewYearsEveName
   >();
   const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<EtrianDay>();
-  const [newTag, setNewTag] = useState("");
+  const [newAffiliation, setNewAffiliation] = useState("");
 
   useEffect(() => {
     localStorage.setItem(KEY, JSON.stringify(etrians));
@@ -483,13 +484,13 @@ export function EtrianRegistry() {
         month: newDateOfBirthMonth,
         day: newDateOfBirthDay,
       },
-      affiliations: newTag ? [{ name: newTag }] : [],
+      affiliations: newAffiliation ? [{ name: newAffiliation }] : [],
       orderNum: 0,
     };
 
     setEtrians([newEtrian, ...etrians]);
     setNewName("");
-    setNewTag("");
+    setNewAffiliation("");
     setNewDateOfBirthMonth(undefined);
     setNewDateOfBirthDay(undefined);
   };
