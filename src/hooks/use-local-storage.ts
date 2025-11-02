@@ -11,7 +11,14 @@ const subscribe = (callback: () => void) => {
 export const useLocalStorage = (storageKey: string) => {
   const storageValue = useSyncExternalStore(
     subscribe,
-    () => localStorage.getItem(storageKey),
+    () => {
+      try {
+        return localStorage.getItem(storageKey) ?? "";
+      } catch (e) {
+        return "";
+      }
+    },
+
     () => "",
   );
 
