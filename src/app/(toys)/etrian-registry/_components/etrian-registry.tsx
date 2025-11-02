@@ -381,9 +381,9 @@ function BackupDialog({
         <DialogHeader>
           <DialogTitle>バックアップ</DialogTitle>
           <DialogDescription>
-            ブラウザ (localStorage) 上に保存されている情報を表示します
+            ブラウザ (localStorage) 上に保存されている情報を表示します。
             <br />
-            コピーしておくと復元しやすい……かも
+            コピーしておくと復元しやすい……かも。
           </DialogDescription>
         </DialogHeader>
 
