@@ -7,7 +7,7 @@ import {
   EtrianMonthNameKana,
   EtrianNewYearsEveName,
   EtrianNewYearsEveNameKana,
-} from "@/app/(toys)/etrian-registry/types/month";
+} from "@/app/(toys)/etrian-registry/types/etrian";
 
 export function toEtrianDate(date: Date): {
   month: {

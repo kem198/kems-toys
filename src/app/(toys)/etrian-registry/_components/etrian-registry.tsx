@@ -1,5 +1,6 @@
 "use client";
 
+import { ICONS } from "@/app/(toys)/etrian-registry/_constants/icon";
 import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import {
@@ -7,7 +8,7 @@ import {
   EtrianDay,
   EtrianMonthName,
   EtrianNewYearsEveName,
-} from "@/app/(toys)/etrian-registry/types/month";
+} from "@/app/(toys)/etrian-registry/types/etrian";
 import { JsonDisplay } from "@/components/shared/json-display";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge, BadgeProps } from "@/components/ui/badge";
@@ -51,7 +52,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import {
   Cake,
-  House,
   Pencil,
   Trash2,
   UserRoundCheck,
@@ -374,16 +374,19 @@ function EtrianItem({ etrian }: EtrianItemProps) {
         <ItemDescription className="flex items-center gap-2">
           <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.tags ?? []).map((g) => (
-            <Badge
-              variant="outline"
-              className="flex items-end gap-1 rounded-full font-normal"
-              key={g.name}
-            >
-              <House strokeWidth={1.5} size={14} />
-              {g.name}
-            </Badge>
-          ))}
+          {(etrian.tags ?? []).map((tag) => {
+            const Icon = tag.icon ? ICONS[tag.icon] : undefined;
+            return (
+              <Badge
+                variant="outline"
+                className="flex items-end gap-1 rounded-full font-normal"
+                key={tag.name}
+              >
+                {Icon ? <Icon strokeWidth={1.5} size={14} /> : null}
+                <span>{tag.name}</span>
+              </Badge>
+            );
+          })}
         </ItemDescription>
       </ItemContent>
 
@@ -409,7 +412,10 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "リン",
-      tags: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
+      tags: [
+        { name: "フィンドリム", icon: "house" },
+        { name: "ブレイバント", icon: "house" },
+      ],
       dateOfBirth: {
         month: "鬼乎ノ日",
       },
@@ -418,7 +424,7 @@ export function EtrianRegistry() {
     {
       id: "b",
       name: "クレシィ",
-      tags: [{ name: "トロイメライ" }],
+      tags: [{ name: "トロイメライ", icon: "house" }],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -428,7 +434,7 @@ export function EtrianRegistry() {
     {
       id: "c",
       name: "ジェッタ",
-      tags: [{ name: "ブレイバント" }],
+      tags: [{ name: "ブレイバント", icon: "house" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 22,
@@ -438,7 +444,7 @@ export function EtrianRegistry() {
     {
       id: "d",
       name: "キサラギ",
-      tags: [{ name: "ブレイバント" }],
+      tags: [{ name: "ブレイバント", icon: "house" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 25,
@@ -475,7 +481,7 @@ export function EtrianRegistry() {
         month: newDateOfBirthMonth,
         day: newDateOfBirthDay,
       },
-      tags: [],
+      tags: newTag ? [{ name: newTag }] : [],
       orderNum: 0,
     };
 

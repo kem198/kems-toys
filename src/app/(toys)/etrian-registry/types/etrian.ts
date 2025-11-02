@@ -1,3 +1,4 @@
+import type { IconKey } from "@/app/(toys)/etrian-registry/_constants/icon";
 import {
   etrianMonths,
   etrianNewYearsEve,
@@ -39,6 +40,8 @@ export type EtrianDay =
 
 export type Tag = {
   name: string;
+  // store a serializable key that maps to an icon component at render time
+  icon?: IconKey;
 };
 
 export type Etrian = {
