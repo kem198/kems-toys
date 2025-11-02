@@ -294,25 +294,30 @@ function EditDialog({ children, ...props }: DialogProps) {
     </Dialog>
   );
 }
-
-type DeleteDialogTriggerProps = {
-  title: React.ReactNode;
-  description?: React.ReactNode;
+type ConfirmDialogProps = {
+  title: string;
+  description?: string;
   content?: React.ReactNode;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  onConfirm?: () => void;
+  onCancel?: () => void;
   children: React.ReactNode;
-  triggerProps?: React.ComponentProps<typeof DialogTrigger>;
 };
 
-function DeleteDialogTrigger({
+function ConfirmDialog({
   title,
   description,
   content,
+  confirmLabel = "OK",
+  cancelLabel = "キャンセル",
+  onConfirm,
+  onCancel,
   children,
-  triggerProps,
-}: DeleteDialogTriggerProps) {
+}: ConfirmDialogProps) {
   return (
     <Dialog>
-      <DialogTrigger {...triggerProps}>{children}</DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
@@ -323,13 +328,15 @@ function DeleteDialogTrigger({
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="button" variant="outline">
-              キャンセル
+            <Button variant="outline" onClick={onCancel}>
+              {cancelLabel}
             </Button>
           </DialogClose>
-          <Button type="submit" variant="destructive">
-            削除
-          </Button>
+          <DialogClose asChild>
+            <Button variant="destructive" onClick={onConfirm}>
+              {confirmLabel}
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -371,9 +378,10 @@ function BackupDialog({
 
 type EtrianItemProps = {
   etrian: Etrian;
+  onDelete: (etrian: Etrian) => void;
 };
 
-function EtrianItem({ etrian }: EtrianItemProps) {
+function EtrianItem({ etrian, onDelete }: EtrianItemProps) {
   return (
     <Item>
       <ItemMedia>
@@ -409,7 +417,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
             <Pencil />
           </Button>
         </EditDialog>
-        <DeleteDialogTrigger
+        <ConfirmDialog
           title="冒険者情報の削除"
           description="下記の冒険者情報を削除します。この操作は元に戻せません！"
           content={
@@ -417,11 +425,12 @@ function EtrianItem({ etrian }: EtrianItemProps) {
               冒険者名: <span className="font-semibold">{etrian.name}</span>
             </p>
           }
+          onConfirm={() => onDelete(etrian)}
         >
           <Button variant="ghost" size="icon" className="rounded-full">
             <Trash2 />
           </Button>
-        </DeleteDialogTrigger>
+        </ConfirmDialog>
       </ItemActions>
     </Item>
   );
@@ -489,6 +498,16 @@ export function EtrianRegistry() {
     }
   }, [storedEtrians]);
 
+  const handleDelete = React.useCallback((target: Etrian) => {
+    setStoredEtrians((prev) =>
+      prev.filter((etrian) => etrian.id !== target.id),
+    );
+
+    toast.success(`冒険者を削除しました`, {
+      description: `冒険者: ${target.name}`,
+    });
+  }, []);
+
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const newEtrian: Etrian = {
       id: crypto.randomUUID(),
@@ -543,7 +562,7 @@ export function EtrianRegistry() {
         <ItemGroup>
           {storedEtrians.map((etrian, index) => (
             <React.Fragment key={etrian.id}>
-              <EtrianItem etrian={etrian} />
+              <EtrianItem etrian={etrian} onDelete={handleDelete} />
               {index !== storedEtrians.length - 1 && <ItemSeparator />}
             </React.Fragment>
           ))}
