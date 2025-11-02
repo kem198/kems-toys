@@ -39,9 +39,12 @@ function DateOfBirthBadge({
       {...props}
     >
       <Cake strokeWidth={1.5} size={14} />
-      {etrian.dateOfBirth?.month !== "鬼乎ノ日"
-        ? `${etrian.dateOfBirth?.month} ${etrian.dateOfBirth?.day} 日`
-        : `${etrian.dateOfBirth?.month}`}
+      {etrian.dateOfBirth?.month}
+
+      {!!etrian.dateOfBirth?.day &&
+        etrian.dateOfBirth?.month !== "鬼乎ノ日" && (
+          <> {etrian.dateOfBirth.day} 日</>
+        )}
     </Badge>
   );
 }
