@@ -1,7 +1,7 @@
 import {
   etrianMonths,
   etrianNewYearsEve,
-} from "@/app/(toys)/etrian-calendar/_constants/month";
+} from "@/app/(toys)/etrian-calendar/_constants/date";
 import {
   EtrianMonthName,
   EtrianMonthNameKana,

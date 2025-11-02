@@ -1,5 +1,6 @@
 "use client";
 
+import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_constants/date";
 import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
 
 function TodaysEtrianDateDisplay() {
@@ -10,7 +11,7 @@ function TodaysEtrianDateDisplay() {
     <p className="flex items-end gap-1">
       <span>本日は</span>
       <span
-        className={`mt-0 font-bold ${todaysEtrianDate.month.name === "鬼乎ノ日" ? "text-red-700" : ""}`}
+        className={`mt-0 font-bold ${todaysEtrianDate.month.name === etrianNewYearsEve.name ? "text-red-700" : ""}`}
       >
         <ruby>
           {todaysEtrianDate.month.name}
