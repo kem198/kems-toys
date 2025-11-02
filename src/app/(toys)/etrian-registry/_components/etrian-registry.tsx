@@ -51,8 +51,15 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil, Trash2, UserRoundCheck, UserRoundPlus } from "lucide-react";
-import * as React from "react";
-import { useEffect } from "react";
+import {
+  ComponentProps,
+  Fragment,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -95,8 +102,8 @@ function BirthdayMessage({ etrian }: BirthdayMessageProps) {
 }
 
 type DialogProps = {
-  children: React.ReactNode;
-} & React.ComponentProps<typeof DialogTrigger>;
+  children: ReactNode;
+} & ComponentProps<typeof DialogTrigger>;
 
 type EditDialogProps = DialogProps & {
   etrian: Etrian;
@@ -104,7 +111,7 @@ type EditDialogProps = DialogProps & {
 };
 
 function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -118,7 +125,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
     },
   });
 
-  const resetFormValues = React.useCallback(() => {
+  const resetFormValues = useCallback(() => {
     form.reset({
       name: etrian.name,
       memo: "",
@@ -128,7 +135,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
           ? String(etrian.dateOfBirth.day)
           : UNSET_SELECT_VALUE,
       },
-      affiliations: etrian.affiliations.join(","),
+      affiliations: etrian.affiliations?.join(","),
     });
   }, [etrian, form]);
 
@@ -390,15 +397,16 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
 }
 
 type ConfirmDialogProps = {
-  title: React.ReactNode;
-  description?: React.ReactNode;
-  content?: React.ReactNode;
-  confirmButtonLabel?: React.ReactNode;
-  confirmButtonVariant?: React.ComponentProps<typeof Button>["variant"];
-  cancelButtonLabel?: React.ReactNode;
+  title: ReactNode;
+  description?: ReactNode;
+  content?: ReactNode;
+  confirmButtonLabel?: ReactNode;
+  confirmButtonVariant?: ComponentProps<typeof Button>["variant"];
+  cancelButtonLabel?: ReactNode;
   onConfirm?: () => void;
   onCancel?: () => void;
-  children: React.ReactNode;
+  className?: string;
+  children: ReactNode;
 };
 
 function ConfirmDialog({
@@ -410,11 +418,14 @@ function ConfirmDialog({
   cancelButtonLabel = "キャンセル",
   onConfirm,
   onCancel,
+  className,
   children,
 }: ConfirmDialogProps) {
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger className={className} asChild>
+        {children}
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
@@ -456,7 +467,7 @@ function BackupDialog({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>バックアップ</DialogTitle>
+          <DialogTitle>登録状況のバックアップ</DialogTitle>
           <DialogDescription>
             ブラウザ (localStorage) 上に保存されている情報を表示します。
             <br />
@@ -495,9 +506,9 @@ function EtrianItem({ etrian, onDelete, onUpdate }: EtrianItemProps) {
           <BirthdayMessage etrian={etrian} />
         </ItemTitle>
 
-        <ItemDescription>aaaa</ItemDescription>
+        <ItemDescription>{etrian.memo}</ItemDescription>
 
-        <ItemFooter>
+        <ItemFooter className={etrian.memo && "pt-2"}>
           <div className="flex flex-wrap items-center gap-2">
             <DateOfBirthBadge dateOfBirth={etrian.dateOfBirth} />
             {(etrian.affiliations ?? []).map((affiliation) => (
@@ -549,40 +560,38 @@ export function EtrianRegistry() {
   });
 
   const KEY = "etrianRegistry";
-  const initialEtrians: Etrian[] = [
-    {
-      id: "sample-paladin",
-      name: "ししょー",
-      affiliations: ["アトラス", "エトリア"],
-      dateOfBirth: {
-        month: "皇帝ノ月",
-        day: 1,
-      },
-      orderNum: 0,
-    },
-    {
-      id: "sample-medic",
-      name: "メディ子",
-      affiliations: ["アトラス", "エトリア"],
-      dateOfBirth: {
-        month: "皇帝ノ月",
-        day: 1,
-      },
-      orderNum: 1,
-    },
-    {
-      id: "sample-gunner",
-      name: "ガン子",
-      affiliations: ["アトラス", "ハイ・ラガード"],
-      dateOfBirth: {
-        month: "皇帝ノ月",
-        day: 1,
-      },
-      orderNum: 2,
-    },
-  ];
 
-  const [storedEtrians, setStoredEtrians] = React.useState<Etrian[]>(() => {
+  const initialEtrians = useMemo<Etrian[]>(
+    () => [
+      {
+        id: "sample-paladin",
+        name: "ししょー",
+        affiliations: ["アトラス", "エトリア"],
+        dateOfBirth: { month: "皇帝ノ月", day: 1 },
+        memo: "ウルトラCだろう…私もそう思う",
+        orderNum: 0,
+      },
+      {
+        id: "sample-gunner",
+        name: "ガン子",
+        affiliations: ["アトラス", "ハイ・ラガード"],
+        dateOfBirth: { month: "皇帝ノ月", day: 1 },
+        memo: "私のフィギュアで三倍売れる",
+        orderNum: 1,
+      },
+      {
+        id: "sample-medic",
+        name: "メディ子",
+        affiliations: ["アトラス", "エトリア"],
+        dateOfBirth: { month: "皇帝ノ月", day: 1 },
+        memo: "ずうずうしい！",
+        orderNum: 2,
+      },
+    ],
+    [],
+  );
+
+  const [storedEtrians, setStoredEtrians] = useState<Etrian[]>(() => {
     try {
       const storedEtriansString = localStorage.getItem(KEY);
       return storedEtriansString
@@ -601,7 +610,7 @@ export function EtrianRegistry() {
     }
   }, [storedEtrians]);
 
-  const handleDelete = React.useCallback((targetEtrian: Etrian) => {
+  const handleDelete = useCallback((targetEtrian: Etrian) => {
     setStoredEtrians((prev) =>
       prev.filter((etrian) => etrian.id !== targetEtrian.id),
     );
@@ -611,7 +620,7 @@ export function EtrianRegistry() {
     });
   }, []);
 
-  const handleUpdate = React.useCallback((updatedEtrian: Etrian) => {
+  const handleUpdate = useCallback((updatedEtrian: Etrian) => {
     setStoredEtrians((prev) =>
       prev.map((etrian) =>
         etrian.id === updatedEtrian.id ? updatedEtrian : etrian,
@@ -623,13 +632,18 @@ export function EtrianRegistry() {
     });
   }, []);
 
+  const handleReset = useCallback(() => {
+    setStoredEtrians(initialEtrians);
+
+    toast.success(`登録状況をリセットしました`);
+  }, [initialEtrians]);
+
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const newEtrian: Etrian = {
       id: crypto.randomUUID(),
       name: data.name.trim(),
-      dateOfBirth: {},
-      affiliations: [],
       orderNum: 0,
+      dateOfBirth: {},
     };
     setStoredEtrians((prev) => [newEtrian, ...prev]);
     form.reset();
@@ -676,20 +690,33 @@ export function EtrianRegistry() {
         </form>
         <ItemGroup>
           {storedEtrians.map((etrian, index) => (
-            <React.Fragment key={etrian.id}>
+            <Fragment key={etrian.id}>
               <EtrianItem
                 etrian={etrian}
                 onDelete={handleDelete}
                 onUpdate={handleUpdate}
               />
               {index !== storedEtrians.length - 1 && <ItemSeparator />}
-            </React.Fragment>
+            </Fragment>
           ))}
         </ItemGroup>
 
-        <BackupDialog storedEtrians={storedEtrians} className="w-fit">
-          <Button variant="ghost">バックアップ</Button>
-        </BackupDialog>
+        <div className="flex justify-end gap-2">
+          <ConfirmDialog
+            title="登録状況のリセット"
+            description="登録状況を初期状態に戻します。この操作は元に戻せません！"
+            confirmButtonLabel="リセット"
+            confirmButtonVariant="destructive"
+            onConfirm={() => handleReset()}
+            className="w-fit"
+          >
+            <Button variant="ghost">リセット</Button>
+          </ConfirmDialog>
+
+          <BackupDialog storedEtrians={storedEtrians} className="w-fit">
+            <Button variant="ghost">バックアップ</Button>
+          </BackupDialog>
+        </div>
       </div>
     </div>
   );
