@@ -140,7 +140,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
           ? String(etrian.dateOfBirth.day)
           : UNSET_SELECT_VALUE,
       },
-      affiliations: etrian.affiliations?.join(","),
+      affiliations: etrian.affiliations.join(","),
     });
   }, [etrian, form]);
 
@@ -179,11 +179,11 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
     const updatedEtrian: Etrian = {
       ...etrian,
       name: data.name.trim(),
-      affiliations: normalizedAffiliations,
       dateOfBirth: {
         month,
         day,
       },
+      affiliations: normalizedAffiliations,
       memo: data.memo?.trim(),
     };
 
@@ -628,6 +628,7 @@ export function EtrianRegistry() {
       name: data.name.trim(),
       orderNum: 0,
       dateOfBirth: {},
+      affiliations: [],
     };
     setStoredEtrians((prev) => [newEtrian, ...prev]);
     form.reset();
