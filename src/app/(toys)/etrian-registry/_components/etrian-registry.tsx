@@ -122,10 +122,6 @@ function BirthdayMessage({ etrian }: BirthdayMessageProps) {
   })();
 }
 
-type EtrianItemProps = {
-  etrian: Etrian;
-};
-
 type DialogProps = {
   children: React.ReactNode;
 } & React.ComponentProps<typeof DialogTrigger>;
@@ -351,6 +347,10 @@ function BackupDialog({
     </Dialog>
   );
 }
+
+type EtrianItemProps = {
+  etrian: Etrian;
+};
 
 function EtrianItem({ etrian }: EtrianItemProps) {
   return (
