@@ -52,6 +52,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil, Trash2, UserRoundCheck, UserRoundPlus } from "lucide-react";
 import {
@@ -60,7 +61,6 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  useMemo,
   useState,
 } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -568,46 +568,9 @@ export function EtrianRegistry() {
 
   const KEY = "etrianRegistry";
 
-  const initialEtrians = useMemo<Etrian[]>(
-    () => [
-      {
-        id: "sample-paladin",
-        name: "ししょー",
-        affiliations: ["アトラス", "エトリア"],
-        dateOfBirth: { month: "皇帝ノ月", day: 1 },
-        memo: "ウルトラCだろう…私もそう思う",
-        orderNum: 0,
-      },
-      {
-        id: "sample-gunner",
-        name: "ガン子",
-        affiliations: ["アトラス", "ハイ・ラガード"],
-        dateOfBirth: { month: "皇帝ノ月", day: 1 },
-        memo: "私のフィギュアで三倍売れる",
-        orderNum: 1,
-      },
-      {
-        id: "sample-medic",
-        name: "メディ子",
-        affiliations: ["アトラス", "エトリア"],
-        dateOfBirth: { month: "皇帝ノ月", day: 1 },
-        memo: "ずうずうしい！",
-        orderNum: 2,
-      },
-    ],
-    [],
-  );
-
-  const [storedEtrians, setStoredEtrians] = useState<Etrian[]>(() => {
-    try {
-      const storedEtriansString = localStorage.getItem(KEY);
-      return storedEtriansString
-        ? JSON.parse(storedEtriansString)
-        : initialEtrians;
-    } catch (e) {
-      return initialEtrians;
-    }
-  });
+  const localStorageValue = useLocalStorage(KEY);
+  const initialEtrians: Etrian[] = JSON.parse(localStorageValue ?? "[]");
+  const [storedEtrians, setStoredEtrians] = useState<Etrian[]>(initialEtrians);
 
   useEffect(() => {
     try {
@@ -640,10 +603,10 @@ export function EtrianRegistry() {
   }, []);
 
   const handleReset = useCallback(() => {
-    setStoredEtrians(initialEtrians);
+    setStoredEtrians([]);
 
     toast.success(`登録状況をリセットしました`);
-  }, [initialEtrians]);
+  }, []);
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const newEtrian: Etrian = {
