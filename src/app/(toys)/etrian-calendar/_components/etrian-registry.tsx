@@ -3,14 +3,14 @@
 import {
   AffiliationBadge,
   DateOfBirthBadge,
-} from "@/app/(toys)/etrian-registry/_components/badge";
-import { EtrianItemSkeleton } from "@/app/(toys)/etrian-registry/_components/skeleton";
+} from "@/app/(toys)/etrian-calendar/_components/badge";
+import { EtrianItemSkeleton } from "@/app/(toys)/etrian-calendar/_components/skeleton";
 import {
   etrianMonths,
   etrianNewYearsEve,
-} from "@/app/(toys)/etrian-registry/_constants/month";
-import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
-import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
+} from "@/app/(toys)/etrian-calendar/_constants/month";
+import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
+import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
 import { JsonDisplay } from "@/components/shared/json-display";
 import { Required } from "@/components/shared/required";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

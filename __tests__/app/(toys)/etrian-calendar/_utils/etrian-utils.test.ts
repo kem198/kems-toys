@@ -1,4 +1,4 @@
-import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
+import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
 import { describe, expect, it } from "vitest";
 
 describe("etrian-utils tests", () => {

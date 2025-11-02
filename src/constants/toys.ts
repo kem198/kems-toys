@@ -61,7 +61,7 @@ const TOYS: Toys = [
   {
     title: "世界樹の暦",
     description: "今日は何ノ月？",
-    link: "/etrian-registry",
+    link: "/etrian-calendar",
     icon: Sprout,
   },
 ];

@@ -1,9 +1,9 @@
-import { etrianNewYearsEve } from "@/app/(toys)/etrian-registry/_constants/month";
+import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_constants/month";
 import {
   type EtrianDateOfBirth,
   type EtrianMonthName,
   type EtrianNewYearsEveName,
-} from "@/app/(toys)/etrian-registry/types/etrian";
+} from "@/app/(toys)/etrian-calendar/types/etrian";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Cake, House } from "lucide-react";
