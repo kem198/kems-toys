@@ -1,6 +1,5 @@
 "use client";
 
-import { ICONS } from "@/app/(toys)/etrian-registry/_constants/icon";
 import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
@@ -50,6 +49,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Cake,
+  House,
   Pencil,
   Trash2,
   UserRoundCheck,
@@ -424,21 +424,16 @@ function EtrianItem({ etrian }: EtrianItemProps) {
         <ItemDescription className="flex items-center gap-2">
           <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.affiliations ?? []).map((affiliation) => {
-            const Icon = affiliation.icon
-              ? ICONS[affiliation.icon as keyof typeof ICONS]
-              : undefined;
-            return (
-              <Badge
-                variant="outline"
-                className="flex items-end gap-1 rounded-full font-normal"
-                key={affiliation.name}
-              >
-                {Icon ? <Icon strokeWidth={1.5} size={14} /> : null}
-                <span>{affiliation.name}</span>
-              </Badge>
-            );
-          })}
+          {(etrian.affiliations ?? []).map((affiliation) => (
+            <Badge
+              variant="outline"
+              className="flex items-end gap-1 rounded-full font-normal"
+              key={affiliation}
+            >
+              <House strokeWidth={1.5} size={14} />
+              <span>{affiliation}</span>
+            </Badge>
+          ))}
         </ItemDescription>
       </ItemContent>
 
@@ -472,10 +467,7 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "ししょー",
-      affiliations: [
-        { name: "アトラス", icon: "house" },
-        { name: "エトリア", icon: "house" },
-      ],
+      affiliations: ["アトラス", "エトリア"],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -485,10 +477,7 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "メディ子",
-      affiliations: [
-        { name: "アトラス", icon: "house" },
-        { name: "エトリア", icon: "house" },
-      ],
+      affiliations: ["アトラス", "エトリア"],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -498,10 +487,7 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "ガン子",
-      affiliations: [
-        { name: "アトラス", icon: "house" },
-        { name: "ハイ・ラガード", icon: "house" },
-      ],
+      affiliations: ["アトラス", "ハイ・ラガード"],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,

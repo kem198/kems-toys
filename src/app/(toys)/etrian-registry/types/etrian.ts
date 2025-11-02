@@ -1,4 +1,3 @@
-import { IconKey } from "@/app/(toys)/etrian-registry/_constants/icon";
 import {
   etrianMonths,
   etrianNewYearsEve,
@@ -38,11 +37,6 @@ export type EtrianDay =
   | 27
   | 28;
 
-export type Affiliation = {
-  name: string;
-  icon?: IconKey;
-};
-
 export type Etrian = {
   id: string;
   name: string;
@@ -50,6 +44,6 @@ export type Etrian = {
     month?: EtrianMonthName | EtrianNewYearsEveName;
     day?: EtrianDay;
   };
-  affiliations: Affiliation[];
+  affiliations: string[];
   orderNum: number;
 };
