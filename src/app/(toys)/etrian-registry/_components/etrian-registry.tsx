@@ -3,13 +3,9 @@
 import { ICONS } from "@/app/(toys)/etrian-registry/_constants/icon";
 import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
-import {
-  Etrian,
-  EtrianDay,
-  EtrianMonthName,
-  EtrianNewYearsEveName,
-} from "@/app/(toys)/etrian-registry/types/etrian";
+import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
 import { JsonDisplay } from "@/components/shared/json-display";
+import { Required } from "@/components/shared/required";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -26,6 +22,7 @@ import {
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSet,
@@ -50,6 +47,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Cake,
   Pencil,
@@ -58,7 +56,18 @@ import {
   UserRoundPlus,
 } from "lucide-react";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
+
+const formSchema = z.object({
+  name: z
+    .string()
+    .min(1, "名前は 1 文字以上入力してください。")
+    .max(20, "名前は 20 文字以下で入力してください。"),
+  memo: z.string().max(100, "メモは 100 文字以下で入力してください。"),
+});
 
 type DateOfBirthBadgeProps = {
   etrian: Etrian;
@@ -127,6 +136,26 @@ type DialogProps = {
 } & React.ComponentProps<typeof DialogTrigger>;
 
 function EditDialog({ children, ...props }: DialogProps) {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      memo: "",
+    },
+  });
+
+  function onSubmit(data: z.infer<typeof formSchema>) {
+    toast.success(`冒険者の登録情報を更新しました！`, {
+      description: `冒険者: ${data.name.trim()}`,
+
+      // description: (
+      //   <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
+      //     <code>{JSON.stringify(data, null, 2)}</code>
+      //   </pre>
+      // ),
+    });
+  }
+
   return (
     <Dialog>
       <DialogTrigger {...props}>{children}</DialogTrigger>
@@ -134,146 +163,174 @@ function EditDialog({ children, ...props }: DialogProps) {
         <DialogHeader>
           <DialogTitle>登録情報の編集</DialogTitle>
           <DialogDescription>
-            冒険者のプロフィールを設定してください
+            冒険者のプロフィールを設定してください。
+            <br />
+            <Required /> は必須項目です。
           </DialogDescription>
         </DialogHeader>
 
-        <FieldGroup>
-          <FieldSet>
-            <Field>
-              <FieldLabel htmlFor="checkout-7j9-card-name-43j">名前</FieldLabel>
-              <Input
-                id="checkout-7j9-card-name-43j"
-                placeholder="ししょー"
-                required
+        <form id="edit" onSubmit={form.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <FieldSet>
+              <Controller
+                name="name"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="name">
+                      名前
+                      <Required />
+                    </FieldLabel>
+                    <Input
+                      {...field}
+                      id="name"
+                      aria-invalid={fieldState.invalid}
+                      placeholder="ししょー"
+                      autoComplete="off"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
               />
-            </Field>
-            <div className="grid grid-cols-2 gap-4">
-              <Field>
-                <FieldLabel htmlFor="checkout-exp-month-ts6">誕生月</FieldLabel>
-                <Select defaultValue="">
-                  <SelectTrigger id="checkout-exp-month-ts6">
-                    <SelectValue placeholder={etrianMonths[0].name} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={etrianMonths[0].name}>
-                      {etrianMonths[0].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[1].name}>
-                      {etrianMonths[1].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[2].name}>
-                      {etrianMonths[2].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[3].name}>
-                      {etrianMonths[3].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[4].name}>
-                      {etrianMonths[4].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[5].name}>
-                      {etrianMonths[5].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[6].name}>
-                      {etrianMonths[6].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[7].name}>
-                      {etrianMonths[7].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[8].name}>
-                      {etrianMonths[8].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[9].name}>
-                      {etrianMonths[9].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[10].name}>
-                      {etrianMonths[10].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[11].name}>
-                      {etrianMonths[11].name}
-                    </SelectItem>
-                    <SelectItem value={etrianMonths[12].name}>
-                      {etrianMonths[12].name}
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="checkout-7j9-exp-year-f59">日</FieldLabel>
-                <Select defaultValue="">
-                  <SelectTrigger id="checkout-7j9-exp-year-f59">
-                    <SelectValue placeholder="1" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="3">3</SelectItem>
-                    <SelectItem value="4">4</SelectItem>
-                    <SelectItem value="5">5</SelectItem>
-                    <SelectItem value="6">6</SelectItem>
-                    <SelectItem value="7">7</SelectItem>
-                    <SelectItem value="8">8</SelectItem>
-                    <SelectItem value="9">9</SelectItem>
-                    <SelectItem value="10">10</SelectItem>
-                    <SelectItem value="11">11</SelectItem>
-                    <SelectItem value="12">12</SelectItem>
-                    <SelectItem value="13">13</SelectItem>
-                    <SelectItem value="14">14</SelectItem>
-                    <SelectItem value="15">15</SelectItem>
-                    <SelectItem value="16">16</SelectItem>
-                    <SelectItem value="17">17</SelectItem>
-                    <SelectItem value="18">18</SelectItem>
-                    <SelectItem value="19">19</SelectItem>
-                    <SelectItem value="20">20</SelectItem>
-                    <SelectItem value="21">21</SelectItem>
-                    <SelectItem value="22">22</SelectItem>
-                    <SelectItem value="23">23</SelectItem>
-                    <SelectItem value="24">24</SelectItem>
-                    <SelectItem value="25">25</SelectItem>
-                    <SelectItem value="26">26</SelectItem>
-                    <SelectItem value="27">27</SelectItem>
-                    <SelectItem value="28">28</SelectItem>
-                  </SelectContent>
-                </Select>
-              </Field>
-            </div>
-            <Field>
-              <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                所属
-              </FieldLabel>
-              <Input
-                id="checkout-7j9-card-number-uw1"
-                placeholder="{ギルド名},エトリア,etc..."
-                required
-              />
-              <FieldDescription>
-                所属ギルドや居住地などを入力してください
-                <br />, で区切ると、複数の所属を登録できます
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="checkout-7j9-optional-comments">
-                メモ
-              </FieldLabel>
-              <Textarea
-                id="checkout-7j9-optional-comments"
-                placeholder="ウルトラCだろう…私もそう思う"
-                className="resize-none"
-              />
-              <FieldDescription>
-                その他プロフィール情報を入力してください
-              </FieldDescription>
-            </Field>
-          </FieldSet>
-        </FieldGroup>
 
+              <div className="grid grid-cols-2 gap-4">
+                <Field>
+                  <FieldLabel htmlFor="date-of-birth-month">誕生月</FieldLabel>
+                  <Select defaultValue="">
+                    <SelectTrigger id="date-of-birth-month">
+                      <SelectValue placeholder={etrianMonths[0].name} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={etrianMonths[0].name}>
+                        {etrianMonths[0].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[1].name}>
+                        {etrianMonths[1].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[2].name}>
+                        {etrianMonths[2].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[3].name}>
+                        {etrianMonths[3].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[4].name}>
+                        {etrianMonths[4].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[5].name}>
+                        {etrianMonths[5].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[6].name}>
+                        {etrianMonths[6].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[7].name}>
+                        {etrianMonths[7].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[8].name}>
+                        {etrianMonths[8].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[9].name}>
+                        {etrianMonths[9].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[10].name}>
+                        {etrianMonths[10].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[11].name}>
+                        {etrianMonths[11].name}
+                      </SelectItem>
+                      <SelectItem value={etrianMonths[12].name}>
+                        {etrianMonths[12].name}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </Field>
+
+                <Field>
+                  <FieldLabel htmlFor="date-of-birth-day">日</FieldLabel>
+                  <Select defaultValue="">
+                    <SelectTrigger id="date-of-birth-day">
+                      <SelectValue placeholder="1" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">1</SelectItem>
+                      <SelectItem value="2">2</SelectItem>
+                      <SelectItem value="3">3</SelectItem>
+                      <SelectItem value="4">4</SelectItem>
+                      <SelectItem value="5">5</SelectItem>
+                      <SelectItem value="6">6</SelectItem>
+                      <SelectItem value="7">7</SelectItem>
+                      <SelectItem value="8">8</SelectItem>
+                      <SelectItem value="9">9</SelectItem>
+                      <SelectItem value="10">10</SelectItem>
+                      <SelectItem value="11">11</SelectItem>
+                      <SelectItem value="12">12</SelectItem>
+                      <SelectItem value="13">13</SelectItem>
+                      <SelectItem value="14">14</SelectItem>
+                      <SelectItem value="15">15</SelectItem>
+                      <SelectItem value="16">16</SelectItem>
+                      <SelectItem value="17">17</SelectItem>
+                      <SelectItem value="18">18</SelectItem>
+                      <SelectItem value="19">19</SelectItem>
+                      <SelectItem value="20">20</SelectItem>
+                      <SelectItem value="21">21</SelectItem>
+                      <SelectItem value="22">22</SelectItem>
+                      <SelectItem value="23">23</SelectItem>
+                      <SelectItem value="24">24</SelectItem>
+                      <SelectItem value="25">25</SelectItem>
+                      <SelectItem value="26">26</SelectItem>
+                      <SelectItem value="27">27</SelectItem>
+                      <SelectItem value="28">28</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </Field>
+              </div>
+
+              <Field>
+                <FieldLabel htmlFor="affiliations">所属</FieldLabel>
+                <Input
+                  id="affiliations"
+                  placeholder="ギルド名,エトリア,etc..."
+                />
+                <FieldDescription>
+                  所属ギルドや居住地などを入力してください。
+                  <br />, で区切ると、複数の所属を登録できます。
+                </FieldDescription>
+              </Field>
+
+              <Controller
+                name="memo"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor="memo">メモ</FieldLabel>
+                    <Textarea
+                      {...field}
+                      id="memo"
+                      placeholder="ウルトラCだろう…私もそう思う"
+                      rows={4}
+                      className="resize-none"
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldDescription>
+                      その他お好みの情報を入力してください。
+                    </FieldDescription>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+            </FieldSet>
+          </FieldGroup>
+        </form>
         <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="outline">
               キャンセル
             </Button>
           </DialogClose>
-          <Button type="submit">
+          <Button type="submit" form="edit">
             <UserRoundCheck />
             更新
           </Button>
@@ -402,24 +459,23 @@ function EtrianItem({ etrian }: EtrianItemProps) {
 }
 
 export function EtrianRegistry() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      memo: "",
+    },
+  });
+
   const KEY = "etrianRegistry";
-  const initialEtrianRegistryValue: Etrian[] = [
+  const initialEtrians: Etrian[] = [
     {
       id: "a",
-      name: "リン",
+      name: "ししょー",
       affiliations: [
-        { name: "フィンドリム", icon: "house" },
-        { name: "ブレイバント", icon: "house" },
+        { name: "アトラス", icon: "house" },
+        { name: "エトリア", icon: "house" },
       ],
-      dateOfBirth: {
-        month: "鬼乎ノ日",
-      },
-      orderNum: 0,
-    },
-    {
-      id: "b",
-      name: "クレシィ",
-      affiliations: [{ name: "トロイメライ", icon: "house" }],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -427,86 +483,108 @@ export function EtrianRegistry() {
       orderNum: 0,
     },
     {
-      id: "c",
-      name: "ジェッタ",
-      affiliations: [{ name: "ブレイバント", icon: "house" }],
+      id: "a",
+      name: "メディ子",
+      affiliations: [
+        { name: "アトラス", icon: "house" },
+        { name: "エトリア", icon: "house" },
+      ],
       dateOfBirth: {
-        month: "火鳥ノ月",
-        day: 22,
+        month: "皇帝ノ月",
+        day: 1,
       },
       orderNum: 0,
     },
     {
-      id: "d",
-      name: "キサラギ",
-      affiliations: [{ name: "ブレイバント", icon: "house" }],
+      id: "a",
+      name: "ガン子",
+      affiliations: [
+        { name: "アトラス", icon: "house" },
+        { name: "ハイ・ラガード", icon: "house" },
+      ],
       dateOfBirth: {
-        month: "火鳥ノ月",
-        day: 25,
+        month: "皇帝ノ月",
+        day: 1,
       },
       orderNum: 0,
     },
   ];
 
-  const [etrians, setEtrians] = useState<Etrian[]>(() => {
-    const stored = localStorage.getItem(KEY);
+  const [storedEtrians, setStoredEtrians] = React.useState<Etrian[]>(() => {
     try {
-      return stored ? JSON.parse(stored) : initialEtrianRegistryValue;
-    } catch {
-      return initialEtrianRegistryValue;
+      const storedEtriansString = localStorage.getItem(KEY);
+      return storedEtriansString
+        ? JSON.parse(storedEtriansString)
+        : initialEtrians;
+    } catch (e) {
+      return initialEtrians;
     }
   });
 
-  const [newName, setNewName] = useState("");
-  const [newDateOfBirthMonth, setNewDateOfBirthMonth] = useState<
-    EtrianMonthName | EtrianNewYearsEveName
-  >();
-  const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<EtrianDay>();
-  const [newAffiliation, setNewAffiliation] = useState("");
-
   useEffect(() => {
-    localStorage.setItem(KEY, JSON.stringify(etrians));
-  }, [etrians]);
+    try {
+      localStorage.setItem(KEY, JSON.stringify(storedEtrians));
+    } catch (e) {
+      // ignore storage errors in this simple toy app
+    }
+  }, [storedEtrians]);
 
-  const addEtrian = () => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     const newEtrian: Etrian = {
       id: crypto.randomUUID(),
-      name: newName.trim(),
-      dateOfBirth: {
-        month: newDateOfBirthMonth,
-        day: newDateOfBirthDay,
-      },
-      affiliations: newAffiliation ? [{ name: newAffiliation }] : [],
+      name: data.name.trim(),
+      dateOfBirth: {},
+      affiliations: [],
       orderNum: 0,
     };
+    setStoredEtrians((prev) => [newEtrian, ...prev]);
+    form.reset();
 
-    setEtrians([newEtrian, ...etrians]);
-    setNewName("");
-    setNewAffiliation("");
-    setNewDateOfBirthMonth(undefined);
-    setNewDateOfBirthDay(undefined);
+    toast.success(`冒険者を登録しました！`, {
+      description: `冒険者: ${data.name.trim()}`,
+
+      // description: (
+      //   <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
+      //     <code>{JSON.stringify(data, null, 2)}</code>
+      //   </pre>
+      // ),
+    });
   };
 
   return (
     <div className="flex flex-col gap-4">
       <div className="not-prose flex w-full flex-col gap-6">
-        <div className="flex gap-2">
-          <Input
-            name="newEtrianName"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            placeholder="ししょー"
-          />
-          <Button onClick={addEtrian}>
-            <UserRoundPlus />
-            登録
-          </Button>
-        </div>
+        <form id="add" onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex gap-2">
+            <Controller
+              name="name"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <Input
+                    {...field}
+                    id="name"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="ししょー"
+                    autoComplete="off"
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Button type="submit" form="add">
+              <UserRoundPlus />
+              登録
+            </Button>
+          </div>
+        </form>
         <ItemGroup>
-          {etrians.map((etrian, index) => (
+          {storedEtrians.map((etrian, index) => (
             <React.Fragment key={etrian.id}>
               <EtrianItem etrian={etrian} />
-              {index !== etrians.length - 1 && <ItemSeparator />}
+              {index !== storedEtrians.length - 1 && <ItemSeparator />}
             </React.Fragment>
           ))}
         </ItemGroup>
