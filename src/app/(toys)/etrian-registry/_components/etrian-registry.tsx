@@ -4,6 +4,7 @@ import {
   AffiliationBadge,
   DateOfBirthBadge,
 } from "@/app/(toys)/etrian-registry/_components/badge";
+import { EtrianItemSkeleton } from "@/app/(toys)/etrian-registry/_components/skeleton";
 import {
   etrianMonths,
   etrianNewYearsEve,
@@ -668,6 +669,7 @@ export function EtrianRegistry() {
           </div>
         </form>
         <ItemGroup>
+          {!isLoaded && <EtrianItemSkeleton />}
           {storedEtrians.map((etrian, index) => (
             <Fragment key={etrian.id}>
               <EtrianItem
