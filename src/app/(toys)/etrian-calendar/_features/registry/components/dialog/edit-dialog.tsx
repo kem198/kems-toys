@@ -14,13 +14,13 @@ import { Controller, useForm } from "react-hook-form";
 import {
   etrianDayOptionValues,
   etrianMonthOptionValues,
-} from "@/app/(toys)/etrian-calendar/_constants/date";
+} from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   RegistryFormValues,
   UNSET_SELECT_VALUE,
   registryFormSchema,
-} from "@/app/(toys)/etrian-calendar/_schemas/registry-form-schema";
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
+} from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Required } from "@/components/shared/required";
 import { Button } from "@/components/ui/button";
 import {

@@ -1,11 +1,11 @@
+import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   AffiliationBadge,
   BirthdayMessage,
   ConfirmDialog,
   DateOfBirthBadge,
   EditDialog,
-} from "@/app/(toys)/etrian-calendar/_features/registry";
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
+} from "@/app/(toys)/etrian-calendar/_features/registry/components";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 import { Pencil, Trash2 } from "lucide-react";
 import { Fragment } from "react";
 
-export function EtrianItemSkeleton() {
+function EtrianRegistrySkeleton() {
   return (
     <Item>
       <ItemMedia>
@@ -50,17 +50,17 @@ export function EtrianItemSkeleton() {
   );
 }
 
-type RegistryListItemProps = {
+type EtrianRegistryItemProps = {
   etrian: Etrian;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
 };
 
-function RegistryListItem({
+function EtrianRegistryItem({
   etrian,
   onDelete,
   onUpdate,
-}: RegistryListItemProps) {
+}: EtrianRegistryItemProps) {
   return (
     <Item>
       <ItemMedia>
@@ -115,23 +115,23 @@ function RegistryListItem({
   );
 }
 
-type RegistryListProps = {
+type EtrianRegistryItemListProps = {
   etrians: Etrian[];
   isLoaded: boolean;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
 };
 
-export function RegistryList({
+export function EtrianRegistryItemList({
   etrians,
   isLoaded,
   onDelete,
   onUpdate,
-}: RegistryListProps) {
+}: EtrianRegistryItemListProps) {
   if (!isLoaded) {
     return (
       <ItemGroup>
-        <EtrianItemSkeleton />
+        <EtrianRegistrySkeleton />
       </ItemGroup>
     );
   }
@@ -144,7 +144,7 @@ export function RegistryList({
     <ItemGroup>
       {etrians.map((etrian, index) => (
         <Fragment key={etrian.id}>
-          <RegistryListItem
+          <EtrianRegistryItem
             etrian={etrian}
             onDelete={onDelete}
             onUpdate={onUpdate}

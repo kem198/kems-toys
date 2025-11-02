@@ -1,7 +1,7 @@
 import {
   EtrianMonthName,
   EtrianNewYearsEveName,
-} from "@/app/(toys)/etrian-calendar/types/etrian";
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 
 export type MonthColorKey = EtrianMonthName | EtrianNewYearsEveName | "default";
 

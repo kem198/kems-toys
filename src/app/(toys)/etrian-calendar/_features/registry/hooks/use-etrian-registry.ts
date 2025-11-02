@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
+import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 
 export const ETRIAN_REGISTRY_STORAGE_KEY = "etrianRegistry";
 

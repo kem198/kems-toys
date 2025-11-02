@@ -1,13 +1,13 @@
 import {
   etrianMonths,
   etrianNewYearsEve,
-} from "@/app/(toys)/etrian-calendar/_constants/date";
+} from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import {
   EtrianMonthName,
   EtrianMonthNameKana,
   EtrianNewYearsEveName,
   EtrianNewYearsEveNameKana,
-} from "@/app/(toys)/etrian-calendar/types/etrian";
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 
 export function toEtrianDate(date: Date): {
   month: {

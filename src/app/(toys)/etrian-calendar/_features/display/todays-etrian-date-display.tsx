@@ -1,7 +1,7 @@
 "use client";
 
-import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_constants/date";
-import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
+import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
 
 function TodaysEtrianDateDisplay() {
   const today = new Date();

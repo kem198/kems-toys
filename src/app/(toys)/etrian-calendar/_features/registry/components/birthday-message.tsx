@@ -1,5 +1,5 @@
-import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_utils/etrian-utils";
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
+import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
 
 type BirthdayMessageProps = {
   etrian: Etrian;

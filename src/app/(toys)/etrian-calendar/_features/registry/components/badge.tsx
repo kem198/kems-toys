@@ -1,9 +1,10 @@
-import { BIRTHDAY_CLASS_BY_MONTH } from "@/app/(toys)/etrian-calendar/_constants/color";
-import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_constants/date";
-import { type EtrianDateOfBirth } from "@/app/(toys)/etrian-calendar/types/etrian";
+import { BIRTHDAY_CLASS_BY_MONTH } from "@/app/(toys)/etrian-calendar/_common/constants/color";
+import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import { type EtrianDateOfBirth } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Cake, House } from "lucide-react";
+
 type DateOfBirthBadgeProps = {
   dateOfBirth: EtrianDateOfBirth;
 } & BadgeProps;

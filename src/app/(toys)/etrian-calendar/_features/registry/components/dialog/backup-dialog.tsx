@@ -1,4 +1,4 @@
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
+import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { JsonDisplay } from "@/components/shared/json-display";
 import {
   Dialog,

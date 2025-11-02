@@ -1,14 +1,14 @@
 "use client";
 
+import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   BackupDialog,
   ConfirmDialog,
-  RegistryForm,
-  RegistryList,
-} from "@/app/(toys)/etrian-calendar/_features/registry";
-import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_hooks";
-import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_schemas/registry-form-schema";
-import { Etrian } from "@/app/(toys)/etrian-calendar/types/etrian";
+  EtrianRegistryForm,
+  EtrianRegistryItemList,
+} from "@/app/(toys)/etrian-calendar/_features/registry/components";
+import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks";
+import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
 import { useCallback } from "react";
 import { toast } from "sonner";
@@ -78,9 +78,9 @@ export function EtrianRegistry() {
   return (
     <div className="flex flex-col gap-4">
       <div className="not-prose flex w-full flex-col gap-6">
-        <RegistryForm onSubmit={handleCreate} />
+        <EtrianRegistryForm onSubmit={handleCreate} />
 
-        <RegistryList
+        <EtrianRegistryItemList
           etrians={storedEtrians}
           isLoaded={isLoaded}
           onDelete={handleDelete}
