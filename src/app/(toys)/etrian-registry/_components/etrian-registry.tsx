@@ -250,7 +250,7 @@ function EditDialog({ children, ...props }: DialogProps) {
               </div>
               <Field>
                 <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                  所属
+                  タグ
                 </FieldLabel>
                 <Input
                   id="checkout-7j9-card-number-uw1"
@@ -374,7 +374,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
         <ItemDescription className="flex items-center gap-2">
           <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.affiliations ?? []).map((g) => (
+          {(etrian.tags ?? []).map((g) => (
             <Badge
               variant="outline"
               className="flex items-end gap-1 rounded-full font-normal"
@@ -409,7 +409,7 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "リン",
-      affiliations: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
+      tags: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
       dateOfBirth: {
         month: "鬼乎ノ日",
       },
@@ -418,7 +418,7 @@ export function EtrianRegistry() {
     {
       id: "b",
       name: "クレシィ",
-      affiliations: [{ name: "トロイメライ" }],
+      tags: [{ name: "トロイメライ" }],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -428,7 +428,7 @@ export function EtrianRegistry() {
     {
       id: "c",
       name: "ジェッタ",
-      affiliations: [{ name: "ブレイバント" }],
+      tags: [{ name: "ブレイバント" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 22,
@@ -438,7 +438,7 @@ export function EtrianRegistry() {
     {
       id: "d",
       name: "キサラギ",
-      affiliations: [{ name: "ブレイバント" }],
+      tags: [{ name: "ブレイバント" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 25,
@@ -461,7 +461,7 @@ export function EtrianRegistry() {
     EtrianMonthName | EtrianNewYearsEveName
   >();
   const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<EtrianDay>();
-  const [newAffiliation, setNewAffiliation] = useState("");
+  const [newTag, setNewTag] = useState("");
 
   useEffect(() => {
     localStorage.setItem(KEY, JSON.stringify(etrians));
@@ -475,13 +475,13 @@ export function EtrianRegistry() {
         month: newDateOfBirthMonth,
         day: newDateOfBirthDay,
       },
-      affiliations: [],
+      tags: [],
       orderNum: 0,
     };
 
     setEtrians([newEtrian, ...etrians]);
     setNewName("");
-    setNewAffiliation("");
+    setNewTag("");
     setNewDateOfBirthMonth(undefined);
     setNewDateOfBirthDay(undefined);
   };
