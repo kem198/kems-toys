@@ -1,14 +1,14 @@
-import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
+import { EtrianDateOfBirth } from "@/app/(toys)/etrian-registry/types/etrian";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { Cake, House } from "lucide-react";
 
 type DateOfBirthBadgeProps = {
-  etrian: Etrian;
+  dateOfBirth: EtrianDateOfBirth;
 } & BadgeProps;
 
 export function DateOfBirthBadge({
-  etrian,
+  dateOfBirth,
   className,
   ...props
 }: DateOfBirthBadgeProps) {
@@ -29,8 +29,8 @@ export function DateOfBirthBadge({
       - 未設定
       */}
       {(() => {
-        const month = etrian.dateOfBirth?.month;
-        const day = etrian.dateOfBirth?.day;
+        const month = dateOfBirth?.month;
+        const day = dateOfBirth?.day;
         if (!month) return <>未設定</>;
         return (
           <>

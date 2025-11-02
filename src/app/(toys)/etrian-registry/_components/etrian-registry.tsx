@@ -354,7 +354,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
 
         <ItemDescription>
           <div className="flex flex-wrap items-center gap-2">
-            <DateOfBirthBadge etrian={etrian} />
+            <DateOfBirthBadge dateOfBirth={etrian.dateOfBirth} />
 
             {(etrian.affiliations ?? []).map((affiliation) => (
               <AffiliationBadge key={affiliation} affiliation={affiliation} />

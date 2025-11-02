@@ -37,13 +37,15 @@ export type EtrianDay =
   | 27
   | 28;
 
+export type EtrianDateOfBirth = {
+  month?: EtrianMonthName | EtrianNewYearsEveName;
+  day?: EtrianDay;
+};
+
 export type Etrian = {
   id: string;
   name: string;
-  dateOfBirth: {
-    month?: EtrianMonthName | EtrianNewYearsEveName;
-    day?: EtrianDay;
-  };
+  dateOfBirth: EtrianDateOfBirth;
   affiliations: string[];
   orderNum: number;
 };
