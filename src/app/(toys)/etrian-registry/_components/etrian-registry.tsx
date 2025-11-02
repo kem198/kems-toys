@@ -3,6 +3,7 @@
 import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
+import { DeleteDialogTrigger } from "@/components/shared/dialog";
 import { JsonDisplay } from "@/components/shared/json-display";
 import { Required } from "@/components/shared/required";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -340,31 +341,6 @@ function EditDialog({ children, ...props }: DialogProps) {
   );
 }
 
-function DeleteDialog({ children, ...props }: DialogProps) {
-  return (
-    <Dialog>
-      <DialogTrigger {...props}>{children}</DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>登録情報の削除</DialogTitle>
-          <DialogDescription>この操作は元に戻せません！</DialogDescription>
-        </DialogHeader>
-
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" variant="outline">
-              キャンセル
-            </Button>
-          </DialogClose>
-          <Button type="submit" variant="destructive">
-            削除
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
 type BackupDialogProps = {
   localStorageKey: string;
 } & DialogProps;
@@ -445,11 +421,19 @@ function EtrianItem({ etrian }: EtrianItemProps) {
             <Pencil />
           </Button>
         </EditDialog>
-        <DeleteDialog>
+        <DeleteDialogTrigger
+          title="冒険者情報の削除"
+          description="下記の冒険者情報を削除します。この操作は元に戻せません！"
+          content={
+            <p>
+              冒険者名: <span className="font-semibold">{etrian.name}</span>
+            </p>
+          }
+        >
           <Button variant="ghost" size="icon" className="rounded-full">
             <Trash2 />
           </Button>
-        </DeleteDialog>
+        </DeleteDialogTrigger>
       </ItemActions>
     </Item>
   );
