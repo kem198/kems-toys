@@ -45,7 +45,7 @@ function DateOfBirthBadge({
       <Cake strokeWidth={1.5} size={14} />
 
       {/*
-      誕生日の設定状況によって次のとおり出力する
+      誕生日の設定状況によって次のいずれかで出力する
       - 皇帝ノ月 1 日
       - 鬼乎ノ日
       - 未設定
