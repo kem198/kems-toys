@@ -1,7 +1,11 @@
 "use client";
 
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
-import { Etrian } from "@/app/(toys)/etrian-registry/types/month";
+import {
+  Etrian,
+  EtrianMonthName,
+  EtrianNewYearsEveName,
+} from "@/app/(toys)/etrian-registry/types/month";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,12 +43,28 @@ function DateOfBirthBadge({
       {...props}
     >
       <Cake strokeWidth={1.5} size={14} />
-      {etrian.dateOfBirth?.month}
 
-      {!!etrian.dateOfBirth?.day &&
-        etrian.dateOfBirth?.month !== "鬼乎ノ日" && (
-          <> {etrian.dateOfBirth.day} 日</>
-        )}
+      {/*
+      誕生日の設定状況によって次のとおり出力する
+      - 皇帝ノ月 1 日
+      - 鬼乎ノ日
+      - 未設定
+      */}
+      {(() => {
+        const month = etrian.dateOfBirth?.month;
+        const day = etrian.dateOfBirth?.day;
+
+        if (month && day) {
+          return (
+            <>
+              {month}
+              {!!day && month !== "鬼乎ノ日" && <> {day} 日</>}
+            </>
+          );
+        }
+
+        return <>未設定</>;
+      })()}
     </Badge>
   );
 }
@@ -177,6 +197,12 @@ export function EtrianRegistry() {
   });
 
   const [newName, setNewName] = useState("");
+  const [newDateOfBirthMonth, setNewDateOfBirthMonth] = useState<
+    EtrianMonthName | EtrianNewYearsEveName | undefined
+  >();
+  const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<
+    number | undefined
+  >();
   const [newGuild, setNewGuild] = useState("");
 
   useEffect(() => {
@@ -184,17 +210,22 @@ export function EtrianRegistry() {
   }, [etrians]);
 
   const addEtrian = () => {
-    if (newName.trim() && newGuild.trim()) {
-      const newEtrian: Etrian = {
-        id: crypto.randomUUID(),
-        name: newName.trim(),
-        guild: [],
-        orderNum: 0,
-      };
-      setEtrians([...etrians, newEtrian]);
-      setNewName("");
-      setNewGuild("");
-    }
+    const newEtrian: Etrian = {
+      id: crypto.randomUUID(),
+      name: newName.trim(),
+      dateOfBirth: {
+        month: newDateOfBirthMonth,
+        day: newDateOfBirthDay,
+      },
+      guild: [{ name: newGuild.trim() }],
+      orderNum: 0,
+    };
+
+    setEtrians([newEtrian, ...etrians]);
+    setNewName("");
+    setNewGuild("");
+    setNewDateOfBirthMonth(undefined);
+    setNewDateOfBirthDay(undefined);
   };
 
   return (
