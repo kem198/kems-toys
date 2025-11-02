@@ -52,7 +52,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil, Trash2, UserRoundCheck, UserRoundPlus } from "lucide-react";
 import {
@@ -568,17 +567,27 @@ export function EtrianRegistry() {
 
   const KEY = "etrianRegistry";
 
-  const localStorageValue = useLocalStorage(KEY);
-  const initialEtrians: Etrian[] = JSON.parse(localStorageValue ?? "[]");
-  const [storedEtrians, setStoredEtrians] = useState<Etrian[]>(initialEtrians);
+  const [storedEtrians, setStoredEtrians] = useState<Etrian[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(storedEtrians));
-    } catch (e) {
-      // ignore storage errors in this simple toy app
+    if (typeof window !== "undefined") {
+      const data = localStorage.getItem(KEY);
+      try {
+        setStoredEtrians(data ? JSON.parse(data) : []);
+      } catch {
+        setStoredEtrians([]);
+      } finally {
+        setIsLoaded(true);
+      }
     }
-  }, [storedEtrians]);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded && typeof window !== "undefined") {
+      localStorage.setItem(KEY, JSON.stringify(storedEtrians));
+    }
+  }, [storedEtrians, isLoaded]);
 
   const handleDelete = useCallback((targetEtrian: Etrian) => {
     setStoredEtrians((prev) =>
