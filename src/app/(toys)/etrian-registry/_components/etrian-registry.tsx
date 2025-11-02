@@ -182,7 +182,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
         month,
         day,
       },
-      memo: data.memo.trim(),
+      memo: data.memo?.trim(),
     };
 
     onSave(updatedEtrian);
@@ -194,6 +194,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
       <DialogTrigger asChild {...props}>
         {children}
       </DialogTrigger>
+
       <DialogContent>
         <DialogHeader>
           <DialogTitle>登録情報の編集</DialogTitle>
