@@ -1,5 +1,9 @@
 "use client";
 
+import {
+  AffiliationBadge,
+  DateOfBirthBadge,
+} from "@/app/(toys)/etrian-registry/_components/badge";
 import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
@@ -7,7 +11,6 @@ import { DeleteDialogTrigger } from "@/components/shared/dialog";
 import { JsonDisplay } from "@/components/shared/json-display";
 import { Required } from "@/components/shared/required";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge, BadgeProps } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -46,16 +49,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Cake,
-  House,
-  Pencil,
-  Trash2,
-  UserRoundCheck,
-  UserRoundPlus,
-} from "lucide-react";
+import { Pencil, Trash2, UserRoundCheck, UserRoundPlus } from "lucide-react";
 import * as React from "react";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -69,46 +64,6 @@ const formSchema = z.object({
     .max(20, "20 文字以下で入力してください。"),
   memo: z.string().max(100, "100 文字以下で入力してください。"),
 });
-
-type DateOfBirthBadgeProps = {
-  etrian: Etrian;
-} & BadgeProps;
-
-function DateOfBirthBadge({
-  etrian,
-  className,
-  ...props
-}: DateOfBirthBadgeProps) {
-  return (
-    <Badge
-      className={cn(
-        "flex items-end gap-1 whitespace-nowrap rounded-full bg-red-100 text-red-500 hover:bg-red-100",
-        className,
-      )}
-      {...props}
-    >
-      <Cake strokeWidth={1.5} size={14} />
-
-      {/*
-      誕生日の設定状況によって次のいずれかで出力する
-      - 皇帝ノ月 1 日
-      - 鬼乎ノ日
-      - 未設定
-      */}
-      {(() => {
-        const month = etrian.dateOfBirth?.month;
-        const day = etrian.dateOfBirth?.day;
-        if (!month) return <>未設定</>;
-        return (
-          <>
-            {month}
-            {day != null && month !== "鬼乎ノ日" && <> {day} 日</>}
-          </>
-        );
-      })()}
-    </Badge>
-  );
-}
 
 type BirthdayMessageProps = {
   etrian: Etrian;
@@ -402,14 +357,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
             <DateOfBirthBadge etrian={etrian} />
 
             {(etrian.affiliations ?? []).map((affiliation) => (
-              <Badge
-                variant="outline"
-                className="flex items-end gap-1 whitespace-nowrap rounded-full font-normal"
-                key={affiliation}
-              >
-                <House strokeWidth={1.5} size={14} />
-                <span>{affiliation}</span>
-              </Badge>
+              <AffiliationBadge key={affiliation} affiliation={affiliation} />
             ))}
           </div>
         </ItemDescription>
