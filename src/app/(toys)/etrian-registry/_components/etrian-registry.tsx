@@ -294,12 +294,14 @@ function EditDialog({ children, ...props }: DialogProps) {
     </Dialog>
   );
 }
+
 type ConfirmDialogProps = {
-  title: string;
-  description?: string;
+  title: React.ReactNode;
+  description?: React.ReactNode;
   content?: React.ReactNode;
-  confirmLabel?: string;
-  cancelLabel?: string;
+  confirmButtonLabel?: React.ReactNode;
+  confirmButtonVariant?: React.ComponentProps<typeof Button>["variant"];
+  cancelButtonLabel?: React.ReactNode;
   onConfirm?: () => void;
   onCancel?: () => void;
   children: React.ReactNode;
@@ -309,8 +311,9 @@ function ConfirmDialog({
   title,
   description,
   content,
-  confirmLabel = "OK",
-  cancelLabel = "キャンセル",
+  confirmButtonLabel = "はい",
+  confirmButtonVariant = "default",
+  cancelButtonLabel = "キャンセル",
   onConfirm,
   onCancel,
   children,
@@ -329,12 +332,12 @@ function ConfirmDialog({
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline" onClick={onCancel}>
-              {cancelLabel}
+              {cancelButtonLabel}
             </Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button variant="destructive" onClick={onConfirm}>
-              {confirmLabel}
+            <Button variant={confirmButtonVariant} onClick={onConfirm}>
+              {confirmButtonLabel}
             </Button>
           </DialogClose>
         </DialogFooter>
@@ -425,6 +428,8 @@ function EtrianItem({ etrian, onDelete }: EtrianItemProps) {
               冒険者名: <span className="font-semibold">{etrian.name}</span>
             </p>
           }
+          confirmButtonLabel="削除"
+          confirmButtonVariant="destructive"
           onConfirm={() => onDelete(etrian)}
         >
           <Button variant="ghost" size="icon" className="rounded-full">
