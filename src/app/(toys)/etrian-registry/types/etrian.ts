@@ -38,9 +38,8 @@ export type EtrianDay =
   | 27
   | 28;
 
-export type Tag = {
+export type Affiliation = {
   name: string;
-  // store a serializable key that maps to an icon component at render time
   icon?: IconKey;
 };
 
@@ -51,6 +50,6 @@ export type Etrian = {
     month?: EtrianMonthName | EtrianNewYearsEveName;
     day?: EtrianDay;
   };
-  tags: Tag[];
+  affiliations: Affiliation[];
   orderNum: number;
 };

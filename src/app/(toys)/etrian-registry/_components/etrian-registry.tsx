@@ -246,7 +246,7 @@ function EditDialog({ children, ...props }: DialogProps) {
               </div>
               <Field>
                 <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                  タグ
+                  所属
                 </FieldLabel>
                 <Input
                   id="checkout-7j9-card-number-uw1"
@@ -374,7 +374,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
         <ItemDescription className="flex items-center gap-2">
           <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.tags ?? []).map((tag) => {
+          {(etrian.affiliations ?? []).map((tag) => {
             const Icon = tag.icon
               ? ICONS[tag.icon as keyof typeof ICONS]
               : undefined;
@@ -414,7 +414,7 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "リン",
-      tags: [
+      affiliations: [
         { name: "フィンドリム", icon: "house" },
         { name: "ブレイバント", icon: "house" },
       ],
@@ -426,7 +426,7 @@ export function EtrianRegistry() {
     {
       id: "b",
       name: "クレシィ",
-      tags: [{ name: "トロイメライ", icon: "house" }],
+      affiliations: [{ name: "トロイメライ", icon: "house" }],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -436,7 +436,7 @@ export function EtrianRegistry() {
     {
       id: "c",
       name: "ジェッタ",
-      tags: [{ name: "ブレイバント", icon: "house" }],
+      affiliations: [{ name: "ブレイバント", icon: "house" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 22,
@@ -446,7 +446,7 @@ export function EtrianRegistry() {
     {
       id: "d",
       name: "キサラギ",
-      tags: [{ name: "ブレイバント", icon: "house" }],
+      affiliations: [{ name: "ブレイバント", icon: "house" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 25,
@@ -483,7 +483,7 @@ export function EtrianRegistry() {
         month: newDateOfBirthMonth,
         day: newDateOfBirthDay,
       },
-      tags: newTag ? [{ name: newTag }] : [],
+      affiliations: newTag ? [{ name: newTag }] : [],
       orderNum: 0,
     };
 
