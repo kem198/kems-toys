@@ -465,7 +465,7 @@ export function EtrianRegistry() {
   const KEY = "etrianRegistry";
   const initialEtrians: Etrian[] = [
     {
-      id: "a",
+      id: "sample-paladin",
       name: "ししょー",
       affiliations: ["アトラス", "エトリア"],
       dateOfBirth: {
@@ -475,24 +475,24 @@ export function EtrianRegistry() {
       orderNum: 0,
     },
     {
-      id: "a",
+      id: "sample-medic",
       name: "メディ子",
       affiliations: ["アトラス", "エトリア"],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
       },
-      orderNum: 0,
+      orderNum: 1,
     },
     {
-      id: "a",
+      id: "sample-gunner",
       name: "ガン子",
       affiliations: ["アトラス", "ハイ・ラガード"],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
       },
-      orderNum: 0,
+      orderNum: 2,
     },
   ];
 
