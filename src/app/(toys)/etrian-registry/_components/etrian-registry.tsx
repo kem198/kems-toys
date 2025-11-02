@@ -3,6 +3,7 @@
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import {
   Etrian,
+  EtrianDay,
   EtrianMonthName,
   EtrianNewYearsEveName,
 } from "@/app/(toys)/etrian-registry/types/month";
@@ -57,7 +58,7 @@ function DateOfBirthBadge({
         return (
           <>
             {month}
-            {!!day && month !== "鬼乎ノ日" && <> {day} 日</>}
+            {day != null && month !== "鬼乎ノ日" && <> {day} 日</>}
           </>
         );
       })()}
@@ -147,7 +148,6 @@ export function EtrianRegistry() {
       guild: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
       dateOfBirth: {
         month: "鬼乎ノ日",
-        day: 0,
       },
       orderNum: 0,
     },
@@ -196,7 +196,7 @@ export function EtrianRegistry() {
   const [newDateOfBirthMonth, setNewDateOfBirthMonth] = useState<
     EtrianMonthName | EtrianNewYearsEveName
   >();
-  const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<number>();
+  const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<EtrianDay>();
   const [newGuild, setNewGuild] = useState("");
 
   useEffect(() => {
@@ -226,7 +226,12 @@ export function EtrianRegistry() {
     <div className="flex flex-col gap-4">
       <div className="not-prose flex w-full flex-col gap-6">
         <div className="flex gap-2">
-          <Input name="todoTitle" type="text" placeholder="ししょー" />
+          <Input
+            name="newEtrianName"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            placeholder="ししょー"
+          />
           <Button onClick={addEtrian}>
             <UserRoundPlus />
             登録
