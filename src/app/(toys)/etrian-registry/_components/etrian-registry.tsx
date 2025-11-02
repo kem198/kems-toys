@@ -182,7 +182,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
         month,
         day,
       },
-      memo: data.memo,
+      memo: data.memo.trim(),
     };
 
     onSave(updatedEtrian);
@@ -388,7 +388,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
             </FieldSet>
           </FieldGroup>
         </form>
-        <DialogFooter>
+        <DialogFooter className="gap-y-2">
           <DialogClose asChild>
             <Button type="button" variant="outline">
               キャンセル
@@ -442,7 +442,7 @@ function ConfirmDialog({
 
         {content}
 
-        <DialogFooter>
+        <DialogFooter className="gap-y-2">
           <DialogClose asChild>
             <Button variant="outline" onClick={onCancel}>
               {cancelButtonLabel}
