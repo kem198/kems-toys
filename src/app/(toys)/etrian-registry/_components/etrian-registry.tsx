@@ -35,6 +35,7 @@ import {
   ItemActions,
   ItemContent,
   ItemDescription,
+  ItemFooter,
   ItemGroup,
   ItemMedia,
   ItemSeparator,
@@ -178,7 +179,9 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger {...props}>{children}</DialogTrigger>
+      <DialogTrigger asChild {...props}>
+        {children}
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>登録情報の編集</DialogTitle>
@@ -438,17 +441,19 @@ function ConfirmDialog({
 }
 
 type BackupDialogProps = {
-  localStorageKey: string;
+  storedEtrians: Etrian[];
 } & DialogProps;
 
 function BackupDialog({
-  localStorageKey,
+  storedEtrians,
   children,
   ...props
 }: BackupDialogProps) {
   return (
     <Dialog>
-      <DialogTrigger {...props}>{children}</DialogTrigger>
+      <DialogTrigger asChild {...props}>
+        {children}
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>バックアップ</DialogTitle>
@@ -459,12 +464,7 @@ function BackupDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <JsonDisplay
-          data={(() => {
-            const stored = localStorage.getItem(localStorageKey);
-            return stored ? JSON.parse(stored) : null;
-          })()}
-        />
+        <JsonDisplay data={storedEtrians} />
       </DialogContent>
     </Dialog>
   );
@@ -495,15 +495,16 @@ function EtrianItem({ etrian, onDelete, onUpdate }: EtrianItemProps) {
           <BirthdayMessage etrian={etrian} />
         </ItemTitle>
 
-        <ItemDescription>
+        <ItemDescription>aaaa</ItemDescription>
+
+        <ItemFooter>
           <div className="flex flex-wrap items-center gap-2">
             <DateOfBirthBadge dateOfBirth={etrian.dateOfBirth} />
-
             {(etrian.affiliations ?? []).map((affiliation) => (
               <AffiliationBadge key={affiliation} affiliation={affiliation} />
             ))}
           </div>
-        </ItemDescription>
+        </ItemFooter>
       </ItemContent>
 
       <ItemActions>
@@ -600,13 +601,13 @@ export function EtrianRegistry() {
     }
   }, [storedEtrians]);
 
-  const handleDelete = React.useCallback((target: Etrian) => {
+  const handleDelete = React.useCallback((targetEtrian: Etrian) => {
     setStoredEtrians((prev) =>
-      prev.filter((etrian) => etrian.id !== target.id),
+      prev.filter((etrian) => etrian.id !== targetEtrian.id),
     );
 
     toast.success(`冒険者を削除しました`, {
-      description: `冒険者: ${target.name}`,
+      description: `冒険者: ${targetEtrian.name}`,
     });
   }, []);
 
@@ -686,7 +687,7 @@ export function EtrianRegistry() {
           ))}
         </ItemGroup>
 
-        <BackupDialog localStorageKey={KEY} className="w-fit">
+        <BackupDialog storedEtrians={storedEtrians} className="w-fit">
           <Button variant="ghost">バックアップ</Button>
         </BackupDialog>
       </div>
