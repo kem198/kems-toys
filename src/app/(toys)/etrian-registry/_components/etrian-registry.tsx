@@ -98,7 +98,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
       <ItemMedia>
         <Avatar>
           <AvatarImage
-            src={`https://github.com/${etrian.name.toLowerCase()}.png`}
+            // src={`https://github.com/${etrian.name.toLowerCase()}.png`}
             className="grayscale"
           />
           <AvatarFallback>{etrian.name.charAt(0)}</AvatarFallback>
