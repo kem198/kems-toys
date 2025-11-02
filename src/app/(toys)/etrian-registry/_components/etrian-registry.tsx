@@ -4,7 +4,10 @@ import {
   AffiliationBadge,
   DateOfBirthBadge,
 } from "@/app/(toys)/etrian-registry/_components/badge";
-import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
+import {
+  etrianMonths,
+  etrianNewYearsEve,
+} from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
 import { JsonDisplay } from "@/components/shared/json-display";
@@ -153,12 +156,13 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
       .map((value) => value.trim())
       .filter((value) => value.length > 0);
 
+    const selectedMonth = data.dateOfBirth.month;
+    const isKnownMonth = [...etrianMonths, etrianNewYearsEve].some(
+      (monthItem) => monthItem.name === selectedMonth,
+    );
     const month =
-      data.dateOfBirth.month !== UNSET_SELECT_VALUE &&
-      etrianMonths.some(
-        (monthItem) => monthItem.name === data.dateOfBirth.month,
-      )
-        ? (data.dateOfBirth.month as Etrian["dateOfBirth"]["month"])
+      selectedMonth && selectedMonth !== UNSET_SELECT_VALUE && isKnownMonth
+        ? (selectedMonth as Etrian["dateOfBirth"]["month"])
         : undefined;
 
     const dayNumber =
@@ -281,6 +285,9 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
                           </SelectItem>
                           <SelectItem value={etrianMonths[12].name}>
                             {etrianMonths[12].name}
+                          </SelectItem>
+                          <SelectItem value={etrianNewYearsEve.name}>
+                            {etrianNewYearsEve.name}
                           </SelectItem>
                         </SelectContent>
                       </Select>
