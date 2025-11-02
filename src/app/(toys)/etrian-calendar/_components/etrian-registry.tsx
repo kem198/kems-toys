@@ -93,7 +93,9 @@ function BirthdayMessage({ etrian }: BirthdayMessageProps) {
     const isSameDay = etrian.dateOfBirth?.day === today.day;
 
     if (isSameMonth && isSameDay) {
-      return <span className="text-xs text-red-400">本日がお誕生日です！</span>;
+      return (
+        <span className="text-xs text-red-400">🎉本日がお誕生日です！</span>
+      );
     }
 
     if (isSameMonth) {
@@ -509,8 +511,8 @@ function EtrianItem({ etrian, onDelete, onUpdate }: EtrianItemProps) {
         </Avatar>
       </ItemMedia>
 
-      <ItemContent className="gap-1">
-        <ItemTitle>
+      <ItemContent>
+        <ItemTitle className="flex flex-col items-start gap-1">
           {etrian.name}
           <BirthdayMessage etrian={etrian} />
         </ItemTitle>
