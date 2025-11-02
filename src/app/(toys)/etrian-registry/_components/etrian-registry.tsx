@@ -131,7 +131,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
   const resetFormValues = useCallback(() => {
     form.reset({
       name: etrian.name,
-      memo: "",
+      memo: etrian.memo,
       dateOfBirth: {
         month: etrian.dateOfBirth.month ?? UNSET_SELECT_VALUE,
         day: etrian.dateOfBirth.day
@@ -182,6 +182,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
         month,
         day,
       },
+      memo: data.memo,
     };
 
     onSave(updatedEtrian);
@@ -376,7 +377,7 @@ function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
                       aria-invalid={fieldState.invalid}
                     />
                     <FieldDescription>
-                      その他お好みの情報を入力してください。
+                      お好みの情報を入力してください。
                     </FieldDescription>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />
