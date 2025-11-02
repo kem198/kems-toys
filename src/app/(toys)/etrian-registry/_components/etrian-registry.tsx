@@ -374,7 +374,7 @@ function EtrianItem({ etrian }: EtrianItemProps) {
         <ItemDescription className="flex items-center gap-2">
           <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.guild ?? []).map((g) => (
+          {(etrian.affiliations ?? []).map((g) => (
             <Badge
               variant="outline"
               className="flex items-end gap-1 rounded-full font-normal"
@@ -409,7 +409,7 @@ export function EtrianRegistry() {
     {
       id: "a",
       name: "リン",
-      guild: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
+      affiliations: [{ name: "フィンドリム" }, { name: "ブレイバント" }],
       dateOfBirth: {
         month: "鬼乎ノ日",
       },
@@ -418,7 +418,7 @@ export function EtrianRegistry() {
     {
       id: "b",
       name: "クレシィ",
-      guild: [{ name: "トロイメライ" }],
+      affiliations: [{ name: "トロイメライ" }],
       dateOfBirth: {
         month: "皇帝ノ月",
         day: 1,
@@ -428,7 +428,7 @@ export function EtrianRegistry() {
     {
       id: "c",
       name: "ジェッタ",
-      guild: [{ name: "ブレイバント" }],
+      affiliations: [{ name: "ブレイバント" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 22,
@@ -438,7 +438,7 @@ export function EtrianRegistry() {
     {
       id: "d",
       name: "キサラギ",
-      guild: [{ name: "ブレイバント" }],
+      affiliations: [{ name: "ブレイバント" }],
       dateOfBirth: {
         month: "火鳥ノ月",
         day: 25,
@@ -461,7 +461,7 @@ export function EtrianRegistry() {
     EtrianMonthName | EtrianNewYearsEveName
   >();
   const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<EtrianDay>();
-  const [newGuild, setNewGuild] = useState("");
+  const [newAffiliation, setNewAffiliation] = useState("");
 
   useEffect(() => {
     localStorage.setItem(KEY, JSON.stringify(etrians));
@@ -475,13 +475,13 @@ export function EtrianRegistry() {
         month: newDateOfBirthMonth,
         day: newDateOfBirthDay,
       },
-      guild: [],
+      affiliations: [],
       orderNum: 0,
     };
 
     setEtrians([newEtrian, ...etrians]);
     setNewName("");
-    setNewGuild("");
+    setNewAffiliation("");
     setNewDateOfBirthMonth(undefined);
     setNewDateOfBirthDay(undefined);
   };

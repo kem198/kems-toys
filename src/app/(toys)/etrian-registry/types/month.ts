@@ -37,7 +37,7 @@ export type EtrianDay =
   | 27
   | 28;
 
-export type Guild = {
+export type Affiliation = {
   name: string;
 };
 
@@ -48,6 +48,6 @@ export type Etrian = {
     month?: EtrianMonthName | EtrianNewYearsEveName;
     day?: EtrianDay;
   };
-  guild: Guild[];
+  affiliations: Affiliation[];
   orderNum: number;
 };
