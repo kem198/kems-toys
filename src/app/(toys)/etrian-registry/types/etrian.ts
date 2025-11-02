@@ -1,4 +1,4 @@
-import type { IconKey } from "@/app/(toys)/etrian-registry/_constants/icon";
+import { IconKey } from "@/app/(toys)/etrian-registry/_constants/icon";
 import {
   etrianMonths,
   etrianNewYearsEve,

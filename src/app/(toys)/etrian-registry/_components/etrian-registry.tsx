@@ -375,7 +375,9 @@ function EtrianItem({ etrian }: EtrianItemProps) {
           <DateOfBirthBadge etrian={etrian} />
 
           {(etrian.tags ?? []).map((tag) => {
-            const Icon = tag.icon ? ICONS[tag.icon] : undefined;
+            const Icon = tag.icon
+              ? ICONS[tag.icon as keyof typeof ICONS]
+              : undefined;
             return (
               <Badge
                 variant="outline"
