@@ -46,7 +46,7 @@ export type Etrian = {
   id: string;
   name: string;
   dateOfBirth: EtrianDateOfBirth;
-  affiliations?: string[];
-  memo?: string;
+  affiliations: string[];
   orderNum: number;
+  memo?: string;
 };
