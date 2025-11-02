@@ -64,9 +64,9 @@ import * as z from "zod";
 const formSchema = z.object({
   name: z
     .string()
-    .min(1, "名前は 1 文字以上入力してください。")
-    .max(20, "名前は 20 文字以下で入力してください。"),
-  memo: z.string().max(100, "メモは 100 文字以下で入力してください。"),
+    .min(1, "1 文字以上入力してください。")
+    .max(20, "20 文字以下で入力してください。"),
+  memo: z.string().max(100, "100 文字以下で入力してください。"),
 });
 
 type DateOfBirthBadgeProps = {
