@@ -81,7 +81,7 @@ function DateOfBirthBadge({
   return (
     <Badge
       className={cn(
-        "flex items-end gap-1 rounded-full bg-red-100 text-red-500 hover:bg-red-100",
+        "flex items-end gap-1 whitespace-nowrap rounded-full bg-red-100 text-red-500 hover:bg-red-100",
         className,
       )}
       {...props}
@@ -421,19 +421,21 @@ function EtrianItem({ etrian }: EtrianItemProps) {
           <BirthdayMessage etrian={etrian} />
         </ItemTitle>
 
-        <ItemDescription className="flex items-center gap-2">
-          <DateOfBirthBadge etrian={etrian} />
+        <ItemDescription>
+          <div className="flex flex-wrap items-center gap-2">
+            <DateOfBirthBadge etrian={etrian} />
 
-          {(etrian.affiliations ?? []).map((affiliation) => (
-            <Badge
-              variant="outline"
-              className="flex items-end gap-1 rounded-full font-normal"
-              key={affiliation}
-            >
-              <House strokeWidth={1.5} size={14} />
-              <span>{affiliation}</span>
-            </Badge>
-          ))}
+            {(etrian.affiliations ?? []).map((affiliation) => (
+              <Badge
+                variant="outline"
+                className="flex items-end gap-1 whitespace-nowrap rounded-full font-normal"
+                key={affiliation}
+              >
+                <House strokeWidth={1.5} size={14} />
+                <span>{affiliation}</span>
+              </Badge>
+            ))}
+          </div>
         </ItemDescription>
       </ItemContent>
 
