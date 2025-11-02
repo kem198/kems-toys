@@ -53,17 +53,13 @@ function DateOfBirthBadge({
       {(() => {
         const month = etrian.dateOfBirth?.month;
         const day = etrian.dateOfBirth?.day;
-
-        if (month && day) {
-          return (
-            <>
-              {month}
-              {!!day && month !== "鬼乎ノ日" && <> {day} 日</>}
-            </>
-          );
-        }
-
-        return <>未設定</>;
+        if (!month) return <>未設定</>;
+        return (
+          <>
+            {month}
+            {!!day && month !== "鬼乎ノ日" && <> {day} 日</>}
+          </>
+        );
       })()}
     </Badge>
   );
@@ -198,11 +194,9 @@ export function EtrianRegistry() {
 
   const [newName, setNewName] = useState("");
   const [newDateOfBirthMonth, setNewDateOfBirthMonth] = useState<
-    EtrianMonthName | EtrianNewYearsEveName | undefined
+    EtrianMonthName | EtrianNewYearsEveName
   >();
-  const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<
-    number | undefined
-  >();
+  const [newDateOfBirthDay, setNewDateOfBirthDay] = useState<number>();
   const [newGuild, setNewGuild] = useState("");
 
   useEffect(() => {

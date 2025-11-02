@@ -15,10 +15,10 @@ export type Guild = {
 export type Etrian = {
   id: string;
   name: string;
-  guild: Guild[];
-  orderNum: number;
-  dateOfBirth?: {
-    month: EtrianMonthName | EtrianNewYearsEveName;
+  dateOfBirth: {
+    month?: EtrianMonthName | EtrianNewYearsEveName;
     day?: number;
   };
+  guild: Guild[];
+  orderNum: number;
 };
