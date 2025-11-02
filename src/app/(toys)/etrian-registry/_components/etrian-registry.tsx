@@ -56,12 +56,19 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
+const UNSET_SELECT_VALUE = "未設定";
+
 const formSchema = z.object({
   name: z
     .string()
     .min(1, "1 文字以上入力してください。")
     .max(20, "20 文字以下で入力してください。"),
-  memo: z.string().max(100, "100 文字以下で入力してください。"),
+  memo: z.string().max(100, "100 文字以下で入力してください。").optional(),
+  dateOfBirth: z.object({
+    month: z.string().optional(),
+    day: z.string().optional(),
+  }),
+  affiliations: z.string().optional(),
 });
 
 type BirthdayMessageProps = {
@@ -90,29 +97,87 @@ type DialogProps = {
   children: React.ReactNode;
 } & React.ComponentProps<typeof DialogTrigger>;
 
-function EditDialog({ children, ...props }: DialogProps) {
+type EditDialogProps = DialogProps & {
+  etrian: Etrian;
+  onSave: (updated: Etrian) => void;
+};
+
+function EditDialog({ etrian, onSave, children, ...props }: EditDialogProps) {
+  const [open, setOpen] = React.useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       memo: "",
+      dateOfBirth: {
+        month: UNSET_SELECT_VALUE,
+        day: UNSET_SELECT_VALUE,
+      },
+      affiliations: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast.success(`冒険者の登録情報を更新しました！`, {
-      description: `冒険者: ${data.name.trim()}`,
-
-      // description: (
-      //   <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-      //     <code>{JSON.stringify(data, null, 2)}</code>
-      //   </pre>
-      // ),
+  const resetFormValues = React.useCallback(() => {
+    form.reset({
+      name: etrian.name,
+      memo: "",
+      dateOfBirth: {
+        month: etrian.dateOfBirth.month ?? UNSET_SELECT_VALUE,
+        day: etrian.dateOfBirth.day
+          ? String(etrian.dateOfBirth.day)
+          : UNSET_SELECT_VALUE,
+      },
+      affiliations: etrian.affiliations.join(","),
     });
+  }, [etrian, form]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    resetFormValues();
+  }, [etrian, open, resetFormValues]);
+
+  function handleSubmit(data: z.infer<typeof formSchema>) {
+    const normalizedAffiliations = (data.affiliations ?? "")
+      .split(",")
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0);
+
+    const month =
+      data.dateOfBirth.month !== UNSET_SELECT_VALUE &&
+      etrianMonths.some(
+        (monthItem) => monthItem.name === data.dateOfBirth.month,
+      )
+        ? (data.dateOfBirth.month as Etrian["dateOfBirth"]["month"])
+        : undefined;
+
+    const dayNumber =
+      data.dateOfBirth.day !== UNSET_SELECT_VALUE
+        ? Number(data.dateOfBirth.day)
+        : undefined;
+    const day =
+      dayNumber !== undefined && dayNumber >= 1 && dayNumber <= 28
+        ? (dayNumber as Etrian["dateOfBirth"]["day"])
+        : undefined;
+
+    const updatedEtrian: Etrian = {
+      ...etrian,
+      name: data.name.trim(),
+      affiliations: normalizedAffiliations,
+      dateOfBirth: {
+        month,
+        day,
+      },
+    };
+
+    onSave(updatedEtrian);
+    setOpen(false);
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger {...props}>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -124,7 +189,7 @@ function EditDialog({ children, ...props }: DialogProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <form id="edit" onSubmit={form.handleSubmit(onSubmit)}>
+        <form id="edit" onSubmit={form.handleSubmit(handleSubmit)}>
           <FieldGroup>
             <FieldSet>
               <Controller
@@ -153,91 +218,115 @@ function EditDialog({ children, ...props }: DialogProps) {
               <div className="grid grid-cols-2 gap-4">
                 <Field>
                   <FieldLabel htmlFor="date-of-birth-month">誕生月</FieldLabel>
-                  <Select defaultValue="">
-                    <SelectTrigger id="date-of-birth-month">
-                      <SelectValue placeholder={etrianMonths[0].name} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value={etrianMonths[0].name}>
-                        {etrianMonths[0].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[1].name}>
-                        {etrianMonths[1].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[2].name}>
-                        {etrianMonths[2].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[3].name}>
-                        {etrianMonths[3].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[4].name}>
-                        {etrianMonths[4].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[5].name}>
-                        {etrianMonths[5].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[6].name}>
-                        {etrianMonths[6].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[7].name}>
-                        {etrianMonths[7].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[8].name}>
-                        {etrianMonths[8].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[9].name}>
-                        {etrianMonths[9].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[10].name}>
-                        {etrianMonths[10].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[11].name}>
-                        {etrianMonths[11].name}
-                      </SelectItem>
-                      <SelectItem value={etrianMonths[12].name}>
-                        {etrianMonths[12].name}
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Controller
+                    name="dateOfBirth.month"
+                    control={form.control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value ?? UNSET_SELECT_VALUE}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger id="date-of-birth-month">
+                          <SelectValue placeholder={etrianMonths[0].name} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value={UNSET_SELECT_VALUE}>
+                            {UNSET_SELECT_VALUE}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[0].name}>
+                            {etrianMonths[0].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[1].name}>
+                            {etrianMonths[1].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[2].name}>
+                            {etrianMonths[2].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[3].name}>
+                            {etrianMonths[3].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[4].name}>
+                            {etrianMonths[4].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[5].name}>
+                            {etrianMonths[5].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[6].name}>
+                            {etrianMonths[6].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[7].name}>
+                            {etrianMonths[7].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[8].name}>
+                            {etrianMonths[8].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[9].name}>
+                            {etrianMonths[9].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[10].name}>
+                            {etrianMonths[10].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[11].name}>
+                            {etrianMonths[11].name}
+                          </SelectItem>
+                          <SelectItem value={etrianMonths[12].name}>
+                            {etrianMonths[12].name}
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
                 </Field>
 
                 <Field>
                   <FieldLabel htmlFor="date-of-birth-day">日</FieldLabel>
-                  <Select defaultValue="">
-                    <SelectTrigger id="date-of-birth-day">
-                      <SelectValue placeholder="1" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1">1</SelectItem>
-                      <SelectItem value="2">2</SelectItem>
-                      <SelectItem value="3">3</SelectItem>
-                      <SelectItem value="4">4</SelectItem>
-                      <SelectItem value="5">5</SelectItem>
-                      <SelectItem value="6">6</SelectItem>
-                      <SelectItem value="7">7</SelectItem>
-                      <SelectItem value="8">8</SelectItem>
-                      <SelectItem value="9">9</SelectItem>
-                      <SelectItem value="10">10</SelectItem>
-                      <SelectItem value="11">11</SelectItem>
-                      <SelectItem value="12">12</SelectItem>
-                      <SelectItem value="13">13</SelectItem>
-                      <SelectItem value="14">14</SelectItem>
-                      <SelectItem value="15">15</SelectItem>
-                      <SelectItem value="16">16</SelectItem>
-                      <SelectItem value="17">17</SelectItem>
-                      <SelectItem value="18">18</SelectItem>
-                      <SelectItem value="19">19</SelectItem>
-                      <SelectItem value="20">20</SelectItem>
-                      <SelectItem value="21">21</SelectItem>
-                      <SelectItem value="22">22</SelectItem>
-                      <SelectItem value="23">23</SelectItem>
-                      <SelectItem value="24">24</SelectItem>
-                      <SelectItem value="25">25</SelectItem>
-                      <SelectItem value="26">26</SelectItem>
-                      <SelectItem value="27">27</SelectItem>
-                      <SelectItem value="28">28</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Controller
+                    name="dateOfBirth.day"
+                    control={form.control}
+                    render={({ field }) => (
+                      <Select
+                        value={field.value ?? UNSET_SELECT_VALUE}
+                        onValueChange={field.onChange}
+                      >
+                        <SelectTrigger id="date-of-birth-day">
+                          <SelectValue placeholder="1" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value={UNSET_SELECT_VALUE}>
+                            {UNSET_SELECT_VALUE}
+                          </SelectItem>
+                          <SelectItem value="1">1</SelectItem>
+                          <SelectItem value="2">2</SelectItem>
+                          <SelectItem value="3">3</SelectItem>
+                          <SelectItem value="4">4</SelectItem>
+                          <SelectItem value="5">5</SelectItem>
+                          <SelectItem value="6">6</SelectItem>
+                          <SelectItem value="7">7</SelectItem>
+                          <SelectItem value="8">8</SelectItem>
+                          <SelectItem value="9">9</SelectItem>
+                          <SelectItem value="10">10</SelectItem>
+                          <SelectItem value="11">11</SelectItem>
+                          <SelectItem value="12">12</SelectItem>
+                          <SelectItem value="13">13</SelectItem>
+                          <SelectItem value="14">14</SelectItem>
+                          <SelectItem value="15">15</SelectItem>
+                          <SelectItem value="16">16</SelectItem>
+                          <SelectItem value="17">17</SelectItem>
+                          <SelectItem value="18">18</SelectItem>
+                          <SelectItem value="19">19</SelectItem>
+                          <SelectItem value="20">20</SelectItem>
+                          <SelectItem value="21">21</SelectItem>
+                          <SelectItem value="22">22</SelectItem>
+                          <SelectItem value="23">23</SelectItem>
+                          <SelectItem value="24">24</SelectItem>
+                          <SelectItem value="25">25</SelectItem>
+                          <SelectItem value="26">26</SelectItem>
+                          <SelectItem value="27">27</SelectItem>
+                          <SelectItem value="28">28</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
                 </Field>
               </div>
 
@@ -246,6 +335,8 @@ function EditDialog({ children, ...props }: DialogProps) {
                 <Input
                   id="affiliations"
                   placeholder="ギルド名,エトリア,etc..."
+                  autoComplete="off"
+                  {...form.register("affiliations")}
                 />
                 <FieldDescription>
                   所属ギルドや居住地などを入力してください。
@@ -382,9 +473,10 @@ function BackupDialog({
 type EtrianItemProps = {
   etrian: Etrian;
   onDelete: (etrian: Etrian) => void;
+  onUpdate: (etrian: Etrian) => void;
 };
 
-function EtrianItem({ etrian, onDelete }: EtrianItemProps) {
+function EtrianItem({ etrian, onDelete, onUpdate }: EtrianItemProps) {
   return (
     <Item>
       <ItemMedia>
@@ -415,7 +507,7 @@ function EtrianItem({ etrian, onDelete }: EtrianItemProps) {
       </ItemContent>
 
       <ItemActions>
-        <EditDialog>
+        <EditDialog etrian={etrian} onSave={onUpdate}>
           <Button variant="ghost" size="icon" className="rounded-full">
             <Pencil />
           </Button>
@@ -447,6 +539,11 @@ export function EtrianRegistry() {
     defaultValues: {
       name: "",
       memo: "",
+      dateOfBirth: {
+        month: UNSET_SELECT_VALUE,
+        day: UNSET_SELECT_VALUE,
+      },
+      affiliations: "",
     },
   });
 
@@ -513,6 +610,18 @@ export function EtrianRegistry() {
     });
   }, []);
 
+  const handleUpdate = React.useCallback((updatedEtrian: Etrian) => {
+    setStoredEtrians((prev) =>
+      prev.map((etrian) =>
+        etrian.id === updatedEtrian.id ? updatedEtrian : etrian,
+      ),
+    );
+
+    toast.success(`冒険者の登録情報を更新しました！`, {
+      description: `冒険者: ${updatedEtrian.name}`,
+    });
+  }, []);
+
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     const newEtrian: Etrian = {
       id: crypto.randomUUID(),
@@ -567,7 +676,11 @@ export function EtrianRegistry() {
         <ItemGroup>
           {storedEtrians.map((etrian, index) => (
             <React.Fragment key={etrian.id}>
-              <EtrianItem etrian={etrian} onDelete={handleDelete} />
+              <EtrianItem
+                etrian={etrian}
+                onDelete={handleDelete}
+                onUpdate={handleUpdate}
+              />
               {index !== storedEtrians.length - 1 && <ItemSeparator />}
             </React.Fragment>
           ))}
