@@ -211,7 +211,7 @@ export function EtrianRegistry() {
         month: newDateOfBirthMonth,
         day: newDateOfBirthDay,
       },
-      guild: [{ name: newGuild.trim() }],
+      guild: [],
       orderNum: 0,
     };
 
