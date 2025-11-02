@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react/no-array-index-key */
+
 import { cva, type VariantProps } from "class-variance-authority";
 import { useMemo } from "react";
 
