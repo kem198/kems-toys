@@ -7,7 +7,6 @@ import {
 import { etrianMonths } from "@/app/(toys)/etrian-registry/_constants/month";
 import { toEtrianDate } from "@/app/(toys)/etrian-registry/_utils/etrian-utils";
 import { Etrian } from "@/app/(toys)/etrian-registry/types/etrian";
-import { DeleteDialogTrigger } from "@/components/shared/dialog";
 import { JsonDisplay } from "@/components/shared/json-display";
 import { Required } from "@/components/shared/required";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -289,6 +288,47 @@ function EditDialog({ children, ...props }: DialogProps) {
           <Button type="submit" form="edit">
             <UserRoundCheck />
             更新
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+type DeleteDialogTriggerProps = {
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  content?: React.ReactNode;
+  children: React.ReactNode;
+  triggerProps?: React.ComponentProps<typeof DialogTrigger>;
+};
+
+function DeleteDialogTrigger({
+  title,
+  description,
+  content,
+  children,
+  triggerProps,
+}: DeleteDialogTriggerProps) {
+  return (
+    <Dialog>
+      <DialogTrigger {...triggerProps}>{children}</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          {description && <DialogDescription>{description}</DialogDescription>}
+        </DialogHeader>
+
+        {content}
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              キャンセル
+            </Button>
+          </DialogClose>
+          <Button type="submit" variant="destructive">
+            削除
           </Button>
         </DialogFooter>
       </DialogContent>
