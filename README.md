@@ -45,6 +45,11 @@ npm run dev
 - [Setup Next.js with Airbnb ESLint, Prettier, TypeScript and Tailwind CSS \| Max Shen Dev](https://m4xshen.dev/posts/setup-nextjs-with-airbnb-eslint-prettier-typescript-and-tailwindcss/)
 - [【完全版】Next.jsのSSG、SSR、ISR、CSRを図とコードでスッキリ理解する - らくらくエンジニア](https://rakuraku-engineer.com/posts/nextjs-app-ssgssr/)
 
+### React
+
+- [React で localStorage 利用時の hydration エラーに対応する](https://zenn.dev/yami_beta/articles/ad209be154945f)
+- [useSyncExternalStore – React](https://react.dev/reference/react/useSyncExternalStore#subscribing-to-a-browser-api)
+
 ### Styling
 
 - [Tailwind CSS - Rapidly build modern websites without ever leaving your HTML.](https://tailwindcss.com/)
