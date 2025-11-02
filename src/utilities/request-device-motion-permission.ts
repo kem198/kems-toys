@@ -9,12 +9,11 @@ async function requestDeviceMotionPermission() {
   const { requestPermission } =
     DeviceOrientationEvent as unknown as DeviceOrientationEventIOS;
 
-  if (requestPermission) {
-    // iOS Safari でのみ存在する関数があれば実行する
-    await requestPermission();
-  } else {
-    alert("DeviceMotionEvent.requestPermission is not found");
+  if (!requestPermission) {
+    return;
   }
+
+  await requestPermission();
 }
 
 export { requestDeviceMotionPermission };

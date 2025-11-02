@@ -1,11 +1,11 @@
 import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   AffiliationBadge,
-  BirthdayMessage,
-  ConfirmDialog,
   DateOfBirthBadge,
-  EditDialog,
-} from "@/app/(toys)/etrian-calendar/_features/registry/components";
+} from "@/app/(toys)/etrian-calendar/_features/registry/components/badge";
+import { BirthdayMessage } from "@/app/(toys)/etrian-calendar/_features/registry/components/birthday-message";
+import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
+import { EditDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/edit-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
