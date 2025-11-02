@@ -120,8 +120,8 @@ function EtrianItem({ etrian }: EtrianItemProps) {
 }
 
 export function EtrianRegistry() {
-  const KEY = "etrianRegistryData";
-  const etrianRegistryData: Etrian[] = [
+  const KEY = "etrianRegistry";
+  const initialEtrianRegistryValue: Etrian[] = [
     {
       id: "a",
       name: "リン",
@@ -167,9 +167,9 @@ export function EtrianRegistry() {
   const [etrians, setEtrians] = useState<Etrian[]>(() => {
     const stored = localStorage.getItem(KEY);
     try {
-      return stored ? JSON.parse(stored) : etrianRegistryData;
+      return stored ? JSON.parse(stored) : initialEtrianRegistryValue;
     } catch {
-      return etrianRegistryData;
+      return initialEtrianRegistryValue;
     }
   });
 
