@@ -28,7 +28,7 @@ function EtrianRegistrySkeleton() {
   return (
     <Item>
       <ItemMedia>
-        <Skeleton className="w-fullrelative flex aspect-square h-10 w-10 shrink-0 overflow-hidden rounded-full" />
+        <Skeleton className="w-full relative flex aspect-square h-10 w-10 shrink-0 overflow-hidden rounded-full" />
       </ItemMedia>
 
       <ItemContent className="gap-1">
