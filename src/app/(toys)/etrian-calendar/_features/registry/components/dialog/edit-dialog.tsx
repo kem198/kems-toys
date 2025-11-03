@@ -146,7 +146,13 @@ export function EditDialog({
         {children}
       </DialogTrigger>
 
-      <DialogContent className="max-h-[72vh] overflow-auto">
+      <DialogContent
+        className="max-h-[72vh] overflow-auto"
+        // オートフォーカスを無効化する
+        onOpenAutoFocus={(event) => {
+          event.preventDefault();
+        }}
+      >
         <DialogHeader>
           <DialogTitle>登録情報の編集</DialogTitle>
           <DialogDescription>
