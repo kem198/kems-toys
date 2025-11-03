@@ -32,7 +32,7 @@ export function EtrianRegistry() {
       const newEtrian: Etrian = {
         id: crypto.randomUUID(),
         name: trimmedName,
-        orderNum: 0,
+        order: 0,
         dateOfBirth: {},
         affiliations: [],
       };
