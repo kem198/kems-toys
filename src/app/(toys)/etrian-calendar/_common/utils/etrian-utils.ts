@@ -9,6 +9,7 @@ import {
   EtrianNewYearsEveName,
   EtrianNewYearsEveNameKana,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { isLeapYear } from "@/utilities/date-utils";
 
 export function toEtrianDate(date: Date): {
   month: {
@@ -52,6 +53,7 @@ export function toEtrianDate(date: Date): {
   }
 
   // 大晦日以外は etrianMonths の配列に割り当てる
+  // e.g. 85 ⇒  (28 * 3 + 1) ⇒ 王虎ノ月 1 日
   const monthIndex = Math.floor((dayOfYear - 1) / 28);
   const day = ((dayOfYear - 1) % 28) + 1;
   return { month: etrianMonths[monthIndex], day };
@@ -64,17 +66,10 @@ export function toSolarDate({
 }: {
   year: number;
   month: EtrianMonthName | EtrianNewYearsEveName;
-  day?: EtrianDay;
+  day: EtrianDay;
 }): Date {
-  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-
   if (month === etrianNewYearsEve.name) {
-    if (!isLeapYear) {
-      // Non-leap years always end on December 31st regardless of the provided day.
-      return new Date(year, 11, 31);
-    }
-
-    if (day === undefined || day === 2) {
+    if (!isLeapYear(new Date(year))) {
       return new Date(year, 11, 31);
     }
 
@@ -82,21 +77,22 @@ export function toSolarDate({
       return new Date(year, 11, 30);
     }
 
-    throw new Error("Invalid day specified for 鬼乎ノ日");
-  }
+    if (day === 2) {
+      return new Date(year, 11, 31);
+    }
 
-  if (day === undefined) {
-    throw new Error("Day is required for regular Etrian months");
+    throw new Error("Invalid day specified for 鬼乎ノ日 (must be 1 or 2)");
   }
 
   const monthIndex = etrianMonths.findIndex(
     (etrianMonth) => etrianMonth.name === month,
   );
-
   if (monthIndex === -1) {
     throw new Error(`Unknown Etrian month: ${month}`);
   }
 
+  // 各月の開始日は「28 * (その月の index) + 1」日目
+  // e.g. 王虎ノ月 1 日 (28 * 3 + 1) ⇒ 85
   const dayOfYear = monthIndex * 28 + day;
 
   return new Date(year, 0, dayOfYear);
