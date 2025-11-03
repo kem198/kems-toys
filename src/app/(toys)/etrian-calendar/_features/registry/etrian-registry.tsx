@@ -9,7 +9,8 @@ import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/r
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
-import { useCallback, useEffect } from "react";
+import { UserPen } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export function EtrianRegistry() {
@@ -22,6 +23,8 @@ export function EtrianRegistry() {
     deleteEtrianById,
     resetEtrians,
   } = useEtrianRegistry();
+
+  const [showActions, setShowActions] = useState(false);
 
   const handleCreate = useCallback(
     (values: RegistryFormValues) => {
@@ -121,26 +124,40 @@ export function EtrianRegistry() {
         <EtrianRegistryItemList
           etrians={storedEtrians}
           isLoaded={isLoaded}
+          showActions={showActions}
           onDelete={handleDelete}
           onUpdate={handleUpdate}
           onReorder={handleReorder}
         />
 
-        <div className="flex justify-end gap-2">
-          <ConfirmDialog
-            title="登録状況のリセット"
-            description="登録状況を初期状態に戻します。この操作は元に戻せません！"
-            confirmButtonLabel="リセット"
-            confirmButtonVariant="destructive"
-            onConfirm={handleReset}
-            className="w-fit"
-          >
-            <Button variant="ghost">リセット</Button>
-          </ConfirmDialog>
+        <div className="flex justify-between gap-2">
+          <div className="flex gap-2">
+            {showActions && (
+              <>
+                <ConfirmDialog
+                  title="登録状況のリセット"
+                  description="登録状況を初期状態に戻します。この操作は元に戻せません！"
+                  confirmButtonLabel="リセット"
+                  confirmButtonVariant="destructive"
+                  onConfirm={handleReset}
+                  className="w-fit"
+                >
+                  <Button variant="destructive">リセット</Button>
+                </ConfirmDialog>
+                <BackupDialog storedEtrians={storedEtrians} className="w-fit">
+                  <Button variant="secondary">バックアップ</Button>
+                </BackupDialog>
+              </>
+            )}
+          </div>
 
-          <BackupDialog storedEtrians={storedEtrians} className="w-fit">
-            <Button variant="ghost">バックアップ</Button>
-          </BackupDialog>
+          <Button
+            variant={showActions ? "default" : "outline"}
+            onClick={() => setShowActions((prev) => !prev)}
+          >
+            <UserPen />
+            {showActions ? "完了" : "編集"}
+          </Button>
         </div>
       </div>
     </div>
