@@ -146,7 +146,7 @@ export function EditDialog({
         {children}
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="max-h-[72vh] overflow-auto">
         <DialogHeader>
           <DialogTitle>登録情報の編集</DialogTitle>
           <DialogDescription>
