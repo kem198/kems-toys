@@ -58,7 +58,7 @@ export const toEtrianDate = (
   // e.g. 85 ⇒  (28 * 3 + 1) ⇒ 王虎ノ月 1 日
   const monthIndex = Math.floor((dayOfYear - 1) / 28);
   const day = ((dayOfYear - 1) % 28) + 1;
-  return { month: etrianMonths[monthIndex], day };
+  return { month: etrianMonths[monthIndex], day: day as EtrianDay };
 };
 
 /**
