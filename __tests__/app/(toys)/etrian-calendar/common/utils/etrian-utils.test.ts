@@ -448,7 +448,7 @@ describe("etrian-utils tests", () => {
       });
     });
 
-    it("'2025-12-31 00:00:00' を与えた場合、'鬼乎ノ日' を返すこと", () => {
+    it("'2025-12-31 00:00:00' を与えた場合、'鬼乎ノ日 1 日' を返すこと", () => {
       // Arrange
       const realDate = new Date("2025-12-31 00:00:00");
 
@@ -461,10 +461,11 @@ describe("etrian-utils tests", () => {
           name: "鬼乎ノ日",
           kana: "ものかのひ",
         },
+        day: 1,
       });
     });
 
-    it("'2025-12-31 23:59:59' を与えた場合、'鬼乎ノ日' を返すこと", () => {
+    it("'2025-12-31 23:59:59' を与えた場合、'鬼乎ノ日 1 日' を返すこと", () => {
       // Arrange
       const realDate = new Date("2025-12-31 23:59:59");
 
@@ -477,6 +478,7 @@ describe("etrian-utils tests", () => {
           name: "鬼乎ノ日",
           kana: "ものかのひ",
         },
+        day: 1,
       });
     });
 
@@ -529,7 +531,7 @@ describe("etrian-utils tests", () => {
         });
       });
 
-      it("'2024-12-31 00:00:00' (閏年最終日) を与えた場合、'鬼乎ノ日' を返すこと", () => {
+      it("'2024-12-31 00:00:00' (閏年最終日) を与えた場合、'鬼乎ノ日 2 日' を返すこと", () => {
         const realDate = new Date("2024-12-31 00:00:00");
 
         // Act
@@ -541,6 +543,23 @@ describe("etrian-utils tests", () => {
             name: "鬼乎ノ日",
             kana: "ものかのひ",
           },
+          day: 2,
+        });
+      });
+
+      it("'2024-12-31 23:59:59' (閏年最終日) を与えた場合、'鬼乎ノ日 2 日' を返すこと", () => {
+        const realDate = new Date("2024-12-31 59:59:59");
+
+        // Act
+        const etrianDate = toEtrianDate(realDate);
+
+        // Assert
+        expect(etrianDate).toEqual({
+          month: {
+            name: "鬼乎ノ日",
+            kana: "ものかのひ",
+          },
+          day: 2,
         });
       });
     });
