@@ -83,7 +83,7 @@ export function EtrianRegistry() {
     const newEtrians = [...etrians];
     const [removed] = newEtrians.splice(startIndex, 1);
     newEtrians.splice(endIndex, 0, removed);
-    return newEtrians.map((t, i) => ({ ...t, order: i + 1 }));
+    return newEtrians.map((t, i) => ({ ...t, order: i }));
   }
 
   const handleReorder = useCallback(
