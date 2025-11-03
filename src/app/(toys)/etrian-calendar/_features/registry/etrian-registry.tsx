@@ -135,7 +135,13 @@ export function EtrianRegistry() {
               <>
                 <ConfirmDialog
                   title="登録状況のリセット"
-                  description="登録状況を初期状態に戻します。この操作は元に戻せません！"
+                  description={
+                    <>
+                      登録状況を初期状態に戻します。
+                      <br />
+                      この操作は元に戻せません！
+                    </>
+                  }
                   confirmButtonLabel="リセット"
                   confirmButtonVariant="destructive"
                   onConfirm={handleReset}

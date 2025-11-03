@@ -121,7 +121,13 @@ function EtrianRegistryItem({
             </ButtonGroup>
             <ConfirmDialog
               title="冒険者情報の削除"
-              description="下記の冒険者情報を削除します。この操作は元に戻せません！"
+              description={
+                <>
+                  下記の冒険者情報を削除します。
+                  <br />
+                  この操作は元に戻せません！
+                </>
+              }
               content={
                 <p>
                   冒険者名: <span className="font-semibold">{etrian.name}</span>
