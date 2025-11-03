@@ -20,7 +20,7 @@ export const sampleEtrians: Etrian[] = [
       day: 1,
     },
     affiliations: ["アトラス", "エトリア"],
-    orderNum: 0,
+    orderNum: 1,
     memo: "ウルトラCだろう…私もそう思う",
   },
   {
@@ -31,7 +31,7 @@ export const sampleEtrians: Etrian[] = [
       day: 1,
     },
     affiliations: ["アトラス", "ハイ・ラガード"],
-    orderNum: 0,
+    orderNum: 2,
     memo: "私のフィギュアで3倍売れる",
   },
 ];
