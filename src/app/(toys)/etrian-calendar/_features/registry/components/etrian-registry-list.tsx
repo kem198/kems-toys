@@ -88,6 +88,32 @@ function EtrianRegistryItem({
       <ItemActions className="flex w-full items-center justify-end gap-2 md:w-auto">
         {isEditing && (
           <>
+            <ConfirmDialog
+              title="冒険者情報の削除"
+              description={
+                <>
+                  下記の冒険者情報を削除します。
+                  <br />
+                  この操作は元に戻せません！
+                </>
+              }
+              content={
+                <p>
+                  冒険者名: <span className="font-semibold">{etrian.name}</span>
+                </p>
+              }
+              confirmButtonLabel="削除"
+              confirmButtonVariant="destructive"
+              onConfirm={() => onDelete(etrian)}
+            >
+              <Button
+                variant="destructive"
+                size="icon"
+                className="rounded-full"
+              >
+                <Trash2 />
+              </Button>
+            </ConfirmDialog>
             <ButtonGroup>
               <Button
                 variant="secondary"
@@ -119,33 +145,15 @@ function EtrianRegistryItem({
                 </Button>
               </EditDialog>
             </ButtonGroup>
-            <ConfirmDialog
-              title="冒険者情報の削除"
-              description={
-                <>
-                  下記の冒険者情報を削除します。
-                  <br />
-                  この操作は元に戻せません！
-                </>
-              }
-              content={
-                <p>
-                  冒険者名: <span className="font-semibold">{etrian.name}</span>
-                </p>
-              }
-              confirmButtonLabel="削除"
-              confirmButtonVariant="destructive"
-              onConfirm={() => onDelete(etrian)}
-            >
-              <Button
-                variant="destructive"
-                size="icon"
-                className="rounded-full"
-              >
-                <Trash2 />
-              </Button>
-            </ConfirmDialog>
           </>
+        )}
+
+        {!isEditing && (
+          <EditDialog etrian={etrian} onSave={onUpdate}>
+            <Button variant="secondary" size="icon" className="rounded-full">
+              <Pencil />
+            </Button>
+          </EditDialog>
         )}
       </ItemActions>
     </Item>
