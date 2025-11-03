@@ -1,5 +1,6 @@
 "use client";
 
+import { sampleEtrians } from "@/app/(toys)/etrian-calendar/_common/constants/sample";
 import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
@@ -72,6 +73,13 @@ export function EtrianRegistry() {
 
     toast.success("登録状況をリセットしました");
   }, [resetEtrians]);
+
+  // サンプルデータ投入
+  if (!storedEtrians || storedEtrians.length === 0) {
+    addEtrian(sampleEtrians[2]);
+    addEtrian(sampleEtrians[1]);
+    addEtrian(sampleEtrians[0]);
+  }
 
   return (
     <div className="flex flex-col gap-4">
