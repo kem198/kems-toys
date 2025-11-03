@@ -699,7 +699,7 @@ describe("etrian-utils tests", () => {
         expect(solarDate).toEqual(new Date(2024, 2, 1));
       });
 
-      it("'2024 年 鬼乎ノ日 1 日' を与えた場合、'2025-12-30' を返すこと", () => {
+      it("'2024 年 鬼乎ノ日 1 日' を与えた場合、'2024-12-30' を返すこと", () => {
         // Act
         const solarDate = toSolarDate({
           year: 2024,
@@ -711,7 +711,7 @@ describe("etrian-utils tests", () => {
         expect(solarDate).toEqual(new Date(2024, 11, 30));
       });
 
-      it("'2024 年 鬼乎ノ日 2 日' を与えた場合、'2025-12-31' を返すこと", () => {
+      it("'2024 年 鬼乎ノ日 2 日' を与えた場合、'2024-12-31' を返すこと", () => {
         // Act
         const solarDate = toSolarDate({
           year: 2024,
