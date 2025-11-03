@@ -33,7 +33,7 @@ function EtrianRegistrySkeleton() {
 
       <ItemContent className="gap-1">
         <ItemTitle>
-          <Skeleton className="h-5 w-60 rounded-full" />
+          <Skeleton className="h-4 w-60 rounded-full" />
         </ItemTitle>
 
         <div
@@ -43,7 +43,7 @@ function EtrianRegistrySkeleton() {
             "flex gap-2",
           )}
         >
-          <Skeleton className="h-5 w-80 rounded-full" />
+          <Skeleton className="h-4 w-80 rounded-full" />
         </div>
       </ItemContent>
     </Item>
@@ -131,6 +131,8 @@ export function EtrianRegistryItemList({
   if (!isLoaded) {
     return (
       <ItemGroup>
+        <EtrianRegistrySkeleton />
+        <EtrianRegistrySkeleton />
         <EtrianRegistrySkeleton />
       </ItemGroup>
     );
