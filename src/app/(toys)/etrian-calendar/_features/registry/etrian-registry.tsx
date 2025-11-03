@@ -9,7 +9,7 @@ import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/r
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { toast } from "sonner";
 
 export function EtrianRegistry() {
@@ -70,16 +70,23 @@ export function EtrianRegistry() {
 
   const handleReset = useCallback(() => {
     resetEtrians();
-
+    localStorage.removeItem("etrianRegistryInitialized");
     toast.success("登録状況をリセットしました");
   }, [resetEtrians]);
 
   // サンプルデータ投入
-  if (!storedEtrians || storedEtrians.length === 0) {
-    addEtrian(sampleEtrians[2]);
-    addEtrian(sampleEtrians[1]);
-    addEtrian(sampleEtrians[0]);
-  }
+  useEffect(() => {
+    const hasInitialized = localStorage.getItem("etrianRegistryInitialized");
+
+    if (!hasInitialized && isLoaded && storedEtrians.length === 0) {
+      sampleEtrians.forEach(addEtrian);
+
+      // リセットしない限りサンプルデータが投入されないようにする
+      localStorage.setItem("etrianRegistryInitialized", "true");
+
+      toast.message("初期状態へリセットしました");
+    }
+  }, [isLoaded, storedEtrians, addEtrian]);
 
   return (
     <div className="flex flex-col gap-4">
