@@ -218,7 +218,7 @@ export function EditDialog({
                   <Controller
                     name="dateOfBirth.day"
                     control={form.control}
-                    render={({ field }) => (
+                    render={({ field, fieldState }) => (
                       <Select
                         value={field.value ?? UNSET_SELECT_VALUE}
                         onValueChange={field.onChange}
@@ -236,6 +236,9 @@ export function EditDialog({
                             </SelectItem>
                           ))}
                         </SelectContent>
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
                       </Select>
                     )}
                   />
