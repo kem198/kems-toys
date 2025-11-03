@@ -129,7 +129,7 @@ export function EtrianRegistry() {
           onReorder={handleReorder}
         />
 
-        <div className="sticky bottom-0 z-50 flex justify-between gap-2 border-t bg-background/70 py-4">
+        <div className="flex justify-between gap-2">
           <div className="flex gap-2">
             {isEditing && (
               <>
