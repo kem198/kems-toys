@@ -79,7 +79,10 @@ export function EtrianRegistry() {
     const hasInitialized = localStorage.getItem("etrianRegistryInitialized");
 
     if (!hasInitialized && isLoaded && storedEtrians.length === 0) {
-      sampleEtrians.forEach(addEtrian);
+      const sortedSamples = [...sampleEtrians]
+        .sort((a, b) => a.order - b.order)
+        .reverse();
+      sortedSamples.forEach(addEtrian);
 
       // リセットしない限りサンプルデータが投入されないようにする
       localStorage.setItem("etrianRegistryInitialized", "true");
