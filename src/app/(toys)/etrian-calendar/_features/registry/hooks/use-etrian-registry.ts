@@ -13,6 +13,7 @@ type UseEtrianRegistryReturn = {
   isLoaded: boolean;
   addEtrian: (etrian: Etrian) => void;
   updateEtrian: (etrian: Etrian) => void;
+  updateEtrians: (updatedEtrians: Etrian[]) => void;
   deleteEtrianById: (id: string) => void;
   resetEtrians: () => void;
 };
@@ -58,6 +59,9 @@ export function useEtrianRegistry(
     );
   }, []);
 
+  const updateEtrians = (updatedEtrians: Etrian[]) =>
+    setStoredEtrians(updatedEtrians);
+
   const deleteEtrianById = useCallback((id: string) => {
     setStoredEtrians((prev) => prev.filter((etrian) => etrian.id !== id));
   }, []);
@@ -71,6 +75,7 @@ export function useEtrianRegistry(
     isLoaded,
     addEtrian,
     updateEtrian,
+    updateEtrians,
     deleteEtrianById,
     resetEtrians,
   };

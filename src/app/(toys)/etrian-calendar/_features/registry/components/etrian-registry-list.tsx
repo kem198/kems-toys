@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/item";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { Pencil, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
 import { Fragment } from "react";
 
 function EtrianRegistrySkeleton() {
@@ -52,14 +52,20 @@ function EtrianRegistrySkeleton() {
 
 type EtrianRegistryItemProps = {
   etrian: Etrian;
+  index: number;
+  length: number;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
+  onReorder: (startIndex: number, endIndex: number) => void;
 };
 
 function EtrianRegistryItem({
   etrian,
+  index,
+  length,
   onDelete,
   onUpdate,
+  onReorder,
 }: EtrianRegistryItemProps) {
   return (
     <Item className="px-0">
@@ -110,6 +116,23 @@ function EtrianRegistryItem({
             <Trash2 />
           </Button>
         </ConfirmDialog>
+
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onReorder(index, index - 1)}
+          disabled={index === 0}
+        >
+          <ChevronUp />
+        </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => onReorder(index, index + 1)}
+          disabled={index === length - 1}
+        >
+          <ChevronDown />
+        </Button>
       </ItemActions>
     </Item>
   );
@@ -120,6 +143,7 @@ type EtrianRegistryItemListProps = {
   isLoaded: boolean;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
+  onReorder: (startIndex: number, endIndex: number) => void;
 };
 
 export function EtrianRegistryItemList({
@@ -127,6 +151,7 @@ export function EtrianRegistryItemList({
   isLoaded,
   onDelete,
   onUpdate,
+  onReorder,
 }: EtrianRegistryItemListProps) {
   if (!isLoaded) {
     return (
@@ -148,8 +173,11 @@ export function EtrianRegistryItemList({
         <Fragment key={etrian.id}>
           <EtrianRegistryItem
             etrian={etrian}
+            index={index}
             onDelete={onDelete}
             onUpdate={onUpdate}
+            onReorder={onReorder}
+            length={etrians.length}
           />
           {index !== etrians.length - 1 && <ItemSeparator />}
         </Fragment>

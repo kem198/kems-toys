@@ -18,6 +18,7 @@ export function EtrianRegistry() {
     isLoaded,
     addEtrian,
     updateEtrian,
+    updateEtrians,
     deleteEtrianById,
     resetEtrians,
   } = useEtrianRegistry();
@@ -74,6 +75,27 @@ export function EtrianRegistry() {
     toast.success("登録状況をリセットしました");
   }, [resetEtrians]);
 
+  function reorderEtrians(
+    etrians: Etrian[],
+    startIndex: number,
+    endIndex: number,
+  ): Etrian[] {
+    const newEtrians = [...etrians];
+    const [removed] = newEtrians.splice(startIndex, 1);
+    newEtrians.splice(endIndex, 0, removed);
+    return newEtrians.map((t, i) => ({ ...t, order: i + 1 }));
+  }
+
+  const handleReorder = useCallback(
+    (startIndex: number, endIndex: number) => {
+      if (!isLoaded) return;
+      const reordered = reorderEtrians(storedEtrians, startIndex, endIndex);
+      updateEtrians(reordered);
+      toast.success("冒険者の並び順を更新しました");
+    },
+    [isLoaded, storedEtrians, updateEtrians],
+  );
+
   // サンプルデータ投入
   useEffect(() => {
     const hasInitialized = localStorage.getItem("etrianRegistryInitialized");
@@ -101,6 +123,7 @@ export function EtrianRegistry() {
           isLoaded={isLoaded}
           onDelete={handleDelete}
           onUpdate={handleUpdate}
+          onReorder={handleReorder}
         />
 
         <div className="flex justify-end gap-2">
