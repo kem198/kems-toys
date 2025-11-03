@@ -9,6 +9,7 @@ import {
   EtrianNewYearsEveName,
   EtrianNewYearsEveNameKana,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { MILLISECONDS_PER_DAY } from "@/constants/date";
 import { isLeapYear } from "@/utilities/date-utils";
 
 export function toEtrianDate(date: Date): {
@@ -18,10 +19,6 @@ export function toEtrianDate(date: Date): {
   };
   day: number;
 } {
-  // 1 日分のミリ秒数
-  // e.g. 86400000
-  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-
   // (a) 与えられた Date が存在する年初の時刻 (Unix epoch time) を取る
   // e.g. 2025-01-01 00:00:00 GMT+0900 (Japan Standard Time) ⇒ 1735657200000
   const startOfYearTime = new Date(date.getFullYear(), 0, 1).getTime();
