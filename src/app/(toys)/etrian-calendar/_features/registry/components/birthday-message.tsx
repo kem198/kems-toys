@@ -9,11 +9,19 @@ type BirthdayMessageProps = {
 };
 
 export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
-  if (!etrian.dateOfBirth?.month || !etrian.dateOfBirth?.day) return null;
+  const birth = etrian.dateOfBirth;
+  if (!birth?.month) return null;
 
-  const todaysEtrianDate = toEtrianDate(new Date());
-  const isSameMonth = etrian.dateOfBirth.month === todaysEtrianDate.month.name;
-  const isSameDay = etrian.dateOfBirth.day === todaysEtrianDate.day;
+  const today = new Date();
+  const todaysEtrianDate = toEtrianDate(today);
+  const isSameMonth = birth.month === todaysEtrianDate.month.name;
+  const isSameDay = birth.day === todaysEtrianDate.day;
+
+  if (isSameMonth && !birth.day) {
+    return <span className="text-xs text-red-400">今月はお誕生月です！</span>;
+  }
+
+  if (!birth.day) return null;
 
   if (isSameMonth && isSameDay) {
     return (
@@ -23,22 +31,22 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
     );
   }
 
-  const diffDays = getDiffDaysBetweenSolarAndEtrianDate(new Date(), {
-    month: etrian.dateOfBirth.month,
-    day: etrian.dateOfBirth.day,
+  const diffDays = getDiffDaysBetweenSolarAndEtrianDate(today, {
+    month: birth.month,
+    day: birth.day,
   });
+
+  if (isSameMonth && diffDays <= 30) {
+    return (
+      <span className="text-xs text-red-400">{`今月はお誕生月です！あと ${diffDays} 日！`}</span>
+    );
+  }
 
   if (isSameMonth && diffDays > 30) {
     return (
       <span className="text-xs text-muted-foreground">
-        今月がお誕生月でした！また来年！
+        今月はお誕生月でした！また来年！
       </span>
-    );
-  }
-
-  if (isSameMonth) {
-    return (
-      <span className="text-xs text-red-400">{`今月はお誕生月です！あと ${diffDays} 日！`}</span>
     );
   }
 
