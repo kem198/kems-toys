@@ -32,10 +32,19 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
     );
   }
 
-  const diffDays = getDiffDaysBetweenSolarAndEtrianDate(today, {
-    month: birth.month,
-    day: birth.day,
-  });
+  let diffDays: number | null = null;
+  try {
+    diffDays = getDiffDaysBetweenSolarAndEtrianDate(today, {
+      month: birth.month,
+      day: birth.day,
+    });
+    if (diffDays < 0) diffDays = null;
+  } catch (e) {
+    diffDays = null;
+  }
+  if (diffDays === null) {
+    return null;
+  }
 
   if (isSameMonth && diffDays <= 30) {
     return (
