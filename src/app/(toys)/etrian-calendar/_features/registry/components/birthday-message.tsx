@@ -1,4 +1,3 @@
-// BirthdayMessage.tsx
 import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   getDiffDaysBetweenSolarAndEtrianDate,
