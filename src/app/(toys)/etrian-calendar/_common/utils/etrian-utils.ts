@@ -69,7 +69,7 @@ export function toSolarDate({
   day: EtrianDay;
 }): Date {
   if (month === etrianNewYearsEve.name) {
-    if (!isLeapYear(new Date(year))) {
+    if (!isLeapYear(new Date(year, 0, 1))) {
       return new Date(year, 11, 31);
     }
 
