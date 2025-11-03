@@ -75,6 +75,7 @@ export function EtrianRegistry() {
   const handleReset = useCallback(() => {
     resetEtrians();
     localStorage.removeItem("etrianRegistryInitialized");
+    setIsEditing(false);
     toast.success("登録状況をリセットしました");
   }, [resetEtrians]);
 
