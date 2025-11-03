@@ -18,7 +18,7 @@ export function DateOfBirthBadge({
   return (
     <Badge
       className={cn(
-        "flex items-end gap-1 whitespace-nowrap rounded-full",
+        "flex items-center gap-1 whitespace-nowrap rounded-full",
         colorClass,
         className,
       )}
@@ -59,10 +59,10 @@ export function AffiliationBadge({
   return (
     <Badge
       variant="outline"
-      className="flex items-end gap-1 whitespace-nowrap rounded-full font-normal"
+      className="flex items-center gap-1 whitespace-nowrap rounded-full font-normal"
       {...props}
     >
-      <House strokeWidth={1.5} size={14} />
+      <House strokeWidth={1.5} size={12} />
       <span>{affiliation}</span>
     </Badge>
   );
