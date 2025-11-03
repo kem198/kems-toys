@@ -601,6 +601,46 @@ describe("etrian-utils tests", () => {
       expect(solarDate).toEqual(new Date(2025, 0, 29));
     });
 
+    it("'2025 年 笛鼠ノ月 28 日' を与えた場合、'2025-02-25' を返すこと", () => {
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "笛鼠ノ月",
+        day: 28,
+      });
+
+      expect(solarDate).toEqual(new Date(2025, 1, 25));
+    });
+
+    it("'2025 年 天牛ノ月 1 日' を与えた場合、'2025-02-26' を返すこと", () => {
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "天牛ノ月",
+        day: 1,
+      });
+
+      expect(solarDate).toEqual(new Date(2025, 1, 26));
+    });
+
+    it("'2025 年 天牛ノ月 28 日' を与えた場合、'2025-03-25' を返すこと", () => {
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "天牛ノ月",
+        day: 28,
+      });
+
+      expect(solarDate).toEqual(new Date(2025, 2, 25));
+    });
+
+    it("'2025 年 王虎ノ月 1 日' を与えた場合、'2025-03-26' を返すこと", () => {
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "王虎ノ月",
+        day: 1,
+      });
+
+      expect(solarDate).toEqual(new Date(2025, 2, 26));
+    });
+
     it("'2025 年 怒猪ノ月 28 日' を与えた場合、'2025-12-30' を返すこと", () => {
       // Act
       const solarDate = toSolarDate({
