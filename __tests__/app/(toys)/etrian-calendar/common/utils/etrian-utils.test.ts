@@ -1,4 +1,7 @@
-import { toEtrianDate } from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
+import {
+  toEtrianDate,
+  toSolarDate,
+} from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
 import { describe, expect, it } from "vitest";
 
 describe("etrian-utils tests", () => {
@@ -447,6 +450,113 @@ describe("etrian-utils tests", () => {
     });
   });
 
+  describe("toSolarDate() tests", () => {
+    it("'2025 年 皇帝ノ月 1 日' を与えた場合、'2025-01-01' を返すこと", () => {
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "皇帝ノ月",
+        day: 1,
+      });
+
+      // Assert
+      expect(solarDate).toEqual(new Date(2025, 0, 1));
+    });
+
+    it("'2025 年 皇帝ノ月 28 日' を与えた場合、'2025-01-28' を返すこと", () => {
+      // Act
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "皇帝ノ月",
+        day: 28,
+      });
+
+      // Assert
+      expect(solarDate).toEqual(new Date(2025, 0, 28));
+    });
+
+    it("'2025 年 笛鼠ノ月 1 日' を与えた場合、'2025-01-29' を返すこと", () => {
+      // Act
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "笛鼠ノ月",
+        day: 1,
+      });
+
+      // Assert
+      expect(solarDate).toEqual(new Date(2025, 0, 29));
+    });
+
+    it("'2025 年 怒猪ノ月 28 日' を与えた場合、'2025-12-30' を返すこと", () => {
+      // Act
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "怒猪ノ月",
+        day: 28,
+      });
+
+      // Assert
+      expect(solarDate).toEqual(new Date(2025, 11, 30));
+    });
+
+    it("'2025 年 鬼乎ノ日' を与えた場合、'2025-12-31' を返すこと", () => {
+      // Act
+      const solarDate = toSolarDate({
+        year: 2025,
+        month: "鬼乎ノ日",
+      });
+
+      // Assert
+      expect(solarDate).toEqual(new Date(2025, 11, 31));
+    });
+
+    describe("閏年の考慮", () => {
+      it("'2024 年 天牛ノ月 4 日' を与えた場合、'2024-02-29' (閏年のみの日付) を返すこと", () => {
+        // Act
+        const solarDate = toSolarDate({
+          year: 2024,
+          month: "天牛ノ月",
+          day: 4,
+        });
+
+        // Assert
+        expect(solarDate).toEqual(new Date(2024, 1, 29));
+      });
+
+      it("'2024 年 天牛ノ月 5 日' を与えた場合、'2024-03-01' (閏年のみの日付翌日) を返すこと", () => {
+        // Act
+        const solarDate = toSolarDate({
+          year: 2024,
+          month: "天牛ノ月",
+          day: 5,
+        });
+
+        // Assert
+        expect(solarDate).toEqual(new Date(2024, 2, 1));
+      });
+
+      it("'2024 年 鬼乎ノ日 1 日' を与えた場合、'2025-12-30' を返すこと", () => {
+        // Act
+        const solarDate = toSolarDate({
+          year: 2024,
+          month: "鬼乎ノ日",
+          day: 1,
+        });
+
+        // Assert
+        expect(solarDate).toEqual(new Date(2024, 11, 30));
+      });
+
+      it("'2024 年 鬼乎ノ日 2 日' を与えた場合、'2025-12-31' を返すこと", () => {
+        // Act
+        const solarDate = toSolarDate({
+          year: 2024,
+          month: "鬼乎ノ日",
+          day: 2,
+        });
+
+        // Assert
+        expect(solarDate).toEqual(new Date(2024, 11, 31));
+      });
     });
   });
 });
