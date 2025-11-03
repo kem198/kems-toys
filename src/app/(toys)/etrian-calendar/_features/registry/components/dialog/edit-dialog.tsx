@@ -265,7 +265,7 @@ export function EditDialog({
                     <Textarea
                       {...field}
                       id="etrian-memo"
-                      placeholder="ウルトラCだろう…私もそう思う"
+                      placeholder="エトリアの冒険者。ずうずうしい。"
                       rows={4}
                       className="resize-none"
                       aria-invalid={fieldState.invalid}
