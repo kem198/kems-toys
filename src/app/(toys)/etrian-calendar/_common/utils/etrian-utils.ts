@@ -12,13 +12,18 @@ import {
 import { MILLISECONDS_PER_DAY } from "@/constants/date";
 import { isLeapYear } from "@/utilities/date-utils";
 
-export function toEtrianDate(date: Date): {
+/**
+ * 太陽暦を世界樹歴へ変換する
+ */
+export const toEtrianDate = (
+  date: Date,
+): {
   month: {
     name: EtrianMonthName | EtrianNewYearsEveName;
     kana: EtrianMonthNameKana | EtrianNewYearsEveNameKana;
   };
-  day: number;
-} {
+  day: EtrianDay;
+} => {
   // (a) 与えられた Date が存在する年初の時刻 (Unix epoch time) を取る
   // e.g. 2025-01-01 00:00:00 GMT+0900 (Japan Standard Time) ⇒ 1735657200000
   const startOfYearTime = new Date(date.getFullYear(), 0, 1).getTime();
@@ -54,9 +59,12 @@ export function toEtrianDate(date: Date): {
   const monthIndex = Math.floor((dayOfYear - 1) / 28);
   const day = ((dayOfYear - 1) % 28) + 1;
   return { month: etrianMonths[monthIndex], day };
-}
+};
 
-export function toSolarDate({
+/**
+ * 世界樹暦を太陽歴へ変換する
+ */
+export const toSolarDate = ({
   year,
   month,
   day,
@@ -64,7 +72,7 @@ export function toSolarDate({
   year: number;
   month: EtrianMonthName | EtrianNewYearsEveName;
   day: EtrianDay;
-}): Date {
+}): Date => {
   if (month === etrianNewYearsEve.name) {
     if (!isLeapYear(new Date(year, 0, 1))) {
       return new Date(year, 11, 31);
@@ -93,4 +101,44 @@ export function toSolarDate({
   const dayOfYear = monthIndex * 28 + day;
 
   return new Date(year, 0, dayOfYear);
-}
+};
+
+/**
+ * 太陽歴と世界樹歴の日数差を返す
+ */
+export const getDiffDaysBetweenSolarAndEtrianDate = (
+  solarDate: Date,
+  etrianDate: {
+    month: EtrianMonthName | EtrianNewYearsEveName;
+    day: EtrianDay;
+  },
+): number => {
+  // 時刻の影響を避けるため「太陽暦 00:00:00」を基準にする
+  const solarDateMidnight = new Date(
+    solarDate.getFullYear(),
+    solarDate.getMonth(),
+    solarDate.getDate(),
+  );
+
+  // 太陽暦の年を割り当てて今年の世界樹歴を作成する
+  let targetEtrianDate = toSolarDate({
+    year: solarDateMidnight.getFullYear(),
+    month: etrianDate.month,
+    day: etrianDate.day,
+  });
+
+  // 今年の世界樹歴が過去なら翌年の日付にする
+  if (targetEtrianDate.getTime() < solarDateMidnight.getTime()) {
+    targetEtrianDate = toSolarDate({
+      year: solarDateMidnight.getFullYear() + 1,
+      month: etrianDate.month,
+      day: etrianDate.day,
+    });
+  }
+
+  const diffMilliseconds =
+    targetEtrianDate.getTime() - solarDateMidnight.getTime();
+  const diffDays = Math.ceil(diffMilliseconds / MILLISECONDS_PER_DAY);
+
+  return diffDays;
+};
