@@ -548,7 +548,7 @@ describe("etrian-utils tests", () => {
       });
 
       it("'2024-12-31 23:59:59' (閏年最終日) を与えた場合、'鬼乎ノ日 2 日' を返すこと", () => {
-        const realDate = new Date("2024-12-31 59:59:59");
+        const realDate = new Date("2024-12-31 23:59:59");
 
         // Act
         const etrianDate = toEtrianDate(realDate);
