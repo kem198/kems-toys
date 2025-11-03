@@ -6,12 +6,16 @@ type BirthdayMessageProps = {
 };
 
 export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
-  const today = toEtrianDate(new Date());
-  const isSameMonth = etrian.dateOfBirth?.month === today.month.name;
-  const isSameDay = etrian.dateOfBirth?.day === today.day;
+  const todaysEtrianDate = toEtrianDate(new Date());
+  const isSameMonth = etrian.dateOfBirth?.month === todaysEtrianDate.month.name;
+  const isSameDay = etrian.dateOfBirth?.day === todaysEtrianDate.day;
 
   if (isSameMonth && isSameDay) {
-    return <span className="text-xs text-red-400">🎉本日がお誕生日です！</span>;
+    return (
+      <span className="text-xs text-red-400">
+        🎉本日がお誕生日です！おめでとう！
+      </span>
+    );
   }
 
   if (isSameMonth) {
