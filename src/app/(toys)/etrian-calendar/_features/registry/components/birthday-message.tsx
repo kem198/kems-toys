@@ -30,7 +30,7 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
 
   if (isSameMonth && diffDays > 30) {
     return (
-      <span className="text-xs text-red-400">
+      <span className="text-xs text-muted-foreground">
         今月がお誕生月でした！また来年！
       </span>
     );
