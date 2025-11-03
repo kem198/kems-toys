@@ -8,6 +8,7 @@ import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/c
 import { EditDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/edit-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
 import {
   Item,
   ItemActions,
@@ -54,28 +55,29 @@ type EtrianRegistryItemProps = {
   etrian: Etrian;
   index: number;
   length: number;
+  showActions: boolean;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
   onReorder: (startIndex: number, endIndex: number) => void;
 };
 
 function EtrianRegistryItem({
-  etrian,
   index,
+  etrian,
   length,
+  showActions,
   onDelete,
   onUpdate,
   onReorder,
 }: EtrianRegistryItemProps) {
   return (
-    <Item className="px-0">
+    <Item className="justify-end px-0">
       <ItemMedia>
         <Avatar>
           <AvatarImage className="grayscale" />
           <AvatarFallback>{etrian.name.charAt(0)}</AvatarFallback>
         </Avatar>
       </ItemMedia>
-
       <ItemContent>
         <ItemTitle className="flex flex-col items-start gap-0">
           {etrian.name}
@@ -95,44 +97,61 @@ function EtrianRegistryItem({
       </ItemContent>
 
       <ItemActions>
-        <EditDialog etrian={etrian} onSave={onUpdate}>
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <Pencil />
-          </Button>
-        </EditDialog>
-        <ConfirmDialog
-          title="冒険者情報の削除"
-          description="下記の冒険者情報を削除します。この操作は元に戻せません！"
-          content={
-            <p>
-              冒険者名: <span className="font-semibold">{etrian.name}</span>
-            </p>
-          }
-          confirmButtonLabel="削除"
-          confirmButtonVariant="destructive"
-          onConfirm={() => onDelete(etrian)}
-        >
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <Trash2 />
-          </Button>
-        </ConfirmDialog>
+        {showActions && (
+          <>
+            <ButtonGroup>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="rounded-full"
+                onClick={() => onReorder(index, index - 1)}
+                disabled={index === 0}
+              >
+                <ChevronUp />
+              </Button>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => onReorder(index, index - 1)}
-          disabled={index === 0}
-        >
-          <ChevronUp />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => onReorder(index, index + 1)}
-          disabled={index === length - 1}
-        >
-          <ChevronDown />
-        </Button>
+              <Button
+                variant="secondary"
+                size="icon"
+                className="rounded-full"
+                onClick={() => onReorder(index, index + 1)}
+                disabled={index === length - 1}
+              >
+                <ChevronDown />
+              </Button>
+
+              <EditDialog etrian={etrian} onSave={onUpdate}>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="rounded-full"
+                >
+                  <Pencil />
+                </Button>
+              </EditDialog>
+            </ButtonGroup>
+            <ConfirmDialog
+              title="冒険者情報の削除"
+              description="下記の冒険者情報を削除します。この操作は元に戻せません！"
+              content={
+                <p>
+                  冒険者名: <span className="font-semibold">{etrian.name}</span>
+                </p>
+              }
+              confirmButtonLabel="削除"
+              confirmButtonVariant="destructive"
+              onConfirm={() => onDelete(etrian)}
+            >
+              <Button
+                variant="destructive"
+                size="icon"
+                className="rounded-full"
+              >
+                <Trash2 />
+              </Button>
+            </ConfirmDialog>
+          </>
+        )}
       </ItemActions>
     </Item>
   );
@@ -141,6 +160,7 @@ function EtrianRegistryItem({
 type EtrianRegistryItemListProps = {
   etrians: Etrian[];
   isLoaded: boolean;
+  showActions: boolean;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
   onReorder: (startIndex: number, endIndex: number) => void;
@@ -149,6 +169,7 @@ type EtrianRegistryItemListProps = {
 export function EtrianRegistryItemList({
   etrians,
   isLoaded,
+  showActions,
   onDelete,
   onUpdate,
   onReorder,
@@ -174,10 +195,11 @@ export function EtrianRegistryItemList({
           <EtrianRegistryItem
             etrian={etrian}
             index={index}
+            length={etrians.length}
+            showActions={showActions}
             onDelete={onDelete}
             onUpdate={onUpdate}
             onReorder={onReorder}
-            length={etrians.length}
           />
           {index !== etrians.length - 1 && <ItemSeparator />}
         </Fragment>
