@@ -112,8 +112,6 @@ export function EtrianRegistry() {
 
       // リセットしない限りサンプルデータが投入されないようにする
       localStorage.setItem("etrianRegistryInitialized", "true");
-
-      toast.message("初期状態へリセットしました");
     }
   }, [isLoaded, storedEtrians, addEtrian]);
 
