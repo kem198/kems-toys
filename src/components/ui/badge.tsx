@@ -18,7 +18,6 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80",
         modane:
           "border-transparent bg-modane text-modane-foreground hover:bg-modane/80",
-
         outline: "text-foreground",
       },
     },
