@@ -157,7 +157,7 @@ export function EtrianRegistry() {
           </div>
 
           <Button
-            variant={isEditing ? "default" : "outline"}
+            variant={isEditing ? "default" : "secondary"}
             onClick={() => setIsEditing((prev) => !prev)}
           >
             <UserPen />
