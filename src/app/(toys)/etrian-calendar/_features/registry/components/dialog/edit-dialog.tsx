@@ -270,7 +270,7 @@ export function EditDialog({
                     <Textarea
                       {...field}
                       id="etrian-memo"
-                      placeholder="エトリアの冒険者。ずうずうしい。"
+                      placeholder="エトリアの冒険者。得意技はフロントガード。"
                       rows={4}
                       className="resize-none"
                       aria-invalid={fieldState.invalid}
