@@ -25,9 +25,7 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
 
   if (isSameMonth && isSameDay) {
     return (
-      <span className="text-xs text-red-400">
-        🎉本日がお誕生日です！おめでとう！
-      </span>
+      <span className="text-xs text-red-400">🎉お誕生日です！おめでとう！</span>
     );
   }
 
