@@ -15,8 +15,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "皇帝ノ月",
+          kana: "こうていのつき",
+        },
         day: 1,
-        month: { kana: "こうていのつき", name: "皇帝ノ月" },
       });
     });
 
@@ -29,8 +32,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "皇帝ノ月",
+          kana: "こうていのつき",
+        },
         day: 28,
-        month: { kana: "こうていのつき", name: "皇帝ノ月" },
       });
     });
 
@@ -43,8 +49,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "笛鼠ノ月",
+          kana: "ふえねずみのつき",
+        },
         day: 1,
-        month: { kana: "ふえねずみのつき", name: "笛鼠ノ月" },
       });
     });
 
@@ -57,8 +66,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "笛鼠ノ月",
+          kana: "ふえねずみのつき",
+        },
         day: 28,
-        month: { kana: "ふえねずみのつき", name: "笛鼠ノ月" },
       });
     });
 
@@ -71,8 +83,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "天牛ノ月",
+          kana: "てんぎゅうのつき",
+        },
         day: 1,
-        month: { kana: "てんぎゅうのつき", name: "天牛ノ月" },
       });
     });
 
@@ -85,8 +100,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "天牛ノ月",
+          kana: "てんぎゅうのつき",
+        },
         day: 28,
-        month: { kana: "てんぎゅうのつき", name: "天牛ノ月" },
       });
     });
 
@@ -99,8 +117,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "王虎ノ月",
+          kana: "おうこのつき",
+        },
         day: 1,
-        month: { kana: "おうこのつき", name: "王虎ノ月" },
       });
     });
 
@@ -113,8 +134,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "王虎ノ月",
+          kana: "おうこのつき",
+        },
         day: 28,
-        month: { kana: "おうこのつき", name: "王虎ノ月" },
       });
     });
 
@@ -127,8 +151,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "素兎ノ月",
+          kana: "すうさぎのつき",
+        },
         day: 1,
-        month: { kana: "すうさぎのつき", name: "素兎ノ月" },
       });
     });
 
@@ -141,8 +168,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "素兎ノ月",
+          kana: "すうさぎのつき",
+        },
         day: 28,
-        month: { kana: "すうさぎのつき", name: "素兎ノ月" },
       });
     });
 
@@ -155,8 +185,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "虹竜ノ月",
+          kana: "にじりゅうのつき",
+        },
         day: 1,
-        month: { kana: "にじりゅうのつき", name: "虹竜ノ月" },
       });
     });
 
@@ -169,8 +202,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "虹竜ノ月",
+          kana: "にじりゅうのつき",
+        },
         day: 28,
-        month: { kana: "にじりゅうのつき", name: "虹竜ノ月" },
       });
     });
 
@@ -183,8 +219,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "白蛇ノ月",
+          kana: "しろへびのつき",
+        },
         day: 1,
-        month: { kana: "しろへびのつき", name: "白蛇ノ月" },
       });
     });
 
@@ -197,8 +236,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "白蛇ノ月",
+          kana: "しろへびのつき",
+        },
         day: 28,
-        month: { kana: "しろへびのつき", name: "白蛇ノ月" },
       });
     });
 
@@ -211,8 +253,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "風馬ノ月",
+          kana: "ふうまのつき",
+        },
         day: 1,
-        month: { kana: "ふうまのつき", name: "風馬ノ月" },
       });
     });
 
@@ -225,8 +270,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "風馬ノ月",
+          kana: "ふうまのつき",
+        },
         day: 28,
-        month: { kana: "ふうまのつき", name: "風馬ノ月" },
       });
     });
 
@@ -239,8 +287,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "金羊ノ月",
+          kana: "きんようのつき",
+        },
         day: 1,
-        month: { kana: "きんようのつき", name: "金羊ノ月" },
       });
     });
 
@@ -253,8 +304,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "金羊ノ月",
+          kana: "きんようのつき",
+        },
         day: 28,
-        month: { kana: "きんようのつき", name: "金羊ノ月" },
       });
     });
 
@@ -267,8 +321,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "飛猴ノ月",
+          kana: "ひろうのつき",
+        },
         day: 1,
-        month: { kana: "ひろうのつき", name: "飛猴ノ月" },
       });
     });
 
@@ -281,8 +338,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "飛猴ノ月",
+          kana: "ひろうのつき",
+        },
         day: 28,
-        month: { kana: "ひろうのつき", name: "飛猴ノ月" },
       });
     });
 
@@ -295,8 +355,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "火鳥ノ月",
+          kana: "かちょうのつき",
+        },
         day: 1,
-        month: { kana: "かちょうのつき", name: "火鳥ノ月" },
       });
     });
 
@@ -309,8 +372,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "火鳥ノ月",
+          kana: "かちょうのつき",
+        },
         day: 28,
-        month: { kana: "かちょうのつき", name: "火鳥ノ月" },
       });
     });
 
@@ -323,8 +389,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "戌神ノ月",
+          kana: "いぬがみのつき",
+        },
         day: 1,
-        month: { kana: "いぬがみのつき", name: "戌神ノ月" },
       });
     });
 
@@ -337,8 +406,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "戌神ノ月",
+          kana: "いぬがみのつき",
+        },
         day: 28,
-        month: { kana: "いぬがみのつき", name: "戌神ノ月" },
       });
     });
 
@@ -351,8 +423,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "怒猪ノ月",
+          kana: "どちょのつき",
+        },
         day: 1,
-        month: { kana: "どちょのつき", name: "怒猪ノ月" },
       });
     });
 
@@ -365,8 +440,11 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
+        month: {
+          name: "怒猪ノ月",
+          kana: "どちょのつき",
+        },
         day: 28,
-        month: { kana: "どちょのつき", name: "怒猪ノ月" },
       });
     });
 
@@ -379,7 +457,10 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
-        month: { kana: "ものかのひ", name: "鬼乎ノ日" },
+        month: {
+          name: "鬼乎ノ日",
+          kana: "ものかのひ",
+        },
       });
     });
 
@@ -392,7 +473,10 @@ describe("etrian-utils tests", () => {
 
       // Assert
       expect(etrianDate).toEqual({
-        month: { kana: "ものかのひ", name: "鬼乎ノ日" },
+        month: {
+          name: "鬼乎ノ日",
+          kana: "ものかのひ",
+        },
       });
     });
 
@@ -406,7 +490,10 @@ describe("etrian-utils tests", () => {
         // Assert
         expect(etrianDate).toEqual({
           day: 4,
-          month: { kana: "てんぎゅうのつき", name: "天牛ノ月" },
+          month: {
+            name: "天牛ノ月",
+            kana: "てんぎゅうのつき",
+          },
         });
       });
 
@@ -419,7 +506,10 @@ describe("etrian-utils tests", () => {
         // Assert
         expect(etrianDate).toEqual({
           day: 4,
-          month: { kana: "てんぎゅうのつき", name: "天牛ノ月" },
+          month: {
+            name: "天牛ノ月",
+            kana: "てんぎゅうのつき",
+          },
         });
       });
 
@@ -432,7 +522,10 @@ describe("etrian-utils tests", () => {
         // Assert
         expect(etrianDate).toEqual({
           day: 5,
-          month: { kana: "てんぎゅうのつき", name: "天牛ノ月" },
+          month: {
+            name: "天牛ノ月",
+            kana: "てんぎゅうのつき",
+          },
         });
       });
 
@@ -444,7 +537,10 @@ describe("etrian-utils tests", () => {
 
         // Assert
         expect(etrianDate).toEqual({
-          month: { kana: "ものかのひ", name: "鬼乎ノ日" },
+          month: {
+            name: "鬼乎ノ日",
+            kana: "ものかのひ",
+          },
         });
       });
     });
