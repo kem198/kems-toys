@@ -55,7 +55,7 @@ type EtrianRegistryItemProps = {
   etrian: Etrian;
   index: number;
   length: number;
-  showActions: boolean;
+  isEditing: boolean;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
   onReorder: (startIndex: number, endIndex: number) => void;
@@ -65,7 +65,7 @@ function EtrianRegistryItem({
   index,
   etrian,
   length,
-  showActions,
+  isEditing,
   onDelete,
   onUpdate,
   onReorder,
@@ -97,7 +97,7 @@ function EtrianRegistryItem({
       </ItemContent>
 
       <ItemActions>
-        {showActions && (
+        {isEditing && (
           <>
             <ButtonGroup>
               <Button
@@ -160,7 +160,7 @@ function EtrianRegistryItem({
 type EtrianRegistryItemListProps = {
   etrians: Etrian[];
   isLoaded: boolean;
-  showActions: boolean;
+  isEditing: boolean;
   onDelete: (etrian: Etrian) => void;
   onUpdate: (etrian: Etrian) => void;
   onReorder: (startIndex: number, endIndex: number) => void;
@@ -169,7 +169,7 @@ type EtrianRegistryItemListProps = {
 export function EtrianRegistryItemList({
   etrians,
   isLoaded,
-  showActions,
+  isEditing,
   onDelete,
   onUpdate,
   onReorder,
@@ -196,7 +196,7 @@ export function EtrianRegistryItemList({
             etrian={etrian}
             index={index}
             length={etrians.length}
-            showActions={showActions}
+            isEditing={isEditing}
             onDelete={onDelete}
             onUpdate={onUpdate}
             onReorder={onReorder}

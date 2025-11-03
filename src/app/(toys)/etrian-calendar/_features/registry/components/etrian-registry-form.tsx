@@ -13,12 +13,12 @@ import { Controller, useForm } from "react-hook-form";
 
 type EtrianRegistryFormProps = {
   onSubmit: (values: RegistryFormValues) => void;
-  showActions: boolean;
+  isEditing: boolean;
 };
 
 export function EtrianRegistryForm({
   onSubmit,
-  showActions,
+  isEditing,
 }: EtrianRegistryFormProps) {
   const form = useForm<RegistryFormValues>({
     resolver: zodResolver(registryFormSchema),
@@ -52,13 +52,13 @@ export function EtrianRegistryForm({
                 aria-invalid={fieldState.invalid}
                 placeholder="ししょー"
                 autoComplete="off"
-                disabled={showActions}
+                disabled={isEditing}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
         />
-        <Button type="submit" form="etrian-add" disabled={showActions}>
+        <Button type="submit" form="etrian-add" disabled={isEditing}>
           <UserRoundPlus />
           登録
         </Button>

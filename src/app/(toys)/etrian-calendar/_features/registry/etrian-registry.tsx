@@ -24,7 +24,7 @@ export function EtrianRegistry() {
     resetEtrians,
   } = useEtrianRegistry();
 
-  const [showActions, setShowActions] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleCreate = useCallback(
     (values: RegistryFormValues) => {
@@ -119,12 +119,12 @@ export function EtrianRegistry() {
   return (
     <div className="flex flex-col gap-4">
       <div className="not-prose flex w-full flex-col gap-6">
-        <EtrianRegistryForm onSubmit={handleCreate} showActions={showActions} />
+        <EtrianRegistryForm onSubmit={handleCreate} isEditing={isEditing} />
 
         <EtrianRegistryItemList
           etrians={storedEtrians}
           isLoaded={isLoaded}
-          showActions={showActions}
+          isEditing={isEditing}
           onDelete={handleDelete}
           onUpdate={handleUpdate}
           onReorder={handleReorder}
@@ -132,7 +132,7 @@ export function EtrianRegistry() {
 
         <div className="flex justify-between gap-2">
           <div className="flex gap-2">
-            {showActions && (
+            {isEditing && (
               <>
                 <ConfirmDialog
                   title="登録状況のリセット"
@@ -152,11 +152,11 @@ export function EtrianRegistry() {
           </div>
 
           <Button
-            variant={showActions ? "default" : "outline"}
-            onClick={() => setShowActions((prev) => !prev)}
+            variant={isEditing ? "default" : "outline"}
+            onClick={() => setIsEditing((prev) => !prev)}
           >
             <UserPen />
-            {showActions ? "完了" : "編集"}
+            {isEditing ? "完了" : "編集"}
           </Button>
         </div>
       </div>
