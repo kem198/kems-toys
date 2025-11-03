@@ -14,7 +14,7 @@ export function DateOfBirthBadge({
   className,
   ...props
 }: DateOfBirthBadgeProps) {
-  const colorClass = BIRTHDAY_CLASS_BY_MONTH[dateOfBirth.month ?? "default"];
+  const colorClass = BIRTHDAY_CLASS_BY_MONTH[dateOfBirth?.month ?? "default"];
   return (
     <Badge
       className={cn(
