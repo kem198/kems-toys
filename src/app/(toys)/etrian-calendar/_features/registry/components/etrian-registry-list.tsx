@@ -71,7 +71,7 @@ function EtrianRegistryItem({
   onReorder,
 }: EtrianRegistryItemProps) {
   return (
-    <Item className="justify-end px-0">
+    <Item className="justify-end px-0 md:flex-row">
       <ItemMedia>
         <Avatar>
           <AvatarImage className="grayscale" />
@@ -96,7 +96,7 @@ function EtrianRegistryItem({
         </ItemFooter>
       </ItemContent>
 
-      <ItemActions>
+      <ItemActions className="flex w-full items-center justify-end gap-2 md:w-auto">
         {isEditing && (
           <>
             <ButtonGroup>
