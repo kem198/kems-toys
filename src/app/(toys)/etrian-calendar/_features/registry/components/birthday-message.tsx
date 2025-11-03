@@ -15,7 +15,7 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
   }
 
   if (isSameMonth) {
-    return <span className="text-xs text-red-400">🎵今月がお誕生日です！</span>;
+    return <span className="text-xs text-red-400">🍰今月がお誕生日です！</span>;
   }
 
   return null;
