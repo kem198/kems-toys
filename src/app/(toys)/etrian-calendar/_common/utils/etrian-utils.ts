@@ -113,32 +113,32 @@ export const getDiffDaysBetweenSolarAndEtrianDate = (
     day: EtrianDay;
   },
 ): number => {
-  // 時刻の影響を避けるため「太陽暦 00:00:00」を基準にする
   const solarDateMidnight = new Date(
     solarDate.getFullYear(),
     solarDate.getMonth(),
     solarDate.getDate(),
   );
 
-  // 太陽暦の年を割り当てて今年の世界樹歴を作成する
-  let targetEtrianDate = toSolarDate({
-    year: solarDateMidnight.getFullYear(),
-    month: etrianDate.month,
-    day: etrianDate.day,
-  });
-
-  // 今年の世界樹歴が過去なら翌年の日付にする
-  if (targetEtrianDate.getTime() < solarDateMidnight.getTime()) {
+  let targetEtrianDate: Date;
+  try {
     targetEtrianDate = toSolarDate({
-      year: solarDateMidnight.getFullYear() + 1,
+      year: solarDateMidnight.getFullYear(),
       month: etrianDate.month,
       day: etrianDate.day,
     });
+
+    if (targetEtrianDate.getTime() < solarDateMidnight.getTime()) {
+      targetEtrianDate = toSolarDate({
+        year: solarDateMidnight.getFullYear() + 1,
+        month: etrianDate.month,
+        day: etrianDate.day,
+      });
+    }
+  } catch (e) {
+    return 0;
   }
 
   const diffMilliseconds =
     targetEtrianDate.getTime() - solarDateMidnight.getTime();
-  const diffDays = Math.ceil(diffMilliseconds / MILLISECONDS_PER_DAY);
-
-  return diffDays;
+  return Math.ceil(diffMilliseconds / MILLISECONDS_PER_DAY);
 };
