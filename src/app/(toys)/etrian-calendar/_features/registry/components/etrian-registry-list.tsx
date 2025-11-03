@@ -21,7 +21,6 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
 import { Fragment } from "react";
 
@@ -32,20 +31,10 @@ function EtrianRegistrySkeleton() {
         <Skeleton className="relative flex aspect-square h-10 w-10 shrink-0 overflow-hidden rounded-full" />
       </ItemMedia>
 
-      <ItemContent className="gap-1">
-        <ItemTitle>
-          <Skeleton className="h-4 w-60 rounded-full" />
-        </ItemTitle>
+      <ItemContent className="flex flex-col gap-1">
+        <Skeleton className="h-4 max-w-[10rem] rounded-full" />
 
-        <div
-          className={cn(
-            "line-clamp-2 text-balance text-sm font-normal leading-normal text-muted-foreground",
-            "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
-            "flex gap-2",
-          )}
-        >
-          <Skeleton className="h-4 w-80 rounded-full" />
-        </div>
+        <Skeleton className="h-4 max-w-[16rem] rounded-full" />
       </ItemContent>
     </Item>
   );
