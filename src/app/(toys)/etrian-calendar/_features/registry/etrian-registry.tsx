@@ -91,7 +91,7 @@ export function EtrianRegistry() {
       if (!isLoaded) return;
       const reordered = reorderEtrians(storedEtrians, startIndex, endIndex);
       updateEtrians(reordered);
-      toast.success("冒険者の並び順を更新しました");
+      toast.success("並び順を更新しました");
     },
     [isLoaded, storedEtrians, updateEtrians],
   );
