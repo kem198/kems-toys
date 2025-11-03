@@ -1,4 +1,9 @@
+import type {
+  EtrianDay,
+  EtrianMonthName,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
+  getDiffDaysBetweenSolarAndEtrianDate,
   toEtrianDate,
   toSolarDate,
 } from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
@@ -674,6 +679,30 @@ describe("etrian-utils tests", () => {
       expect(solarDate).toEqual(new Date(2025, 11, 31));
     });
 
+    it("'鬼乎ノ日 3 日' を与えた場合、例外がスローされること", () => {
+      // Act & Assert
+      expect(() =>
+        toSolarDate({
+          year: 2024,
+          month: "鬼乎ノ日",
+          day: 3 as EtrianDay,
+        }),
+      ).toThrowError(
+        new Error("Invalid day specified for 鬼乎ノ日 (must be 1 or 2)"),
+      );
+    });
+
+    it("未知の月を与えた場合、例外がスローされること", () => {
+      // Act & Assert
+      expect(() =>
+        toSolarDate({
+          year: 2025,
+          month: "未知ノ月" as unknown as EtrianMonthName,
+          day: 1,
+        }),
+      ).toThrowError(new Error("Unknown Etrian month: 未知ノ月"));
+    });
+
     describe("閏年の考慮", () => {
       it("'2024 年 天牛ノ月 4 日' を与えた場合、'2024-02-29' (閏年のみの日付) を返すこと", () => {
         // Act
@@ -722,6 +751,93 @@ describe("etrian-utils tests", () => {
         // Assert
         expect(solarDate).toEqual(new Date(2024, 11, 31));
       });
+    });
+  });
+
+  describe("getDiffDaysBetweenSolarAndEtrianDate() tests", () => {
+    it("'2025-01-01' と '皇帝ノ月 1 日' との差分は 0 日であること", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(new Date(2025, 0, 1), {
+        month: "皇帝ノ月",
+        day: 1,
+      });
+
+      // Assert
+      expect(diff).toBe(0);
+    });
+
+    it("'2025-01-01' と '皇帝ノ月 2 日' との差分は 1 日であること", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(new Date(2025, 0, 1), {
+        month: "皇帝ノ月",
+        day: 2,
+      });
+
+      // Assert
+      expect(diff).toBe(1);
+    });
+
+    it("'2025-12-30' と '皇帝ノ月 1 日' との差分は翌年をまたいで 2 日であること", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(
+        new Date(2025, 11, 30),
+        {
+          month: "皇帝ノ月",
+          day: 1,
+        },
+      );
+
+      // Assert
+      expect(diff).toBe(2);
+    });
+
+    it("'2024-12-30' と '鬼乎ノ日 2 日' との差分は閏年でも 1 日であること", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(
+        new Date(2024, 11, 30),
+        {
+          month: "鬼乎ノ日",
+          day: 2,
+        },
+      );
+
+      // Assert
+      expect(diff).toBe(1);
+    });
+
+    it("未知の月を指定した場合は null を返すこと", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(new Date(2025, 0, 1), {
+        month: "未知ノ月" as unknown as EtrianMonthName,
+        day: 1,
+      });
+
+      // Assert
+      expect(diff).toBeNull();
+    });
+
+    it("日付が数値として不正な場合は null を返すこと", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(new Date(2025, 0, 1), {
+        month: "皇帝ノ月",
+        day: Number.NaN as unknown as EtrianDay,
+      });
+
+      expect(diff).toBeNull();
+    });
+
+    it("鬼乎ノ日で不正な日付を指定した場合は null を返すこと", () => {
+      // Act
+      const diff = getDiffDaysBetweenSolarAndEtrianDate(
+        new Date(2024, 11, 30),
+        {
+          month: "鬼乎ノ日",
+          day: 3 as EtrianDay,
+        },
+      );
+
+      // Assert
+      expect(diff).toBeNull();
     });
   });
 });
