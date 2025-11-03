@@ -613,11 +613,12 @@ describe("etrian-utils tests", () => {
       expect(solarDate).toEqual(new Date(2025, 11, 30));
     });
 
-    it("'2025 年 鬼乎ノ日' を与えた場合、'2025-12-31' を返すこと", () => {
+    it("'2025 年 鬼乎ノ日 1 日' を与えた場合、'2025-12-31' を返すこと", () => {
       // Act
       const solarDate = toSolarDate({
         year: 2025,
         month: "鬼乎ノ日",
+        day: 1,
       });
 
       // Assert
