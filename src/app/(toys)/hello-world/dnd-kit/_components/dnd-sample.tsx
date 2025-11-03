@@ -7,6 +7,7 @@ import { ReactNode } from "react";
 type DroppableProps = {
   children: ReactNode;
 };
+
 function Droppable({ children }: DroppableProps) {
   const { isOver, setNodeRef } = useDroppable({
     id: "droppable",
@@ -29,6 +30,7 @@ function Droppable({ children }: DroppableProps) {
 type DraggableProps = {
   children: ReactNode;
 };
+
 function Draggable({ children }: DraggableProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: "draggable",
@@ -56,8 +58,8 @@ export function DndSample() {
   return (
     <DndContext>
       <div className="flex w-40 flex-col gap-4">
-        <Draggable>Draggable</Draggable>
         <Droppable>Droppable</Droppable>
+        <Draggable>Draggable</Draggable>
       </div>
     </DndContext>
   );
