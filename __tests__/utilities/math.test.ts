@@ -1,6 +1,5 @@
 import { isPositiveInteger, sum } from "@/utilities/math";
-import { describe } from "node:test";
-import { expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 describe("sum", () => {
   it("should adds 1 + 2 to equal 3", () => {

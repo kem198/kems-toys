@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -45,22 +47,19 @@ function BasicForm() {
       {/* "handleSubmit" は "onSubmit" を呼び出す前に入力を検証する */}
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         {/* "register" 関数を呼び出して入力をフックに登録する */}
-        <input
-          className="input input-bordered"
-          placeholder="example (non rules)"
-          {...register("example")}
-        />
+        <Input placeholder="example (non rules)" {...register("example")} />
 
         {/* 必須や他の標準的な HTML 検証ルールで検証を含める */}
-        <input
-          className="input input-bordered"
+        <Input
           placeholder="exampleRequired (required: true)"
           {...register("exampleRequired", { required: true })}
         />
         {/* フィールド検証が失敗したときはエラーを表示する */}
-        {errors.exampleRequired && <div>This field is required</div>}
+        {errors.exampleRequired && (
+          <div className="text-destructive">This field is required</div>
+        )}
 
-        <input className="btn" type="submit" value="Validate" />
+        <Button type="submit">Submit</Button>
       </form>
       <p>watch:</p>
       {/* 名前を指定して入力値を監視できる */}

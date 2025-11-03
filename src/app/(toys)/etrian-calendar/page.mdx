@@ -1,28 +1,30 @@
-import { TodaysEtrianDateDisplay } from "./_components/todays-etrian-date-display";
-import { SolarEtrianCalendarConverter } from "./_components/etrian-calendar";
+import { EtrianRegistry } from "./_features/registry/etrian-registry";
+import { TodaysEtrianDateDisplay } from "./_features/display/todays-etrian-date-display";
+import { SolarEtrianCalendarConverter } from "./_features/converter/solar-etrian-calendar-converter";
 import { Version } from "@/components/shared/version";
 
 # 世界樹の暦
 
 <TodaysEtrianDateDisplay />
 
-## 太陽暦 ⇒ 世界樹歴 変換
-
 <SolarEtrianCalendarConverter />
 
-## お誕生日ノート
+## 冒険者お誕生日台帳
 
-Coming soon...
+<EtrianRegistry />
 
 ---
 
 ## このアプリは何？
 
-[世界樹の迷宮](https://www.atlus.co.jp/series/sq/) シリーズに登場する暦 (以下 世界樹歴) と、私たちの暦 (以下 太陽暦) を変換するアプリケーションです。
+[世界樹の迷宮](https://www.atlus.co.jp/series/sq/) シリーズに登場する暦 (以下 世界樹歴) について、私たちの暦 (以下 太陽暦) から変換したり、冒険者の誕生日を記録するアプリケーションです。
 
 ## メモ
 
 - 太陽暦で閏年の場合、大晦日 (鬼乎ノ日) が 2 日続きます。
+- 登録した情報はお使いのブラウザ (localStorage) に保存されます。
+  - **ブラウザの「Cookie およびその他のサイト データ」を削除すると、記録も抹消されます。ご注意ください。**
+  - 「編集」>「バックアップ」ボタンから登録情報を控えておくことを推奨します。
 
 ## 参考文献
 
@@ -49,4 +51,8 @@ Coming soon...
   >
   > 出展『世界樹の迷宮Ⅳ伝承の巨人公式マスターズガイド）
 
-<Version version="0.1.0" onDate="2025-10-30" />
+- [ウェブストレージ API - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Web_Storage_API)
+  - [Window: localStorage プロパティ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage)
+- [Next.js で Hydration Error が起きる理由と解決方法](https://zenn.dev/luvmini511/articles/71f65df05716ca)
+
+<Version version="0.2.0" onDate="2025-11-03" />
