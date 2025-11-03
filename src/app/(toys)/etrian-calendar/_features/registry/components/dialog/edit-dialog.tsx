@@ -219,27 +219,29 @@ export function EditDialog({
                     name="dateOfBirth.day"
                     control={form.control}
                     render={({ field, fieldState }) => (
-                      <Select
-                        value={field.value ?? UNSET_SELECT_VALUE}
-                        onValueChange={field.onChange}
-                      >
-                        <SelectTrigger id="etrian-birth-day">
-                          <SelectValue placeholder="1" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value={UNSET_SELECT_VALUE}>
-                            {UNSET_SELECT_VALUE}
-                          </SelectItem>
-                          {etrianDayOptionValues.map((option) => (
-                            <SelectItem key={option} value={option}>
-                              {option}
+                      <>
+                        <Select
+                          value={field.value ?? UNSET_SELECT_VALUE}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger id="etrian-birth-day">
+                            <SelectValue placeholder="1" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value={UNSET_SELECT_VALUE}>
+                              {UNSET_SELECT_VALUE}
                             </SelectItem>
-                          ))}
-                        </SelectContent>
+                            {etrianDayOptionValues.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                         {fieldState.invalid && (
                           <FieldError errors={[fieldState.error]} />
                         )}
-                      </Select>
+                      </>
                     )}
                   />
                 </Field>
