@@ -15,7 +15,6 @@ export function JsonDisplay({ data }: { data: unknown }) {
   return (
     <Item variant="outline" className="w-full bg-muted/50">
       <ItemContent>
-        {/* limit height and allow scrolling when JSON is long */}
         <pre className="max-h-[60vh] cursor-text select-text overflow-auto whitespace-pre-wrap break-words text-xs">
           {items.map(({ key, line }) => (
             <span key={key} className="block hover:bg-zinc-200/80">
