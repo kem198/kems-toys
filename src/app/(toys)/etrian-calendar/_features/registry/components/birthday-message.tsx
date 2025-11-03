@@ -1,21 +1,20 @@
+// BirthdayMessage.tsx
 import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   getDiffDaysBetweenSolarAndEtrianDate,
   toEtrianDate,
 } from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
 
-type BirthdayMessageProps = {
-  etrian: Etrian;
-};
+type BirthdayMessageProps = { etrian: Etrian };
 
 export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
   const birth = etrian.dateOfBirth;
   if (!birth?.month) return null;
 
   const today = new Date();
-  const todaysEtrianDate = toEtrianDate(today);
-  const isSameMonth = birth.month === todaysEtrianDate.month.name;
-  const isSameDay = birth.day === todaysEtrianDate.day;
+  const todaysEtrian = toEtrianDate(today);
+  const isSameMonth = birth.month === todaysEtrian.month.name;
+  const isSameDay = birth.day === todaysEtrian.day;
 
   if (isSameMonth && !birth.day) {
     return <span className="text-xs text-red-400">今月はお誕生月です！</span>;
@@ -24,7 +23,7 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
   if (!birth.day) return null;
 
   if (
-    (isSameMonth && todaysEtrianDate.month.name === "鬼乎ノ日") ||
+    (isSameMonth && todaysEtrian.month.name === "鬼乎ノ日") ||
     (isSameMonth && isSameDay)
   ) {
     return (
@@ -32,19 +31,12 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
     );
   }
 
-  let diffDays: number | null = null;
-  try {
-    diffDays = getDiffDaysBetweenSolarAndEtrianDate(today, {
-      month: birth.month,
-      day: birth.day,
-    });
-    if (diffDays < 0) diffDays = null;
-  } catch (e) {
-    diffDays = null;
-  }
-  if (diffDays === null) {
-    return null;
-  }
+  const diffDays = getDiffDaysBetweenSolarAndEtrianDate(today, {
+    month: birth.month,
+    day: birth.day,
+  });
+
+  if (diffDays === null) return null;
 
   if (isSameMonth && diffDays <= 30) {
     return (
@@ -60,7 +52,6 @@ export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
     );
   }
 
-  // TODO: 閏年の「鬼乎ノ日」の場合、2 日目ではなく 1 日目で計算する
   if (diffDays >= 1 && diffDays <= 30) {
     return (
       <span className="text-xs text-red-400">{`あと ${diffDays} 日でお誕生日です！`}</span>

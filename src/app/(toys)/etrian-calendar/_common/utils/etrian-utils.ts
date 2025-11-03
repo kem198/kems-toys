@@ -112,16 +112,15 @@ export const getDiffDaysBetweenSolarAndEtrianDate = (
     month: EtrianMonthName | EtrianNewYearsEveName;
     day: EtrianDay;
   },
-): number => {
+): number | null => {
   const solarDateMidnight = new Date(
     solarDate.getFullYear(),
     solarDate.getMonth(),
     solarDate.getDate(),
   );
 
-  let targetEtrianDate: Date;
   try {
-    targetEtrianDate = toSolarDate({
+    let targetEtrianDate = toSolarDate({
       year: solarDateMidnight.getFullYear(),
       month: etrianDate.month,
       day: etrianDate.day,
@@ -134,11 +133,13 @@ export const getDiffDaysBetweenSolarAndEtrianDate = (
         day: etrianDate.day,
       });
     }
-  } catch (e) {
-    return 0;
-  }
 
-  const diffMilliseconds =
-    targetEtrianDate.getTime() - solarDateMidnight.getTime();
-  return Math.ceil(diffMilliseconds / MILLISECONDS_PER_DAY);
+    const diff = Math.ceil(
+      (targetEtrianDate.getTime() - solarDateMidnight.getTime()) /
+        MILLISECONDS_PER_DAY,
+    );
+    return diff >= 0 ? diff : null;
+  } catch {
+    return null;
+  }
 };
