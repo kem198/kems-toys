@@ -119,7 +119,7 @@ export function EtrianRegistry() {
   return (
     <div className="flex flex-col gap-4">
       <div className="not-prose flex w-full flex-col gap-6">
-        <EtrianRegistryForm onSubmit={handleCreate} />
+        <EtrianRegistryForm onSubmit={handleCreate} showActions={showActions} />
 
         <EtrianRegistryItemList
           etrians={storedEtrians}
