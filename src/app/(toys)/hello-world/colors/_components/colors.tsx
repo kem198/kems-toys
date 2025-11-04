@@ -1,4 +1,6 @@
+import { ETRIAN_CALENDAR_COLOR_VARIANTS } from "@/app/(toys)/etrian-calendar/_common/constants/color";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { HTMLAttributes, ReactNode } from "react";
 
 type ColorProps = {
@@ -95,6 +97,63 @@ export function Colors() {
         </Color>
         <Color className="bg-sidebar-border">sidebar-border</Color>
         <Color className="bg-sidebar-ring text-white">sidebar-ring</Color>
+      </ColorBackground>
+
+      <h2>Etrian calendar colors</h2>
+      <p>
+        Shows background and text color combination for{" "}
+        <Link href="/etrian-calendar">Etrian calendar</Link>.
+      </p>
+
+      <ColorBackground>
+        <Color
+          className={cn(
+            ETRIAN_CALENDAR_COLOR_VARIANTS.emperor,
+            "hover:bg-cyan-100",
+          )}
+        >
+          emperor
+        </Color>
+        <Color
+          className={cn(
+            ETRIAN_CALENDAR_COLOR_VARIANTS.sakura,
+            "hover:bg-pink-100",
+          )}
+        >
+          sakura
+        </Color>
+        <Color
+          className={cn(
+            ETRIAN_CALENDAR_COLOR_VARIANTS.koseki,
+            "hover:bg-green-100",
+          )}
+        >
+          koseki
+        </Color>
+        <Color
+          className={cn(
+            ETRIAN_CALENDAR_COLOR_VARIANTS.johi,
+            "hover:bg-amber-100",
+          )}
+        >
+          johi
+        </Color>
+        <Color
+          className={cn(
+            ETRIAN_CALENDAR_COLOR_VARIANTS.rikka,
+            "hover:bg-sky-100",
+          )}
+        >
+          rikka
+        </Color>
+        <Color
+          className={cn(
+            ETRIAN_CALENDAR_COLOR_VARIANTS.summoner,
+            "hover:bg-pink-500",
+          )}
+        >
+          summoner
+        </Color>
       </ColorBackground>
 
       <h2>Other colors</h2>
