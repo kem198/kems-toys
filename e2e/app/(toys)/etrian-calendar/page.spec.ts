@@ -5,7 +5,7 @@ import { expect, test } from "@playwright/test";
 test.describe("世界樹の暦ページのテスト", () => {
   test.describe("冒険者お誕生日台帳のテスト", () => {
     test.describe("初期表示のテスト", () => {
-      test("追加済みの冒険者「Added Task 1」が初期表示されること", async ({
+      test("追加済みの冒険者「セトハ」が初期表示されること", async ({
         page,
       }) => {
         // Arrange
