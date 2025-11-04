@@ -5,7 +5,7 @@ import { expect, test } from "@playwright/test";
 test.describe("世界樹の暦ページのテスト", () => {
   test.describe("冒険者お誕生日台帳のテスト", () => {
     test.describe("初期表示のテスト", () => {
-      test("追加済みの冒険者「セトハ」が初期表示されること", async ({
+      test("追加済み冒険者の各種登録情報が初期表示されること", async ({
         page,
       }) => {
         // Arrange
@@ -37,6 +37,9 @@ test.describe("世界樹の暦ページのテスト", () => {
 
         // Assert
         await expect(page.getByText("セトハ").first()).toBeVisible();
+        await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible();
+        await expect(page.getByText("ブレイバント").first()).toBeVisible();
+        await expect(page.getByText("アルカディア").first()).toBeVisible();
 
         // Cleanup
         await page.evaluate(
