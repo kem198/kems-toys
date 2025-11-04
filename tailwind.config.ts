@@ -85,6 +85,32 @@ const config: Config = {
           DEFAULT: "hsl(var(--modane))",
           foreground: "hsl(var(--modane-foreground))",
         },
+        etrian: {
+          emperor: {
+            DEFAULT: "hsl(var(--etrian-emperor))",
+            foreground: "hsl(var(--etrian-emperor-foreground))",
+          },
+          spring: {
+            DEFAULT: "hsl(var(--etrian-spring))",
+            foreground: "hsl(var(--etrian-spring-foreground))",
+          },
+          summer: {
+            DEFAULT: "hsl(var(--etrian-summer))",
+            foreground: "hsl(var(--etrian-summer-foreground))",
+          },
+          fall: {
+            DEFAULT: "hsl(var(--etrian-fall))",
+            foreground: "hsl(var(--etrian-fall-foreground))",
+          },
+          winter: {
+            DEFAULT: "hsl(var(--etrian-winter))",
+            foreground: "hsl(var(--etrian-winter-foreground))",
+          },
+          summoner: {
+            DEFAULT: "hsl(var(--etrian-summoner))",
+            foreground: "hsl(var(--etrian-summoner-foreground))",
+          },
+        },
       },
       keyframes: {
         "accordion-down": {

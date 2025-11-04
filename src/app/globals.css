@@ -43,6 +43,18 @@
     --personal-foreground: 0 0% 98%;
     --modane: 0 100% 73%; /* ff7777 */
     --modane-foreground: 0 0% 98%;
+    --etrian-emperor: 160 80% 84%;
+    --etrian-emperor-foreground: 180 66% 25%;
+    --etrian-spring: 65 67% 79%;
+    --etrian-spring-foreground: 110 33% 35%;
+    --etrian-summer: 150 70% 75%;
+    --etrian-summer-foreground: 150 59% 30%;
+    --etrian-fall: 42 99% 75%;
+    --etrian-fall-foreground: 42 67% 28%;
+    --etrian-winter: 176 60% 70%;
+    --etrian-winter-foreground: 176 27% 30%;
+    --etrian-summoner: 326 65% 70%;
+    --etrian-summoner-foreground: 339 20% 14%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -83,6 +95,24 @@
     --personal-foreground: 0 0% 98%;
     --modane: 0 100% 73%; /* ff7777 */
     --modane-foreground: 0 0% 98%;
+    --etrian-emperor-top: 0 0% 0%; /*  */
+    --etrian-emperor-bottom: 0 0% 0%; /*  */
+    --etrian-emperor-foreground: 0 0% 0%; /*  */
+    --etrian-spring-top: 0 100% 73%; /* fdfcb1 */
+    --etrian-spring-bottom: 139 51% 65%; /* 7ad497 */
+    --etrian-spring-foreground: 159 33% 24%; /* 285042 */
+    --etrian-summer-top: 99 42% 76%; /* bbdca9 */
+    --etrian-summer-bottom: 173 32% 49%; /* 56a69d */
+    --etrian-summer-foreground: 205 59% 27%; /* 1d4d6f */
+    --etrian-fall-top: 0 0% 0%; /*  */
+    --etrian-fall-bottom: 0 0% 0%; /*  */
+    --etrian-fall-foreground: 0 0% 0%; /*  */
+    --etrian-winter-top: 0 0% 0%; /*  */
+    --etrian-winter-bottom: 0 0% 0%; /*  */
+    --etrian-winter-foreground: 0 0% 0%; /*  */
+    --etrian-summoner-top: 0 0% 0%; /*  */
+    --etrian-summoner-bottom: 0 0% 0%; /*  */
+    --etrian-summoner-foreground: 0 0% 0%; /*  */
   }
 }
 
