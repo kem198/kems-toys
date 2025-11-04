@@ -1,4 +1,4 @@
-import { BIRTHDAY_CLASS_BY_MONTH } from "@/app/(toys)/etrian-calendar/_common/constants/color";
+import { ETRIAN_CALENDAR_CLASS_BY_MONTH } from "@/app/(toys)/etrian-calendar/_common/constants/color";
 import { etrianNewYearsEve } from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import { type EtrianDateOfBirth } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { Badge, BadgeProps } from "@/components/ui/badge";
@@ -14,7 +14,8 @@ export function DateOfBirthBadge({
   className,
   ...props
 }: DateOfBirthBadgeProps) {
-  const colorClass = BIRTHDAY_CLASS_BY_MONTH[dateOfBirth?.month ?? "default"];
+  const colorClass =
+    ETRIAN_CALENDAR_CLASS_BY_MONTH[dateOfBirth?.month ?? "default"];
   return (
     <Badge
       className={cn(
