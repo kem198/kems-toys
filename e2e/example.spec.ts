@@ -18,3 +18,10 @@ test("get started link", async ({ page }) => {
     page.getByRole("heading", { name: "Installation" }),
   ).toBeVisible();
 });
+
+test("has title 'KeM's Toys'", async ({ page }) => {
+  await page.goto("http://localhost:3000");
+
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/KeM's Toys/);
+});
