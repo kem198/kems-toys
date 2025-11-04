@@ -1,24 +1,55 @@
-name: Playwright Tests
+name: CI - End-to-End
+
 on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+      - develop
   pull_request:
-    branches: [main, master]
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
 jobs:
-  test:
+  ci-e2e:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      # Setup and Run Frontend
+      - name: Extract Node.js version from package.json
+        run: echo "NODE_VERSION=$(jq -r '.volta.node' package.json)" >> $GITHUB_ENV
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-      - name: Install dependencies
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+          cache-dependency-path: "./package-lock.json"
+      - name: Install Frontend Dependencies
         run: npm ci
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Build and Start Frontend
+        run: |
+          npm run build
+          npm start &
+          timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+
+      # Run E2E tests
+      - name: Run E2E tests
+        run: npm run e2e
+
+      # Upload artifacts
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
