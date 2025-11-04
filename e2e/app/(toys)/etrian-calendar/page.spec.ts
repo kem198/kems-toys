@@ -31,7 +31,6 @@ test.describe("世界樹の暦ページのテスト", () => {
         );
 
         // Act
-        await page.getByRole("link", { name: "icon KeM's Toys" }).click();
         await page
           .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
           .click();
