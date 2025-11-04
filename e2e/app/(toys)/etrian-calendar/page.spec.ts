@@ -9,6 +9,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         page,
       }) => {
         // Arrange
+        await page.goto("/");
         const etrians: Etrian[] = [
           {
             id: "test-etrian",
@@ -21,7 +22,6 @@ test.describe("世界樹の暦ページのテスト", () => {
             order: 0,
           },
         ];
-        await page.goto("/");
         await page.evaluate(
           ([key, value]) => {
             localStorage.setItem(key, value);
