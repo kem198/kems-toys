@@ -5,7 +5,12 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
-    environment: "jsdom",
-    include: ["./__tests__/**/*.test.{ts,tsx}"],
+    globals: true,
+    environment: "happy-dom",
+    include: ["./tests/**/*.test.{ts,tsx}"],
+    // setupFiles: ["./tests/setup.ts"],
+  },
+  esbuild: {
+    jsx: "automatic",
   },
 });
