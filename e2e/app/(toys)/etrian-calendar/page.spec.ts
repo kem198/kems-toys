@@ -20,6 +20,7 @@ test.describe("世界樹の暦ページのテスト", () => {
             },
             affiliations: ["ブレイバント", "アルカディア"],
             order: 0,
+            memo: "アルカディアの冒険者。没落貴族の一人娘。",
           },
         ];
         await page.evaluate(
@@ -40,6 +41,9 @@ test.describe("世界樹の暦ページのテスト", () => {
         await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible();
         await expect(page.getByText("ブレイバント").first()).toBeVisible();
         await expect(page.getByText("アルカディア").first()).toBeVisible();
+        await expect(
+          page.getByText("アルカディアの冒険者。没落貴族の一人娘。").first(),
+        ).toBeVisible();
 
         // Cleanup
         await page.evaluate(
