@@ -1,7 +1,10 @@
 "use client";
 
 import { sampleEtrians } from "@/app/(toys)/etrian-calendar/_common/constants/sample";
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import {
+  Etrian,
+  EtrianDay,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
@@ -33,12 +36,23 @@ export function EtrianRegistry() {
         return;
       }
 
+      const normalizedAffiliations = (values.affiliations ?? "")
+        .split(",")
+        .map((value) => value.trim())
+        .filter((value) => value.length > 0);
+
       const newEtrian: Etrian = {
         id: crypto.randomUUID(),
         name: trimmedName,
         order: 0,
-        dateOfBirth: {},
-        affiliations: [],
+        affiliations: normalizedAffiliations,
+        dateOfBirth: values.dateOfBirth
+          ? {
+              month: values.dateOfBirth.month,
+              day: Number(values.dateOfBirth.day) as EtrianDay,
+            }
+          : undefined,
+        memo: values.memo?.trim() || undefined,
       };
 
       addEtrian(newEtrian);

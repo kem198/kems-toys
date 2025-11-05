@@ -1,6 +1,8 @@
+import {
+  etrianDayOptionValues,
+  etrianMonthOptionValues,
+} from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import * as z from "zod";
-
-export const UNSET_SELECT_VALUE = "未設定";
 
 export const registryFormSchema = z
   .object({
@@ -9,21 +11,30 @@ export const registryFormSchema = z
       .min(1, "1 文字以上入力してください。")
       .max(20, "20 文字以下で入力してください。"),
     memo: z.string().max(100, "100 文字以下で入力してください。").optional(),
-    dateOfBirth: z.object({
-      month: z.string().optional(),
-      day: z.string().optional(),
-    }),
+    dateOfBirth: z
+      .object({
+        month: z.enum(
+          etrianMonthOptionValues,
+          // TODO: 表示されないので原因調査する
+          "誕生日を設定する場合月日両方を入力してください。",
+        ),
+        day: z.enum(
+          etrianDayOptionValues,
+          "誕生日を設定する場合月日両方を入力してください。",
+        ),
+      })
+      .optional(),
     affiliations: z.string().optional(),
   })
   .refine(
     (data) => {
-      if (data.dateOfBirth.month === "鬼乎ノ日") {
-        return data.dateOfBirth.day === UNSET_SELECT_VALUE;
+      if (data.dateOfBirth?.month === "鬼乎ノ日") {
+        return data.dateOfBirth.day === "1";
       }
       return true;
     },
     {
-      message: "鬼乎ノ日の場合、日は「未設定」で登録してください。",
+      message: "鬼乎ノ日の場合、日は「1」で登録してください。",
       path: ["dateOfBirth", "day"],
     },
   );

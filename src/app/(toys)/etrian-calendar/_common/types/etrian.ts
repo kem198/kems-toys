@@ -38,14 +38,26 @@ export type EtrianDay =
   | 28;
 
 export type EtrianDateOfBirth = {
-  month?: EtrianMonthName | EtrianNewYearsEveName;
-  day?: EtrianDay;
+  month: EtrianMonthName | EtrianNewYearsEveName;
+  day: EtrianDay;
+};
+
+export type EtrianV1 = {
+  id: string;
+  name: string;
+  dateOfBirth: {
+    month?: EtrianMonthName | EtrianNewYearsEveName;
+    day?: EtrianDay;
+  };
+  affiliations: string[];
+  order: number;
+  memo?: string;
 };
 
 export type Etrian = {
   id: string;
   name: string;
-  dateOfBirth: EtrianDateOfBirth;
+  dateOfBirth?: EtrianDateOfBirth;
   affiliations: string[];
   order: number;
   memo?: string;

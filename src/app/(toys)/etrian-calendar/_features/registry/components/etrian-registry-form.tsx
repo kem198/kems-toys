@@ -25,10 +25,6 @@ export function EtrianRegistryForm({
     defaultValues: {
       name: "",
       memo: "",
-      dateOfBirth: {
-        month: undefined,
-        day: undefined,
-      },
       affiliations: "",
     },
   });
