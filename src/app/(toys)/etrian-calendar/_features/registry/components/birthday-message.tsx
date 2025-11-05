@@ -7,6 +7,7 @@ import {
 type BirthdayMessageProps = { etrian: Etrian };
 
 export function BirthdayMessage({ etrian }: BirthdayMessageProps) {
+  // TODO: etrian.DateOfBirth? になったので修正する
   const birth = etrian.dateOfBirth;
   if (!birth?.month) return null;
 
