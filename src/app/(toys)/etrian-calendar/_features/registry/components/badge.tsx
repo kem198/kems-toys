@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Cake, House } from "lucide-react";
 
 type DateOfBirthBadgeProps = {
-  dateOfBirth: EtrianDateOfBirth;
+  dateOfBirth?: EtrianDateOfBirth;
 } & BadgeProps;
 
 export function DateOfBirthBadge({
@@ -34,9 +34,9 @@ export function DateOfBirthBadge({
       - 未設定
       */}
       {(() => {
-        const month = dateOfBirth?.month;
-        const day = dateOfBirth?.day;
-        if (!month) return <>未設定</>;
+        if (!dateOfBirth) return <>未設定</>;
+
+        const { month, day } = dateOfBirth;
         return (
           <>
             {month}
