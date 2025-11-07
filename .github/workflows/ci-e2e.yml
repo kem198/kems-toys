@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - develop
+      - feature/mod-etrian-calendar
   workflow_dispatch:
 
 jobs:
