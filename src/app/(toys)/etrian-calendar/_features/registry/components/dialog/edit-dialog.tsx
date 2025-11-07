@@ -104,16 +104,19 @@ export function EditDialog({
       .map((value) => value.trim())
       .filter((value) => value.length > 0);
 
-    const updatedEtrian: Etrian = {
-      ...etrian,
-      name: data.name.trim(),
-      affiliations: normalizedAffiliations,
-      dateOfBirth: data.dateOfBirth
+    const dateOfBirth =
+      data.dateOfBirth?.month && data.dateOfBirth?.day
         ? {
             month: data.dateOfBirth.month,
             day: Number(data.dateOfBirth.day) as EtrianDay,
           }
-        : undefined,
+        : undefined;
+
+    const updatedEtrian: Etrian = {
+      ...etrian,
+      name: data.name.trim(),
+      affiliations: normalizedAffiliations,
+      dateOfBirth,
       memo: data.memo?.trim() || undefined,
     };
 
@@ -169,14 +172,14 @@ export function EditDialog({
                 )}
               />
 
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="etrian-birth-month">誕生月</FieldLabel>
-                  <Controller
-                    name="dateOfBirth.month"
-                    control={form.control}
-                    render={({ field, fieldState }) => (
-                      <>
+              <Field data-invalid={form.formState.errors.dateOfBirth}>
+                <div className="grid grid-cols-2 gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="etrian-birth-month">誕生月</FieldLabel>
+                    <Controller
+                      name="dateOfBirth.month"
+                      control={form.control}
+                      render={({ field }) => (
                         <Select
                           value={field.value}
                           onValueChange={field.onChange}
@@ -194,21 +197,16 @@ export function EditDialog({
                             ))}
                           </SelectContent>
                         </Select>
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </>
-                    )}
-                  />
-                </Field>
+                      )}
+                    />
+                  </Field>
 
-                <Field>
-                  <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
-                  <Controller
-                    name="dateOfBirth.day"
-                    control={form.control}
-                    render={({ field, fieldState }) => (
-                      <>
+                  <Field>
+                    <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
+                    <Controller
+                      name="dateOfBirth.day"
+                      control={form.control}
+                      render={({ field }) => (
                         <Select
                           value={field.value}
                           onValueChange={field.onChange}
@@ -224,14 +222,14 @@ export function EditDialog({
                             ))}
                           </SelectContent>
                         </Select>
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </>
-                    )}
-                  />
-                </Field>
-              </div>
+                      )}
+                    />
+                  </Field>
+                </div>
+                {form.formState.errors.dateOfBirth && (
+                  <FieldError errors={[form.formState.errors.dateOfBirth]} />
+                )}
+              </Field>
 
               <Field>
                 <FieldLabel htmlFor="etrian-affiliations">所属</FieldLabel>
