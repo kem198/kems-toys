@@ -11,7 +11,7 @@ describe("migration-utils tests", () => {
           id: "test-id",
           name: "セトハ",
           dateOfBirth: {},
-          affiliations: [],
+          affiliations: ["ブレイバント"],
           order: 1,
         },
       ];
@@ -24,7 +24,7 @@ describe("migration-utils tests", () => {
         id: "test-id",
         name: "セトハ",
         dateOfBirth: undefined, // 更新対象
-        affiliations: [],
+        affiliations: ["ブレイバント"],
         order: 1,
       });
     });

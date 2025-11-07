@@ -7,11 +7,12 @@ export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] => {
   console.log(etrianV1s);
   const migratedEtrians: Etrian[] = [
     {
-      affiliations: [],
+      id: etrianV1s[0].id,
+      name: etrianV1s[0].name,
       dateOfBirth: undefined,
-      id: "test-id",
-      name: "セトハ",
-      order: 1,
+      affiliations: [etrianV1s[0].affiliations[0]],
+      order: etrianV1s[0].order,
+      memo: etrianV1s[0].memo,
     },
   ];
 
