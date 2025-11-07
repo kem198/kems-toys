@@ -32,9 +32,12 @@ export function useEtrianRegistry(
     }
 
     const data = window.localStorage.getItem(storageKey);
+
     try {
+      // TODO: 多分この辺に実装する
       setStoredEtrians(data ? (JSON.parse(data) as Etrian[]) : []);
     } catch {
+      // TODO: 読み取りに失敗したら「初期化します」みたいなモーダル表示
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
