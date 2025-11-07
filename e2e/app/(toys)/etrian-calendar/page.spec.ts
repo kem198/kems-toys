@@ -301,61 +301,61 @@ test.describe("世界樹の暦ページのテスト", () => {
           ETRIAN_REGISTRY_STORAGE_KEY,
         );
       });
-    });
 
-    test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (月日なし -> 誕生日なし)", async ({
-      page,
-    }) => {
-      // Arrange
-      await page.goto("/");
-      const etrians: EtrianV1[] = [
-        {
-          id: "test-etrian",
-          name: "セトハ",
-          dateOfBirth: {},
-          affiliations: ["ブレイバント", "アルカディア"],
-          order: 0,
-          memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
-        },
-      ];
-      await page.evaluate(
-        ([key, value]) => {
-          localStorage.setItem(key, value);
-        },
-        [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
-      );
+      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (月日なし -> 誕生日なし)", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.goto("/");
+        const etrians: EtrianV1[] = [
+          {
+            id: "test-etrian",
+            name: "セトハ",
+            dateOfBirth: {},
+            affiliations: ["ブレイバント", "アルカディア"],
+            order: 0,
+            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+          },
+        ];
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+        );
 
-      // Act
-      await page
-        .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
-        .click();
+        // Act
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
 
-      // Assert (月に初期値が設定されること)
-      const migrated: Etrian[] = await page.evaluate(
-        (key) => JSON.parse(localStorage.getItem(key)!),
-        ETRIAN_REGISTRY_STORAGE_KEY,
-      );
-      expect(migrated[0].dateOfBirth).toBeUndefined(); // マイグレート対象
-      expect(migrated[0].name).toBe("セトハ");
-      expect(migrated[0].affiliations).toEqual([
-        "ブレイバント",
-        "アルカディア",
-      ]);
+        // Assert (月に初期値が設定されること)
+        const migrated: Etrian[] = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated[0].dateOfBirth).toBeUndefined(); // マイグレート対象
+        expect(migrated[0].name).toBe("セトハ");
+        expect(migrated[0].affiliations).toEqual([
+          "ブレイバント",
+          "アルカディア",
+        ]);
 
-      // Assert (表示が正しいこと)
-      await expect(page.getByText("セトハ").first()).toBeVisible();
-      await expect(page.getByText("皇帝ノ月 1 日").first()).not.toBeVisible(); // マイグレート対象
-      await expect(page.getByText("ブレイバント").first()).toBeVisible();
-      await expect(page.getByText("アルカディア").first()).toBeVisible();
-      await expect(
-        page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
-      ).toBeVisible();
+        // Assert (表示が正しいこと)
+        await expect(page.getByText("セトハ").first()).toBeVisible();
+        await expect(page.getByText("皇帝ノ月 1 日").first()).not.toBeVisible(); // マイグレート対象
+        await expect(page.getByText("ブレイバント").first()).toBeVisible();
+        await expect(page.getByText("アルカディア").first()).toBeVisible();
+        await expect(
+          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
+        ).toBeVisible();
 
-      // Cleanup
-      await page.evaluate(
-        (key) => localStorage.removeItem(key),
-        ETRIAN_REGISTRY_STORAGE_KEY,
-      );
+        // Cleanup
+        await page.evaluate(
+          (key) => localStorage.removeItem(key),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+      });
     });
   });
 });
