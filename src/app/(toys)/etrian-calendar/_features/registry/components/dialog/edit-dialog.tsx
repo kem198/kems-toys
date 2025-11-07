@@ -231,6 +231,9 @@ export function EditDialog({
                     />
                   </Field>
                 </div>
+                <FieldDescription>
+                  設定する場合は月日両方を入力してください。
+                </FieldDescription>
                 {form.formState.errors.dateOfBirth && (
                   <FieldError errors={[form.formState.errors.dateOfBirth]} />
                 )}
