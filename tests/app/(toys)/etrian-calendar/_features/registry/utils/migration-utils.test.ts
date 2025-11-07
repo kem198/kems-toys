@@ -23,7 +23,7 @@ describe("migration-utils tests", () => {
       expect(migratedEtrians[0]).toEqual({
         id: "test-id",
         name: "セトハ",
-        dateOfBirth: undefined, // 変更対象
+        dateOfBirth: undefined, // 更新対象
         affiliations: [],
         order: 1,
       });
