@@ -59,10 +59,12 @@ export const etrianNewYearsEve = {
 } as const;
 
 export const etrianMonthOptionValues = [
+  "未設定",
   ...etrianMonths.map((month) => month.name),
   etrianNewYearsEve.name,
 ] as const;
 
-export const etrianDayOptionValues = Array.from({ length: 28 }, (_, index) =>
-  String(index + 1),
-);
+export const etrianDayOptionValues = [
+  "未設定",
+  ...Array.from({ length: 28 }, (_, index) => String(index + 1)),
+];

@@ -85,7 +85,10 @@ export function EditDialog({
             month: etrian.dateOfBirth.month,
             day: String(etrian.dateOfBirth.day),
           }
-        : undefined,
+        : {
+            month: "未設定",
+            day: "未設定",
+          },
       affiliations: etrian.affiliations?.join(","),
     });
   }, [etrian, form]);
@@ -105,7 +108,10 @@ export function EditDialog({
       .filter((value) => value.length > 0);
 
     const dateOfBirth =
-      data.dateOfBirth?.month && data.dateOfBirth?.day
+      data.dateOfBirth?.month &&
+      data.dateOfBirth?.day &&
+      data.dateOfBirth.month !== "未設定" &&
+      data.dateOfBirth.day !== "未設定"
         ? {
             month: data.dateOfBirth.month,
             day: Number(data.dateOfBirth.day) as EtrianDay,
@@ -185,9 +191,7 @@ export function EditDialog({
                           onValueChange={field.onChange}
                         >
                           <SelectTrigger id="etrian-birth-month">
-                            <SelectValue
-                              placeholder={etrianMonthOptionValues[0]}
-                            />
+                            <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
                             {etrianMonthOptionValues.map((option) => (
@@ -212,7 +216,7 @@ export function EditDialog({
                           onValueChange={field.onChange}
                         >
                           <SelectTrigger id="etrian-birth-day">
-                            <SelectValue placeholder="1" />
+                            <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
                             {etrianDayOptionValues.map((option) => (

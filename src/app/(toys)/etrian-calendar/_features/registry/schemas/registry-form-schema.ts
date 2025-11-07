@@ -23,10 +23,13 @@ export const registryFormSchema = z
     (data) => {
       if (!data.dateOfBirth) return true;
 
-      const hasMonth = data.dateOfBirth.month !== undefined;
-      const hasDay = data.dateOfBirth.day !== undefined;
+      const hasMonth =
+        data.dateOfBirth.month !== undefined &&
+        data.dateOfBirth.month !== "未設定";
+      const hasDay =
+        data.dateOfBirth.day !== undefined && data.dateOfBirth.day !== "未設定";
 
-      // 月日が両方入力または両方未入力の場合のみ true
+      // 両方入力または両方未設定
       return hasMonth === hasDay;
     },
     {
