@@ -13,18 +13,27 @@ export const registryFormSchema = z
     memo: z.string().max(100, "100 文字以下で入力してください。").optional(),
     dateOfBirth: z
       .object({
-        month: z.enum(
-          etrianMonthOptionValues,
-          "誕生日を設定する場合、月日両方を入力してください。",
-        ),
-        day: z.enum(
-          etrianDayOptionValues,
-          "誕生日を設定する場合、月日両方を入力してください。",
-        ),
+        month: z.enum(etrianMonthOptionValues).optional(),
+        day: z.enum(etrianDayOptionValues).optional(),
       })
       .optional(),
     affiliations: z.string().optional(),
   })
+  .refine(
+    (data) => {
+      if (!data.dateOfBirth) return true;
+
+      const hasMonth = data.dateOfBirth.month !== undefined;
+      const hasDay = data.dateOfBirth.day !== undefined;
+
+      // 月日が両方入力または両方未入力の場合のみ true
+      return hasMonth === hasDay;
+    },
+    {
+      message: "誕生日を設定する場合、月日両方を入力してください。",
+      path: ["dateOfBirth"],
+    },
+  )
   .refine(
     (data) => {
       if (data.dateOfBirth?.month === "鬼乎ノ日") {
