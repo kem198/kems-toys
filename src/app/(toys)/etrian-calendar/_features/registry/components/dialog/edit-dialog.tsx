@@ -44,7 +44,6 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -52,7 +51,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 
 type EditDialogProps = {
@@ -68,7 +66,6 @@ export function EditDialog({
   ...props
 }: EditDialogProps) {
   const [open, setOpen] = useState(false);
-  const [showDateOfBirth, setShowDateOfBirth] = useState(false);
 
   const form = useForm<RegistryFormValues>({
     resolver: zodResolver(registryFormSchema),
@@ -91,7 +88,6 @@ export function EditDialog({
         : undefined,
       affiliations: etrian.affiliations?.join(","),
     });
-    setShowDateOfBirth(!!etrian.dateOfBirth);
   }, [etrian, form]);
 
   useEffect(() => {
@@ -176,32 +172,10 @@ export function EditDialog({
                 )}
               />
 
-              <div className="flex items-center gap-2">
-                <Switch
-                  id="show-date-of-birth-switch"
-                  checked={showDateOfBirth}
-                  onCheckedChange={(checked) => {
-                    setShowDateOfBirth(checked);
-                    if (!checked) {
-                      form.setValue("dateOfBirth", undefined);
-                      form.clearErrors("dateOfBirth");
-                    }
-                  }}
-                />
-                <Label htmlFor="show-date-of-birth-switch">
-                  誕生日を設定する
-                </Label>
-              </div>
-
               <Field data-invalid={form.formState.errors.dateOfBirth}>
                 <div className="grid grid-cols-2 gap-4">
                   <Field>
-                    <FieldLabel
-                      htmlFor="etrian-birth-month"
-                      className={!showDateOfBirth ? "text-muted" : undefined}
-                    >
-                      誕生月
-                    </FieldLabel>
+                    <FieldLabel htmlFor="etrian-birth-month">誕生月</FieldLabel>
                     <Controller
                       name="dateOfBirth.month"
                       control={form.control}
@@ -209,7 +183,6 @@ export function EditDialog({
                         <Select
                           value={field.value}
                           onValueChange={field.onChange}
-                          disabled={!showDateOfBirth}
                         >
                           <SelectTrigger id="etrian-birth-month">
                             <SelectValue
@@ -229,12 +202,7 @@ export function EditDialog({
                   </Field>
 
                   <Field>
-                    <FieldLabel
-                      htmlFor="etrian-birth-day"
-                      className={!showDateOfBirth ? "text-muted" : undefined}
-                    >
-                      日
-                    </FieldLabel>
+                    <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
                     <Controller
                       name="dateOfBirth.day"
                       control={form.control}
@@ -242,7 +210,6 @@ export function EditDialog({
                         <Select
                           value={field.value}
                           onValueChange={field.onChange}
-                          disabled={!showDateOfBirth}
                         >
                           <SelectTrigger id="etrian-birth-day">
                             <SelectValue placeholder="1" />
