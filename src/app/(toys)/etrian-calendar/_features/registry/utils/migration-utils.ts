@@ -4,40 +4,44 @@ import {
   EtrianV1,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 
-export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] => {
-  let migratedDateOfBirth: EtrianDateOfBirth | undefined;
-
-  if (etrianV1s[0].dateOfBirth.month && etrianV1s[0].dateOfBirth.day) {
-    migratedDateOfBirth = {
-      month: etrianV1s[0].dateOfBirth.month,
-      day: etrianV1s[0].dateOfBirth.day,
+const migrateDateOfBirth = (
+  dateOfBirth: EtrianV1["dateOfBirth"],
+): EtrianDateOfBirth | undefined => {
+  if (dateOfBirth.month && dateOfBirth.day) {
+    return {
+      month: dateOfBirth.month,
+      day: dateOfBirth.day,
     };
   }
 
-  if (etrianV1s[0].dateOfBirth.month && !etrianV1s[0].dateOfBirth.day) {
-    migratedDateOfBirth = {
-      month: etrianV1s[0].dateOfBirth.month,
+  if (dateOfBirth.month && !dateOfBirth.day) {
+    return {
+      month: dateOfBirth.month,
       day: 1,
     };
   }
 
-  if (!etrianV1s[0].dateOfBirth.month && etrianV1s[0].dateOfBirth.day) {
-    migratedDateOfBirth = {
+  if (!dateOfBirth.month && dateOfBirth.day) {
+    return {
       month: "皇帝ノ月",
-      day: etrianV1s[0].dateOfBirth.day,
+      day: dateOfBirth.day,
     };
   }
 
-  const migratedEtrians: Etrian[] = [
-    {
-      id: etrianV1s[0].id,
-      name: etrianV1s[0].name,
-      dateOfBirth: migratedDateOfBirth,
-      affiliations: [etrianV1s[0].affiliations[0]],
-      order: etrianV1s[0].order,
-      memo: etrianV1s[0].memo,
-    },
-  ];
+  return undefined;
+};
 
-  return migratedEtrians;
+export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] => {
+  if (etrianV1s.length === 0) {
+    return [];
+  }
+
+  return etrianV1s.map((etrianV1) => ({
+    id: etrianV1.id,
+    name: etrianV1.name,
+    dateOfBirth: migrateDateOfBirth(etrianV1.dateOfBirth),
+    affiliations: etrianV1.affiliations,
+    order: etrianV1.order,
+    memo: etrianV1.memo,
+  }));
 };
