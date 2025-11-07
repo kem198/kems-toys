@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import {
+  Etrian,
+  EtrianV1,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { migrateEtriansV1toV2 } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 
 export const ETRIAN_REGISTRY_STORAGE_KEY = "etrianRegistry";
 
@@ -34,8 +38,41 @@ export function useEtrianRegistry(
     const data = window.localStorage.getItem(storageKey);
 
     try {
-      // TODO: 多分この辺に実装する
-      setStoredEtrians(data ? (JSON.parse(data) as Etrian[]) : []);
+      if (!data) {
+        setStoredEtrians([]);
+        return;
+      }
+
+      const parsed = JSON.parse(data) as EtrianV1[];
+      
+      // Check if migration is needed by checking if any item has V1 format
+      const needsMigration = parsed.some((item) => {
+        // V1 format has dateOfBirth as an object (possibly empty) with optional month/day
+        // V2 format has dateOfBirth as undefined OR an object with required month AND day
+        if (item.dateOfBirth === null || item.dateOfBirth === undefined) {
+          return false;
+        }
+        
+        // If dateOfBirth is an object, check if it has the V1 pattern
+        const dob = item.dateOfBirth as { month?: unknown; day?: unknown };
+        
+        // V1 pattern: object exists but month or day is missing (optional fields)
+        // V2 pattern: dateOfBirth is undefined, or both month and day are present
+        return (
+          (dob.month === undefined && dob.day !== undefined) ||
+          (dob.month !== undefined && dob.day === undefined) ||
+          (dob.month === undefined && dob.day === undefined)
+        );
+      });
+
+      if (needsMigration) {
+        const migrated = migrateEtriansV1toV2(parsed);
+        setStoredEtrians(migrated);
+        // Save migrated data back to localStorage
+        window.localStorage.setItem(storageKey, JSON.stringify(migrated));
+      } else {
+        setStoredEtrians(parsed as Etrian[]);
+      }
     } catch {
       // TODO: 読み取りに失敗したら「初期化します」みたいなモーダル表示
       setStoredEtrians([]);
