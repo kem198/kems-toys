@@ -15,7 +15,6 @@ export const registryFormSchema = z
       .object({
         month: z.enum(
           etrianMonthOptionValues,
-          // TODO: 表示されないので原因調査する
           "誕生日を設定する場合、月日両方を入力してください。",
         ),
         day: z.enum(

@@ -201,25 +201,30 @@ export function EditDialog({
                   <Controller
                     name="dateOfBirth.month"
                     control={form.control}
-                    render={({ field }) => (
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        disabled={!showDateOfBirth}
-                      >
-                        <SelectTrigger id="etrian-birth-month">
-                          <SelectValue
-                            placeholder={etrianMonthOptionValues[0]}
-                          />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {etrianMonthOptionValues.map((option) => (
-                            <SelectItem key={option} value={option}>
-                              {option}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                    render={({ field, fieldState }) => (
+                      <>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          disabled={!showDateOfBirth}
+                        >
+                          <SelectTrigger id="etrian-birth-month">
+                            <SelectValue
+                              placeholder={etrianMonthOptionValues[0]}
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {etrianMonthOptionValues.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        {fieldState.invalid && (
+                          <FieldError errors={[fieldState.error]} />
+                        )}
+                      </>
                     )}
                   />
                 </Field>
