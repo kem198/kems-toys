@@ -31,8 +31,8 @@ const migrateDateOfBirth = (
   return undefined;
 };
 
-export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] => {
-  return etrianV1s.map((etrianV1) => ({
+export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] =>
+  etrianV1s.map((etrianV1) => ({
     id: etrianV1.id,
     name: etrianV1.name,
     dateOfBirth: migrateDateOfBirth(etrianV1.dateOfBirth),
@@ -40,4 +40,3 @@ export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] => {
     order: etrianV1.order,
     memo: etrianV1.memo,
   }));
-};
