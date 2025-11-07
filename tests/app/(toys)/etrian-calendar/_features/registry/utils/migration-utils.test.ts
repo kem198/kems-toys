@@ -1,5 +1,5 @@
 import { EtrianV1 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
-import { migrateEtrians } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
+import { migrateEtriansV1toV2 } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 import { describe, expect, it } from "vitest";
 
 describe("migration-utils tests", () => {
@@ -9,7 +9,7 @@ describe("migration-utils tests", () => {
       const oldEtrians: EtrianV1[] = [];
 
       // Act
-      const migratedEtrians = migrateEtrians(oldEtrians);
+      const migratedEtrians = migrateEtriansV1toV2(oldEtrians);
 
       // Assert
       expect(migratedEtrians).toEqual([]);
@@ -29,7 +29,7 @@ describe("migration-utils tests", () => {
       ];
 
       // Act
-      const migratedEtrians = migrateEtrians(oldEtrians);
+      const migratedEtrians = migrateEtriansV1toV2(oldEtrians);
 
       // Assert
       expect(migratedEtrians[0]).toEqual({
@@ -56,7 +56,7 @@ describe("migration-utils tests", () => {
       ];
 
       // Act
-      const migratedEtrians = migrateEtrians(oldEtrians);
+      const migratedEtrians = migrateEtriansV1toV2(oldEtrians);
 
       // Assert
       expect(migratedEtrians[0]).toEqual({
@@ -83,7 +83,7 @@ describe("migration-utils tests", () => {
       ];
 
       // Act
-      const migratedEtrians = migrateEtrians(oldEtrians);
+      const migratedEtrians = migrateEtriansV1toV2(oldEtrians);
 
       // Assert
       expect(migratedEtrians[0]).toEqual({
@@ -110,7 +110,7 @@ describe("migration-utils tests", () => {
       ];
 
       // Act
-      const migratedEtrians = migrateEtrians(oldEtrians);
+      const migratedEtrians = migrateEtriansV1toV2(oldEtrians);
 
       // Assert
       expect(migratedEtrians[0]).toEqual({
@@ -145,7 +145,7 @@ describe("migration-utils tests", () => {
       ];
 
       // Act
-      const migratedEtrians = migrateEtrians(oldEtrians);
+      const migratedEtrians = migrateEtriansV1toV2(oldEtrians);
 
       // Assert
       expect(migratedEtrians[0]).toEqual({

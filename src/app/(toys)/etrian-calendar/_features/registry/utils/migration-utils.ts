@@ -31,7 +31,7 @@ const migrateDateOfBirth = (
   return undefined;
 };
 
-export const migrateEtrians = (etrianV1s: EtrianV1[]): Etrian[] =>
+export const migrateEtriansV1toV2 = (etrianV1s: EtrianV1[]): Etrian[] =>
   etrianV1s.map((etrianV1) => ({
     id: etrianV1.id,
     name: etrianV1.name,
