@@ -1,3 +1,5 @@
+import { UNSET_OPTION } from "@/constants/select";
+
 export const etrianMonths = [
   {
     name: "皇帝ノ月",
@@ -59,12 +61,12 @@ export const etrianNewYearsEve = {
 } as const;
 
 export const etrianMonthOptionValues = [
-  "未設定",
+  UNSET_OPTION,
   ...etrianMonths.map((month) => month.name),
   etrianNewYearsEve.name,
 ] as const;
 
 export const etrianDayOptionValues = [
-  "未設定",
+  UNSET_OPTION,
   ...Array.from({ length: 28 }, (_, index) => String(index + 1)),
 ];

@@ -52,6 +52,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { UNSET_OPTION } from "@/constants/select";
 
 type EditDialogProps = {
   etrian: Etrian;
@@ -86,8 +87,8 @@ export function EditDialog({
             day: String(etrian.dateOfBirth.day),
           }
         : {
-            month: "未設定",
-            day: "未設定",
+            month: UNSET_OPTION,
+            day: UNSET_OPTION,
           },
       affiliations: etrian.affiliations?.join(","),
     });
@@ -110,8 +111,8 @@ export function EditDialog({
     const dateOfBirth =
       data.dateOfBirth?.month &&
       data.dateOfBirth?.day &&
-      data.dateOfBirth.month !== "未設定" &&
-      data.dateOfBirth.day !== "未設定"
+      data.dateOfBirth.month !== UNSET_OPTION &&
+      data.dateOfBirth.day !== UNSET_OPTION
         ? {
             month: data.dateOfBirth.month,
             day: Number(data.dateOfBirth.day) as EtrianDay,

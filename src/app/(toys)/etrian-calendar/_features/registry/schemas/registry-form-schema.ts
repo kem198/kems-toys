@@ -2,6 +2,7 @@ import {
   etrianDayOptionValues,
   etrianMonthOptionValues,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import { UNSET_OPTION } from "@/constants/select";
 import * as z from "zod";
 
 export const registryFormSchema = z
@@ -25,9 +26,10 @@ export const registryFormSchema = z
 
       const hasMonth =
         data.dateOfBirth.month !== undefined &&
-        data.dateOfBirth.month !== "未設定";
+        data.dateOfBirth.month !== UNSET_OPTION;
       const hasDay =
-        data.dateOfBirth.day !== undefined && data.dateOfBirth.day !== "未設定";
+        data.dateOfBirth.day !== undefined &&
+        data.dateOfBirth.day !== UNSET_OPTION;
 
       // 両方入力または両方未設定
       return hasMonth === hasDay;
