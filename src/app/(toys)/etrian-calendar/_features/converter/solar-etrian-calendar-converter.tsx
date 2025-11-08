@@ -27,7 +27,13 @@ import {
 } from "@/components/ui/select";
 import { isLeapYear } from "@/utilities/date-utils";
 import { format } from "date-fns";
-import { ArrowRightLeft, ChevronDownIcon, Sprout, Sun } from "lucide-react";
+import {
+  ArrowDownUp,
+  ArrowRightLeft,
+  ChevronDownIcon,
+  Sprout,
+  Sun,
+} from "lucide-react";
 import React, { useState } from "react";
 
 export function ToEtrianCalendarConverter() {
@@ -260,7 +266,8 @@ export function SolarEtrianCalendarConverter() {
           setIsShowToEtrian(!isShowToEtrian);
         }}
       >
-        <ArrowRightLeft />
+        <ArrowDownUp className="block md:hidden" />
+        <ArrowRightLeft className="hidden md:block" />
         入れ替える
       </Button>
     </div>
