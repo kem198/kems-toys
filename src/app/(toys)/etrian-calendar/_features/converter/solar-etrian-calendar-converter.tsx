@@ -1,7 +1,10 @@
 "use client";
 
 import { etrianMonthOptionValues } from "@/app/(toys)/etrian-calendar/_common/constants/date";
-import { EtrianDay } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import {
+  EtrianDay,
+  EtrianMonthName,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   toEtrianDate,
   toSolarDate,
@@ -104,6 +107,15 @@ export function ToSolarCalendarConverter() {
 
   const currentYear = new Date().getFullYear();
 
+  const isNewYearsEve = selectedMonth === "鬼乎ノ日";
+  const maxDay = isNewYearsEve ? 1 : 28;
+
+  React.useEffect(() => {
+    if (isNewYearsEve && selectedDay !== "1") {
+      setSelectedDay("1");
+    }
+  }, [isNewYearsEve, selectedDay]);
+
   React.useEffect(() => {
     if (!selectedMonth || !selectedDay) {
       setSolarDate(undefined);
@@ -112,21 +124,21 @@ export function ToSolarCalendarConverter() {
 
     try {
       const day = parseInt(selectedDay, 10);
-      if (Number.isNaN(day) || day < 1 || day > 28) {
+      if (Number.isNaN(day) || day < 1 || day > maxDay) {
         setSolarDate(undefined);
         return;
       }
 
-      const date = toSolarDate({
+      const date: Date = toSolarDate({
         year: currentYear,
-        month: selectedMonth as any,
+        month: selectedMonth as EtrianMonthName,
         day: day as EtrianDay,
       });
       setSolarDate(date);
     } catch {
       setSolarDate(undefined);
     }
-  }, [selectedMonth, selectedDay, currentYear]);
+  }, [selectedMonth, selectedDay, currentYear, maxDay]);
 
   return (
     <ItemContent className="flex flex-row flex-wrap gap-4">
@@ -153,7 +165,7 @@ export function ToSolarCalendarConverter() {
               <SelectValue placeholder="日" />
             </SelectTrigger>
             <SelectContent>
-              {Array.from({ length: 28 }, (_, i) => i + 1).map((day) => (
+              {Array.from({ length: maxDay }, (_, i) => i + 1).map((day) => (
                 <SelectItem key={day} value={String(day)}>
                   {day}
                 </SelectItem>
@@ -172,7 +184,7 @@ export function ToSolarCalendarConverter() {
         <Button
           variant="secondary"
           id="date"
-          className="w-full justify-between font-normal"
+          className="w-full cursor-default justify-between font-normal"
         >
           {solarDate
             ? format(solarDate, "yyyy-MM-dd")
