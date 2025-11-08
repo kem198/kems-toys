@@ -33,11 +33,15 @@ export interface ResultDisplayProps
 }
 
 const ResultDisplay = React.forwardRef<HTMLDivElement, ResultDisplayProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    { className, variant, size, asChild = false, role = "status", ...props },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "div";
     return (
       <Comp
         className={cn(resultDisplayVariants({ variant, size, className }))}
+        role={role}
         ref={ref}
         {...props}
       />
