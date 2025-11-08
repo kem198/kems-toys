@@ -1,4 +1,5 @@
 import {
+  etrianDays,
   etrianMonths,
   etrianNewYearsEve,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
@@ -11,35 +12,7 @@ export type EtrianMonthNameWithNewYearsEve =
   | EtrianMonthName
   | EtrianNewYearsEveName;
 
-export type EtrianDay =
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
-  | 13
-  | 14
-  | 15
-  | 16
-  | 17
-  | 18
-  | 19
-  | 20
-  | 21
-  | 22
-  | 23
-  | 24
-  | 25
-  | 26
-  | 27
-  | 28;
+export type EtrianDay = (typeof etrianDays)[number];
 
 export type EtrianDateOfBirth = {
   month?: EtrianMonthNameWithNewYearsEve;

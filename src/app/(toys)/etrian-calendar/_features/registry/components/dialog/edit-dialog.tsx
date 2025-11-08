@@ -12,8 +12,8 @@ import {
 import { Controller, useForm } from "react-hook-form";
 
 import {
-  etrianDayOptionValues,
-  etrianMonthOptionValues,
+  etrianDayOptions,
+  etrianMonthOptions,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import {
   Etrian,
@@ -110,7 +110,7 @@ export function EditDialog({
     monthString: string | undefined,
   ): EtrianMonthNameWithNewYearsEve | undefined => {
     if (!monthString || monthString === UNSET_SELECT_VALUE) return undefined;
-    return etrianMonthOptionValues.includes(monthString as any)
+    return etrianMonthOptions.includes(monthString as any)
       ? (monthString as EtrianMonthNameWithNewYearsEve)
       : undefined;
   };
@@ -206,15 +206,13 @@ export function EditDialog({
                         onValueChange={field.onChange}
                       >
                         <SelectTrigger id="etrian-birth-month">
-                          <SelectValue
-                            placeholder={etrianMonthOptionValues[0]}
-                          />
+                          <SelectValue placeholder={etrianMonthOptions[0]} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value={UNSET_SELECT_VALUE}>
                             {UNSET_SELECT_VALUE}
                           </SelectItem>
-                          {etrianMonthOptionValues.map((option) => (
+                          {etrianMonthOptions.map((option) => (
                             <SelectItem key={option} value={option}>
                               {option}
                             </SelectItem>
@@ -243,7 +241,7 @@ export function EditDialog({
                             <SelectItem value={UNSET_SELECT_VALUE}>
                               {UNSET_SELECT_VALUE}
                             </SelectItem>
-                            {etrianDayOptionValues.map((option) => (
+                            {etrianDayOptions.map((option) => (
                               <SelectItem key={option} value={option}>
                                 {option}
                               </SelectItem>

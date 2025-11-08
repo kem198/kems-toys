@@ -1,6 +1,6 @@
 "use client";
 
-import { etrianMonthOptionValues } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import { etrianMonthOptions } from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import {
   EtrianDay,
   EtrianMonthName,
@@ -202,7 +202,7 @@ export function ToSolarCalendarConverter() {
                 <SelectValue placeholder="月を選択" />
               </SelectTrigger>
               <SelectContent>
-                {etrianMonthOptionValues.map((option) => (
+                {etrianMonthOptions.map((option) => (
                   <SelectItem key={option} value={option}>
                     {option}
                   </SelectItem>
