@@ -12,8 +12,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci-frontend:
+  ci:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        task: [lint, test, build]
     steps:
       - uses: actions/checkout@v4
       - name: Extract Node.js version from package.json
@@ -27,9 +30,5 @@ jobs:
           cache-dependency-path: "./package-lock.json"
       - name: Install dependencies
         run: npm ci
-      - name: Test
-        run: npm run test
-      - name: Lint
-        run: npm run lint
-      - name: Build
-        run: npm run build
+      - name: Run ${{ matrix.task }}
+        run: npm run ${{ matrix.task }}
