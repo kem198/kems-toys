@@ -39,7 +39,7 @@ export function ToEtrianCalendarConverter() {
   const endMonth = new Date(currentYear + 4, 11);
 
   return (
-    <ItemContent className="flex flex-row flex-wrap gap-4">
+    <ItemContent className="flex flex-col flex-wrap gap-4 md:flex-row">
       <div className="flex flex-1 flex-col gap-2">
         <Label htmlFor="date" className="flex items-center gap-1">
           <Sun size={16} />
@@ -167,7 +167,7 @@ export function ToSolarCalendarConverter() {
   }, [selectedYear, selectedMonth, selectedDay, maxDay]);
 
   return (
-    <ItemContent className="flex flex-row flex-wrap gap-4">
+    <ItemContent className="flex flex-col flex-wrap gap-4 md:flex-row">
       <div className="flex flex-1 flex-col gap-2">
         <Label htmlFor="etrian-month" className="flex items-center gap-1">
           <Sprout size={16} />
