@@ -18,38 +18,59 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Setup and Run Frontend
       - name: Extract Node.js version from package.json
         run: echo "NODE_VERSION=$(jq -r '.volta.node' package.json)" >> $GITHUB_ENV
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "npm"
           cache-dependency-path: "./package-lock.json"
-      - name: Install Frontend Dependencies
+
+      - name: Install Dependencies
         run: npm ci
+
+      - name: Get Playwright version
+        id: playwright-version
+        run: echo "version=$(jq -r '.devDependencies."@playwright/test"' package.json)" >> $GITHUB_OUTPUT
+
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Build and Start Frontend
-        run: |
-          npm run build
-          npm start &
-          timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
 
-      # Run E2E tests
+      - name: Install Playwright Browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps
+
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.tsx', '**/*.ts', '**/*.jsx', '**/*.js') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+
+      - name: Build Frontend
+        run: npm run build
+
+      - name: Start Frontend
+        run: npm start &
+
+      - name: Wait for server
+        run: timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+
       - name: Run E2E tests
         run: npm run e2e
 
-      # Upload artifacts
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
