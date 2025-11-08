@@ -12,14 +12,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci-e2e:
-    timeout-minutes: 60
+  e2e:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extract Node.js version from package.json
-        run: echo "NODE_VERSION=$(jq -r '.volta.node' package.json)" >> $GITHUB_ENV
+      - name: Extract Node.js version from package.json (Volta / engines fallback)
+        run: |
+          NODE_VERSION=$(jq -r '.volta.node // .engines.node // "lts/*"' package.json)
+          echo "NODE_VERSION=$NODE_VERSION" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,9 +34,13 @@ jobs:
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
-        id: playwright-cache
         with:
-          path: ~/.cache/ms-playwright
+          path: |
+            ~/.cache/ms-playwright
+            ~/.cache/playwright
+            ~/.local/share/ms-playwright
+            node_modules/playwright/.local-browsers
+            node_modules/.cache/playwright
           key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
@@ -43,14 +48,14 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Cache Next.js build
+      - name: Cache Next.js build cache
         uses: actions/cache@v4
         with:
           path: |
             .next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-${{ hashFiles('**/*.tsx', '**/*.ts', '**/*.jsx', '**/*.js') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json','package.json','next.config.js') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('package-lock.json') }}-
+            ${{ runner.os }}-nextjs-
 
       - name: Build Frontend
         run: npm run build
@@ -59,12 +64,13 @@ jobs:
         run: npm start &
 
       - name: Wait for server
-        run: timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
+        run: timeout 120 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
 
       - name: Run E2E tests
         run: npm run e2e
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload E2E artifacts
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
