@@ -38,5 +38,26 @@
     // props 渡しでスプレッド構文を使用できるようにする
     // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
     "react/jsx-props-no-spreading": "off"
-  }
+  },
+  "overrides": [
+    {
+      // テスト系ファイルのみ devDependencies からの import を許可する
+      "files": [
+        "**/*.test.{js,ts,tsx}",
+        "**/*.spec.{js,ts,tsx}",
+        "**/e2e/**/*.{js,ts,tsx}",
+        "**/tests/**/*.{js,ts,tsx}",
+        "playwright.config.{js,ts}",
+        "vitest.config.{js,ts,mts}"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "devDependencies": true
+          }
+        ]
+      }
+    }
+  ]
 }
