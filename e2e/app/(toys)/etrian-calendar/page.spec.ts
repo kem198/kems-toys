@@ -155,6 +155,28 @@ test.describe("世界樹の暦ページのテスト", () => {
         await expect(page.getByText("2").first()).toBeVisible();
         await expect(page.getByText("2024-12-31").first()).toBeVisible();
       });
+
+      test("暦変換機 (太陽暦 -> 世界樹歴) で特定日を選択した状態で、暦変換器 (世界樹歴 -> 太陽暦) が初期表示された時、特定日が初期表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+        await page.getByRole("button", { name: "太陽暦" }).click();
+        await page.getByLabel("Choose the Month").selectOption("3");
+        await page.getByRole("button", { name: "Tuesday, April 1st," }).click();
+
+        // Act
+        await page.getByRole("button", { name: "入れ替える" }).click();
+
+        // Assert
+        await expect(page.getByText("2025").first()).toBeVisible();
+        await expect(page.getByText("王虎ノ月").first()).toBeVisible();
+        await expect(page.getByText("7").first()).toBeVisible();
+        await expect(page.getByText("2025-04-01").first()).toBeVisible();
+      });
     });
 
     test.describe("更新時のテスト", () => {
