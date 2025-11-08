@@ -3,16 +3,6 @@ import { ETRIAN_REGISTRY_STORAGE_KEY } from "@/app/(toys)/etrian-calendar/_featu
 import { expect, Locator, Page, test } from "@playwright/test";
 
 test.describe("世界樹の暦ページのテスト", () => {
-  const DUMMY_ETRIANS: Etrian[] = [
-    {
-      id: "dummy-etrian",
-      name: "dummy",
-      dateOfBirth: { month: "天牛ノ月", day: 1 },
-      affiliations: [],
-      order: 0,
-    },
-  ];
-
   /** テストの Assert 範囲 */
   let toySection: Locator;
 
@@ -26,26 +16,8 @@ test.describe("世界樹の暦ページのテスト", () => {
     // ルートへ移動しておく
     await page.goto("/");
 
-    // ダミー Etrians のセット
-    await page.evaluate(
-      ([key, value]) => {
-        localStorage.setItem(key, value);
-      },
-      [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
-    );
-
     // テストの Assert 範囲を設定
     toySection = page.locator('[data-testid="toy"]');
-  });
-
-  test.afterEach(async ({ page }) => {
-    // ダミー Etrians を再度セット
-    await page.evaluate(
-      ([key, value]) => {
-        localStorage.setItem(key, value);
-      },
-      [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
-    );
   });
 
   test.describe("暦変換器 (太陽暦 -> 世界樹歴) のテスト", () => {
@@ -61,7 +33,9 @@ test.describe("世界樹の暦ページのテスト", () => {
 
         // Assert
         await expect(toySection.getByText("2025-01-01")).toBeVisible();
-        await expect(toySection.getByText("皇帝ノ月 1 日")).toBeVisible();
+        await expect(
+          toySection.getByText("皇帝ノ月 1 日").nth(1),
+        ).toBeVisible();
       });
 
       test("当日が '2024-12-31' (閏年) の状態で、画面が初期表示された時、'2024-12-31' と '鬼乎ノ日 2 日' が表示されること", async ({
@@ -208,6 +182,36 @@ test.describe("世界樹の暦ページのテスト", () => {
   });
 
   test.describe("冒険者お誕生日台帳のテスト", () => {
+    const DUMMY_ETRIANS: Etrian[] = [
+      {
+        id: "dummy-etrian",
+        name: "dummy",
+        dateOfBirth: { month: "天牛ノ月", day: 1 },
+        affiliations: [],
+        order: 0,
+      },
+    ];
+
+    test.beforeEach(async ({ page }) => {
+      // ダミー Etrians のセット
+      await page.evaluate(
+        ([key, value]) => {
+          localStorage.setItem(key, value);
+        },
+        [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
+      );
+    });
+
+    test.afterEach(async ({ page }) => {
+      // ダミー Etrians で再度上書き
+      await page.evaluate(
+        ([key, value]) => {
+          localStorage.setItem(key, value);
+        },
+        [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
+      );
+    });
+
     test.describe("初期表示のテスト", () => {
       test("冒険者が登録済みの状態で、画面が初期表示された時、登録済み冒険者の各種情報が表示されること", async ({
         page,
