@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/heading-has-content */
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
