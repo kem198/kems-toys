@@ -6,13 +6,219 @@ import { ETRIAN_REGISTRY_STORAGE_KEY } from "@/app/(toys)/etrian-calendar/_featu
 import { expect, test } from "@playwright/test";
 
 test.describe("世界樹の暦ページのテスト", () => {
+  const DUMMY_ETRIANS: Etrian[] = [
+    {
+      id: "dummy-etrian",
+      name: "dummy",
+      dateOfBirth: { month: "天牛ノ月", day: 1 },
+      affiliations: [],
+      order: 0,
+    },
+  ];
+
+  test.beforeEach(async ({ page }) => {
+    // ルートへ移動しておく
+    await page.goto("/");
+    // ダミー Etrians のセット
+    await page.evaluate(
+      ([key, value]) => {
+        localStorage.setItem(key, value);
+      },
+      [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
+    );
+  });
+
+  test.afterEach(async ({ page }) => {
+    // ダミー Etrians を再度セット
+    await page.evaluate(
+      ([key, value]) => {
+        localStorage.setItem(key, value);
+      },
+      [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
+    );
+  });
+
+  test.describe("暦変換器 (太陽暦 -> 世界樹歴) のテスト", () => {
+    test.describe("初期表示のテスト", () => {
+      test("当日が '2025-01-01' の状態で、画面が初期表示された時、'2025-01-01' と '皇帝ノ月 1 日' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+
+        // Act
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Assert
+        await expect(page.getByText("2025-01-01").first()).toBeVisible();
+        await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible();
+      });
+
+      test("当日が '2024-12-31' (閏年) の状態で、画面が初期表示された時、'2024-12-31' と '鬼乎ノ日 2 日' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2024-12-31T09:00:00"));
+
+        // Act
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Assert
+        await expect(page.getByText("2024-12-31").first()).toBeVisible();
+        await expect(page.getByText("鬼乎ノ日 2 日").first()).toBeVisible();
+      });
+    });
+
+    test.describe("更新時のテスト", () => {
+      test("当日が '2025-01-01' の状態で、太陽暦を '2025-02-01' に変更した時、'2025-02-01' と '笛鼠ノ月 4 日' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Act
+        await page.getByRole("button", { name: "太陽暦" }).click();
+        await page.getByLabel("Choose the Month").selectOption("1");
+        await page
+          .getByRole("button", { name: "Saturday, February 1st," })
+          .click();
+
+        // Assert
+        await expect(page.getByText("2025-02-01").first()).toBeVisible();
+        await expect(page.getByText("笛鼠ノ月 4 日").first()).toBeVisible();
+      });
+
+      test("当日が '2025-01-01' の状態で、太陽暦を '2024-12-31' に変更した時、'2024-12-31' と '鬼乎ノ日 2 日' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Act
+        await page.getByRole("button", { name: "太陽暦" }).click();
+        await page.getByLabel("Choose the Month").selectOption("11");
+        await page.getByLabel("Choose the Year").selectOption("2024");
+        await page
+          .getByRole("button", { name: "Tuesday, December 31st," })
+          .click();
+
+        // Assert
+        await expect(page.getByText("2024-12-31").first()).toBeVisible();
+        await expect(page.getByText("鬼乎ノ日 2 日").first()).toBeVisible();
+      });
+    });
+  });
+
+  test.describe("暦変換器 (世界樹歴 -> 太陽暦) のテスト", () => {
+    test.describe("初期表示のテスト", () => {
+      test("当日が '2025-01-01' の状態で、暦変換器 (世界樹歴 -> 太陽暦) が初期表示された時、'皇帝ノ月 1 日' と '2025-01-01' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Act
+        await page.getByRole("button", { name: "入れ替える" }).click();
+
+        // Assert
+        await expect(page.getByText("2025").first()).toBeVisible();
+        await expect(page.getByText("皇帝ノ月").first()).toBeVisible();
+        await expect(page.getByText("1").first()).toBeVisible();
+        await expect(page.getByText("2025-01-01").first()).toBeVisible();
+      });
+
+      test("当日が '2024-12-31' (閏年) の状態で、暦変換器 (世界樹歴 -> 太陽暦) が初期表示された時、'鬼乎ノ日 2 日' と '2024-12-31' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2024-12-31T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Act
+        await page.getByRole("button", { name: "入れ替える" }).click();
+
+        // Assert
+        await expect(page.getByText("2024").first()).toBeVisible();
+        await expect(page.getByText("鬼乎ノ日").first()).toBeVisible();
+        await expect(page.getByText("2").first()).toBeVisible();
+        await expect(page.getByText("2024-12-31").first()).toBeVisible();
+      });
+    });
+
+    test.describe("更新時のテスト", () => {
+      test("当日が '2025-01-01' の状態で、世界樹暦を '2025 年 笛鼠ノ月 4 日' に変更した時、'笛鼠ノ月 4 日' と '2025-02-01' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+        await page.getByRole("button", { name: "入れ替える" }).click();
+
+        // Act
+        await page.locator("#etrian-year").click();
+        await page.getByRole("option", { name: "2025" }).click();
+        await page.locator("#etrian-month").click();
+        await page.getByText("笛鼠ノ月", { exact: true }).click();
+        await page.locator("#etrian-day").click();
+        await page.getByRole("option", { name: "4", exact: true }).click();
+
+        // Assert
+        await expect(page.getByText("2025").first()).toBeVisible();
+        await expect(page.getByText("笛鼠ノ月").first()).toBeVisible();
+        await expect(page.getByText("4").first()).toBeVisible();
+        await expect(page.getByText("2025-02-01").first()).toBeVisible();
+      });
+
+      test("当日が '2025-01-01' の状態で、世界樹暦を '2024 年 鬼乎ノ日 2 日' に変更した時、'鬼乎ノ日 2 日' と '2024-12-31' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+        await page.getByRole("button", { name: "入れ替える" }).click();
+
+        // Act
+        await page.locator("#etrian-year").click();
+        await page.getByRole("option", { name: "2024" }).click();
+        await page.locator("#etrian-month").click();
+        await page.getByText("鬼乎ノ日", { exact: true }).click();
+        await page.locator("#etrian-day").click();
+        await page.getByRole("option", { name: "2", exact: true }).click();
+
+        // Assert
+        await expect(page.getByText("2024").first()).toBeVisible();
+        await expect(page.getByText("鬼乎ノ日").first()).toBeVisible();
+        await expect(page.getByText("2").first()).toBeVisible();
+        await expect(page.getByText("2024-12-31").first()).toBeVisible();
+      });
+    });
+  });
+
   test.describe("冒険者お誕生日台帳のテスト", () => {
     test.describe("初期表示のテスト", () => {
       test("冒険者が登録済みの状態で、画面が初期表示された時、登録済み冒険者の各種情報が表示されること", async ({
         page,
       }) => {
         // Arrange
-        await page.goto("/");
         const etrians: Etrian[] = [
           {
             id: "test-etrian",
@@ -46,12 +252,6 @@ test.describe("世界樹の暦ページのテスト", () => {
         await expect(
           page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
         ).toBeVisible();
-
-        // Cleanup
-        await page.evaluate(
-          (key) => localStorage.removeItem(key),
-          ETRIAN_REGISTRY_STORAGE_KEY,
-        );
       });
 
       test("今日が誕生月の状態で、画面が初期表示された時、「今月はお誕生月です！あと ? 日！」が表示されること", async ({
@@ -185,7 +385,9 @@ test.describe("世界樹の暦ページのテスト", () => {
     });
 
     test.describe.skip("作成時のテスト", () => {});
+
     test.describe.skip("更新時のテスト", () => {});
+
     test.describe.skip("削除時のテスト", () => {});
     test.describe("移行時のテスト", () => {
       test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (月なし -> 月あり)", async ({
