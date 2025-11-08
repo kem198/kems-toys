@@ -2,17 +2,17 @@ import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { ETRIAN_REGISTRY_STORAGE_KEY } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { expect, test } from "@playwright/test";
 
-const DUMMY_ETRIANS: Etrian[] = [
-  {
-    id: "dummy-etrian",
-    name: "dummy",
-    dateOfBirth: { month: "天牛ノ月", day: 1 },
-    affiliations: [],
-    order: 0,
-  },
-];
-
 test.describe("世界樹の暦ページのテスト", () => {
+  const DUMMY_ETRIANS: Etrian[] = [
+    {
+      id: "dummy-etrian",
+      name: "dummy",
+      dateOfBirth: { month: "天牛ノ月", day: 1 },
+      affiliations: [],
+      order: 0,
+    },
+  ];
+
   test.beforeEach(async ({ page }) => {
     // ルートへ移動しておく
     await page.goto("/");
