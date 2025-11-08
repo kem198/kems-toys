@@ -1,1 +1,1 @@
-export const UNSET_OPTION = "未設定";
+export const UNSET_SELECT_VALUE = "未設定";

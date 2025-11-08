@@ -12,8 +12,8 @@ import {
 import { Controller, useForm } from "react-hook-form";
 
 import {
-  etrianDayOptionValues,
-  etrianMonthOptionValues,
+  etrianDayOptions,
+  etrianMonthOptions,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import {
   Etrian,
@@ -52,7 +52,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { UNSET_OPTION } from "@/constants/select";
+import { UNSET_SELECT_VALUE } from "@/constants/select";
 
 type EditDialogProps = {
   etrian: Etrian;
@@ -87,12 +87,22 @@ export function EditDialog({
             day: String(etrian.dateOfBirth.day),
           }
         : {
-            month: UNSET_OPTION,
-            day: UNSET_OPTION,
+            month: UNSET_SELECT_VALUE,
+            day: UNSET_SELECT_VALUE,
           },
       affiliations: etrian.affiliations?.join(","),
     });
   }, [etrian, form]);
+
+  const normalizeAffiliations = (
+    affiliationsString: string | undefined,
+  ): string[] => {
+    if (!affiliationsString) return [];
+    return affiliationsString
+      .split(",")
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0);
+  };
 
   useEffect(() => {
     if (!open) {
@@ -103,16 +113,13 @@ export function EditDialog({
   }, [open, resetFormValues]);
 
   const handleSubmit = (data: RegistryFormValues) => {
-    const normalizedAffiliations = (data.affiliations ?? "")
-      .split(",")
-      .map((value) => value.trim())
-      .filter((value) => value.length > 0);
+    const normalizedAffiliations = normalizeAffiliations(data.affiliations);
 
     const dateOfBirth =
       data.dateOfBirth?.month &&
       data.dateOfBirth?.day &&
-      data.dateOfBirth.month !== UNSET_OPTION &&
-      data.dateOfBirth.day !== UNSET_OPTION
+      data.dateOfBirth.month !== UNSET_SELECT_VALUE &&
+      data.dateOfBirth.day !== UNSET_SELECT_VALUE
         ? {
             month: data.dateOfBirth.month,
             day: Number(data.dateOfBirth.day) as EtrianDay,
@@ -193,10 +200,10 @@ export function EditDialog({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value={UNSET_OPTION}>
-                              {UNSET_OPTION}
+                            <SelectItem value={UNSET_SELECT_VALUE}>
+                              {UNSET_SELECT_VALUE}
                             </SelectItem>
-                            {etrianMonthOptionValues.map((option) => (
+                            {etrianMonthOptions.map((option) => (
                               <SelectItem key={option} value={option}>
                                 {option}
                               </SelectItem>
@@ -221,10 +228,10 @@ export function EditDialog({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value={UNSET_OPTION}>
-                              {UNSET_OPTION}
+                            <SelectItem value={UNSET_SELECT_VALUE}>
+                              {UNSET_SELECT_VALUE}
                             </SelectItem>
-                            {etrianDayOptionValues.map((option) => (
+                            {etrianDayOptions.map((option) => (
                               <SelectItem key={option} value={option}>
                                 {option}
                               </SelectItem>

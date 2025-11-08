@@ -1,8 +1,8 @@
 import {
-  etrianDayOptionValues,
-  etrianMonthOptionValues,
+  etrianDayOptions,
+  etrianMonthOptions,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
-import { UNSET_OPTION } from "@/constants/select";
+import { UNSET_SELECT_VALUE } from "@/constants/select";
 import * as z from "zod";
 
 export const registryFormSchema = z
@@ -14,8 +14,8 @@ export const registryFormSchema = z
     memo: z.string().max(100, "100 文字以下で入力してください。").optional(),
     dateOfBirth: z
       .object({
-        month: z.enum([UNSET_OPTION, ...etrianMonthOptionValues]).optional(),
-        day: z.enum([UNSET_OPTION, ...etrianDayOptionValues]).optional(),
+        month: z.enum([UNSET_SELECT_VALUE, ...etrianMonthOptions]).optional(),
+        day: z.enum([UNSET_SELECT_VALUE, ...etrianDayOptions]).optional(),
       })
       .optional(),
     affiliations: z.string().optional(),
@@ -26,10 +26,10 @@ export const registryFormSchema = z
 
       const hasMonth =
         data.dateOfBirth.month !== undefined &&
-        data.dateOfBirth.month !== UNSET_OPTION;
+        data.dateOfBirth.month !== UNSET_SELECT_VALUE;
       const hasDay =
         data.dateOfBirth.day !== undefined &&
-        data.dateOfBirth.day !== UNSET_OPTION;
+        data.dateOfBirth.day !== UNSET_SELECT_VALUE;
 
       // 両方入力または両方未設定
       return hasMonth === hasDay;
