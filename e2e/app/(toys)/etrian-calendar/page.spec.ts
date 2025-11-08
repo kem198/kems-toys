@@ -61,6 +61,67 @@ test.describe("世界樹の暦ページのテスト", () => {
         await expect(page.getByText("鬼乎ノ日 2 日").first()).toBeVisible();
       });
     });
+
+    test.describe("更新時のテスト", () => {
+      test("当日が '2025-01-01' の状態で、太陽暦を '2025-02-01' に変更した時、'2025-02-01' と '笛鼠ノ月 4 日' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page.goto("/");
+        const etrians: Etrian[] = [];
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+        );
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Act
+        await page.getByRole("button", { name: "太陽暦" }).click();
+        await page.getByLabel("Choose the Month").selectOption("1");
+        await page
+          .getByRole("button", { name: "Saturday, February 1st," })
+          .click();
+
+        // Assert
+        await expect(page.getByText("2025-02-01").first()).toBeVisible();
+        await expect(page.getByText("笛鼠ノ月 4 日").first()).toBeVisible();
+      });
+
+      test("当日が '2025-01-01' の状態で、太陽暦を '2024-12-31' に変更した時、'2024-12-31' と '鬼乎ノ日 2 日' が表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await page.clock.setFixedTime(new Date("2025-01-01T09:00:00"));
+        await page.goto("/");
+        const etrians: Etrian[] = [];
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+        );
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Act
+        await page.getByRole("button", { name: "太陽暦" }).click();
+        await page.getByLabel("Choose the Month").selectOption("11");
+        await page.getByLabel("Choose the Year").selectOption("2024");
+        await page
+          .getByRole("button", { name: "Tuesday, December 31st," })
+          .click();
+
+        // Assert
+        await expect(page.getByText("2024-12-31").first()).toBeVisible();
+        await expect(page.getByText("鬼乎ノ日 2 日").first()).toBeVisible();
+      });
+    });
   });
 
   test.describe("冒険者お誕生日台帳のテスト", () => {
