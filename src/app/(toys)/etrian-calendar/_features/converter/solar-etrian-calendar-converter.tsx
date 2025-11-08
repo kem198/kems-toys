@@ -56,6 +56,7 @@ export function ToEtrianCalendarConverter() {
           </PopoverContent>
         </Popover>
       </div>
+
       <div className="flex flex-1 flex-col gap-2">
         <Label className="flex items-center gap-1">
           <Sprout size={16} />
@@ -88,6 +89,24 @@ export function ToSolarCalendarConverter() {
   return (
     <ItemContent className="flex flex-row flex-wrap gap-4">
       <div className="flex flex-1 flex-col gap-2">
+        <Label className="flex items-center gap-1">
+          <Sprout size={16} />
+          世界樹暦
+        </Label>
+        <div>
+          <Button
+            variant="secondary"
+            className="w-full cursor-default select-text justify-between font-normal"
+          >
+            {date ? toEtrianDate(date).month.name : ""}{" "}
+            {date && toEtrianDate(date).day
+              ? `${toEtrianDate(date).day} 日`
+              : ""}
+          </Button>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-2">
         <Label htmlFor="date" className="flex items-center gap-1">
           <Sun size={16} />
           太陽暦
@@ -118,23 +137,6 @@ export function ToSolarCalendarConverter() {
             />
           </PopoverContent>
         </Popover>
-      </div>
-      <div className="flex flex-1 flex-col gap-2">
-        <Label className="flex items-center gap-1">
-          <Sprout size={16} />
-          世界樹暦
-        </Label>
-        <div>
-          <Button
-            variant="secondary"
-            className="w-full cursor-default select-text justify-between font-normal"
-          >
-            {date ? toEtrianDate(date).month.name : ""}{" "}
-            {date && toEtrianDate(date).day
-              ? `${toEtrianDate(date).day} 日`
-              : ""}
-          </Button>
-        </div>
       </div>
     </ItemContent>
   );
