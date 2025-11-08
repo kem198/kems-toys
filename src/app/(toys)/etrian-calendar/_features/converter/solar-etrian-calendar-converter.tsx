@@ -17,7 +17,10 @@ import React from "react";
 export function SolarEtrianCalendarConverter() {
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(new Date());
+
+  const startMonth = new Date(2007, 0);
   const currentYear = new Date().getFullYear();
+  const endMonth = new Date(currentYear + 4, 11);
 
   return (
     <div className="flex flex-wrap items-center gap-4">
@@ -48,8 +51,8 @@ export function SolarEtrianCalendarConverter() {
                   captionLayout="dropdown"
                   selected={date}
                   defaultMonth={date}
-                  startMonth={new Date(2007, 0)}
-                  endMonth={new Date(currentYear + 4, 11)}
+                  startMonth={startMonth}
+                  endMonth={endMonth}
                   onSelect={(selectedDate) => {
                     setDate(selectedDate);
                     setOpen(false);
