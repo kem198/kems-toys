@@ -1,18 +1,53 @@
-import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-interface Props {
-  children: ReactNode;
-  className?: string;
+const resultDisplayVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-normal transition-colors [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        destructive: "bg-destructive text-destructive-foreground shadow-sm",
+        outline: "border border-input bg-background shadow-sm",
+        secondary: "bg-secondary text-secondary-foreground shadow-sm",
+        ghost: "",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+      },
+    },
+    defaultVariants: {
+      variant: "secondary",
+      size: "default",
+    },
+  },
+);
+
+export interface ResultDisplayProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof resultDisplayVariants> {
+  asChild?: boolean;
 }
 
-function ResultDisplay({ children, className }: Props) {
-  return (
-    <div
-      className={`flex min-h-20 flex-col place-items-center items-center justify-center rounded bg-zinc-200 p-4 ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
+const ResultDisplay = React.forwardRef<HTMLDivElement, ResultDisplayProps>(
+  (
+    { className, variant, size, asChild = false, role = "status", ...props },
+    ref,
+  ) => {
+    const Comp = asChild ? Slot : "div";
+    return (
+      <Comp
+        className={cn(resultDisplayVariants({ variant, size, className }))}
+        role={role}
+        ref={ref}
+        {...props}
+      />
+    );
+  },
+);
+ResultDisplay.displayName = "ResultDisplay";
 
-export { ResultDisplay };
+export { ResultDisplay, resultDisplayVariants };
