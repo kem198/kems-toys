@@ -18,7 +18,6 @@ import {
 import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   RegistryFormValues,
-  UNSET_SELECT_VALUE,
   registryFormSchema,
 } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Required } from "@/components/shared/required";
@@ -50,6 +49,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { UNSET_SELECT_VALUE } from "@/constants/select";
 
 type EditDialogProps = {
   etrian: Etrian;
