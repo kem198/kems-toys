@@ -1,6 +1,5 @@
+import { UNSET_SELECT_VALUE } from "@/constants/select";
 import * as z from "zod";
-
-export const UNSET_SELECT_VALUE = "未設定";
 
 export const registryFormSchema = z
   .object({

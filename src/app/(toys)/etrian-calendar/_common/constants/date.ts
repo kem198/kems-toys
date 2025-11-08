@@ -58,11 +58,14 @@ export const etrianNewYearsEve = {
   kana: "ものかのひ",
 } as const;
 
-export const etrianMonthOptionValues = [
+export const etrianMonthOptions = [
   ...etrianMonths.map((month) => month.name),
   etrianNewYearsEve.name,
-];
+] as const;
 
-export const etrianDayOptionValues = Array.from({ length: 28 }, (_, index) =>
-  String(index + 1),
-);
+export const etrianDays = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26, 27, 28,
+] as const;
+
+export const etrianDayOptions = etrianDays.map(String);
