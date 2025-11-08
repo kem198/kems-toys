@@ -516,6 +516,53 @@ test.describe("世界樹の暦ページのテスト", () => {
           "アルカディア",
         ]);
       });
+
+      test("Etrian 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること", async ({
+        page,
+      }) => {
+        // Arrange
+        const etrians: Etrian[] = [
+          {
+            id: "test-etrian",
+            name: "セトハ",
+            affiliations: ["ブレイバント", "アルカディア"],
+            order: 0,
+            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+          },
+        ];
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+        );
+
+        // Act
+        await page
+          .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
+          .click();
+
+        // Assert (表示が正しいこと)
+        await expect(page.getByText("セトハ").first()).toBeVisible();
+        await expect(page.getByText("未設定").first()).toBeVisible(); // マイグレート対象
+        await expect(page.getByText("ブレイバント").first()).toBeVisible();
+        await expect(page.getByText("アルカディア").first()).toBeVisible();
+        await expect(
+          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
+        ).toBeVisible();
+
+        // Assert (月に初期値が設定されること)
+        const migrated: Etrian[] = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated[0].dateOfBirth).toBeUndefined(); // マイグレート対象
+        expect(migrated[0].name).toBe("セトハ");
+        expect(migrated[0].affiliations).toEqual([
+          "ブレイバント",
+          "アルカディア",
+        ]);
+      });
     });
   });
 });
