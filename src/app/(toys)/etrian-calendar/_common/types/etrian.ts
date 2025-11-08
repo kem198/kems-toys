@@ -7,6 +7,10 @@ export type EtrianMonthName = (typeof etrianMonths)[number]["name"];
 export type EtrianMonthNameKana = (typeof etrianMonths)[number]["kana"];
 export type EtrianNewYearsEveName = (typeof etrianNewYearsEve)["name"];
 export type EtrianNewYearsEveNameKana = (typeof etrianNewYearsEve)["kana"];
+export type EtrianMonthNameWithNewYearsEve =
+  | EtrianMonthName
+  | EtrianNewYearsEveName;
+
 export type EtrianDay =
   | 1
   | 2
@@ -38,7 +42,7 @@ export type EtrianDay =
   | 28;
 
 export type EtrianDateOfBirth = {
-  month?: EtrianMonthName | EtrianNewYearsEveName;
+  month?: EtrianMonthNameWithNewYearsEve;
   day?: EtrianDay;
 };
 

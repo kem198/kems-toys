@@ -15,7 +15,11 @@ import {
   etrianDayOptionValues,
   etrianMonthOptionValues,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import {
+  Etrian,
+  EtrianDay,
+  EtrianMonthNameWithNewYearsEve,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   RegistryFormValues,
   registryFormSchema,
@@ -83,14 +87,41 @@ export function EditDialog({
       name: etrian.name,
       memo: etrian.memo,
       dateOfBirth: {
-        month: etrian.dateOfBirth.month ?? UNSET_SELECT_VALUE,
-        day: etrian.dateOfBirth.day
+        month: etrian.dateOfBirth?.month ?? UNSET_SELECT_VALUE,
+        day: etrian.dateOfBirth?.day
           ? String(etrian.dateOfBirth.day)
           : UNSET_SELECT_VALUE,
       },
       affiliations: etrian.affiliations?.join(","),
     });
   }, [etrian, form]);
+
+  const normalizeAffiliations = (
+    affiliationsString: string | undefined,
+  ): string[] => {
+    if (!affiliationsString) return [];
+    return affiliationsString
+      .split(",")
+      .map((value) => value.trim())
+      .filter((value) => value.length > 0);
+  };
+
+  const parseMonth = (
+    monthString: string | undefined,
+  ): EtrianMonthNameWithNewYearsEve | undefined => {
+    if (!monthString || monthString === UNSET_SELECT_VALUE) return undefined;
+    return etrianMonthOptionValues.includes(monthString as any)
+      ? (monthString as EtrianMonthNameWithNewYearsEve)
+      : undefined;
+  };
+
+  const parseDay = (dayStr: string | undefined): EtrianDay | undefined => {
+    if (!dayStr || dayStr === UNSET_SELECT_VALUE) return undefined;
+    const dayNumber = Number(dayStr);
+    return dayNumber >= 1 && dayNumber <= 28
+      ? (dayNumber as EtrianDay)
+      : undefined;
+  };
 
   useEffect(() => {
     if (!open) {
@@ -101,38 +132,15 @@ export function EditDialog({
   }, [open, resetFormValues]);
 
   const handleSubmit = (data: RegistryFormValues) => {
-    const normalizedAffiliations = (data.affiliations ?? "")
-      .split(",")
-      .map((value) => value.trim())
-      .filter((value) => value.length > 0);
-
-    const selectedMonth = data.dateOfBirth.month;
-    const isKnownMonth =
-      selectedMonth !== undefined &&
-      selectedMonth !== UNSET_SELECT_VALUE &&
-      (etrianMonthOptionValues as string[]).includes(selectedMonth);
-    const month = isKnownMonth
-      ? (selectedMonth as Etrian["dateOfBirth"]["month"])
-      : undefined;
-
-    const selectedDay = data.dateOfBirth.day;
-    const dayNumber =
-      selectedDay && selectedDay !== UNSET_SELECT_VALUE
-        ? Number(selectedDay)
-        : undefined;
-    const day =
-      dayNumber && dayNumber >= 1 && dayNumber <= 28
-        ? (dayNumber as Etrian["dateOfBirth"]["day"])
-        : undefined;
+    const normalizedAffiliations = normalizeAffiliations(data.affiliations);
+    const month = parseMonth(data.dateOfBirth.month);
+    const day = parseDay(data.dateOfBirth.day);
 
     const updatedEtrian: Etrian = {
       ...etrian,
       name: data.name.trim(),
       affiliations: normalizedAffiliations,
-      dateOfBirth: {
-        month,
-        day,
-      },
+      dateOfBirth: { month, day },
       memo: data.memo?.trim(),
     };
 
