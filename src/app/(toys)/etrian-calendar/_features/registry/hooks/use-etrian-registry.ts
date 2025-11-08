@@ -68,8 +68,6 @@ export function useEtrianRegistry(
       if (needsMigration) {
         const migrated = migrateEtriansV1toV2(parsed);
         setStoredEtrians(migrated);
-        // Save migrated data back to localStorage
-        window.localStorage.setItem(storageKey, JSON.stringify(migrated));
       } else {
         setStoredEtrians(parsed as Etrian[]);
       }
