@@ -147,10 +147,10 @@ test.describe("世界樹の暦ページのテスト", () => {
         await page.getByRole("button", { name: "入れ替える" }).click();
 
         // Assert
-        await expect(page.getByText("2025").first()).toBeVisible();
-        await expect(page.getByText("王虎ノ月").first()).toBeVisible();
-        await expect(page.getByText("7").first()).toBeVisible();
-        await expect(page.getByText("2025-04-01").first()).toBeVisible();
+        await expect(toySection.getByText("2025").first()).toBeVisible();
+        await expect(toySection.getByText("王虎ノ月")).toBeVisible();
+        await expect(toySection.getByText("7")).toBeVisible();
+        await expect(toySection.getByText("2025-04-01")).toBeVisible();
       });
     });
 
