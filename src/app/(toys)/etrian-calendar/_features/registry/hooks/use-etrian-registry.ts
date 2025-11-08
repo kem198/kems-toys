@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import {
+  Etrian,
+  EtrianV1,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { migrateEtriansV1toV2 } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 
 export const ETRIAN_REGISTRY_STORAGE_KEY = "etrianRegistry";
 
@@ -34,8 +38,28 @@ export function useEtrianRegistry(
     const data = window.localStorage.getItem(storageKey);
 
     try {
-      // TODO: 多分この辺に実装する
-      setStoredEtrians(data ? (JSON.parse(data) as Etrian[]) : []);
+      if (!data) {
+        setStoredEtrians([]);
+        return;
+      }
+
+      const parsedData = JSON.parse(data);
+
+      // データが配列でない場合は初期化
+      if (!Array.isArray(parsedData)) {
+        setStoredEtrians([]);
+        return;
+      }
+
+      // 空配列の場合はそのまま設定
+      if (parsedData.length === 0) {
+        setStoredEtrians([]);
+        return;
+      }
+
+      // データ型を判定してマイグレーション
+      const migratedEtrians = migrateEtriansV1toV2(parsedData as EtrianV1[]);
+      setStoredEtrians(migratedEtrians);
     } catch {
       // TODO: 読み取りに失敗したら「初期化します」みたいなモーダル表示
       setStoredEtrians([]);
