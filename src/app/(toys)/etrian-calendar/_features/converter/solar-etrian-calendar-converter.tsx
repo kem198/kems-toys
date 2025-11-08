@@ -9,6 +9,7 @@ import {
   toEtrianDate,
   toSolarDate,
 } from "@/app/(toys)/etrian-calendar/_common/utils/etrian-utils";
+import { ResultDisplay } from "@/components/shared/result-display";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Item, ItemContent } from "@/components/ui/item";
@@ -85,15 +86,12 @@ export function ToEtrianCalendarConverter() {
           世界樹暦
         </Label>
         <div>
-          <Button
-            variant="secondary"
-            className="w-full cursor-default select-text justify-between font-normal"
-          >
+          <ResultDisplay className="w-full justify-between">
             {date ? toEtrianDate(date).month.name : ""}{" "}
             {date && toEtrianDate(date).day
               ? `${toEtrianDate(date).day} 日`
               : ""}
-          </Button>
+          </ResultDisplay>
         </div>
       </div>
     </ItemContent>
@@ -230,19 +228,15 @@ export function ToSolarCalendarConverter() {
       </div>
 
       <div className="flex flex-1 flex-col gap-2">
-        <Label htmlFor="date" className="flex items-center gap-1">
+        <Label className="flex items-center gap-1">
           <Sun size={16} />
           太陽暦
         </Label>
-        <Button
-          variant="secondary"
-          id="date"
-          className="w-full cursor-default justify-between font-normal"
-        >
+        <ResultDisplay className="w-full justify-between">
           {solarDate
             ? format(solarDate, "yyyy-MM-dd")
             : "日付を選択してください"}
-        </Button>
+        </ResultDisplay>
       </div>
     </ItemContent>
   );
