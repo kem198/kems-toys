@@ -35,11 +35,16 @@ import {
   Sprout,
   Sun,
 } from "lucide-react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function ToEtrianCalendarConverter() {
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+export function ToEtrianCalendarConverter({
+  date,
+  setDate,
+}: {
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
+}) {
+  const [open, setOpen] = useState(false);
 
   const startMonth = new Date(2007, 0);
   const currentYear = new Date().getFullYear();
@@ -98,20 +103,35 @@ export function ToEtrianCalendarConverter() {
   );
 }
 
-export function ToSolarCalendarConverter() {
+export function ToSolarCalendarConverter({
+  date,
+  setDate,
+}: {
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
+}) {
   const today = new Date();
-  const todayEtrian = toEtrianDate(today);
+  const currentEtrianDate = date ? toEtrianDate(date) : toEtrianDate(today);
 
-  const [selectedYear, setSelectedYear] = React.useState<string>(
-    String(today.getFullYear()),
+  const [selectedYear, setSelectedYear] = useState<string>(
+    String(date?.getFullYear() || today.getFullYear()),
   );
-  const [selectedMonth, setSelectedMonth] = React.useState<string>(
-    todayEtrian.month.name,
+  const [selectedMonth, setSelectedMonth] = useState<string>(
+    currentEtrianDate.month.name,
   );
-  const [selectedDay, setSelectedDay] = React.useState<string>(
-    String(todayEtrian.day),
+  const [selectedDay, setSelectedDay] = useState<string>(
+    String(currentEtrianDate.day),
   );
-  const [solarDate, setSolarDate] = React.useState<Date | undefined>(today);
+
+  useEffect(() => {
+    if (date) {
+      // 引き継いできた date を世界樹歴用に詰め替える
+      const etrianDate = toEtrianDate(date);
+      setSelectedYear(String(date.getFullYear()));
+      setSelectedMonth(etrianDate.month.name);
+      setSelectedDay(String(etrianDate.day));
+    }
+  }, [date]);
 
   let maxDay = 28;
 
@@ -125,12 +145,14 @@ export function ToSolarCalendarConverter() {
   // 年の選択肢
   const startYear = 2007;
   const endYear = today.getFullYear() + 4;
+  // 期間中に含む年の配列を生成する
   const yearOptions = Array.from(
     { length: endYear - startYear + 1 },
     (_, i) => startYear + i,
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // 鬼乎ノ日が選択されたとき用の useEffect ブロック
     if (isNewYearsEve) {
       const currentDay = parseInt(selectedDay, 10);
       // 鬼乎ノ日が選択されたら選択中の日を 1 日にする
@@ -145,9 +167,11 @@ export function ToSolarCalendarConverter() {
     }
   }, [isNewYearsEve, isLeap, selectedDay]);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // 選択した日付を監視して更新する useEffect ブロック
+    // 未入力項目など異常値は早期リターンして undefined を詰める
     if (!selectedYear || !selectedMonth || !selectedDay) {
-      setSolarDate(undefined);
+      setDate(undefined);
       return;
     }
 
@@ -155,20 +179,20 @@ export function ToSolarCalendarConverter() {
       const year = parseInt(selectedYear, 10);
       const day = parseInt(selectedDay, 10);
       if (Number.isNaN(year) || Number.isNaN(day) || day < 1 || day > maxDay) {
-        setSolarDate(undefined);
+        setDate(undefined);
         return;
       }
 
-      const date: Date = toSolarDate({
+      const calculatedDate: Date = toSolarDate({
         year,
         month: selectedMonth as EtrianMonthName,
         day: day as EtrianDay,
       });
-      setSolarDate(date);
+      setDate(calculatedDate);
     } catch {
-      setSolarDate(undefined);
+      setDate(undefined);
     }
-  }, [selectedYear, selectedMonth, selectedDay, maxDay]);
+  }, [selectedYear, selectedMonth, selectedDay, maxDay, setDate]);
 
   return (
     <ItemContent className="flex flex-col flex-wrap gap-4 md:flex-row">
@@ -233,9 +257,7 @@ export function ToSolarCalendarConverter() {
           太陽暦
         </Label>
         <ResultDisplay className="w-full justify-between">
-          {solarDate
-            ? format(solarDate, "yyyy-MM-dd")
-            : "日付を選択してください"}
+          {date ? format(date, "yyyy-MM-dd") : "日付を選択してください"}
         </ResultDisplay>
       </div>
     </ItemContent>
@@ -243,14 +265,16 @@ export function ToSolarCalendarConverter() {
 }
 
 export function SolarEtrianCalendarConverter() {
+  const [date, setDate] = useState<Date | undefined>(new Date());
   const [isShowToEtrian, setIsShowToEtrian] = useState(true);
+
   return (
     <div className="flex flex-col items-end gap-2">
       <Item variant="outline" className="w-full">
         {isShowToEtrian ? (
-          <ToEtrianCalendarConverter />
+          <ToEtrianCalendarConverter date={date} setDate={setDate} />
         ) : (
-          <ToSolarCalendarConverter />
+          <ToSolarCalendarConverter date={date} setDate={setDate} />
         )}
       </Item>
 
