@@ -110,7 +110,7 @@ export function EditDialog({
     monthString: string | undefined,
   ): EtrianMonthNameWithNewYearsEve | undefined => {
     if (!monthString || monthString === UNSET_SELECT_VALUE) return undefined;
-    return etrianMonthOptions.includes(monthString as any)
+    return (etrianMonthOptions as readonly string[]).includes(monthString)
       ? (monthString as EtrianMonthNameWithNewYearsEve)
       : undefined;
   };
