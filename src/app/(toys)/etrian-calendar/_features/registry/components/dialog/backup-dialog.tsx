@@ -35,7 +35,10 @@ export function BackupDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <JsonDisplay data={storedEtrians} />
+        <JsonDisplay
+          data={storedEtrians}
+          scrollAreaProps={{ className: "max-h-[60vh]" }}
+        />
       </DialogContent>
     </Dialog>
   );
