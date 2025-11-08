@@ -145,7 +145,7 @@ export function ToSolarCalendarConverter() {
 export function SolarEtrianCalendarConverter() {
   const [isShowToEtrian, setIsShowToEtrian] = useState(true);
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex flex-col items-end gap-2">
       <Item variant="outline" className="w-full">
         {isShowToEtrian ? (
           <ToEtrianCalendarConverter />
@@ -156,13 +156,12 @@ export function SolarEtrianCalendarConverter() {
 
       <Button
         variant="secondary"
-        size="icon"
-        className="rounded-full"
         onClick={() => {
           setIsShowToEtrian(!isShowToEtrian);
         }}
       >
         <ArrowRightLeft />
+        入れ替える
       </Button>
     </div>
   );
