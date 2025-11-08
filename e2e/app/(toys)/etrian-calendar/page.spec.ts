@@ -1,6 +1,6 @@
 import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { ETRIAN_REGISTRY_STORAGE_KEY } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
-import { expect, Locator, test } from "@playwright/test";
+import { expect, Locator, Page, test } from "@playwright/test";
 
 test.describe("世界樹の暦ページのテスト", () => {
   const DUMMY_ETRIANS: Etrian[] = [
@@ -17,7 +17,7 @@ test.describe("世界樹の暦ページのテスト", () => {
   let toySection: Locator;
 
   /** テスト対象のページへ遷移する */
-  const navigateToEtrianCalendar = async (page: any) => {
+  const navigateToEtrianCalendar = async (page: Page) => {
     await page.getByRole("link", { name: "世界樹の暦 今日は何ノ月？" }).click();
     await expect(toySection).toBeVisible();
   };
