@@ -46,12 +46,15 @@ export function EtrianRegistry() {
         name: trimmedName,
         order: 0,
         affiliations: normalizedAffiliations,
-        dateOfBirth: values.dateOfBirth
-          ? {
-              month: values.dateOfBirth.month,
-              day: Number(values.dateOfBirth.day) as EtrianDay,
-            }
-          : undefined,
+        dateOfBirth:
+          values.dateOfBirth &&
+          values.dateOfBirth.month &&
+          values.dateOfBirth.month !== "未設定"
+            ? {
+                month: values.dateOfBirth.month,
+                day: Number(values.dateOfBirth.day) as EtrianDay,
+              }
+            : undefined,
         memo: values.memo?.trim() || undefined,
       };
 
