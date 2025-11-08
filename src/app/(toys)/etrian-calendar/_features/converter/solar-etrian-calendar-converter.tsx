@@ -34,11 +34,11 @@ import {
   Sprout,
   Sun,
 } from "lucide-react";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function ToEtrianCalendarConverter() {
-  const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(new Date());
 
   const startMonth = new Date(2007, 0);
   const currentYear = new Date().getFullYear();
@@ -104,16 +104,16 @@ export function ToSolarCalendarConverter() {
   const today = new Date();
   const todayEtrian = toEtrianDate(today);
 
-  const [selectedYear, setSelectedYear] = React.useState<string>(
+  const [selectedYear, setSelectedYear] = useState<string>(
     String(today.getFullYear()),
   );
-  const [selectedMonth, setSelectedMonth] = React.useState<string>(
+  const [selectedMonth, setSelectedMonth] = useState<string>(
     todayEtrian.month.name,
   );
-  const [selectedDay, setSelectedDay] = React.useState<string>(
+  const [selectedDay, setSelectedDay] = useState<string>(
     String(todayEtrian.day),
   );
-  const [solarDate, setSolarDate] = React.useState<Date | undefined>(today);
+  const [solarDate, setSolarDate] = useState<Date | undefined>(today);
 
   let maxDay = 28;
 
@@ -132,7 +132,7 @@ export function ToSolarCalendarConverter() {
     (_, i) => startYear + i,
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isNewYearsEve) {
       const currentDay = parseInt(selectedDay, 10);
       // 鬼乎ノ日が選択されたら選択中の日を 1 日にする
@@ -147,7 +147,7 @@ export function ToSolarCalendarConverter() {
     }
   }, [isNewYearsEve, isLeap, selectedDay]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!selectedYear || !selectedMonth || !selectedDay) {
       setSolarDate(undefined);
       return;
