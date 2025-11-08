@@ -16,7 +16,7 @@ test.describe("世界樹の暦ページのテスト", () => {
   /** テストの Assert 範囲 */
   let toySection: Locator;
 
-  // ヘルパー関数
+  /** テスト対象のページへ遷移する */
   const navigateToEtrianCalendar = async (page: any) => {
     await page.getByRole("link", { name: "世界樹の暦 今日は何ノ月？" }).click();
     await expect(toySection).toBeVisible();
@@ -25,6 +25,7 @@ test.describe("世界樹の暦ページのテスト", () => {
   test.beforeEach(async ({ page }) => {
     // ルートへ移動しておく
     await page.goto("/");
+
     // ダミー Etrians のセット
     await page.evaluate(
       ([key, value]) => {
@@ -33,7 +34,7 @@ test.describe("世界樹の暦ページのテスト", () => {
       [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(DUMMY_ETRIANS)],
     );
 
-    // Locator を定義（ページ遷移はしない）
+    // テストの Assert 範囲を設定
     toySection = page.locator('[data-testid="toy"]');
   });
 
