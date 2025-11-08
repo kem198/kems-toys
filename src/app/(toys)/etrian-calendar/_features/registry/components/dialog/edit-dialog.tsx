@@ -138,7 +138,7 @@ export function EditDialog({
       </DialogTrigger>
 
       <DialogContent
-        className="max-h-[72vh]"
+        className="max-h-[72vh] overflow-auto"
         onOpenAutoFocus={(event) => {
           event.preventDefault();
         }}
