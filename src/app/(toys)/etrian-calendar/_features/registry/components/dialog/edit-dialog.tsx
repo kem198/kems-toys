@@ -44,7 +44,6 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -139,160 +138,157 @@ export function EditDialog({
       </DialogTrigger>
 
       <DialogContent
+        className="max-h-[72vh]"
         onOpenAutoFocus={(event) => {
           event.preventDefault();
         }}
       >
-        <ScrollArea className="max-h-[72vh]">
-          <DialogHeader>
-            <DialogTitle>登録情報の編集</DialogTitle>
-            <DialogDescription>
-              冒険者のプロフィールを設定してください。
-              <br />
-              <Required /> は必須項目です。
-            </DialogDescription>
-          </DialogHeader>
+        <DialogHeader>
+          <DialogTitle>登録情報の編集</DialogTitle>
+          <DialogDescription>
+            冒険者のプロフィールを設定してください。
+            <br />
+            <Required /> は必須項目です。
+          </DialogDescription>
+        </DialogHeader>
 
-          <form id="etrian-edit" onSubmit={form.handleSubmit(handleSubmit)}>
-            <FieldGroup>
-              <FieldSet>
-                <Controller
-                  name="name"
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor="etrian-name-edit">
-                        名前
-                        <Required />
-                      </FieldLabel>
-                      <Input
-                        {...field}
-                        id="etrian-name-edit"
-                        aria-invalid={fieldState.invalid}
-                        placeholder="ししょー"
-                        autoComplete="off"
-                      />
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
+        <form id="etrian-edit" onSubmit={form.handleSubmit(handleSubmit)}>
+          <FieldGroup>
+            <FieldSet>
+              <Controller
+                name="name"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="etrian-name-edit">
+                      名前
+                      <Required />
+                    </FieldLabel>
+                    <Input
+                      {...field}
+                      id="etrian-name-edit"
+                      aria-invalid={fieldState.invalid}
+                      placeholder="ししょー"
+                      autoComplete="off"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+
+              <Field data-invalid={form.formState.errors.dateOfBirth}>
+                <div className="grid grid-cols-2 gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="etrian-birth-month">誕生月</FieldLabel>
+                    <Controller
+                      name="dateOfBirth.month"
+                      control={form.control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger id="etrian-birth-month">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {etrianMonthOptionValues.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       )}
-                    </Field>
-                  )}
-                />
+                    />
+                  </Field>
 
-                <Field data-invalid={form.formState.errors.dateOfBirth}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <Field>
-                      <FieldLabel htmlFor="etrian-birth-month">
-                        誕生月
-                      </FieldLabel>
-                      <Controller
-                        name="dateOfBirth.month"
-                        control={form.control}
-                        render={({ field }) => (
-                          <Select
-                            value={field.value}
-                            onValueChange={field.onChange}
-                          >
-                            <SelectTrigger id="etrian-birth-month">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {etrianMonthOptionValues.map((option) => (
-                                <SelectItem key={option} value={option}>
-                                  {option}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                    </Field>
-
-                    <Field>
-                      <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
-                      <Controller
-                        name="dateOfBirth.day"
-                        control={form.control}
-                        render={({ field }) => (
-                          <Select
-                            value={field.value}
-                            onValueChange={field.onChange}
-                          >
-                            <SelectTrigger id="etrian-birth-day">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {etrianDayOptionValues.map((option) => (
-                                <SelectItem key={option} value={option}>
-                                  {option}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        )}
-                      />
-                    </Field>
-                  </div>
-                  <FieldDescription>
-                    設定する場合は月日両方を入力してください。
-                  </FieldDescription>
-                  {form.formState.errors.dateOfBirth && (
-                    <FieldError errors={[form.formState.errors.dateOfBirth]} />
-                  )}
-                </Field>
-
-                <Field>
-                  <FieldLabel htmlFor="etrian-affiliations">所属</FieldLabel>
-                  <Input
-                    id="etrian-affiliations"
-                    placeholder="ギルド名,エトリア,etc..."
-                    autoComplete="off"
-                    {...form.register("affiliations")}
-                  />
-                  <FieldDescription>
-                    所属ギルドや居住地などを入力してください。
-                    <br />, で区切ると、複数の所属を登録できます。
-                  </FieldDescription>
-                </Field>
-
-                <Controller
-                  name="memo"
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field>
-                      <FieldLabel htmlFor="etrian-memo">メモ</FieldLabel>
-                      <Textarea
-                        {...field}
-                        id="etrian-memo"
-                        placeholder="エトリアの冒険者。得意技はフロントガード。"
-                        rows={4}
-                        className="resize-none"
-                        aria-invalid={fieldState.invalid}
-                      />
-                      <FieldDescription>
-                        お好みの情報を入力してください。
-                      </FieldDescription>
-                      {fieldState.invalid && (
-                        <FieldError errors={[fieldState.error]} />
+                  <Field>
+                    <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
+                    <Controller
+                      name="dateOfBirth.day"
+                      control={form.control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger id="etrian-birth-day">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {etrianDayOptionValues.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
                       )}
-                    </Field>
-                  )}
+                    />
+                  </Field>
+                </div>
+                <FieldDescription>
+                  設定する場合は月日両方を入力してください。
+                </FieldDescription>
+                {form.formState.errors.dateOfBirth && (
+                  <FieldError errors={[form.formState.errors.dateOfBirth]} />
+                )}
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="etrian-affiliations">所属</FieldLabel>
+                <Input
+                  id="etrian-affiliations"
+                  placeholder="ギルド名,エトリア,etc..."
+                  autoComplete="off"
+                  {...form.register("affiliations")}
                 />
-              </FieldSet>
-            </FieldGroup>
-          </form>
-          <DialogFooter className="gap-y-2">
-            <DialogClose asChild>
-              <Button type="button" variant="outline">
-                キャンセル
-              </Button>
-            </DialogClose>
-            <Button type="submit" form="etrian-edit">
-              <UserRoundCheck />
-              更新
+                <FieldDescription>
+                  所属ギルドや居住地などを入力してください。
+                  <br />, で区切ると、複数の所属を登録できます。
+                </FieldDescription>
+              </Field>
+
+              <Controller
+                name="memo"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor="etrian-memo">メモ</FieldLabel>
+                    <Textarea
+                      {...field}
+                      id="etrian-memo"
+                      placeholder="エトリアの冒険者。得意技はフロントガード。"
+                      rows={4}
+                      className="resize-none"
+                      aria-invalid={fieldState.invalid}
+                    />
+                    <FieldDescription>
+                      お好みの情報を入力してください。
+                    </FieldDescription>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
+            </FieldSet>
+          </FieldGroup>
+        </form>
+        <DialogFooter className="gap-y-2">
+          <DialogClose asChild>
+            <Button type="button" variant="outline">
+              キャンセル
             </Button>
-          </DialogFooter>
-        </ScrollArea>
+          </DialogClose>
+          <Button type="submit" form="etrian-edit">
+            <UserRoundCheck />
+            更新
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
