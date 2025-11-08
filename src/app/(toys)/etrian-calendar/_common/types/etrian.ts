@@ -6,11 +6,11 @@ import {
 
 export type EtrianMonthName = (typeof etrianMonths)[number]["name"];
 export type EtrianMonthNameKana = (typeof etrianMonths)[number]["kana"];
-export type EtrianNewYearsEveName = (typeof etrianNewYearsEve)["name"];
-export type EtrianNewYearsEveNameKana = (typeof etrianNewYearsEve)["kana"];
 export type EtrianMonthNameWithNewYearsEve =
   | EtrianMonthName
   | EtrianNewYearsEveName;
+export type EtrianNewYearsEveName = (typeof etrianNewYearsEve)["name"];
+export type EtrianNewYearsEveNameKana = (typeof etrianNewYearsEve)["kana"];
 
 export type EtrianDay = (typeof etrianDays)[number];
 
