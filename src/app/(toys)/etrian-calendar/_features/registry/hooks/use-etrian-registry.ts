@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
   Etrian,
@@ -29,6 +29,7 @@ export function useEtrianRegistry(
 
   const [storedEtrians, setStoredEtrians] = useState<Etrian[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const hasMigratedRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -68,6 +69,9 @@ export function useEtrianRegistry(
       if (needsMigration) {
         const migrated = migrateEtriansV1toV2(parsed);
         setStoredEtrians(migrated);
+        // Save migrated data immediately to ensure E2E tests can read it
+        window.localStorage.setItem(storageKey, JSON.stringify(migrated));
+        hasMigratedRef.current = true;
       } else {
         setStoredEtrians(parsed as Etrian[]);
       }
@@ -81,6 +85,12 @@ export function useEtrianRegistry(
 
   useEffect(() => {
     if (!isLoaded || typeof window === "undefined") {
+      return;
+    }
+
+    // Skip saving if we just migrated (already saved in first useEffect)
+    if (hasMigratedRef.current) {
+      hasMigratedRef.current = false;
       return;
     }
 
