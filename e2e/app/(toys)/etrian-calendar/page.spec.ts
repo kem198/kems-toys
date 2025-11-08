@@ -18,6 +18,7 @@ test.describe("世界樹の暦ページのテスト", () => {
 
   test.beforeEach(async ({ page }) => {
     // ルートへ移動しておく
+    await page.goto("/");
     // ダミー Etrians のセット
     await page.evaluate(
       ([key, value]) => {
