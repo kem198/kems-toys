@@ -509,7 +509,7 @@ test.describe("世界樹の暦ページのテスト", () => {
 
         // Assert (表示が正しいこと)
         await expect(page.getByText("セトハ").first()).toBeVisible();
-        await expect(page.getByText("未設定").first()).not.toBeVisible(); // マイグレート対象
+        await expect(page.getByText("未設定").first()).toBeVisible(); // マイグレート対象
         await expect(page.getByText("ブレイバント").first()).toBeVisible();
         await expect(page.getByText("アルカディア").first()).toBeVisible();
         await expect(
