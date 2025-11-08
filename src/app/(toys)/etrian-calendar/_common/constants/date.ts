@@ -61,8 +61,8 @@ export const etrianNewYearsEve = {
 export const etrianMonthOptionValues = [
   ...etrianMonths.map((month) => month.name),
   etrianNewYearsEve.name,
-];
+] as const;
 
-export const etrianDayOptionValues = Array.from({ length: 28 }, (_, index) =>
-  String(index + 1),
-);
+export const etrianDayOptionValues = [
+  ...Array.from({ length: 28 }, (_, index) => String(index + 1)),
+] as const;
