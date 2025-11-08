@@ -194,6 +194,9 @@ export function EditDialog({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
+                            <SelectItem value={UNSET_OPTION}>
+                              {UNSET_OPTION}
+                            </SelectItem>
                             {etrianMonthOptionValues.map((option) => (
                               <SelectItem key={option} value={option}>
                                 {option}
@@ -219,6 +222,9 @@ export function EditDialog({
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
+                            <SelectItem value={UNSET_OPTION}>
+                              {UNSET_OPTION}
+                            </SelectItem>
                             {etrianDayOptionValues.map((option) => (
                               <SelectItem key={option} value={option}>
                                 {option}

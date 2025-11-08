@@ -14,8 +14,8 @@ export const registryFormSchema = z
     memo: z.string().max(100, "100 文字以下で入力してください。").optional(),
     dateOfBirth: z
       .object({
-        month: z.enum(etrianMonthOptionValues).optional(),
-        day: z.enum(etrianDayOptionValues).optional(),
+        month: z.enum([UNSET_OPTION, ...etrianMonthOptionValues]).optional(),
+        day: z.enum([UNSET_OPTION, ...etrianDayOptionValues]).optional(),
       })
       .optional(),
     affiliations: z.string().optional(),
