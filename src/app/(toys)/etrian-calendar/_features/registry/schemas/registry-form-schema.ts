@@ -48,7 +48,7 @@ export const registryFormSchema = z
     },
     {
       message: "鬼乎ノ日の場合、日は「1」で登録してください。",
-      path: ["dateOfBirth", "day"],
+      path: ["dateOfBirth"],
     },
   );
 
