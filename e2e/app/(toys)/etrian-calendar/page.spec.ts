@@ -397,6 +397,15 @@ test.describe("世界樹の暦ページのテスト", () => {
           .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
           .click();
 
+        // Assert (表示が正しいこと)
+        await expect(page.getByText("セトハ").first()).toBeVisible();
+        await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible(); // マイグレート対象
+        await expect(page.getByText("ブレイバント").first()).toBeVisible();
+        await expect(page.getByText("アルカディア").first()).toBeVisible();
+        await expect(
+          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
+        ).toBeVisible();
+
         // Assert (月に初期値が設定されること)
         const migrated: Etrian[] = await page.evaluate(
           (key) => JSON.parse(localStorage.getItem(key)!),
@@ -408,15 +417,6 @@ test.describe("世界樹の暦ページのテスト", () => {
           "ブレイバント",
           "アルカディア",
         ]);
-
-        // Assert (表示が正しいこと)
-        await expect(page.getByText("セトハ").first()).toBeVisible();
-        await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible(); // マイグレート対象
-        await expect(page.getByText("ブレイバント").first()).toBeVisible();
-        await expect(page.getByText("アルカディア").first()).toBeVisible();
-        await expect(
-          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
-        ).toBeVisible();
       });
 
       test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (日なし -> 日あり)", async ({
@@ -447,6 +447,15 @@ test.describe("世界樹の暦ページのテスト", () => {
           .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
           .click();
 
+        // Assert (表示が正しいこと)
+        await expect(page.getByText("セトハ").first()).toBeVisible();
+        await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible(); // マイグレート対象
+        await expect(page.getByText("ブレイバント").first()).toBeVisible();
+        await expect(page.getByText("アルカディア").first()).toBeVisible();
+        await expect(
+          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
+        ).toBeVisible();
+
         // Assert (月に初期値が設定されること)
         const migrated: Etrian[] = await page.evaluate(
           (key) => JSON.parse(localStorage.getItem(key)!),
@@ -458,15 +467,6 @@ test.describe("世界樹の暦ページのテスト", () => {
           "ブレイバント",
           "アルカディア",
         ]);
-
-        // Assert (表示が正しいこと)
-        await expect(page.getByText("セトハ").first()).toBeVisible();
-        await expect(page.getByText("皇帝ノ月 1 日").first()).toBeVisible(); // マイグレート対象
-        await expect(page.getByText("ブレイバント").first()).toBeVisible();
-        await expect(page.getByText("アルカディア").first()).toBeVisible();
-        await expect(
-          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
-        ).toBeVisible();
       });
 
       test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (月日なし -> 誕生日なし)", async ({
@@ -495,6 +495,15 @@ test.describe("世界樹の暦ページのテスト", () => {
           .getByRole("link", { name: "世界樹の暦 今日は何ノ月？" })
           .click();
 
+        // Assert (表示が正しいこと)
+        await expect(page.getByText("セトハ").first()).toBeVisible();
+        await expect(page.getByText("未設定").first()).toBeVisible(); // マイグレート対象
+        await expect(page.getByText("ブレイバント").first()).toBeVisible();
+        await expect(page.getByText("アルカディア").first()).toBeVisible();
+        await expect(
+          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
+        ).toBeVisible();
+
         // Assert (月に初期値が設定されること)
         const migrated: Etrian[] = await page.evaluate(
           (key) => JSON.parse(localStorage.getItem(key)!),
@@ -506,15 +515,6 @@ test.describe("世界樹の暦ページのテスト", () => {
           "ブレイバント",
           "アルカディア",
         ]);
-
-        // Assert (表示が正しいこと)
-        await expect(page.getByText("セトハ").first()).toBeVisible();
-        await expect(page.getByText("未設定").first()).toBeVisible(); // マイグレート対象
-        await expect(page.getByText("ブレイバント").first()).toBeVisible();
-        await expect(page.getByText("アルカディア").first()).toBeVisible();
-        await expect(
-          page.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。").first(),
-        ).toBeVisible();
       });
     });
   });
