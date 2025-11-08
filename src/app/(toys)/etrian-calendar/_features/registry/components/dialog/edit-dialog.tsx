@@ -147,8 +147,6 @@ export function EditDialog({
       </DialogTrigger>
 
       <DialogContent
-        className="max-h-[72vh] overflow-auto"
-        // オートフォーカスを無効化する
         onOpenAutoFocus={(event) => {
           event.preventDefault();
         }}
