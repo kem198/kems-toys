@@ -13,7 +13,7 @@ test.describe("世界樹の暦ページのテスト", () => {
     },
   ];
 
-  /** テストの検証範囲 */
+  /** テストの Assert 範囲 */
   let toySection: Locator;
 
   // ヘルパー関数
