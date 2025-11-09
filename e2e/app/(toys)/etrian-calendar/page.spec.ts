@@ -404,6 +404,7 @@ test.describe("世界樹の暦ページのテスト", () => {
     test.describe.skip("更新時のテスト", () => {});
 
     test.describe.skip("削除時のテスト", () => {});
+
     test.describe("移行時のテスト", () => {
       test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の型に揃えた初期値が設定されること (月なし -> 月あり)", async ({
         page,
