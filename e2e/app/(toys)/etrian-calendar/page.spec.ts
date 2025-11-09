@@ -1,5 +1,4 @@
 import {
-  Etrian,
   EtrianRegistry,
   EtrianV1,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
@@ -246,24 +245,27 @@ test.describe("世界樹の暦ページのテスト", () => {
         page,
       }) => {
         // Arrange
-        const etrians: Etrian[] = [
-          {
-            id: "test-etrian",
-            name: "セトハ",
-            dateOfBirth: {
-              month: "皇帝ノ月",
-              day: 1,
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "test-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
             },
-            affiliations: ["ブレイバント", "アルカディア"],
-            order: 0,
-            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
-          },
-        ];
+          ],
+        };
         await page.evaluate(
           ([key, value]) => {
             localStorage.setItem(key, value);
           },
-          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrianRegistry)],
         );
 
         // Act
@@ -284,24 +286,27 @@ test.describe("世界樹の暦ページのテスト", () => {
       }) => {
         // Arrange
         await page.clock.setFixedTime(new Date("2024-01-14T10:00:00"));
-        const etrians: Etrian[] = [
-          {
-            id: "test-etrian",
-            name: "セトハ",
-            dateOfBirth: {
-              month: "皇帝ノ月",
-              day: 15,
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "test-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 15,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
             },
-            affiliations: ["ブレイバント", "アルカディア"],
-            order: 0,
-            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
-          },
-        ];
+          ],
+        };
         await page.evaluate(
           ([key, value]) => {
             localStorage.setItem(key, value);
           },
-          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrianRegistry)],
         );
 
         // Act
@@ -320,24 +325,27 @@ test.describe("世界樹の暦ページのテスト", () => {
       }) => {
         // Arrange
         await page.clock.setFixedTime(new Date("2024-01-15T10:00:00"));
-        const etrians: Etrian[] = [
-          {
-            id: "test-etrian",
-            name: "セトハ",
-            dateOfBirth: {
-              month: "皇帝ノ月",
-              day: 15,
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "test-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 15,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
             },
-            affiliations: ["ブレイバント", "アルカディア"],
-            order: 0,
-            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
-          },
-        ];
+          ],
+        };
         await page.evaluate(
           ([key, value]) => {
             localStorage.setItem(key, value);
           },
-          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrianRegistry)],
         );
 
         // Act
@@ -356,24 +364,27 @@ test.describe("世界樹の暦ページのテスト", () => {
       }) => {
         // Arrange
         await page.clock.setFixedTime(new Date("2024-01-16T10:00:00"));
-        const etrians: Etrian[] = [
-          {
-            id: "test-etrian",
-            name: "セトハ",
-            dateOfBirth: {
-              month: "皇帝ノ月",
-              day: 15,
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "test-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 15,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
             },
-            affiliations: ["ブレイバント", "アルカディア"],
-            order: 0,
-            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
-          },
-        ];
+          ],
+        };
         await page.evaluate(
           ([key, value]) => {
             localStorage.setItem(key, value);
           },
-          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrianRegistry)],
         );
 
         // Act
@@ -394,7 +405,7 @@ test.describe("世界樹の暦ページのテスト", () => {
 
     test.describe.skip("削除時のテスト", () => {});
     test.describe("移行時のテスト", () => {
-      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (月なし -> 月あり)", async ({
+      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の型に揃えた初期値が設定されること (月なし -> 月あり)", async ({
         page,
       }) => {
         // Arrange
@@ -456,7 +467,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         ]);
       });
 
-      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (日なし -> 日あり)", async ({
+      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の型に揃えた初期値が設定されること (日なし -> 日あり)", async ({
         page,
       }) => {
         // Arrange
@@ -510,7 +521,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         ]);
       });
 
-      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の Etrian 型で初期値が設定されること (月日なし -> 誕生日なし)", async ({
+      test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の型に揃えた初期値が設定されること (月日なし -> 誕生日なし)", async ({
         page,
       }) => {
         // Arrange
