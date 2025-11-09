@@ -49,7 +49,7 @@ export function useEtrianRegistry(
     } catch {
       // TODO: 読み取りやマイグレーション処理に失敗したら
       // - 「初期化します」のモーダル表示
-      // - JsonDisplay を利用して移行前のデータ内容を表示
+      // - ダイアログと JsonDisplay を利用して移行前のデータ内容を表示・案内
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
