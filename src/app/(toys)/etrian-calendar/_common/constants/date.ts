@@ -1,3 +1,5 @@
+export const CURRENT_ETRIAN_REGISTRY_VERSION = 2 as const;
+
 export const etrianMonths = [
   {
     name: "皇帝ノ月",
