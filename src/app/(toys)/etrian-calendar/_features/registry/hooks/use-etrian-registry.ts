@@ -40,7 +40,6 @@ export function useEtrianRegistry(
 
     try {
       if (data) {
-        // TODO: バージョン差異を検知したら閉じれないダイアログで通知、バックアップ案内、実行
         const parsedData = JSON.parse(data);
         const migratedRegistry = migrateEtrianRegistry(parsedData);
         setStoredEtrians(migratedRegistry.etrians);
@@ -48,7 +47,9 @@ export function useEtrianRegistry(
         setStoredEtrians([]);
       }
     } catch {
-      // 読み取りに失敗したら空配列で初期化
+      // TODO: 読み取りやマイグレーション処理に失敗したら
+      // - 「初期化します」のモーダル表示
+      // - JsonDisplay を利用して移行前のデータ内容を表示
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
