@@ -12,6 +12,7 @@ import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/r
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
+import { UNSET_SELECT_VALUE } from "@/constants/select";
 import { UserPen } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
