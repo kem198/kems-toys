@@ -36,6 +36,7 @@ export function useEtrianRegistry(
 
     try {
       // TODO: 作成中
+      // TODO: バージョン差異を検知したら閉じれないダイアログで通知、バックアップ案内、実行
       if (data) {
         const migratedEtrians = migrateEtriansV1toV2(JSON.parse(data));
         setStoredEtrians(migratedEtrians as Etrian[]);
