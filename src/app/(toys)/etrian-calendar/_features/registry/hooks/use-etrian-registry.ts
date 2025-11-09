@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
-import { migrateEtriansV1toV2 } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
+import { CURRENT_ETRIAN_REGISTRY_VERSION } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import {
+  Etrian,
+  EtrianRegistry,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { migrateEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 
 export const ETRIAN_REGISTRY_STORAGE_KEY = "etrianRegistry";
 
@@ -35,17 +39,16 @@ export function useEtrianRegistry(
     const data = window.localStorage.getItem(storageKey);
 
     try {
-      // TODO: 作成中
-      // TODO: 差異はバージョンで判定する
-      // TODO: バージョン差異を検知したら閉じれないダイアログで通知、バックアップ案内、実行
       if (data) {
-        const migratedEtrians = migrateEtriansV1toV2(JSON.parse(data));
-        setStoredEtrians(migratedEtrians as Etrian[]);
+        // TODO: バージョン差異を検知したら閉じれないダイアログで通知、バックアップ案内、実行
+        const parsedData = JSON.parse(data);
+        const migratedRegistry = migrateEtrianRegistry(parsedData);
+        setStoredEtrians(migratedRegistry.etrians);
       } else {
         setStoredEtrians([]);
       }
     } catch {
-      // TODO: 読み取りに失敗したら「初期化します」みたいなモーダル表示
+      // 読み取りに失敗したら空配列で初期化
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
@@ -57,7 +60,12 @@ export function useEtrianRegistry(
       return;
     }
 
-    window.localStorage.setItem(storageKey, JSON.stringify(storedEtrians));
+    const registry: EtrianRegistry = {
+      version: CURRENT_ETRIAN_REGISTRY_VERSION,
+      etrians: storedEtrians,
+    };
+
+    window.localStorage.setItem(storageKey, JSON.stringify(registry));
   }, [storedEtrians, isLoaded, storageKey]);
 
   const addEtrian = useCallback((etrian: Etrian) => {
