@@ -532,7 +532,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         ).toBeVisible();
 
         // Assert (月に初期値が設定されること)
-        const migrated: Etrian[] = await toySection.evaluate(
+        const migrated: Etrian[] = await page.evaluate(
           (key) => JSON.parse(localStorage.getItem(key)!),
           ETRIAN_REGISTRY_STORAGE_KEY,
         );
