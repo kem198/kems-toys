@@ -491,13 +491,17 @@ test.describe("世界樹の暦ページのテスト", () => {
         ).toBeVisible();
 
         // Assert (月に初期値が設定されること)
-        const migrated: Etrian[] = await page.evaluate(
+        const migrated: EtrianRegistry = await page.evaluate(
           (key) => JSON.parse(localStorage.getItem(key)!),
           ETRIAN_REGISTRY_STORAGE_KEY,
         );
-        expect(migrated[0].dateOfBirth).toEqual({ month: "皇帝ノ月", day: 1 }); // マイグレート対象
-        expect(migrated[0].name).toBe("セトハ");
-        expect(migrated[0].affiliations).toEqual([
+        expect(migrated.version).toBe(2); // マイグレート対象
+        expect(migrated.etrians[0].dateOfBirth).toEqual({
+          month: "皇帝ノ月",
+          day: 1,
+        }); // マイグレート対象
+        expect(migrated.etrians[0].name).toBe("セトハ");
+        expect(migrated.etrians[0].affiliations).toEqual([
           "ブレイバント",
           "アルカディア",
         ]);
@@ -537,13 +541,14 @@ test.describe("世界樹の暦ページのテスト", () => {
         ).toBeVisible();
 
         // Assert (月に初期値が設定されること)
-        const migrated: Etrian[] = await page.evaluate(
+        const migrated: EtrianRegistry = await page.evaluate(
           (key) => JSON.parse(localStorage.getItem(key)!),
           ETRIAN_REGISTRY_STORAGE_KEY,
         );
-        expect(migrated[0].dateOfBirth).toBeUndefined(); // マイグレート対象
-        expect(migrated[0].name).toBe("セトハ");
-        expect(migrated[0].affiliations).toEqual([
+        expect(migrated.version).toBe(2); // マイグレート対象
+        expect(migrated.etrians[0].dateOfBirth).toBeUndefined(); // マイグレート対象
+        expect(migrated.etrians[0].name).toBe("セトハ");
+        expect(migrated.etrians[0].affiliations).toEqual([
           "ブレイバント",
           "アルカディア",
         ]);
