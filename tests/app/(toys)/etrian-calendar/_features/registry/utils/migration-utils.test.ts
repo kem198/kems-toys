@@ -128,6 +128,97 @@ describe("migration-utils tests", () => {
         ]);
       });
 
+      it("EtrianV1[] が渡された時、最新の EtrianRegistry へ変換されること (複数要素)", () => {
+        // Arrange
+        const oldEtrians: EtrianV1[] = [
+          {
+            id: "test-id-0",
+            name: "セトハ",
+            dateOfBirth: {
+              month: "怒猪ノ月",
+              day: 2,
+            },
+            affiliations: ["ブレイバント"],
+            order: 0,
+            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+          },
+          {
+            id: "test-id-1",
+            name: "オーパス",
+            dateOfBirth: {
+              month: "天牛ノ月",
+            },
+            affiliations: ["ブレイバント"],
+            order: 1,
+          },
+          {
+            id: "test-id-2",
+            name: "キサラギ",
+            dateOfBirth: {
+              day: 3,
+            },
+            affiliations: [],
+            order: 3,
+          },
+          {
+            id: "test-id-3",
+            name: "ヴィニヨン",
+            dateOfBirth: {},
+            affiliations: ["ブレイバント", "aaa"],
+            order: 4,
+          },
+        ];
+
+        // Act
+        const registry = migrateEtrianRegistry(oldEtrians);
+
+        // Assert
+        expect(registry.version).toBe(2);
+        expect(registry.etrians).toEqual([
+          {
+            id: "test-id-0",
+            name: "セトハ",
+            dateOfBirth: {
+              month: "怒猪ノ月",
+              day: 2,
+            },
+            affiliations: ["ブレイバント"],
+            order: 0,
+            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+          },
+          {
+            id: "test-id-1",
+            name: "オーパス",
+            dateOfBirth: {
+              month: "天牛ノ月",
+              day: 1,
+            },
+            affiliations: ["ブレイバント"],
+            order: 1,
+            memo: undefined,
+          },
+          {
+            id: "test-id-2",
+            name: "キサラギ",
+            dateOfBirth: {
+              month: "皇帝ノ月",
+              day: 3,
+            },
+            affiliations: [],
+            order: 3,
+            memo: undefined,
+          },
+          {
+            id: "test-id-3",
+            name: "ヴィニヨン",
+            dateOfBirth: undefined,
+            affiliations: ["ブレイバント", "aaa"],
+            order: 4,
+            memo: undefined,
+          },
+        ]);
+      });
+
       it("空の EtrianV1[] が渡された時、空の etrians を持つ EtrianRegistry へ変換されること", () => {
         // Arrange
         const oldEtrians: EtrianV1[] = [];
