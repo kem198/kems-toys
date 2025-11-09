@@ -49,7 +49,7 @@ export function EtrianRegistry() {
         dateOfBirth:
           values.dateOfBirth &&
           values.dateOfBirth.month &&
-          values.dateOfBirth.month !== "未設定"
+          values.dateOfBirth.month !== UNSET_SELECT_VALUE
             ? {
                 month: values.dateOfBirth.month,
                 day: Number(values.dateOfBirth.day) as EtrianDay,
