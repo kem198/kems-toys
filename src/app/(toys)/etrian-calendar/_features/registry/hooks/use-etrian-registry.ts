@@ -85,7 +85,7 @@ export function useEtrianRegistry(
       version: CURRENT_ETRIAN_REGISTRY_VERSION,
       etrians: storedEtrians,
     };
-
+    setStoredEtrianRegistry(registry);
     window.localStorage.setItem(storageKey, JSON.stringify(registry));
   }, [storedEtrians, isLoaded, storageKey]);
 
