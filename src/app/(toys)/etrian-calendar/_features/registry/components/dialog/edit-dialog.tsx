@@ -261,7 +261,6 @@ export function EditDialog({
                       id="etrian-affiliations"
                       placeholder="ギルド名,エトリア,etc..."
                       autoComplete="off"
-                      {...form.register("affiliations")}
                     />
                     <FieldDescription>
                       所属ギルドや居住地などを入力してください。
