@@ -568,6 +568,34 @@ test.describe("世界樹の暦ページのテスト", () => {
           "アルカディア",
         ]);
       });
+
+      test("型定義に一致しない冒険者が保存されていて移行が行えないとき、ダイアログ通知が行われること", async ({
+        page,
+      }) => {
+        // Arrange
+        const etrians = [
+          {
+            id: "test-etrian",
+            name: "セトハ",
+            dateOfBirth_: {}, // 型定義に一致しない
+            affiliations: ["ブレイバント", "アルカディア"],
+            order: 0,
+            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+          },
+        ];
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+        );
+
+        // Act
+        await navigateToEtrianCalendar(page);
+
+        // Assert
+        await expect(page.getByText("データの初期化が必要です")).toBeVisible();
+      });
     });
   });
 });
