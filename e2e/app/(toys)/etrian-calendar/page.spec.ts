@@ -594,7 +594,9 @@ test.describe("世界樹の暦ページのテスト", () => {
         await navigateToEtrianCalendar(page);
 
         // Assert
-        await expect(page.getByText("データの初期化が必要です")).toBeVisible();
+        await expect(
+          page.getByText("登録内容の初期化が必要です"),
+        ).toBeVisible();
       });
     });
 
