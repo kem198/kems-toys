@@ -399,11 +399,103 @@ test.describe("世界樹の暦ページのテスト", () => {
       });
     });
 
-    test.describe.skip("作成時のテスト", () => {});
+    test.describe("作成時のテスト", () => {
+      test("冒険者を登録できること", async ({ page }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("textbox", { name: "ししょー" }).fill("セトハ");
 
-    test.describe.skip("更新時のテスト", () => {});
+        // Act
+        await page.getByRole("button", { name: "登録" }).click();
 
-    test.describe.skip("削除時のテスト", () => {});
+        // Assert (表示が正しいこと)
+        await expect(toySection.getByText("セトハ")).toBeVisible();
+
+        // Assert (データストアへ登録されていること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.etrians[0].name).toBe("セトハ");
+      });
+    });
+
+    test.describe("更新時のテスト", () => {
+      test("冒険者を編集できること", async ({ page }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集: dummy" }).click();
+        await page.getByRole("textbox", { name: "名前 *" }).fill("セトハ");
+        await page.getByRole("combobox", { name: "誕生月" }).click();
+        await page.getByRole("option", { name: "皇帝ノ月" }).click();
+        await page.getByRole("combobox", { name: "日" }).click();
+        await page.getByRole("option", { name: "1", exact: true }).click();
+        await page
+          .getByRole("textbox", { name: "所属" })
+          .fill("ブレイバント,アルカディア");
+        await page
+          .getByRole("textbox", { name: "メモ" })
+          .fill("突剣を自在に扱う冒険者。没落貴族の一人娘。");
+
+        // Act
+        await page.getByRole("button", { name: "更新" }).click();
+
+        // Assert (表示が正しいこと)
+        await expect(toySection.getByText("セトハ").first()).toBeVisible();
+        await expect(
+          toySection.getByText("皇帝ノ月 1 日").first(),
+        ).toBeVisible();
+        await expect(
+          toySection.getByText("ブレイバント").first(),
+        ).toBeVisible();
+        await expect(
+          toySection.getByText("アルカディア").first(),
+        ).toBeVisible();
+        await expect(
+          toySection
+            .getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。")
+            .first(),
+        ).toBeVisible();
+
+        // Assert (データストアへ登録されていること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.version).toBe(2);
+        expect(migrated.etrians[0].dateOfBirth).toEqual({
+          month: "皇帝ノ月",
+          day: 1,
+        });
+        expect(migrated.etrians[0].name).toBe("セトハ");
+        expect(migrated.etrians[0].affiliations).toEqual([
+          "ブレイバント",
+          "アルカディア",
+        ]);
+      });
+    });
+
+    test.describe("削除時のテスト", () => {
+      test("冒険者を削除できること", async ({ page }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+        await page.getByRole("button", { name: "削除: dummy" }).click();
+
+        // Act
+        await page.getByRole("button", { name: "削除" }).click();
+
+        // Assert (表示が正しいこと)
+        await expect(toySection.getByText("dummy").first()).not.toBeVisible();
+
+        // Assert (データストアへ登録されていないこと)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.etrians[0].name).not.toBe("dummy");
+      });
+    });
 
     test.describe("移行時のテスト", () => {
       test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の型に揃えた初期値が設定されること (月なし -> 月あり)", async ({
@@ -598,42 +690,42 @@ test.describe("世界樹の暦ページのテスト", () => {
           page.getByText("登録内容の初期化が必要です"),
         ).toBeVisible();
       });
-    });
 
-    test("型定義に一致しない冒険者が保存されていて移行が行えないとき、登録内容がリセットされること", async ({
-      page,
-    }) => {
-      // Arrange
-      const etrians = [
-        {
-          id: "test-etrian",
-          name: "セトハ",
-          dateOfBirth_: {}, // 型定義に一致しない
-          affiliations: ["ブレイバント", "アルカディア"],
-          order: 0,
-          memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
-        },
-      ];
-      await page.evaluate(
-        ([key, value]) => {
-          localStorage.setItem(key, value);
-        },
-        [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
-      );
-      await navigateToEtrianCalendar(page);
+      test("型定義に一致しない冒険者が保存されていて移行が行えないとき、登録内容がリセットされること", async ({
+        page,
+      }) => {
+        // Arrange
+        const etrians = [
+          {
+            id: "test-etrian",
+            name: "セトハ",
+            dateOfBirth_: {}, // 型定義に一致しない
+            affiliations: ["ブレイバント", "アルカディア"],
+            order: 0,
+            memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+          },
+        ];
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrians)],
+        );
+        await navigateToEtrianCalendar(page);
 
-      // Act
-      await page.getByRole("button", { name: "リセットする" }).click();
+        // Act
+        await page.getByRole("button", { name: "リセットする" }).click();
 
-      // Assert (初期値が表示されること)
-      await expect(toySection.getByText("ししょー").first()).toBeVisible();
+        // Assert (初期値が表示されること)
+        await expect(toySection.getByText("ししょー").first()).toBeVisible();
 
-      // Assert (初期値が設定されること)
-      const migrated: EtrianRegistry = await page.evaluate(
-        (key) => JSON.parse(localStorage.getItem(key)!),
-        ETRIAN_REGISTRY_STORAGE_KEY,
-      );
-      expect(migrated.etrians[0].name).toBe("ししょー");
+        // Assert (初期値が設定されること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.etrians[0].name).toBe("ししょー");
+      });
     });
   });
 });

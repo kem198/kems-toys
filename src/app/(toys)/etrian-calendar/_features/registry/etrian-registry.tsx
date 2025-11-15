@@ -182,13 +182,17 @@ export function EtrianRegistry() {
                   onConfirm={handleReset}
                   className="w-fit"
                 >
-                  <Button variant="destructive">リセット</Button>
+                  <Button variant="destructive" aria-label="リセット">
+                    リセット
+                  </Button>
                 </ConfirmDialog>
                 <BackupDialog
                   storedEtrianRegistry={storedEtrianRegistry}
                   className="w-fit"
                 >
-                  <Button variant="secondary">バックアップ</Button>
+                  <Button variant="secondary" aria-label="バックアップ">
+                    バックアップ
+                  </Button>
                 </BackupDialog>
               </>
             )}
@@ -197,6 +201,7 @@ export function EtrianRegistry() {
           <Button
             variant={isEditing ? "default" : "secondary"}
             onClick={() => setIsEditing((prev) => !prev)}
+            aria-label={isEditing ? "編集完了" : "編集開始"}
           >
             <UserPen />
             {isEditing ? "完了" : "編集"}

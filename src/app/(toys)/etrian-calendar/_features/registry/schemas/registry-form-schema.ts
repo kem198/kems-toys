@@ -20,7 +20,10 @@ export const registryFormSchema = z
         day: z.enum([UNSET_SELECT_VALUE, ...etrianDayOptions]).optional(),
       })
       .optional(),
-    affiliations: z.string().optional(),
+    affiliations: z
+      .string()
+      .max(50, "50 文字以下で入力してください。")
+      .optional(),
   })
   .refine(
     (data) => {
