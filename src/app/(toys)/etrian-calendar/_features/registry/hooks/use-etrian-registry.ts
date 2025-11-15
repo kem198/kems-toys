@@ -16,11 +16,16 @@ type UseEtrianRegistryOptions = {
 type UseEtrianRegistryReturn = {
   storedEtrians: Etrian[];
   isLoaded: boolean;
+  migrationError: {
+    hasError: boolean;
+    originalData: string | null;
+  };
   addEtrian: (etrian: Etrian) => void;
   updateEtrian: (etrian: Etrian) => void;
   updateEtrians: (updatedEtrians: Etrian[]) => void;
   deleteEtrianById: (id: string) => void;
   resetEtrians: () => void;
+  clearMigrationError: () => void;
 };
 
 export function useEtrianRegistry(
@@ -30,6 +35,13 @@ export function useEtrianRegistry(
 
   const [storedEtrians, setStoredEtrians] = useState<Etrian[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [migrationError, setMigrationError] = useState<{
+    hasError: boolean;
+    originalData: string | null;
+  }>({
+    hasError: false,
+    originalData: null,
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -47,9 +59,11 @@ export function useEtrianRegistry(
         setStoredEtrians([]);
       }
     } catch {
-      // TODO: 読み取りやマイグレーション処理に失敗したら
-      // - 「初期化します」のモーダル表示
-      // - ダイアログと JsonDisplay を利用して移行前のデータ内容を表示・案内
+      // マイグレーション処理に失敗した場合、元のデータを保持してエラー状態を設定する
+      setMigrationError({
+        hasError: true,
+        originalData: data,
+      });
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
@@ -90,13 +104,22 @@ export function useEtrianRegistry(
     setStoredEtrians([]);
   }, []);
 
+  const clearMigrationError = useCallback(() => {
+    setMigrationError({
+      hasError: false,
+      originalData: null,
+    });
+  }, []);
+
   return {
     storedEtrians,
     isLoaded,
+    migrationError,
     addEtrian,
     updateEtrian,
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    clearMigrationError,
   };
 }

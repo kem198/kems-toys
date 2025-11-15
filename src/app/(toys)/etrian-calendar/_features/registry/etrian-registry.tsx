@@ -9,6 +9,7 @@ import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/co
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
+import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/migration-error-dialog";
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
@@ -21,11 +22,13 @@ export function EtrianRegistry() {
   const {
     storedEtrians,
     isLoaded,
+    migrationError,
     addEtrian,
     updateEtrian,
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    clearMigrationError,
   } = useEtrianRegistry();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -97,6 +100,13 @@ export function EtrianRegistry() {
     toast.success("登録状況をリセットしました");
   }, [resetEtrians]);
 
+  const handleMigrationErrorConfirm = useCallback(() => {
+    resetEtrians();
+    localStorage.removeItem("etrianRegistryInitialized");
+    clearMigrationError();
+    toast.success("登録状況をリセットしました");
+  }, [resetEtrians, clearMigrationError]);
+
   function reorderEtrians(
     etrians: Etrian[],
     startIndex: number,
@@ -135,6 +145,12 @@ export function EtrianRegistry() {
 
   return (
     <div className="flex flex-col gap-4">
+      <MigrationErrorDialog
+        open={migrationError.hasError}
+        originalData={migrationError.originalData}
+        onConfirm={handleMigrationErrorConfirm}
+      />
+
       <div className="not-prose flex w-full flex-col gap-6">
         <EtrianRegistryForm onSubmit={handleCreate} isEditing={isEditing} />
 
