@@ -15,6 +15,7 @@ type UseEtrianRegistryOptions = {
 
 type UseEtrianRegistryReturn = {
   storedEtrians: Etrian[];
+  storedEtrianRegistry: EtrianRegistry;
   isLoaded: boolean;
   migrationError: {
     hasError: boolean;
@@ -34,6 +35,8 @@ export function useEtrianRegistry(
   const { storageKey = ETRIAN_REGISTRY_STORAGE_KEY } = options;
 
   const [storedEtrians, setStoredEtrians] = useState<Etrian[]>([]);
+  const [storedEtrianRegistry, setStoredEtrianRegistry] =
+    useState<EtrianRegistry | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [migrationError, setMigrationError] = useState<{
     hasError: boolean;
@@ -54,8 +57,10 @@ export function useEtrianRegistry(
       if (data) {
         const parsedData = JSON.parse(data);
         const migratedRegistry = migrateEtrianRegistry(parsedData);
+        setStoredEtrianRegistry(migratedRegistry);
         setStoredEtrians(migratedRegistry.etrians);
       } else {
+        setStoredEtrianRegistry(null);
         setStoredEtrians([]);
       }
     } catch {
@@ -64,6 +69,7 @@ export function useEtrianRegistry(
         hasError: true,
         originalData: data,
       });
+      setStoredEtrianRegistry(null);
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
@@ -113,6 +119,10 @@ export function useEtrianRegistry(
 
   return {
     storedEtrians,
+    storedEtrianRegistry: storedEtrianRegistry ?? {
+      version: CURRENT_ETRIAN_REGISTRY_VERSION,
+      etrians: storedEtrians,
+    },
     isLoaded,
     migrationError,
     addEtrian,
