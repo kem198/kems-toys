@@ -50,7 +50,9 @@ export function EtrianRegistry() {
         order: 0,
         affiliations: normalizedAffiliations,
         dateOfBirth:
-          values.dateOfBirth && values.dateOfBirth.month
+          values.dateOfBirth &&
+          values.dateOfBirth.month &&
+          values.dateOfBirth.month !== "未設定"
             ? {
                 month: values.dateOfBirth.month,
                 day: Number(values.dateOfBirth.day) as EtrianDay,
