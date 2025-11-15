@@ -420,7 +420,60 @@ test.describe("世界樹の暦ページのテスト", () => {
       });
     });
 
-    test.describe.skip("更新時のテスト", () => {});
+    test.describe("更新時のテスト", () => {
+      test("冒険者を編集できること", async ({ page }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集: dummy" }).click();
+        await page.getByRole("textbox", { name: "名前 *" }).fill("セトハ");
+        await page.getByRole("combobox", { name: "誕生月" }).click();
+        await page.getByRole("option", { name: "皇帝ノ月" }).click();
+        await page.getByRole("combobox", { name: "日" }).click();
+        await page.getByRole("option", { name: "1", exact: true }).click();
+        await page
+          .getByRole("textbox", { name: "所属" })
+          .fill("ブレイバント,アルカディア");
+        await page
+          .getByRole("textbox", { name: "メモ" })
+          .fill("突剣を自在に扱う冒険者。没落貴族の一人娘。");
+
+        // Act
+        await page.getByRole("button", { name: "更新" }).click();
+
+        // Assert (表示が正しいこと)
+        await expect(toySection.getByText("セトハ").first()).toBeVisible();
+        await expect(
+          toySection.getByText("皇帝ノ月 1 日").first(),
+        ).toBeVisible();
+        await expect(
+          toySection.getByText("ブレイバント").first(),
+        ).toBeVisible();
+        await expect(
+          toySection.getByText("アルカディア").first(),
+        ).toBeVisible();
+        await expect(
+          toySection
+            .getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。")
+            .first(),
+        ).toBeVisible();
+
+        // Assert (データストアへ登録されていること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.version).toBe(2);
+        expect(migrated.etrians[0].dateOfBirth).toEqual({
+          month: "皇帝ノ月",
+          day: 1,
+        });
+        expect(migrated.etrians[0].name).toBe("セトハ");
+        expect(migrated.etrians[0].affiliations).toEqual([
+          "ブレイバント",
+          "アルカディア",
+        ]);
+      });
+    });
 
     test.describe.skip("削除時のテスト", () => {});
 
