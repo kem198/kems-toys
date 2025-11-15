@@ -71,6 +71,7 @@ export function useEtrianRegistry(
       });
       setStoredEtrianRegistry(null);
       setStoredEtrians([]);
+      setStoredEtrianRegistry(null);
     } finally {
       setIsLoaded(true);
     }
