@@ -31,7 +31,7 @@ export function BackupDialog({
           <DialogDescription>
             ブラウザ (localStorage) 上に保存されている情報を表示します。
             <br />
-            コピーしておくと復元しやすい……かも。
+            コピーしておくと安心……かも。
           </DialogDescription>
         </DialogHeader>
 
