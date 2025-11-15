@@ -16,14 +16,8 @@ export const registryFormSchema = z
     memo: z.string().max(100, "100 文字以下で入力してください。").optional(),
     dateOfBirth: z
       .object({
-        month: z
-          .enum([UNSET_SELECT_VALUE, ...etrianMonthOptions])
-          .optional()
-          .transform((val) => (val === UNSET_SELECT_VALUE ? null : val)),
-        day: z
-          .enum([UNSET_SELECT_VALUE, ...etrianDayOptions])
-          .optional()
-          .transform((val) => (val === UNSET_SELECT_VALUE ? null : val)),
+        month: z.enum([UNSET_SELECT_VALUE, ...etrianMonthOptions]).optional(),
+        day: z.enum([UNSET_SELECT_VALUE, ...etrianDayOptions]).optional(),
       })
       .optional(),
     affiliations: z.string().optional(),
@@ -33,9 +27,11 @@ export const registryFormSchema = z
       if (!data.dateOfBirth) return true;
 
       const hasMonth =
-        data.dateOfBirth.month !== undefined && data.dateOfBirth.month !== null;
+        data.dateOfBirth.month !== undefined &&
+        data.dateOfBirth.month !== UNSET_SELECT_VALUE;
       const hasDay =
-        data.dateOfBirth.day !== undefined && data.dateOfBirth.day !== null;
+        data.dateOfBirth.day !== undefined &&
+        data.dateOfBirth.day !== UNSET_SELECT_VALUE;
 
       // 両方入力または両方未設定
       return hasMonth === hasDay;
