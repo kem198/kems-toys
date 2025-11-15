@@ -12,8 +12,9 @@ import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/regis
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { UserPen } from "lucide-react";
+import { AlertCircleIcon, UserPen } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -169,12 +170,12 @@ export function EtrianRegistry() {
               <>
                 <ConfirmDialog
                   title="登録状況のリセット"
-                  description={
-                    <>
-                      登録状況を初期状態に戻します。
-                      <br />
-                      この操作は元に戻せません！
-                    </>
+                  description="登録状況を初期状態に戻します。"
+                  content={
+                    <Alert variant="destructive">
+                      <AlertCircleIcon size={16} />
+                      <AlertTitle>この操作は元に戻せません。</AlertTitle>
+                    </Alert>
                   }
                   confirmButtonLabel="リセット"
                   confirmButtonVariant="destructive"

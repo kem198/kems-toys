@@ -6,6 +6,7 @@ import {
 import { BirthdayMessage } from "@/app/(toys)/etrian-calendar/_features/registry/components/birthday-message";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
 import { EditDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/edit-dialog";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -21,7 +22,13 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronDown, ChevronUp, Pencil, Trash2 } from "lucide-react";
+import {
+  AlertCircleIcon,
+  ChevronDown,
+  ChevronUp,
+  Pencil,
+  Trash2,
+} from "lucide-react";
 import { Fragment } from "react";
 
 function EtrianRegistrySkeleton() {
@@ -90,17 +97,18 @@ function EtrianRegistryItem({
           <>
             <ConfirmDialog
               title="冒険者情報の削除"
-              description={
-                <>
-                  下記の冒険者情報を削除します。
-                  <br />
-                  この操作は元に戻せません！
-                </>
-              }
+              description="下記の冒険者情報を削除します。"
               content={
-                <p>
-                  冒険者名: <span className="font-semibold">{etrian.name}</span>
-                </p>
+                <>
+                  <p>
+                    冒険者名:{" "}
+                    <span className="font-semibold">{etrian.name}</span>
+                  </p>
+                  <Alert variant="destructive">
+                    <AlertCircleIcon size={16} />
+                    <AlertTitle>この操作は元に戻せません。</AlertTitle>
+                  </Alert>
+                </>
               }
               confirmButtonLabel="削除"
               confirmButtonVariant="destructive"
