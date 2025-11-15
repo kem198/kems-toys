@@ -475,7 +475,27 @@ test.describe("世界樹の暦ページのテスト", () => {
       });
     });
 
-    test.describe.skip("削除時のテスト", () => {});
+    test.describe("削除時のテスト", () => {
+      test("冒険者を削除できること", async ({ page }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByTestId("toggle-edit-mode").click();
+        await page.getByRole("button", { name: "削除: dummy" }).click();
+
+        // Act
+        await page.getByRole("button", { name: "削除" }).click();
+
+        // Assert (表示が正しいこと)
+        await expect(toySection.getByText("dummy").first()).not.toBeVisible();
+
+        // Assert (データストアへ登録されていないこと)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.etrians[0].name).not.toBe("dummy");
+      });
+    });
 
     test.describe("移行時のテスト", () => {
       test("EtrianV1 型が保存されている状態で、画面が初期表示された時、最新の型に揃えた初期値が設定されること (月なし -> 月あり)", async ({
