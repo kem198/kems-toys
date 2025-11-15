@@ -118,6 +118,7 @@ function EtrianRegistryItem({
                 variant="destructive"
                 size="icon"
                 className="rounded-full"
+                aria-label={`削除: ${etrian.name}`}
               >
                 <Trash2 />
               </Button>
@@ -129,6 +130,7 @@ function EtrianRegistryItem({
                 className="rounded-full"
                 onClick={() => onReorder(index, index - 1)}
                 disabled={index === 0}
+                aria-label={`上へ移動: ${etrian.name}`}
               >
                 <ChevronUp />
               </Button>
@@ -139,6 +141,7 @@ function EtrianRegistryItem({
                 className="rounded-full"
                 onClick={() => onReorder(index, index + 1)}
                 disabled={index === length - 1}
+                aria-label={`下へ移動: ${etrian.name}`}
               >
                 <ChevronDown />
               </Button>
@@ -148,6 +151,7 @@ function EtrianRegistryItem({
                   variant="secondary"
                   size="icon"
                   className="rounded-full"
+                  aria-label={`編集: ${etrian.name}`}
                 >
                   <Pencil />
                 </Button>
@@ -158,7 +162,12 @@ function EtrianRegistryItem({
 
         {!isEditing && (
           <EditDialog etrian={etrian} onSave={onUpdate}>
-            <Button variant="secondary" size="icon" className="rounded-full">
+            <Button
+              variant="secondary"
+              size="icon"
+              className="rounded-full"
+              aria-label={`編集: ${etrian.name}`}
+            >
               <Pencil />
             </Button>
           </EditDialog>
