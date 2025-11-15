@@ -54,7 +54,7 @@ export function MigrationErrorDialog({
           )}
 
           <Alert variant="destructive">
-            <AlertCircleIcon size={18} />
+            <AlertCircleIcon size={16} />
             <AlertTitle>現在の登録内容はすべて削除されます。</AlertTitle>
             <AlertDescription>
               お手数ですが、控えた内容を元に再登録をお願いします。
@@ -62,7 +62,7 @@ export function MigrationErrorDialog({
           </Alert>
 
           <Alert variant="destructive">
-            <AlertCircleIcon size={18} />
+            <AlertCircleIcon size={16} />
             <AlertTitle>現在の登録内容は再表示できません。</AlertTitle>
           </Alert>
         </div>
