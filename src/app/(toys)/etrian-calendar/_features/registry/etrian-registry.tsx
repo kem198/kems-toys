@@ -7,9 +7,9 @@ import {
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
+import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/migration-error-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
-import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/migration-error-dialog";
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
