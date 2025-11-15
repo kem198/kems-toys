@@ -18,7 +18,6 @@ import {
 import {
   Etrian,
   EtrianDay,
-  EtrianMonthNameWithNewYearsEve,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import {
   RegistryFormValues,
@@ -74,10 +73,6 @@ export function EditDialog({
     defaultValues: {
       name: "",
       memo: "",
-      dateOfBirth: {
-        month: UNSET_SELECT_VALUE,
-        day: UNSET_SELECT_VALUE,
-      },
       affiliations: "",
     },
   });
@@ -86,12 +81,15 @@ export function EditDialog({
     form.reset({
       name: etrian.name,
       memo: etrian.memo,
-      dateOfBirth: {
-        month: etrian.dateOfBirth?.month ?? UNSET_SELECT_VALUE,
-        day: etrian.dateOfBirth?.day
-          ? String(etrian.dateOfBirth.day)
-          : UNSET_SELECT_VALUE,
-      },
+      dateOfBirth: etrian.dateOfBirth
+        ? {
+            month: etrian.dateOfBirth.month,
+            day: String(etrian.dateOfBirth.day),
+          }
+        : {
+            month: UNSET_SELECT_VALUE,
+            day: UNSET_SELECT_VALUE,
+          },
       affiliations: etrian.affiliations?.join(","),
     });
   }, [etrian, form]);
@@ -106,23 +104,6 @@ export function EditDialog({
       .filter((value) => value.length > 0);
   };
 
-  const parseMonth = (
-    monthString: string | undefined,
-  ): EtrianMonthNameWithNewYearsEve | undefined => {
-    if (!monthString || monthString === UNSET_SELECT_VALUE) return undefined;
-    return (etrianMonthOptions as readonly string[]).includes(monthString)
-      ? (monthString as EtrianMonthNameWithNewYearsEve)
-      : undefined;
-  };
-
-  const parseDay = (dayStr: string | undefined): EtrianDay | undefined => {
-    if (!dayStr || dayStr === UNSET_SELECT_VALUE) return undefined;
-    const dayNumber = Number(dayStr);
-    return dayNumber >= 1 && dayNumber <= 28
-      ? (dayNumber as EtrianDay)
-      : undefined;
-  };
-
   useEffect(() => {
     if (!open) {
       return;
@@ -133,15 +114,24 @@ export function EditDialog({
 
   const handleSubmit = (data: RegistryFormValues) => {
     const normalizedAffiliations = normalizeAffiliations(data.affiliations);
-    const month = parseMonth(data.dateOfBirth.month);
-    const day = parseDay(data.dateOfBirth.day);
+
+    const dateOfBirth =
+      data.dateOfBirth?.month &&
+      data.dateOfBirth?.day &&
+      data.dateOfBirth.month !== UNSET_SELECT_VALUE &&
+      data.dateOfBirth.day !== UNSET_SELECT_VALUE
+        ? {
+            month: data.dateOfBirth.month,
+            day: Number(data.dateOfBirth.day) as EtrianDay,
+          }
+        : undefined;
 
     const updatedEtrian: Etrian = {
       ...etrian,
       name: data.name.trim(),
       affiliations: normalizedAffiliations,
-      dateOfBirth: { month, day },
-      memo: data.memo?.trim(),
+      dateOfBirth,
+      memo: data.memo?.trim() || undefined,
     };
 
     onSave(updatedEtrian);
@@ -194,48 +184,48 @@ export function EditDialog({
                 )}
               />
 
-              <div className="grid grid-cols-2 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="etrian-birth-month">誕生月</FieldLabel>
-                  <Controller
-                    name="dateOfBirth.month"
-                    control={form.control}
-                    render={({ field }) => (
-                      <Select
-                        value={field.value ?? UNSET_SELECT_VALUE}
-                        onValueChange={field.onChange}
-                      >
-                        <SelectTrigger id="etrian-birth-month">
-                          <SelectValue placeholder={etrianMonthOptions[0]} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value={UNSET_SELECT_VALUE}>
-                            {UNSET_SELECT_VALUE}
-                          </SelectItem>
-                          {etrianMonthOptions.map((option) => (
-                            <SelectItem key={option} value={option}>
-                              {option}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </Field>
-
-                <Field>
-                  <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
-                  <Controller
-                    name="dateOfBirth.day"
-                    control={form.control}
-                    render={({ field, fieldState }) => (
-                      <>
+              <Field data-invalid={form.formState.errors.dateOfBirth}>
+                <div className="grid grid-cols-2 gap-4">
+                  <Field>
+                    <FieldLabel htmlFor="etrian-birth-month">誕生月</FieldLabel>
+                    <Controller
+                      name="dateOfBirth.month"
+                      control={form.control}
+                      render={({ field }) => (
                         <Select
-                          value={field.value ?? UNSET_SELECT_VALUE}
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger id="etrian-birth-month">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value={UNSET_SELECT_VALUE}>
+                              {UNSET_SELECT_VALUE}
+                            </SelectItem>
+                            {etrianMonthOptions.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </Field>
+
+                  <Field>
+                    <FieldLabel htmlFor="etrian-birth-day">日</FieldLabel>
+                    <Controller
+                      name="dateOfBirth.day"
+                      control={form.control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value}
                           onValueChange={field.onChange}
                         >
                           <SelectTrigger id="etrian-birth-day">
-                            <SelectValue placeholder="1" />
+                            <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value={UNSET_SELECT_VALUE}>
@@ -248,14 +238,17 @@ export function EditDialog({
                             ))}
                           </SelectContent>
                         </Select>
-                        {fieldState.invalid && (
-                          <FieldError errors={[fieldState.error]} />
-                        )}
-                      </>
-                    )}
-                  />
-                </Field>
-              </div>
+                      )}
+                    />
+                  </Field>
+                </div>
+                <FieldDescription>
+                  設定する場合は月日両方を入力してください。
+                </FieldDescription>
+                {form.formState.errors.dateOfBirth && (
+                  <FieldError errors={[form.formState.errors.dateOfBirth]} />
+                )}
+              </Field>
 
               <Field>
                 <FieldLabel htmlFor="etrian-affiliations">所属</FieldLabel>

@@ -1,9 +1,13 @@
 "use client";
 
 import { sampleEtrians } from "@/app/(toys)/etrian-calendar/_common/constants/sample";
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import {
+  Etrian,
+  EtrianDay,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
+import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/migration-error-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
@@ -17,11 +21,13 @@ export function EtrianRegistry() {
   const {
     storedEtrians,
     isLoaded,
+    migrationError,
     addEtrian,
     updateEtrian,
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    clearMigrationError,
   } = useEtrianRegistry();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -33,12 +39,26 @@ export function EtrianRegistry() {
         return;
       }
 
+      const normalizedAffiliations = (values.affiliations ?? "")
+        .split(",")
+        .map((value) => value.trim())
+        .filter((value) => value.length > 0);
+
       const newEtrian: Etrian = {
         id: crypto.randomUUID(),
         name: trimmedName,
         order: 0,
-        dateOfBirth: {},
-        affiliations: [],
+        affiliations: normalizedAffiliations,
+        dateOfBirth:
+          values.dateOfBirth &&
+          values.dateOfBirth.month &&
+          values.dateOfBirth.month !== "未設定"
+            ? {
+                month: values.dateOfBirth.month,
+                day: Number(values.dateOfBirth.day) as EtrianDay,
+              }
+            : undefined,
+        memo: values.memo?.trim() || undefined,
       };
 
       addEtrian(newEtrian);
@@ -79,6 +99,13 @@ export function EtrianRegistry() {
     toast.success("登録状況をリセットしました");
   }, [resetEtrians]);
 
+  const handleMigrationErrorConfirm = useCallback(() => {
+    resetEtrians();
+    localStorage.removeItem("etrianRegistryInitialized");
+    clearMigrationError();
+    toast.success("登録状況をリセットしました");
+  }, [resetEtrians, clearMigrationError]);
+
   function reorderEtrians(
     etrians: Etrian[],
     startIndex: number,
@@ -117,6 +144,12 @@ export function EtrianRegistry() {
 
   return (
     <div className="flex flex-col gap-4">
+      <MigrationErrorDialog
+        open={migrationError.hasError}
+        originalData={migrationError.originalData}
+        onConfirm={handleMigrationErrorConfirm}
+      />
+
       <div className="not-prose flex w-full flex-col gap-6">
         <EtrianRegistryForm onSubmit={handleCreate} isEditing={isEditing} />
 

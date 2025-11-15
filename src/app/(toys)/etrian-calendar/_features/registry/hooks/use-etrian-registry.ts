@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { CURRENT_ETRIAN_REGISTRY_VERSION } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import {
+  Etrian,
+  EtrianRegistry,
+} from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { migrateEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 
 export const ETRIAN_REGISTRY_STORAGE_KEY = "etrianRegistry";
 
@@ -11,11 +16,16 @@ type UseEtrianRegistryOptions = {
 type UseEtrianRegistryReturn = {
   storedEtrians: Etrian[];
   isLoaded: boolean;
+  migrationError: {
+    hasError: boolean;
+    originalData: string | null;
+  };
   addEtrian: (etrian: Etrian) => void;
   updateEtrian: (etrian: Etrian) => void;
   updateEtrians: (updatedEtrians: Etrian[]) => void;
   deleteEtrianById: (id: string) => void;
   resetEtrians: () => void;
+  clearMigrationError: () => void;
 };
 
 export function useEtrianRegistry(
@@ -25,6 +35,13 @@ export function useEtrianRegistry(
 
   const [storedEtrians, setStoredEtrians] = useState<Etrian[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [migrationError, setMigrationError] = useState<{
+    hasError: boolean;
+    originalData: string | null;
+  }>({
+    hasError: false,
+    originalData: null,
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -32,9 +49,21 @@ export function useEtrianRegistry(
     }
 
     const data = window.localStorage.getItem(storageKey);
+
     try {
-      setStoredEtrians(data ? (JSON.parse(data) as Etrian[]) : []);
+      if (data) {
+        const parsedData = JSON.parse(data);
+        const migratedRegistry = migrateEtrianRegistry(parsedData);
+        setStoredEtrians(migratedRegistry.etrians);
+      } else {
+        setStoredEtrians([]);
+      }
     } catch {
+      // マイグレーション処理に失敗した場合、元のデータを保持してエラー状態を設定する
+      setMigrationError({
+        hasError: true,
+        originalData: data,
+      });
       setStoredEtrians([]);
     } finally {
       setIsLoaded(true);
@@ -46,7 +75,12 @@ export function useEtrianRegistry(
       return;
     }
 
-    window.localStorage.setItem(storageKey, JSON.stringify(storedEtrians));
+    const registry: EtrianRegistry = {
+      version: CURRENT_ETRIAN_REGISTRY_VERSION,
+      etrians: storedEtrians,
+    };
+
+    window.localStorage.setItem(storageKey, JSON.stringify(registry));
   }, [storedEtrians, isLoaded, storageKey]);
 
   const addEtrian = useCallback((etrian: Etrian) => {
@@ -70,13 +104,22 @@ export function useEtrianRegistry(
     setStoredEtrians([]);
   }, []);
 
+  const clearMigrationError = useCallback(() => {
+    setMigrationError({
+      hasError: false,
+      originalData: null,
+    });
+  }, []);
+
   return {
     storedEtrians,
     isLoaded,
+    migrationError,
     addEtrian,
     updateEtrian,
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    clearMigrationError,
   };
 }

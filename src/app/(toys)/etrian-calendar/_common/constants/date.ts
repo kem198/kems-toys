@@ -1,3 +1,5 @@
+export const CURRENT_ETRIAN_REGISTRY_VERSION = 2 as const;
+
 export const etrianMonths = [
   {
     name: "皇帝ノ月",
@@ -69,3 +71,5 @@ export const etrianDays = [
 ] as const;
 
 export const etrianDayOptions = etrianDays.map(String);
+
+export const MONOKA_DAY_OPTION = "1" as const;
