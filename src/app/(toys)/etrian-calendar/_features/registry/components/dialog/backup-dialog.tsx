@@ -1,4 +1,4 @@
-import { Etrian } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import { EtrianRegistry } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { JsonDisplay } from "@/components/shared/json-display";
 import {
   Dialog,
@@ -11,12 +11,12 @@ import {
 import { ComponentProps, ReactNode } from "react";
 
 type BackupDialogProps = {
-  storedEtrians: Etrian[];
+  storedEtrianRegistry: EtrianRegistry;
   children: ReactNode;
 } & ComponentProps<typeof DialogTrigger>;
 
 export function BackupDialog({
-  storedEtrians,
+  storedEtrianRegistry,
   children,
   ...props
 }: BackupDialogProps) {
@@ -31,12 +31,12 @@ export function BackupDialog({
           <DialogDescription>
             ブラウザ (localStorage) 上に保存されている情報を表示します。
             <br />
-            コピーしておくと復元しやすい……かも。
+            コピーしておくと安心……かも。
           </DialogDescription>
         </DialogHeader>
 
         <JsonDisplay
-          data={storedEtrians}
+          data={storedEtrianRegistry}
           scrollAreaProps={{ className: "max-h-[60vh]" }}
         />
       </DialogContent>

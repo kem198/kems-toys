@@ -15,6 +15,7 @@ type UseEtrianRegistryOptions = {
 
 type UseEtrianRegistryReturn = {
   storedEtrians: Etrian[];
+  storedEtrianRegistry: EtrianRegistry;
   isLoaded: boolean;
   migrationError: {
     hasError: boolean;
@@ -34,6 +35,8 @@ export function useEtrianRegistry(
   const { storageKey = ETRIAN_REGISTRY_STORAGE_KEY } = options;
 
   const [storedEtrians, setStoredEtrians] = useState<Etrian[]>([]);
+  const [storedEtrianRegistry, setStoredEtrianRegistry] =
+    useState<EtrianRegistry | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [migrationError, setMigrationError] = useState<{
     hasError: boolean;
@@ -54,17 +57,21 @@ export function useEtrianRegistry(
       if (data) {
         const parsedData = JSON.parse(data);
         const migratedRegistry = migrateEtrianRegistry(parsedData);
+        setStoredEtrianRegistry(migratedRegistry);
         setStoredEtrians(migratedRegistry.etrians);
       } else {
+        setStoredEtrianRegistry(null);
         setStoredEtrians([]);
       }
     } catch {
       // マイグレーション処理に失敗した場合、元のデータを保持してエラー状態を設定する
       setMigrationError({
+        // MigrationErrorDialog を表示する
         hasError: true,
         originalData: data,
       });
       setStoredEtrians([]);
+      setStoredEtrianRegistry(null);
     } finally {
       setIsLoaded(true);
     }
@@ -79,7 +86,7 @@ export function useEtrianRegistry(
       version: CURRENT_ETRIAN_REGISTRY_VERSION,
       etrians: storedEtrians,
     };
-
+    setStoredEtrianRegistry(registry);
     window.localStorage.setItem(storageKey, JSON.stringify(registry));
   }, [storedEtrians, isLoaded, storageKey]);
 
@@ -102,6 +109,7 @@ export function useEtrianRegistry(
 
   const resetEtrians = useCallback(() => {
     setStoredEtrians([]);
+    setStoredEtrianRegistry(null);
   }, []);
 
   const clearMigrationError = useCallback(() => {
@@ -113,6 +121,10 @@ export function useEtrianRegistry(
 
   return {
     storedEtrians,
+    storedEtrianRegistry: storedEtrianRegistry ?? {
+      version: CURRENT_ETRIAN_REGISTRY_VERSION,
+      etrians: storedEtrians,
+    },
     isLoaded,
     migrationError,
     addEtrian,

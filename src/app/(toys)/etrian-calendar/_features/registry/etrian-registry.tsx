@@ -20,6 +20,7 @@ import { toast } from "sonner";
 export function EtrianRegistry() {
   const {
     storedEtrians,
+    storedEtrianRegistry,
     isLoaded,
     migrationError,
     addEtrian,
@@ -182,7 +183,10 @@ export function EtrianRegistry() {
                 >
                   <Button variant="destructive">リセット</Button>
                 </ConfirmDialog>
-                <BackupDialog storedEtrians={storedEtrians} className="w-fit">
+                <BackupDialog
+                  storedEtrianRegistry={storedEtrianRegistry}
+                  className="w-fit"
+                >
                   <Button variant="secondary">バックアップ</Button>
                 </BackupDialog>
               </>
