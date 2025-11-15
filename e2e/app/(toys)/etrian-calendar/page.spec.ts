@@ -399,7 +399,26 @@ test.describe("世界樹の暦ページのテスト", () => {
       });
     });
 
-    test.describe.skip("作成時のテスト", () => {});
+    test.describe("作成時のテスト", () => {
+      test("冒険者を登録できること", async ({ page }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("textbox", { name: "ししょー" }).fill("セトハ");
+
+        // Act
+        await page.getByRole("button", { name: "登録" }).click();
+
+        // Assert (表示が正しいこと)
+        await expect(toySection.getByText("セトハ")).toBeVisible();
+
+        // Assert (データストアへ登録されていること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.etrians[0].name).toBe("セトハ");
+      });
+    });
 
     test.describe.skip("更新時のテスト", () => {});
 
