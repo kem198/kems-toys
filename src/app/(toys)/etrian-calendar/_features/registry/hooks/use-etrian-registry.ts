@@ -66,10 +66,10 @@ export function useEtrianRegistry(
     } catch {
       // マイグレーション処理に失敗した場合、元のデータを保持してエラー状態を設定する
       setMigrationError({
+        // MigrationErrorDialog を表示する
         hasError: true,
         originalData: data,
       });
-      setStoredEtrianRegistry(null);
       setStoredEtrians([]);
       setStoredEtrianRegistry(null);
     } finally {
@@ -109,6 +109,7 @@ export function useEtrianRegistry(
 
   const resetEtrians = useCallback(() => {
     setStoredEtrians([]);
+    setStoredEtrianRegistry(null);
   }, []);
 
   const clearMigrationError = useCallback(() => {
