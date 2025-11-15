@@ -479,7 +479,7 @@ test.describe("世界樹の暦ページのテスト", () => {
       test("冒険者を削除できること", async ({ page }) => {
         // Arrange
         await navigateToEtrianCalendar(page);
-        await page.getByTestId("toggle-edit-mode").click();
+        await page.getByRole("button", { name: "編集開始" }).click();
         await page.getByRole("button", { name: "削除: dummy" }).click();
 
         // Act
