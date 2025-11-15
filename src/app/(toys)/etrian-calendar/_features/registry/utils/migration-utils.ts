@@ -57,7 +57,7 @@ export const migrateEtrianRegistry = (
     // 他のバージョンの場合は最新の JSON 形式に詰め替える (ここが後々の更新対象になるはず)
     return {
       version: CURRENT_ETRIAN_REGISTRY_VERSION,
-      etrians: data.etrians,
+      etrians: migrateEtriansV1toV2(data.etrians),
     };
   }
 
