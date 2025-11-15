@@ -250,19 +250,29 @@ export function EditDialog({
                 )}
               </Field>
 
-              <Field>
-                <FieldLabel htmlFor="etrian-affiliations">所属</FieldLabel>
-                <Input
-                  id="etrian-affiliations"
-                  placeholder="ギルド名,エトリア,etc..."
-                  autoComplete="off"
-                  {...form.register("affiliations")}
-                />
-                <FieldDescription>
-                  所属ギルドや居住地などを入力してください。
-                  <br />, で区切ると、複数の所属を登録できます。
-                </FieldDescription>
-              </Field>
+              <Controller
+                name="affiliations"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field>
+                    <FieldLabel htmlFor="etrian-affiliations">所属</FieldLabel>
+                    <Input
+                      {...field}
+                      id="etrian-affiliations"
+                      placeholder="ギルド名,エトリア,etc..."
+                      autoComplete="off"
+                      {...form.register("affiliations")}
+                    />
+                    <FieldDescription>
+                      所属ギルドや居住地などを入力してください。
+                      <br />, で区切ると、複数の所属を登録できます。
+                    </FieldDescription>
+                    {fieldState.invalid && (
+                      <FieldError errors={[fieldState.error]} />
+                    )}
+                  </Field>
+                )}
+              />
 
               <Controller
                 name="memo"
