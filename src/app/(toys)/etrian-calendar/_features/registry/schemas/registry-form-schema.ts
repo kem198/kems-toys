@@ -1,6 +1,8 @@
 import {
   etrianDayOptions,
   etrianMonthOptions,
+  etrianNewYearsEve,
+  MONOKA_DAY_OPTION,
 } from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import { UNSET_SELECT_VALUE } from "@/constants/select";
 import * as z from "zod";
@@ -45,13 +47,13 @@ export const registryFormSchema = z
   )
   .refine(
     (data) => {
-      if (data.dateOfBirth?.month === "鬼乎ノ日") {
-        return data.dateOfBirth.day === "1";
+      if (data.dateOfBirth?.month === etrianNewYearsEve.name) {
+        return data.dateOfBirth.day === MONOKA_DAY_OPTION;
       }
       return true;
     },
     {
-      message: "鬼乎ノ日の場合、日は「1」で登録してください。",
+      message: `${etrianNewYearsEve.name}の場合、日は「${MONOKA_DAY_OPTION}」で登録してください。`,
       path: ["dateOfBirth"],
     },
   );

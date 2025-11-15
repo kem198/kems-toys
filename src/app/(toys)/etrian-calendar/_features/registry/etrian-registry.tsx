@@ -13,7 +13,6 @@ import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/r
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
 import { Button } from "@/components/ui/button";
-import { UNSET_SELECT_VALUE } from "@/constants/select";
 import { UserPen } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -51,9 +50,7 @@ export function EtrianRegistry() {
         order: 0,
         affiliations: normalizedAffiliations,
         dateOfBirth:
-          values.dateOfBirth &&
-          values.dateOfBirth.month &&
-          values.dateOfBirth.month !== UNSET_SELECT_VALUE
+          values.dateOfBirth && values.dateOfBirth.month
             ? {
                 month: values.dateOfBirth.month,
                 day: Number(values.dateOfBirth.day) as EtrianDay,

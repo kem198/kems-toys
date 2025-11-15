@@ -71,3 +71,5 @@ export const etrianDays = [
 ] as const;
 
 export const etrianDayOptions = etrianDays.map(String);
+
+export const MONOKA_DAY_OPTION = "1" as const;
