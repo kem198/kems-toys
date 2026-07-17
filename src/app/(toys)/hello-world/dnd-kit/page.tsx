@@ -12,11 +12,21 @@ export default function DnDKitPage() {
         <h2>References</h2>
         <ul>
           <li>
-            <a href="https://docs.dndkit.com/">@dnd-kit – Documentation</a>
+            <a
+              href="https://docs.dndkit.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @dnd-kit – Documentation
+            </a>
           </li>
           <ul>
             <li>
-              <a href="https://docs.dndkit.com/introduction/getting-started">
+              <a
+                href="https://docs.dndkit.com/introduction/getting-started"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Quick start | @dnd-kit – Documentation
               </a>
             </li>

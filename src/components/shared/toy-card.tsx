@@ -1,3 +1,4 @@
+import Link from "@/components/shared/Link";
 import {
   Item,
   ItemContent,
@@ -5,7 +6,6 @@ import {
   ItemHeader,
   ItemTitle,
 } from "@/components/ui/item";
-import Link from "next/link";
 
 interface ToyCardProps {
   title: string;
