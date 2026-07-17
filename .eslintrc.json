@@ -38,8 +38,7 @@
     "react/require-default-props": "off",
     // props 渡しでスプレッド構文を使用できるようにする
     // https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
-    "react/jsx-props-no-spreading": "off",
-    "jsx-a11y/no-target-blank": "error"
+    "react/jsx-props-no-spreading": "off"
   },
   "overrides": [
     {

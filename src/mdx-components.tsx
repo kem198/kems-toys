@@ -3,7 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import React from "react";
 
 function MDXAnchor(props: React.ComponentPropsWithoutRef<"a">) {
-  const { href, target, rel, ...rest } = props;
+  const { href, target, rel, children, ...rest } = props;
   const isExternal =
     typeof href === "string" &&
     (href.startsWith("http://") ||
@@ -19,11 +19,17 @@ function MDXAnchor(props: React.ComponentPropsWithoutRef<"a">) {
         target={target ?? "_blank"}
         rel={rel ?? "noopener noreferrer"}
         {...rest}
-      />
+      >
+        {children}
+      </a>
     );
   }
 
-  return <a href={href} {...rest} />;
+  return (
+    <a href={href} {...rest}>
+      {children}
+    </a>
+  );
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
