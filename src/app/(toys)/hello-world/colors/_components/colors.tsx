@@ -1,6 +1,6 @@
 import { ETRIAN_CALENDAR_COLOR_VARIANTS } from "@/app/(toys)/etrian-calendar/_common/constants/color";
+import Link from "@/components/shared/Link";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { HTMLAttributes, ReactNode } from "react";
 
 type ColorProps = {

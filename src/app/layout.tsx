@@ -1,11 +1,11 @@
 import { AppHeader } from "@/components/layout/app-header";
 import { AppSidebar } from "@/components/layout/app-sidebar";
+import Link from "@/components/shared/Link";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import Image from "next/image";
-import Link from "next/link";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({

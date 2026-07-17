@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "@/components/shared/Link";
 import { Logo } from "@/components/shared/logo";
 import {
   Sidebar,
@@ -12,7 +13,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { TOYS } from "@/constants/toys";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
