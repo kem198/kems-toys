@@ -42,7 +42,7 @@ export function ExportDialog({
             try {
               const json = JSON.stringify(storedEtrianRegistry, null, 2);
               void navigator.clipboard.writeText(json);
-              toast.success("バックアップをクリップボードにコピーしました");
+              toast.success("冒険者情報をクリップボードにコピーしました");
             } catch (e) {
               toast.error("コピーに失敗しました");
             }
