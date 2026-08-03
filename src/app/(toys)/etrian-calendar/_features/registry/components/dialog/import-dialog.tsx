@@ -21,14 +21,20 @@ type ImportDialogProps = {
 export function ImportDialog({ onImport, children }: ImportDialogProps) {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleImport = () => {
     const success = onImport(value);
     setError(!success);
+    if (success) {
+      // close dialog on successful import
+      setOpen(false);
+      setValue("");
+    }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
 
       <DialogContent>
