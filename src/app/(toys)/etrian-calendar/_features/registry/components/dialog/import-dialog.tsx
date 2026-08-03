@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -31,7 +32,6 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
     const success = onImport(value);
     setError(!success);
     if (success) {
-      // close dialog on successful import
       setOpen(false);
       setValue("");
     }
@@ -43,7 +43,12 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>インポート</DialogTitle>
+          <DialogTitle>冒険者情報のインポート</DialogTitle>
+          <DialogDescription>
+            冒険者情報を復元します。
+            <br />
+            「エクスポート」でコピーした文字列を貼り付けて「インポート」ボタンを押してください。
+          </DialogDescription>
         </DialogHeader>
 
         <ScrollArea className="max-h-[60vh] rounded-md border border-border">

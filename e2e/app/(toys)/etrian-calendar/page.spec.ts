@@ -728,8 +728,8 @@ test.describe("世界樹の暦ページのテスト", () => {
       });
     });
 
-    test.describe("バックアップ時のテスト", () => {
-      test("冒険者が登録済みの状態で、「バックアップ」ボタンをクリックした時、登録状況のバックアップ用テキストが表示されること", async ({
+    test.describe("エクスポート時のテスト", () => {
+      test("冒険者が登録済みの状態で、「エクスポート」ボタンをクリックした時、登録状況のエクスポート用テキストが表示されること", async ({
         page,
       }) => {
         // Arrange
@@ -772,7 +772,7 @@ test.describe("世界樹の暦ページのテスト", () => {
 
         // Act
         await page.getByRole("button", { name: "編集開始" }).click();
-        await page.getByRole("button", { name: "バックアップ" }).click();
+        await page.getByRole("button", { name: "エクスポート" }).click();
 
         // Assert
         // ダイアログは toySection の範囲外のためページ全体をテスト範囲にする
@@ -807,7 +807,7 @@ test.describe("世界樹の暦ページのテスト", () => {
     });
 
     test.describe("インポート時のテスト", () => {
-      test("バックアップ用テキストをインポートした時、既存の登録情報が上書きされること", async ({
+      test("エクスポート用テキストをインポートした時、既存の登録情報が上書きされること", async ({
         page,
       }) => {
         // Arrange

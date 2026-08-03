@@ -27,11 +27,11 @@ export function BackupDialog({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>登録状況のバックアップ</DialogTitle>
+          <DialogTitle>冒険者情報のエクスポート</DialogTitle>
           <DialogDescription>
-            ブラウザ (localStorage) 上に保存されている情報を表示します。
+            ブラウザ上に保存されている冒険者情報を表示します。
             <br />
-            コピーしておくと安心……かも。
+            コピーして復元や端末間の移行にお使いください。
           </DialogDescription>
         </DialogHeader>
 

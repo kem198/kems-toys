@@ -211,8 +211,8 @@ export function EtrianRegistry() {
                   storedEtrianRegistry={storedEtrianRegistry}
                   className="w-fit"
                 >
-                  <Button variant="secondary" aria-label="バックアップ">
-                    バックアップ
+                  <Button variant="secondary" aria-label="エクスポート">
+                    エクスポート
                   </Button>
                 </BackupDialog>
                 <ImportDialog onImport={handleImport}>
