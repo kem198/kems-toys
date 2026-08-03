@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
+import { AlertCircleIcon } from "lucide-react";
 
 type ImportDialogProps = {
   onImport: (data: string) => boolean;
@@ -54,6 +56,12 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
             className="font-mono min-h-[160px] w-full cursor-text select-text resize-none whitespace-pre-wrap break-words bg-muted/50 bg-transparent px-0 py-0  text-xs"
           />
         </ScrollArea>
+        <Alert variant="destructive">
+          <AlertCircleIcon size={16} />
+          <AlertTitle>
+            現在の登録状況を上書きします。この操作は元に戻せません。
+          </AlertTitle>
+        </Alert>
         {error && (
           <p className="text-sm text-destructive">インポートに失敗しました</p>
         )}
