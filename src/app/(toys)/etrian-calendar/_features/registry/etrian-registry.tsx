@@ -13,6 +13,7 @@ import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/regis
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
+import { migrateEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { AlertCircleIcon, UserPen } from "lucide-react";
@@ -35,6 +36,8 @@ export function EtrianRegistry() {
   } = useEtrianRegistry();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [importText, setImportText] = useState("");
+  const [importError, setImportError] = useState(false);
 
   const handleCreate = useCallback(
     (values: RegistryFormValues) => {
@@ -131,6 +134,22 @@ export function EtrianRegistry() {
     [isLoaded, storedEtrians, updateEtrians],
   );
 
+  const handleImport = useCallback(
+    (data: string) => {
+      try {
+        const parsed = JSON.parse(data);
+        const migrated = migrateEtrianRegistry(parsed);
+
+        updateEtrians(migrated.etrians);
+
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    [updateEtrians],
+  );
+
   // サンプルデータ投入
   useEffect(() => {
     const hasInitialized = localStorage.getItem("etrianRegistryInitialized");
@@ -196,7 +215,7 @@ export function EtrianRegistry() {
                     バックアップ
                   </Button>
                 </BackupDialog>
-                <ImportDialog onImport={importEtrianRegistry}>
+                <ImportDialog onImport={handleImport}>
                   <Button variant="secondary">インポート</Button>
                 </ImportDialog>
               </>

@@ -855,6 +855,22 @@ test.describe("世界樹の暦ページのテスト", () => {
         expect(migrated.etrians[0].id).toBe("import-etrian");
         expect(migrated.etrians[0].name).toBe("セトハ");
       });
+
+      test("不正な JSON を入力した時、エラーが表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Act
+        await page.getByRole("textbox").fill("invalid json");
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert
+        await expect(page.getByText("インポートに失敗しました")).toBeVisible();
+      });
     });
   });
 });

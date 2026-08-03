@@ -14,15 +14,17 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 type ImportDialogProps = {
-  onImport: (data: string) => void;
+  onImport: (data: string) => boolean;
   children: React.ReactNode;
 };
 
 export function ImportDialog({ onImport, children }: ImportDialogProps) {
   const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
 
   const handleImport = () => {
-    onImport(value);
+    const success = onImport(value);
+    setError(!success);
   };
 
   return (
@@ -36,8 +38,14 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
 
         <Textarea
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event) => {
+            setValue(event.target.value);
+            setError(false);
+          }}
         />
+        {error && (
+          <p className="text-sm text-destructive">インポートに失敗しました</p>
+        )}
 
         <DialogFooter>
           <Button onClick={handleImport}>インポート</Button>
