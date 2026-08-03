@@ -58,7 +58,7 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
               setValue(e.target.value);
               setError(false);
             }}
-            className="font-mono min-h-[160px] w-full cursor-text select-text resize-none whitespace-pre-wrap break-words bg-muted/50 bg-transparent px-0 py-0  text-xs"
+            className="font-mono min-h-[160px] w-full cursor-text select-text resize-none whitespace-pre-wrap break-words bg-muted/50 p-2 text-xs"
           />
         </ScrollArea>
         <Alert variant="destructive">
