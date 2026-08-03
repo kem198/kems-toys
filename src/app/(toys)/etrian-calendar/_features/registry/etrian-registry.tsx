@@ -147,6 +147,8 @@ export function EtrianRegistry() {
 
         updateEtrians(migrated.etrians);
 
+        toast.success("インポートされた冒険者情報で更新しました");
+
         return true;
       } catch {
         return false;
