@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 
 type ImportDialogProps = {
@@ -42,13 +43,16 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
           <DialogTitle>インポート</DialogTitle>
         </DialogHeader>
 
-        <Textarea
-          value={value}
-          onChange={(event) => {
-            setValue(event.target.value);
-            setError(false);
-          }}
-        />
+        <ScrollArea className="max-h-[60vh] rounded-md border border-border">
+          <Textarea
+            value={value}
+            onChange={(event) => {
+              setValue(event.target.value);
+              setError(false);
+            }}
+            className="min-h-[160px] resize-none bg-transparent"
+          />
+        </ScrollArea>
         {error && (
           <p className="text-sm text-destructive">インポートに失敗しました</p>
         )}
