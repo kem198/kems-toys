@@ -16,7 +16,12 @@ import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/regis
 import { migrateEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { AlertCircleIcon, UserPen } from "lucide-react";
+import {
+  AlertCircleIcon,
+  DownloadIcon,
+  UploadIcon,
+  UserPen,
+} from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -211,12 +216,24 @@ export function EtrianRegistry() {
                   storedEtrianRegistry={storedEtrianRegistry}
                   className="w-fit"
                 >
-                  <Button variant="secondary" aria-label="エクスポート">
-                    エクスポート
+                  <Button
+                    variant="secondary"
+                    aria-label="エクスポート"
+                    className="inline-flex items-center gap-2"
+                  >
+                    <UploadIcon className="sm:hidden" />
+                    <span className="hidden sm:inline">エクスポート</span>
                   </Button>
                 </BackupDialog>
                 <ImportDialog onImport={handleImport}>
-                  <Button variant="secondary">インポート</Button>
+                  <Button
+                    variant="secondary"
+                    aria-label="インポート"
+                    className="inline-flex items-center gap-2"
+                  >
+                    <DownloadIcon className="sm:hidden" />
+                    <span className="hidden sm:inline">インポート</span>
+                  </Button>
                 </ImportDialog>
               </>
             )}

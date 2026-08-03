@@ -31,7 +31,7 @@ export function BackupDialog({
           <DialogDescription>
             ブラウザ上に保存されている冒険者情報を表示します。
             <br />
-            コピーして復元や端末間の移行にお使いください。
+            コピーして復元や端末間の移行にご利用ください。
           </DialogDescription>
         </DialogHeader>
 
