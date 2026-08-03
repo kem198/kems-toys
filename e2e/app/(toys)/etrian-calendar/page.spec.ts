@@ -727,5 +727,83 @@ test.describe("世界樹の暦ページのテスト", () => {
         expect(migrated.etrians[0].name).toBe("ししょー");
       });
     });
+
+    test.describe("バックアップ時のテスト", () => {
+      test("冒険者が登録済みの状態で、「バックアップ」ボタンをクリックした時、登録状況のバックアップ用テキストが表示されること", async ({
+        page,
+      }) => {
+        // Arrange
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "test-etrian-01",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+            },
+            {
+              id: "test-etrian-02",
+              name: "オーパス",
+              dateOfBirth: {
+                month: "鬼乎ノ日",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 1,
+              memo: "大盾で仲間を守る冒険者。敏腕執事。",
+            },
+          ],
+        };
+
+        await page.evaluate(
+          ([key, value]) => {
+            localStorage.setItem(key, value);
+          },
+          [ETRIAN_REGISTRY_STORAGE_KEY, JSON.stringify(etrianRegistry)],
+        );
+
+        await navigateToEtrianCalendar(page);
+
+        // Act
+        await page.getByRole("button", { name: "編集開始" }).click();
+        await page.getByRole("button", { name: "バックアップ" }).click();
+
+        // Assert
+        // ダイアログは toySection の範囲外のためページ全体をテスト範囲にする
+        await expect(page.locator("body")).toContainText('"version": 2');
+
+        await expect(page.locator("body")).toContainText(
+          '"id": "test-etrian-01"',
+        );
+        await expect(page.locator("body")).toContainText('"name": "セトハ"');
+        await expect(page.locator("body")).toContainText('"month": "皇帝ノ月"');
+        await expect(page.locator("body")).toContainText('"day": 1');
+        await expect(page.locator("body")).toContainText('"ブレイバント"');
+        await expect(page.locator("body")).toContainText('"アルカディア"');
+        await expect(page.locator("body")).toContainText('"order": 0');
+        await expect(page.locator("body")).toContainText(
+          '"memo": "突剣を自在に扱う冒険者。没落貴族の一人娘。"',
+        );
+
+        await expect(page.locator("body")).toContainText(
+          '"id": "test-etrian-02"',
+        );
+        await expect(page.locator("body")).toContainText('"name": "オーパス"');
+        await expect(page.locator("body")).toContainText('"month": "鬼乎ノ日"');
+        await expect(page.locator("body")).toContainText('"day": 1');
+        await expect(page.locator("body")).toContainText('"ブレイバント"');
+        await expect(page.locator("body")).toContainText('"アルカディア"');
+        await expect(page.locator("body")).toContainText('"order": 1');
+        await expect(page.locator("body")).toContainText(
+          '"memo": "大盾で仲間を守る冒険者。敏腕執事。"',
+        );
+      });
+    });
   });
 });
