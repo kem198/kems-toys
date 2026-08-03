@@ -865,11 +865,70 @@ test.describe("世界樹の暦ページのテスト", () => {
         await page.getByRole("button", { name: "インポート" }).click();
 
         // Act
-        await page.getByRole("textbox").fill("invalid json");
+        await page.getByRole("textbox").fill("dummyText");
         await page.getByRole("button", { name: "インポート" }).click();
 
         // Assert
         await expect(page.getByText("インポートに失敗しました")).toBeVisible();
+
+        // Assert (表示がダミーデータのままであること)
+        await expect(toySection.getByText("dummy")).toBeVisible();
+        await expect(toySection.getByText("天牛ノ月 1 日")).toBeVisible();
+
+        // Assert (データストアが更新されていないこと)
+        const migratedInvalidJson: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migratedInvalidJson.etrians[0].id).toBe("dummy-etrian");
+      });
+
+      test("EtrianRegistry 型に一致しない JSON 文字列をインポートした時、エラーメッセージが表示され、登録済み情報が更新されないこと", async ({
+        page,
+      }) => {
+        // Arrange
+        const corruptedEtrianRegistry: unknown = {
+          version: 2,
+          etrians: [
+            {
+              id: "import-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+
+              undefinedKey: "★ EtrianRegistry 型に一致しないキー",
+            },
+          ],
+        };
+
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Act
+        await page
+          .getByRole("textbox")
+          .fill(JSON.stringify(corruptedEtrianRegistry));
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert
+        await expect(page.getByText("インポートに失敗しました")).toBeVisible();
+
+        // Assert (表示がダミーデータのままであること)
+        await expect(toySection.getByText("dummy")).toBeVisible();
+        await expect(toySection.getByText("天牛ノ月 1 日")).toBeVisible();
+
+        // Assert (データストアが更新されていないこと)
+        const migratedCorrupted: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migratedCorrupted.etrians[0].id).toBe("dummy-etrian");
       });
     });
   });
