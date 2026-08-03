@@ -5,8 +5,8 @@ import {
   Etrian,
   EtrianDay,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
-import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
+import { ExportDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/export-dialog";
 import { ImportDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/import-dialog";
 import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/migration-error-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
@@ -214,7 +214,7 @@ export function EtrianRegistry() {
                     リセット
                   </Button>
                 </ConfirmDialog>
-                <BackupDialog
+                <ExportDialog
                   storedEtrianRegistry={storedEtrianRegistry}
                   className="w-fit"
                 >
@@ -226,7 +226,7 @@ export function EtrianRegistry() {
                     <UploadIcon className="sm:hidden" />
                     <span className="hidden sm:inline">エクスポート</span>
                   </Button>
-                </BackupDialog>
+                </ExportDialog>
                 <ImportDialog onImport={handleImport}>
                   <Button
                     variant="secondary"

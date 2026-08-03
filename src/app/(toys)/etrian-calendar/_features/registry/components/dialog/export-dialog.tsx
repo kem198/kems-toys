@@ -13,16 +13,16 @@ import {
 import { ComponentProps, ReactNode } from "react";
 import { toast } from "sonner";
 
-type BackupDialogProps = {
+type ExportDialogProps = {
   storedEtrianRegistry: EtrianRegistry;
   children: ReactNode;
 } & ComponentProps<typeof DialogTrigger>;
 
-export function BackupDialog({
+export function ExportDialog({
   storedEtrianRegistry,
   children,
   ...props
-}: BackupDialogProps) {
+}: ExportDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild {...props}>
