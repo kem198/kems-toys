@@ -68,7 +68,9 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
           </AlertTitle>
         </Alert>
         {error && (
-          <p className="text-sm text-destructive">インポートに失敗しました</p>
+          <p className="text-sm text-destructive">
+            冒険者情報の形式が不正なため、インポートに失敗しました。
+          </p>
         )}
 
         <DialogFooter>

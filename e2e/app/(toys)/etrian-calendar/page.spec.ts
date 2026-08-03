@@ -869,7 +869,11 @@ test.describe("世界樹の暦ページのテスト", () => {
         await page.getByRole("button", { name: "インポート" }).click();
 
         // Assert
-        await expect(page.getByText("インポートに失敗しました")).toBeVisible();
+        await expect(
+          page.getByText(
+            "冒険者情報の形式が不正なため、冒険者情報の形式が不正なため、インポートに失敗しました。。",
+          ),
+        ).toBeVisible();
 
         // Assert (表示がダミーデータのままであること)
         await expect(toySection.getByText("dummy")).toBeVisible();
@@ -917,7 +921,11 @@ test.describe("世界樹の暦ページのテスト", () => {
         await page.getByRole("button", { name: "インポート" }).click();
 
         // Assert
-        await expect(page.getByText("インポートに失敗しました")).toBeVisible();
+        await expect(
+          page.getByText(
+            "冒険者情報の形式が不正なため、インポートに失敗しました。",
+          ),
+        ).toBeVisible();
 
         // Assert (表示がダミーデータのままであること)
         await expect(toySection.getByText("dummy")).toBeVisible();
