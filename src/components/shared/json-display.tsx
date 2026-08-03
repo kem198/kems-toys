@@ -19,15 +19,6 @@ export function JsonDisplay({
   preProps,
 }: JsonDisplayProps) {
   const jsonString = data ? JSON.stringify(data, undefined, 2) : " ";
-  const lines = jsonString.split("\n");
-
-  const occurrences = new Map<string, number>();
-
-  const items = lines.map((line) => {
-    const count = occurrences.get(line) ?? 0;
-    occurrences.set(line, count + 1);
-    return { key: `${line}#${count}`, line };
-  });
 
   return (
     <ScrollArea
@@ -49,11 +40,7 @@ export function JsonDisplay({
               preProps?.className,
             )}
           >
-            {items.map(({ key, line }) => (
-              <span key={key} className="block hover:bg-zinc-200/80">
-                {line}
-              </span>
-            ))}
+            {jsonString}
           </pre>
         </ItemContent>
       </Item>
