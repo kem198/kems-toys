@@ -856,7 +856,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         expect(migrated.etrians[0].name).toBe("セトハ");
       });
 
-      test("不正な JSON 文字列をインポートした時、エラーメッセージが表示されること", async ({
+      test("不正な JSON 文字列をインポートした時、エラーメッセージが表示され、登録済み情報が更新されないこと", async ({
         page,
       }) => {
         // Arrange
