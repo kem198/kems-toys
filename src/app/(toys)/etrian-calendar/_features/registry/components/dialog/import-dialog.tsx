@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,7 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
+  const editableRef = useRef<HTMLDivElement | null>(null);
 
   const handleImport = () => {
     const success = onImport(value);
@@ -46,11 +47,11 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
         <ScrollArea className="max-h-[60vh] rounded-md border border-border">
           <Textarea
             value={value}
-            onChange={(event) => {
-              setValue(event.target.value);
+            onChange={(e) => {
+              setValue(e.target.value);
               setError(false);
             }}
-            className="min-h-[160px] resize-none bg-transparent"
+            className="font-mono min-h-[160px] w-full cursor-text select-text resize-none whitespace-pre-wrap break-words bg-muted/50 bg-transparent px-0 py-0  text-xs"
           />
         </ScrollArea>
         {error && (
