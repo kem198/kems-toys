@@ -1,6 +1,7 @@
 import { EtrianRegistry } from "./_features/registry/etrian-registry";
 import { TodaysEtrianDateDisplay } from "./_features/display/todays-etrian-date-display";
 import { SolarEtrianCalendarConverter } from "./_features/converter/solar-etrian-calendar-converter";
+import { DownloadIcon, UploadIcon } from "lucide-react";
 import { Version } from "@/components/shared/version";
 
 # 世界樹の暦
@@ -23,12 +24,32 @@ import { Version } from "@/components/shared/version";
 
 [世界樹の迷宮](https://www.atlus.co.jp/series/sq/) シリーズに登場する暦 (以下 世界樹歴) について、私たちの暦 (以下 太陽暦) から変換したり、冒険者の誕生日を記録するアプリケーションです。
 
-## メモ
+## 仕様・機能
 
-- 太陽暦で閏年の場合、大晦日 (鬼乎ノ日) が 2 日続きます。
-- 登録した情報はお使いのブラウザ (localStorage) に保存されます。
-  - **ブラウザの「Cookie およびその他のサイト データ」を削除すると、記録も抹消されます。ご注意ください。**
-  - 「編集」>「エクスポート」ボタンから登録情報を控えておくことを推奨します。
+<ul>
+  <li>太陽暦で閏年の場合、大晦日 (鬼乎ノ日) が 2 日続きます。</li>
+  <li>
+    登録した情報はお使いのブラウザ (localStorage) に保存されます。
+    <ul>
+      <li>
+        <strong>ブラウザの「Cookie およびその他のサイト データ」を削除すると、記録も抹消されます。ご注意ください。</strong>
+      </li>
+      <li>
+      <div className="flex">
+        <span>「編集」>「エクスポート (</span><UploadIcon height={16} width={16} className="inline-block" />)<span>」ボタンから登録情報を控えておくことを推奨します。</span>
+      </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+      <div className="flex">
+    <span>「エクスポート」ボタンから控えた冒険者情報を「編集」>「インポート (</span><DownloadIcon height={16} width={16} className="inline-block" />)<span> 」ボタンから読み込むことができます。</span>
+      </div>
+    <ul>
+      <li>バックアップの復元や、端末間のデータの移動にご利用ください。</li>
+    </ul>
+  </li>
+</ul>
 
 ## 参考文献
 
