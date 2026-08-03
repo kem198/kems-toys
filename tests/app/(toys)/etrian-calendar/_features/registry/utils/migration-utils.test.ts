@@ -296,6 +296,81 @@ describe("migration-utils tests", () => {
           },
         ]);
       });
+
+      describe("入力検証に失敗するケース", () => {
+        it("EtrianRegistry に未知のキーが含まれると例外を投げること", () => {
+          const bad: unknown = {
+            version: 2,
+            etrians: [
+              {
+                id: "x",
+                name: "n",
+                dateOfBirth: { month: "皇帝ノ月", day: 1 },
+                affiliations: [],
+                order: 0,
+                memo: "m",
+                unknownKey: "bad",
+              },
+            ],
+          };
+
+          expect(() => migrateEtrianRegistry(bad as any)).toThrow();
+        });
+
+        it("EtrianRegistry の dateOfBirth に未知のキーがあると例外を投げること", () => {
+          const bad: unknown = {
+            version: 2,
+            etrians: [
+              {
+                id: "x",
+                name: "n",
+                dateOfBirth: { month: "皇帝ノ月", day: 1, extra: true },
+                affiliations: [],
+                order: 0,
+              },
+            ],
+          };
+
+          expect(() => migrateEtrianRegistry(bad as any)).toThrow();
+        });
+
+        it("EtrianRegistry の affiliations が配列でないと例外を投げること", () => {
+          const bad: unknown = {
+            version: 2,
+            etrians: [
+              {
+                id: "x",
+                name: "n",
+                dateOfBirth: { month: "皇帝ノ月", day: 1 },
+                affiliations: "not-array",
+                order: 0,
+              },
+            ],
+          };
+
+          expect(() => migrateEtrianRegistry(bad as any)).toThrow();
+        });
+
+        it("EtrianV1 に未知のキーが含まれると例外を投げること", () => {
+          const badV1: unknown = [
+            {
+              id: "x",
+              name: "n",
+              dateOfBirth: {},
+              affiliations: [],
+              order: 0,
+              unknownKey: "bad",
+            },
+          ];
+
+          expect(() => migrateEtrianRegistry(badV1 as any)).toThrow();
+        });
+
+        it("非配列の値が渡されたら例外を投げること", () => {
+          const bad: unknown = { foo: "bar" };
+          expect(() => migrateEtrianRegistry(bad as any)).toThrow();
+        });
+      });
     });
   });
 });

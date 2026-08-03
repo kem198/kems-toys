@@ -5,6 +5,7 @@ import {
   EtrianRegistry,
   EtrianV1,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
+import * as z from "zod";
 
 const migrateEtriansV1toV2 = (etrianV1s: EtrianV1[]): Etrian[] => {
   const migrateDateOfBirth = (
@@ -47,85 +48,65 @@ const migrateEtriansV1toV2 = (etrianV1s: EtrianV1[]): Etrian[] => {
 export const migrateEtrianRegistry = (
   data: EtrianV1[] | EtrianRegistry,
 ): EtrianRegistry => {
+  // zod schemas for runtime validation
+  const dateOfBirthV2Schema = z
+    .object({
+      month: z.string(),
+      day: z.number(),
+    })
+    .strict();
+
+  const etrianSchema = z
+    .object({
+      id: z.string(),
+      name: z.string(),
+      dateOfBirth: dateOfBirthV2Schema.optional(),
+      affiliations: z.array(z.string()),
+      order: z.number(),
+      memo: z.string().optional(),
+    })
+    .strict();
+
+  const registrySchema = z
+    .object({
+      version: z.number(),
+      etrians: z.array(etrianSchema),
+    })
+    .strict();
+
+  // V1 dateOfBirth is more permissive (month/day optional or empty object)
+  const dateOfBirthV1Schema = z
+    .object({
+      month: z.string().optional(),
+      day: z.number().optional(),
+    })
+    .strict();
+
+  const etrianV1Schema = z
+    .object({
+      id: z.string(),
+      name: z.string(),
+      dateOfBirth: dateOfBirthV1Schema.optional(),
+      affiliations: z.array(z.string()),
+      order: z.number(),
+      memo: z.string().optional(),
+    })
+    .strict();
+
   // EtrianRegistry 型の場合 (version を含む)
   if ("version" in data) {
-    // runtime validation: ensure structure is exactly as expected
-    if (typeof data.version !== "number") {
-      throw new Error("invalid version");
-    }
-
-    if (!Array.isArray((data as any).etrians)) {
-      throw new Error("invalid etrians");
-    }
-
-    const allowedEtrianKeys = [
-      "id",
-      "name",
-      "dateOfBirth",
-      "affiliations",
-      "order",
-      "memo",
-    ];
-
-    for (const et of (data as any).etrians) {
-      if (et == null || typeof et !== "object") {
-        throw new Error("invalid etrian");
-      }
-
-      // no unknown keys
-      for (const key of Object.keys(et)) {
-        if (!allowedEtrianKeys.includes(key)) {
-          throw new Error(`unknown key: ${key}`);
-        }
-      }
-
-      if (typeof et.id !== "string" || typeof et.name !== "string") {
-        throw new Error("invalid etrian fields");
-      }
-
-      if (!Array.isArray(et.affiliations)) {
-        throw new Error("invalid affiliations");
-      }
-
-      if (typeof et.order !== "number") {
-        throw new Error("invalid order");
-      }
-
-      if (et.memo !== undefined && typeof et.memo !== "string") {
-        throw new Error("invalid memo");
-      }
-
-      if (et.dateOfBirth !== undefined) {
-        if (typeof et.dateOfBirth !== "object" || et.dateOfBirth == null) {
-          throw new Error("invalid dateOfBirth");
-        }
-
-        // dateOfBirth must not contain unknown keys
-        const dobKeys = Object.keys(et.dateOfBirth);
-        for (const k of dobKeys) {
-          if (k !== "month" && k !== "day") {
-            throw new Error(`unknown dateOfBirth key: ${k}`);
-          }
-        }
-
-        if (typeof et.dateOfBirth.month !== "string") {
-          throw new Error("invalid dateOfBirth.month");
-        }
-        if (typeof et.dateOfBirth.day !== "number") {
-          throw new Error("invalid dateOfBirth.day");
-        }
-      }
-    }
+    // validate using zod; will throw on unknown keys or type mismatches
+    const parsed = registrySchema.parse(data);
 
     // すでに最新バージョンの場合はそのまま
-    if (data.version === CURRENT_ETRIAN_REGISTRY_VERSION) {
-      return data;
+    if (parsed.version === CURRENT_ETRIAN_REGISTRY_VERSION) {
+      return parsed as EtrianRegistry;
     }
 
     // 他のバージョンの場合は最新の JSON 形式に詰め替える
     return {
       version: CURRENT_ETRIAN_REGISTRY_VERSION,
-      etrians: data.etrians,
+      etrians: parsed.etrians,
     };
   }
 
@@ -134,37 +115,16 @@ export const migrateEtrianRegistry = (
     throw new Error("invalid data");
   }
 
-  // validate V1 items
-  for (const et of data as any[]) {
-    if (et == null || typeof et !== "object") {
-      throw new Error("invalid etrian v1");
-    }
-    const allowedV1Keys = [
-      "id",
-      "name",
-      "dateOfBirth",
-      "affiliations",
-      "order",
-      "memo",
-    ];
-    for (const key of Object.keys(et)) {
-      if (!allowedV1Keys.includes(key)) {
-        throw new Error(`unknown key v1: ${key}`);
-      }
-    }
-    if (typeof et.id !== "string" || typeof et.name !== "string") {
-      throw new Error("invalid etrian v1 fields");
-    }
-    if (!Array.isArray(et.affiliations)) {
-      throw new Error("invalid affiliations v1");
-    }
-    if (typeof et.order !== "number") {
-      throw new Error("invalid order v1");
-    }
+  // EtrianV1[] は構造が一段階浅いので別処理で移行する
+  if (!Array.isArray(data)) {
+    throw new Error("invalid data");
   }
+
+  // validate V1 items with zod
+  const parsedV1 = z.array(etrianV1Schema).parse(data);
 
   return {
     version: CURRENT_ETRIAN_REGISTRY_VERSION,
-    etrians: migrateEtriansV1toV2(data as EtrianV1[]),
+    etrians: migrateEtriansV1toV2(parsedV1 as EtrianV1[]),
   };
 };
