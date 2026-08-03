@@ -930,6 +930,51 @@ test.describe("世界樹の暦ページのテスト", () => {
         );
         expect(migratedCorrupted.etrians[0].id).toBe("dummy-etrian");
       });
+
+      test("過去の version (EtrianV1[]) の JSON をインポートした時、マイグレーションされて既存の登録情報が上書きされること", async ({
+        page,
+      }) => {
+        // Arrange: prepare an old-format EtrianV1[] (no version)
+        const oldEtrians: EtrianV1[] = [
+          {
+            id: "old-import-etrian",
+            name: "セトハ",
+            dateOfBirth: {
+              day: 1, // month missing -> should be migrated to 皇帝ノ月
+            },
+            affiliations: ["ブレイバント"],
+            order: 0,
+            memo: "過去版からのインポート",
+          },
+        ];
+
+        const importText = JSON.stringify(oldEtrians, null, 2);
+
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+
+        // Act: open import dialog and paste old-format JSON
+        await page.getByRole("button", { name: "インポート" }).click();
+        await page.getByRole("textbox").fill(importText);
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert: display updated and migrated
+        await expect(toySection.getByText("セトハ")).toBeVisible();
+        await expect(toySection.getByText("皇帝ノ月 1 日")).toBeVisible();
+        await expect(toySection.getByText("ブレイバント")).toBeVisible();
+
+        // Assert: localStorage saved as latest version and normalized
+        const migratedOld: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migratedOld.version).toBe(2);
+        expect(migratedOld.etrians[0].id).toBe("old-import-etrian");
+        expect(migratedOld.etrians[0].dateOfBirth).toEqual({
+          month: "皇帝ノ月",
+          day: 1,
+        });
+      });
     });
   });
 });
