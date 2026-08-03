@@ -64,7 +64,7 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
         <Alert variant="destructive">
           <AlertCircleIcon size={16} />
           <AlertTitle>
-            現在の登録状況を上書きします。この操作は元に戻せません。
+            現在の登録内容を上書きします。この操作は元に戻せません。
           </AlertTitle>
         </Alert>
         {error && (

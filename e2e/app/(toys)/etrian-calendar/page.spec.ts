@@ -691,7 +691,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         ).toBeVisible();
       });
 
-      test("型定義に一致しない冒険者が保存されていて移行が行えないとき、登録内容がリセットされること", async ({
+      test("型定義に一致しない冒険者が保存されていて移行が行えないとき、登録内容が初期化されること", async ({
         page,
       }) => {
         // Arrange
@@ -714,7 +714,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         await navigateToEtrianCalendar(page);
 
         // Act
-        await page.getByRole("button", { name: "リセットする" }).click();
+        await page.getByRole("button", { name: "初期化する" }).click();
 
         // Assert (初期値が表示されること)
         await expect(toySection.getByText("ししょー").first()).toBeVisible();
@@ -729,7 +729,7 @@ test.describe("世界樹の暦ページのテスト", () => {
     });
 
     test.describe("エクスポート時のテスト", () => {
-      test("冒険者が登録済みの状態で、「エクスポート」ボタンをクリックした時、登録状況のエクスポート用テキストが表示されること", async ({
+      test("冒険者が登録済みの状態で、「エクスポート」ボタンをクリックした時、登録内容のエクスポート用テキストが表示されること", async ({
         page,
       }) => {
         // Arrange

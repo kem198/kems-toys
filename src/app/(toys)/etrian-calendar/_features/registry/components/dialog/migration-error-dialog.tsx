@@ -43,7 +43,7 @@ export function MigrationErrorDialog({
 
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            現在の登録内容を控えた上で、「リセットする」ボタンを選択してください。
+            現在の登録内容を控えた上で、「初期化する」ボタンを選択してください。
           </p>
 
           {originalData && (
@@ -68,9 +68,7 @@ export function MigrationErrorDialog({
         </div>
 
         <AlertDialogFooter>
-          <AlertDialogAction onClick={onConfirm}>
-            リセットする
-          </AlertDialogAction>
+          <AlertDialogAction onClick={onConfirm}>初期化する</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -150,7 +150,7 @@ export function EditDialog({
         }}
       >
         <DialogHeader>
-          <DialogTitle>登録情報の編集</DialogTitle>
+          <DialogTitle>冒険者情報の編集</DialogTitle>
           <DialogDescription>
             冒険者のプロフィールを設定してください。
             <br />
@@ -288,7 +288,7 @@ export function EditDialog({
                       aria-invalid={fieldState.invalid}
                     />
                     <FieldDescription>
-                      お好みの情報を入力してください。
+                      お好みの内容を入力してください。
                     </FieldDescription>
                     {fieldState.invalid && (
                       <FieldError errors={[fieldState.error]} />

@@ -97,7 +97,7 @@ export function EtrianRegistry() {
     (updated: Etrian) => {
       updateEtrian(updated);
 
-      toast.success("冒険者の登録情報を更新しました！", {
+      toast.success("冒険者情報を更新しました！", {
         description: `冒険者: ${updated.name}`,
       });
     },
@@ -108,14 +108,14 @@ export function EtrianRegistry() {
     resetEtrians();
     localStorage.removeItem("etrianRegistryInitialized");
     setIsEditing(false);
-    toast.success("登録状況をリセットしました");
+    toast.success("登録内容を初期化しました");
   }, [resetEtrians]);
 
   const handleMigrationErrorConfirm = useCallback(() => {
     resetEtrians();
     localStorage.removeItem("etrianRegistryInitialized");
     clearMigrationError();
-    toast.success("登録状況をリセットしました");
+    toast.success("登録内容を初期化しました");
   }, [resetEtrians, clearMigrationError]);
 
   function reorderEtrians(
@@ -167,7 +167,7 @@ export function EtrianRegistry() {
         .reverse();
       sortedSamples.forEach(addEtrian);
 
-      // リセットしない限りサンプルデータが投入されないようにする
+      // 初期化しない限りサンプルデータが投入されないようにする
       localStorage.setItem("etrianRegistryInitialized", "true");
     }
   }, [isLoaded, storedEtrians, addEtrian]);
@@ -197,21 +197,21 @@ export function EtrianRegistry() {
             {isEditing && (
               <>
                 <ConfirmDialog
-                  title="登録状況のリセット"
-                  description="登録状況を初期状態に戻します。"
+                  title="登録内容の初期化"
+                  description="登録内容を初期状態に戻します。"
                   content={
                     <Alert variant="destructive">
                       <AlertCircleIcon size={16} />
                       <AlertTitle>この操作は元に戻せません。</AlertTitle>
                     </Alert>
                   }
-                  confirmButtonLabel="リセット"
+                  confirmButtonLabel="初期化"
                   confirmButtonVariant="destructive"
                   onConfirm={handleReset}
                   className="w-fit"
                 >
-                  <Button variant="destructive" aria-label="リセット">
-                    リセット
+                  <Button variant="destructive" aria-label="初期化">
+                    初期化
                   </Button>
                 </ConfirmDialog>
                 <ExportDialog
