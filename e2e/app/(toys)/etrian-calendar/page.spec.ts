@@ -807,7 +807,7 @@ test.describe("世界樹の暦ページのテスト", () => {
     });
 
     test.describe("インポート時のテスト", () => {
-      test("バックアップ用テキストを入力してインポートした時、登録状況が復元されること", async ({
+      test("バックアップ用テキストをインポートした時、既存の登録情報が上書きされること", async ({
         page,
       }) => {
         // Arrange
@@ -856,7 +856,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         expect(migrated.etrians[0].name).toBe("セトハ");
       });
 
-      test("不正な JSON を入力した時、エラーが表示されること", async ({
+      test("不正な JSON 文字列をインポートした時、エラーメッセージが表示されること", async ({
         page,
       }) => {
         // Arrange
