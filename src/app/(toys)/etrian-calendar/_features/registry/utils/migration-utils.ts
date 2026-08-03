@@ -1,4 +1,8 @@
-import { CURRENT_ETRIAN_REGISTRY_VERSION } from "@/app/(toys)/etrian-calendar/_common/constants/date";
+import {
+  CURRENT_ETRIAN_REGISTRY_VERSION,
+  etrianDays,
+  etrianMonthOptions,
+} from "@/app/(toys)/etrian-calendar/_common/constants/date";
 import {
   Etrian,
   EtrianDateOfBirth,
@@ -49,10 +53,20 @@ export const migrateEtrianRegistry = (
   data: EtrianV1[] | EtrianRegistry,
 ): EtrianRegistry => {
   // zod schemas for runtime validation
+  const monthLiteralSchemas = (etrianMonthOptions as readonly string[]).map(
+    (m) => z.literal(m as string),
+  );
+  const dayLiteralSchemas = (etrianDays as readonly number[]).map((d) =>
+    z.literal(d as number),
+  );
+
+  const monthSchema = z.union(monthLiteralSchemas as any);
+  const daySchema = z.union(dayLiteralSchemas as any);
+
   const dateOfBirthV2Schema = z
     .object({
-      month: z.string(),
-      day: z.number(),
+      month: monthSchema,
+      day: daySchema,
     })
     .strict();
 
@@ -77,8 +91,8 @@ export const migrateEtrianRegistry = (
   // V1 dateOfBirth is more permissive (month/day optional or empty object)
   const dateOfBirthV1Schema = z
     .object({
-      month: z.string().optional(),
-      day: z.number().optional(),
+      month: monthSchema.optional(),
+      day: daySchema.optional(),
     })
     .strict();
 
@@ -98,21 +112,34 @@ export const migrateEtrianRegistry = (
     // validate using zod; will throw on unknown keys or type mismatches
     const parsed = registrySchema.parse(data);
 
+    // map parsed.etrians to `Etrian[]` to satisfy strict TypeScript types
+    const mappedEtrians: Etrian[] = parsed.etrians.map((et) => ({
+      id: et.id,
+      name: et.name,
+      affiliations: et.affiliations,
+      order: et.order,
+      memo: et.memo,
+      dateOfBirth: et.dateOfBirth
+        ? {
+            month: et.dateOfBirth.month as any,
+            day: et.dateOfBirth.day as any,
+          }
+        : undefined,
+    }));
+
     // すでに最新バージョンの場合はそのまま
     if (parsed.version === CURRENT_ETRIAN_REGISTRY_VERSION) {
-      return parsed as EtrianRegistry;
+      return {
+        version: parsed.version,
+        etrians: mappedEtrians,
+      };
     }
 
     // 他のバージョンの場合は最新の JSON 形式に詰め替える
     return {
       version: CURRENT_ETRIAN_REGISTRY_VERSION,
-      etrians: parsed.etrians,
+      etrians: mappedEtrians,
     };
-  }
-
-  // EtrianV1[] は構造が一段階浅いので別処理で移行する
-  if (!Array.isArray(data)) {
-    throw new Error("invalid data");
   }
 
   // EtrianV1[] は構造が一段階浅いので別処理で移行する
