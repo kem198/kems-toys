@@ -5,9 +5,12 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogFooter,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import { ComponentProps, ReactNode } from "react";
 
 type BackupDialogProps = {
@@ -39,6 +42,22 @@ export function BackupDialog({
           data={storedEtrianRegistry}
           scrollAreaProps={{ className: "max-h-[60vh]" }}
         />
+
+        <DialogFooter>
+          <Button
+            onClick={() => {
+              try {
+                const json = JSON.stringify(storedEtrianRegistry, null, 2);
+                void navigator.clipboard.writeText(json);
+                toast.success("バックアップをクリップボードにコピーしました");
+              } catch (e) {
+                toast.error("コピーに失敗しました");
+              }
+            }}
+          >
+            コピー
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
