@@ -5,13 +5,16 @@ import { Version } from "@/components/shared/version";
 
 # 世界樹の暦
 
-<div data-testid="toy">
-  <TodaysEtrianDateDisplay />
-  <SolarEtrianCalendarConverter />
+<div data-testid="toy" className="flex flex-col gap-6">
+  <div>
+    <TodaysEtrianDateDisplay />
+    <SolarEtrianCalendarConverter />
+  </div>
 
 ## 冒険者お誕生日台帳
 
   <EtrianRegistry />
+  <Version version="0.4.2" onDate="2025-11-15" />
 </div>
 
 ---
@@ -57,4 +60,9 @@ import { Version } from "@/components/shared/version";
   - [Window: localStorage プロパティ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage)
 - [kem198/practice-web-storage-api](https://github.com/kem198/practice-web-storage-api)
 
-<Version version="0.4.2" onDate="2025-11-15" />
+## 更新履歴
+
+- v0.5.0 | on 2026-08-04
+  - 冒険者のインポート機能を追加しました。
+- v0.4.2 | on 2025-11-15
+  - 公開しました。
