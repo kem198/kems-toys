@@ -152,7 +152,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         // Assert
         await expect(toySection.getByText("2025").first()).toBeVisible();
         await expect(toySection.getByText("王虎ノ月")).toBeVisible();
-        await expect(toySection.getByText("7")).toBeVisible();
+        await expect(toySection.getByText("7", { exact: true })).toBeVisible();
         await expect(toySection.getByText("2025-04-01")).toBeVisible();
       });
     });
@@ -177,7 +177,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         // Assert
         await expect(toySection.getByText("2025").first()).toBeVisible();
         await expect(toySection.getByText("笛鼠ノ月")).toBeVisible();
-        await expect(toySection.getByText("4")).toBeVisible();
+        await expect(toySection.getByText("4", { exact: true })).toBeVisible();
         await expect(toySection.getByText("2025-02-01")).toBeVisible();
       });
 
