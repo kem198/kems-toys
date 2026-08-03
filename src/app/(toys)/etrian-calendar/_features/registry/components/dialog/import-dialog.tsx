@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -26,7 +26,6 @@ export function ImportDialog({ onImport, children }: ImportDialogProps) {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
-  const editableRef = useRef<HTMLDivElement | null>(null);
 
   const handleImport = () => {
     const success = onImport(value);

@@ -41,8 +41,6 @@ export function EtrianRegistry() {
   } = useEtrianRegistry();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [importText, setImportText] = useState("");
-  const [importError, setImportError] = useState(false);
 
   const handleCreate = useCallback(
     (values: RegistryFormValues) => {

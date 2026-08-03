@@ -108,7 +108,7 @@ export const migrateEtrianRegistry = (
     .strict();
 
   // EtrianRegistry 型の場合 (version を含む)
-  if ("version" in data) {
+  if (data && typeof data === "object" && !Array.isArray(data) && "version" in data) {
     // validate using zod; will throw on unknown keys or type mismatches
     const parsed = registrySchema.parse(data);
 
