@@ -805,5 +805,56 @@ test.describe("世界樹の暦ページのテスト", () => {
         );
       });
     });
+
+    test.describe("インポート時のテスト", () => {
+      test("バックアップ用テキストを入力してインポートした時、登録状況が復元されること", async ({
+        page,
+      }) => {
+        // Arrange
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "import-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+            },
+          ],
+        };
+
+        const backupText = JSON.stringify(etrianRegistry, null, 2);
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+
+        // Act
+        await page.getByRole("button", { name: "インポート" }).click();
+        await page.getByRole("textbox").fill(backupText);
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert (表示が復元されること)
+        await expect(toySection.getByText("セトハ")).toBeVisible();
+        await expect(toySection.getByText("皇帝ノ月 1 日")).toBeVisible();
+        await expect(toySection.getByText("ブレイバント")).toBeVisible();
+        await expect(toySection.getByText("アルカディア")).toBeVisible();
+        await expect(
+          toySection.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。"),
+        ).toBeVisible();
+
+        // Assert (データストアへ保存されていること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.version).toBe(2);
+        expect(migrated.etrians[0].id).toBe("import-etrian");
+        expect(migrated.etrians[0].name).toBe("セトハ");
+      });
+    });
   });
 });

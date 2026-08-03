@@ -7,6 +7,7 @@ import {
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
 import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
+import { ImportDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/import-dialog";
 import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/migration-error-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
@@ -29,6 +30,7 @@ export function EtrianRegistry() {
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    importEtrianRegistry,
     clearMigrationError,
   } = useEtrianRegistry();
 
@@ -194,6 +196,9 @@ export function EtrianRegistry() {
                     バックアップ
                   </Button>
                 </BackupDialog>
+                <ImportDialog onImport={importEtrianRegistry}>
+                  <Button variant="secondary">インポート</Button>
+                </ImportDialog>
               </>
             )}
           </div>
