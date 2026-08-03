@@ -5,16 +5,23 @@ import {
   Etrian,
   EtrianDay,
 } from "@/app/(toys)/etrian-calendar/_common/types/etrian";
-import { BackupDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/backup-dialog";
 import { ConfirmDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/confirm-dialog";
+import { ExportDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/export-dialog";
+import { ImportDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/import-dialog";
 import { MigrationErrorDialog } from "@/app/(toys)/etrian-calendar/_features/registry/components/dialog/migration-error-dialog";
 import { EtrianRegistryForm } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-form";
 import { EtrianRegistryItemList } from "@/app/(toys)/etrian-calendar/_features/registry/components/etrian-registry-list";
 import { useEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/hooks/use-etrian-registry";
 import { RegistryFormValues } from "@/app/(toys)/etrian-calendar/_features/registry/schemas/registry-form-schema";
+import { migrateEtrianRegistry } from "@/app/(toys)/etrian-calendar/_features/registry/utils/migration-utils";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { AlertCircleIcon, UserPen } from "lucide-react";
+import {
+  AlertCircleIcon,
+  DownloadIcon,
+  UploadIcon,
+  UserPen,
+} from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -29,6 +36,7 @@ export function EtrianRegistry() {
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    importEtrianRegistry,
     clearMigrationError,
   } = useEtrianRegistry();
 
@@ -87,7 +95,7 @@ export function EtrianRegistry() {
     (updated: Etrian) => {
       updateEtrian(updated);
 
-      toast.success("冒険者の登録情報を更新しました！", {
+      toast.success("冒険者情報を更新しました！", {
         description: `冒険者: ${updated.name}`,
       });
     },
@@ -98,14 +106,14 @@ export function EtrianRegistry() {
     resetEtrians();
     localStorage.removeItem("etrianRegistryInitialized");
     setIsEditing(false);
-    toast.success("登録状況をリセットしました");
+    toast.success("登録内容を初期化しました");
   }, [resetEtrians]);
 
   const handleMigrationErrorConfirm = useCallback(() => {
     resetEtrians();
     localStorage.removeItem("etrianRegistryInitialized");
     clearMigrationError();
-    toast.success("登録状況をリセットしました");
+    toast.success("登録内容を初期化しました");
   }, [resetEtrians, clearMigrationError]);
 
   function reorderEtrians(
@@ -129,6 +137,24 @@ export function EtrianRegistry() {
     [isLoaded, storedEtrians, updateEtrians],
   );
 
+  const handleImport = useCallback(
+    (data: string) => {
+      try {
+        const parsed = JSON.parse(data);
+        const migrated = migrateEtrianRegistry(parsed);
+
+        updateEtrians(migrated.etrians);
+
+        toast.success("インポートされた冒険者情報で更新しました");
+
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    [updateEtrians],
+  );
+
   // サンプルデータ投入
   useEffect(() => {
     const hasInitialized = localStorage.getItem("etrianRegistryInitialized");
@@ -139,7 +165,7 @@ export function EtrianRegistry() {
         .reverse();
       sortedSamples.forEach(addEtrian);
 
-      // リセットしない限りサンプルデータが投入されないようにする
+      // 初期化しない限りサンプルデータが投入されないようにする
       localStorage.setItem("etrianRegistryInitialized", "true");
     }
   }, [isLoaded, storedEtrians, addEtrian]);
@@ -169,31 +195,46 @@ export function EtrianRegistry() {
             {isEditing && (
               <>
                 <ConfirmDialog
-                  title="登録状況のリセット"
-                  description="登録状況を初期状態に戻します。"
+                  title="登録内容の初期化"
+                  description="登録内容を初期状態に戻します。"
                   content={
                     <Alert variant="destructive">
                       <AlertCircleIcon size={16} />
                       <AlertTitle>この操作は元に戻せません。</AlertTitle>
                     </Alert>
                   }
-                  confirmButtonLabel="リセット"
+                  confirmButtonLabel="初期化"
                   confirmButtonVariant="destructive"
                   onConfirm={handleReset}
                   className="w-fit"
                 >
-                  <Button variant="destructive" aria-label="リセット">
-                    リセット
+                  <Button variant="destructive" aria-label="初期化">
+                    初期化
                   </Button>
                 </ConfirmDialog>
-                <BackupDialog
+                <ExportDialog
                   storedEtrianRegistry={storedEtrianRegistry}
                   className="w-fit"
                 >
-                  <Button variant="secondary" aria-label="バックアップ">
-                    バックアップ
+                  <Button
+                    variant="secondary"
+                    aria-label="エクスポート"
+                    className="inline-flex items-center gap-2"
+                  >
+                    <UploadIcon className="sm:hidden" />
+                    <span className="hidden sm:inline">エクスポート</span>
                   </Button>
-                </BackupDialog>
+                </ExportDialog>
+                <ImportDialog onImport={handleImport}>
+                  <Button
+                    variant="secondary"
+                    aria-label="インポート"
+                    className="inline-flex items-center gap-2"
+                  >
+                    <DownloadIcon className="sm:hidden" />
+                    <span className="hidden sm:inline">インポート</span>
+                  </Button>
+                </ImportDialog>
               </>
             )}
           </div>

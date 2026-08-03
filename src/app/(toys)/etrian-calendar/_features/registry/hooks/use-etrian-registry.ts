@@ -26,6 +26,7 @@ type UseEtrianRegistryReturn = {
   updateEtrians: (updatedEtrians: Etrian[]) => void;
   deleteEtrianById: (id: string) => void;
   resetEtrians: () => void;
+  importEtrianRegistry: (data: string) => void;
   clearMigrationError: () => void;
 };
 
@@ -119,6 +120,15 @@ export function useEtrianRegistry(
     });
   }, []);
 
+  const importEtrianRegistry = useCallback((data: string) => {
+    const parsedData = JSON.parse(data);
+
+    const migratedRegistry = migrateEtrianRegistry(parsedData);
+
+    setStoredEtrianRegistry(migratedRegistry);
+    setStoredEtrians(migratedRegistry.etrians);
+  }, []);
+
   return {
     storedEtrians,
     storedEtrianRegistry: storedEtrianRegistry ?? {
@@ -132,6 +142,7 @@ export function useEtrianRegistry(
     updateEtrians,
     deleteEtrianById,
     resetEtrians,
+    importEtrianRegistry,
     clearMigrationError,
   };
 }

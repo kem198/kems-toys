@@ -1,17 +1,21 @@
 import { EtrianRegistry } from "./_features/registry/etrian-registry";
 import { TodaysEtrianDateDisplay } from "./_features/display/todays-etrian-date-display";
 import { SolarEtrianCalendarConverter } from "./_features/converter/solar-etrian-calendar-converter";
+import { DownloadIcon, UploadIcon } from "lucide-react";
 import { Version } from "@/components/shared/version";
 
 # 世界樹の暦
 
-<div data-testid="toy">
-  <TodaysEtrianDateDisplay />
-  <SolarEtrianCalendarConverter />
+<div data-testid="toy" className="flex flex-col gap-6">
+  <div>
+    <TodaysEtrianDateDisplay />
+    <SolarEtrianCalendarConverter />
+  </div>
 
 ## 冒険者お誕生日台帳
 
   <EtrianRegistry />
+  <Version version="0.5.0" onDate="2026-08-04" />
 </div>
 
 ---
@@ -20,12 +24,32 @@ import { Version } from "@/components/shared/version";
 
 [世界樹の迷宮](https://www.atlus.co.jp/series/sq/) シリーズに登場する暦 (以下 世界樹歴) について、私たちの暦 (以下 太陽暦) から変換したり、冒険者の誕生日を記録するアプリケーションです。
 
-## メモ
+## 仕様・機能
 
-- 太陽暦で閏年の場合、大晦日 (鬼乎ノ日) が 2 日続きます。
-- 登録した情報はお使いのブラウザ (localStorage) に保存されます。
-  - **ブラウザの「Cookie およびその他のサイト データ」を削除すると、記録も抹消されます。ご注意ください。**
-  - 「編集」>「バックアップ」ボタンから登録情報を控えておくことを推奨します。
+<ul>
+  <li>太陽暦で閏年の場合、大晦日 (鬼乎ノ日) が 2 日続きます。</li>
+  <li>
+    登録した情報はお使いのブラウザに保存されます。
+    <ul>
+      <li>
+        <strong>ブラウザの「Cookie およびその他のサイト データ」を削除すると、記録も抹消されます。ご注意ください。</strong>
+      </li>
+      <li>
+      <div className="flex">
+        <span>「編集」>「エクスポート (</span><UploadIcon height={16} width={16} className="inline-block" />)<span>」ボタンから登録内容を控えておくことを推奨します。</span>
+      </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+      <div className="flex">
+    <span>「エクスポート」ボタンから控えた冒険者情報を「編集」>「インポート (</span><DownloadIcon height={16} width={16} className="inline-block" />)<span> 」ボタンから読み込むことができます。</span>
+      </div>
+    <ul>
+      <li>登録内容の復元や、ブラウザ間のデータの移動にご利用ください。</li>
+    </ul>
+  </li>
+</ul>
 
 ## 参考文献
 
@@ -57,4 +81,9 @@ import { Version } from "@/components/shared/version";
   - [Window: localStorage プロパティ - Web API \| MDN](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage)
 - [kem198/practice-web-storage-api](https://github.com/kem198/practice-web-storage-api)
 
-<Version version="0.4.2" onDate="2025-11-15" />
+## 更新履歴
+
+- v0.5.0 | on 2026-08-04
+  - 冒険者のインポート機能を追加しました。
+- v0.4.2 | on 2025-11-15
+  - 公開しました。

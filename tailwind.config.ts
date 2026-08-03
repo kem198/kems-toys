@@ -111,6 +111,7 @@ const config: Config = {
     },
     fontFamily: {
       sans: ["var(--font-noto-sans-jp)"],
+      mono: ["ui-monospace", "Noto Sans Mono", "monospace"],
     },
   },
   plugins: [typography, require("tailwindcss-animate")],

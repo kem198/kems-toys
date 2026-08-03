@@ -152,7 +152,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         // Assert
         await expect(toySection.getByText("2025").first()).toBeVisible();
         await expect(toySection.getByText("王虎ノ月")).toBeVisible();
-        await expect(toySection.getByText("7")).toBeVisible();
+        await expect(toySection.getByText("7", { exact: true })).toBeVisible();
         await expect(toySection.getByText("2025-04-01")).toBeVisible();
       });
     });
@@ -177,7 +177,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         // Assert
         await expect(toySection.getByText("2025").first()).toBeVisible();
         await expect(toySection.getByText("笛鼠ノ月")).toBeVisible();
-        await expect(toySection.getByText("4")).toBeVisible();
+        await expect(toySection.getByText("4", { exact: true })).toBeVisible();
         await expect(toySection.getByText("2025-02-01")).toBeVisible();
       });
 
@@ -691,7 +691,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         ).toBeVisible();
       });
 
-      test("型定義に一致しない冒険者が保存されていて移行が行えないとき、登録内容がリセットされること", async ({
+      test("型定義に一致しない冒険者が保存されていて移行が行えないとき、登録内容が初期化されること", async ({
         page,
       }) => {
         // Arrange
@@ -714,7 +714,7 @@ test.describe("世界樹の暦ページのテスト", () => {
         await navigateToEtrianCalendar(page);
 
         // Act
-        await page.getByRole("button", { name: "リセットする" }).click();
+        await page.getByRole("button", { name: "初期化する" }).click();
 
         // Assert (初期値が表示されること)
         await expect(toySection.getByText("ししょー").first()).toBeVisible();
@@ -728,8 +728,8 @@ test.describe("世界樹の暦ページのテスト", () => {
       });
     });
 
-    test.describe("バックアップ時のテスト", () => {
-      test("冒険者が登録済みの状態で、「バックアップ」ボタンをクリックした時、登録状況のバックアップ用テキストが表示されること", async ({
+    test.describe("エクスポート時のテスト", () => {
+      test("冒険者が登録済みの状態で、「エクスポート」ボタンをクリックした時、登録内容のエクスポート用テキストが表示されること", async ({
         page,
       }) => {
         // Arrange
@@ -772,7 +772,7 @@ test.describe("世界樹の暦ページのテスト", () => {
 
         // Act
         await page.getByRole("button", { name: "編集開始" }).click();
-        await page.getByRole("button", { name: "バックアップ" }).click();
+        await page.getByRole("button", { name: "エクスポート" }).click();
 
         // Assert
         // ダイアログは toySection の範囲外のためページ全体をテスト範囲にする
@@ -803,6 +803,185 @@ test.describe("世界樹の暦ページのテスト", () => {
         await expect(page.locator("body")).toContainText(
           '"memo": "大盾で仲間を守る冒険者。敏腕執事。"',
         );
+      });
+    });
+
+    test.describe("インポート時のテスト", () => {
+      test("エクスポート用テキストをインポートした時、既存の登録情報が上書きされること", async ({
+        page,
+      }) => {
+        // Arrange
+        const etrianRegistry: EtrianRegistry = {
+          version: 2,
+          etrians: [
+            {
+              id: "import-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+            },
+          ],
+        };
+
+        const backupText = JSON.stringify(etrianRegistry, null, 2);
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+
+        // Act
+        await page.getByRole("button", { name: "インポート" }).click();
+        await page.getByRole("textbox").fill(backupText);
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert (表示が復元されること)
+        await expect(toySection.getByText("セトハ")).toBeVisible();
+        await expect(toySection.getByText("皇帝ノ月 1 日")).toBeVisible();
+        await expect(toySection.getByText("ブレイバント")).toBeVisible();
+        await expect(toySection.getByText("アルカディア")).toBeVisible();
+        await expect(
+          toySection.getByText("突剣を自在に扱う冒険者。没落貴族の一人娘。"),
+        ).toBeVisible();
+
+        // Assert (データストアへ保存されていること)
+        const migrated: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migrated.version).toBe(2);
+        expect(migrated.etrians[0].id).toBe("import-etrian");
+        expect(migrated.etrians[0].name).toBe("セトハ");
+      });
+
+      test("不正な JSON 文字列をインポートした時、エラーメッセージが表示され、登録済み情報が更新されないこと", async ({
+        page,
+      }) => {
+        // Arrange
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Act
+        await page.getByRole("textbox").fill("dummyText");
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert
+        await expect(
+          page.getByText(
+            "冒険者情報の形式が不正なため、インポートを中止しました。",
+          ),
+        ).toBeVisible();
+
+        // Assert (表示がダミーデータのままであること)
+        await expect(toySection.getByText("dummy")).toBeVisible();
+        await expect(toySection.getByText("天牛ノ月 1 日")).toBeVisible();
+
+        // Assert (データストアが更新されていないこと)
+        const migratedInvalidJson: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migratedInvalidJson.etrians[0].id).toBe("dummy-etrian");
+      });
+
+      test("EtrianRegistry 型に一致しない JSON 文字列をインポートした時、エラーメッセージが表示され、登録済み情報が更新されないこと", async ({
+        page,
+      }) => {
+        // Arrange
+        const corruptedEtrianRegistry: unknown = {
+          version: 2,
+          etrians: [
+            {
+              id: "import-etrian",
+              name: "セトハ",
+              dateOfBirth: {
+                month: "皇帝ノ月",
+                day: 1,
+              },
+              affiliations: ["ブレイバント", "アルカディア"],
+              order: 0,
+              memo: "突剣を自在に扱う冒険者。没落貴族の一人娘。",
+
+              undefinedKey: "★ EtrianRegistry 型に一致しないキー",
+            },
+          ],
+        };
+
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Act
+        await page
+          .getByRole("textbox")
+          .fill(JSON.stringify(corruptedEtrianRegistry));
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert
+        await expect(
+          page.getByText(
+            "冒険者情報の形式が不正なため、インポートを中止しました。",
+          ),
+        ).toBeVisible();
+
+        // Assert (表示がダミーデータのままであること)
+        await expect(toySection.getByText("dummy")).toBeVisible();
+        await expect(toySection.getByText("天牛ノ月 1 日")).toBeVisible();
+
+        // Assert (データストアが更新されていないこと)
+        const migratedCorrupted: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migratedCorrupted.etrians[0].id).toBe("dummy-etrian");
+      });
+
+      test("過去の version (EtrianV1[]) の JSON をインポートした時、マイグレーションされて既存の登録情報が上書きされること", async ({
+        page,
+      }) => {
+        // Arrange: prepare an old-format EtrianV1[] (no version)
+        const oldEtrians: EtrianV1[] = [
+          {
+            id: "old-import-etrian",
+            name: "セトハ",
+            dateOfBirth: {
+              day: 1, // month missing -> should be migrated to 皇帝ノ月
+            },
+            affiliations: ["ブレイバント"],
+            order: 0,
+            memo: "過去版からのインポート",
+          },
+        ];
+
+        const importText = JSON.stringify(oldEtrians, null, 2);
+
+        await navigateToEtrianCalendar(page);
+        await page.getByRole("button", { name: "編集開始" }).click();
+
+        // Act: open import dialog and paste old-format JSON
+        await page.getByRole("button", { name: "インポート" }).click();
+        await page.getByRole("textbox").fill(importText);
+        await page.getByRole("button", { name: "インポート" }).click();
+
+        // Assert: display updated and migrated
+        await expect(toySection.getByText("セトハ")).toBeVisible();
+        await expect(toySection.getByText("皇帝ノ月 1 日")).toBeVisible();
+        await expect(toySection.getByText("ブレイバント")).toBeVisible();
+
+        // Assert: localStorage saved as latest version and normalized
+        const migratedOld: EtrianRegistry = await page.evaluate(
+          (key) => JSON.parse(localStorage.getItem(key)!),
+          ETRIAN_REGISTRY_STORAGE_KEY,
+        );
+        expect(migratedOld.version).toBe(2);
+        expect(migratedOld.etrians[0].id).toBe("old-import-etrian");
+        expect(migratedOld.etrians[0].dateOfBirth).toEqual({
+          month: "皇帝ノ月",
+          day: 1,
+        });
       });
     });
   });
