@@ -6,19 +6,12 @@ import { Version } from "@/components/shared/version";
 
 # 世界樹の暦
 
-<div data-testid="toy" className="flex flex-col gap-6">
-  <div>
-    <TodaysEtrianDateDisplay />
-    <SolarEtrianCalendarConverter />
-  </div>
+<TodaysEtrianDateDisplay />
+<SolarEtrianCalendarConverter />
 
 ## 冒険者お誕生日台帳
 
-  <EtrianRegistry />
-  <Version version="0.5.0" onDate="2026-08-04" />
-</div>
-
----
+<EtrianRegistry />
 
 ## これは何？
 
@@ -82,6 +75,8 @@ import { Version } from "@/components/shared/version";
 - [kem198/practice-web-storage-api](https://github.com/kem198/practice-web-storage-api)
 
 ## 更新履歴
+
+<Version version="0.5.0" onDate="2026-08-04" />
 
 - v0.5.0 | on 2026-08-04
   - 冒険者のインポート機能を追加しました。
