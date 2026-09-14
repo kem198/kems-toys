@@ -5,9 +5,9 @@ import { Progress } from "@/components/ui/progress";
 import { useDeviceOrientation } from "@/hooks/use-device-orientation";
 import { requestDeviceMotionPermission } from "@/utilities/request-device-motion-permission";
 import { Application, extend } from "@pixi/react";
-import { Container, Graphics, Sprite, Text, Texture } from "pixi.js";
+import { Assets, Container, Graphics, Sprite, Text, Texture } from "pixi.js";
 import { MoveHorizontal, MoveVertical, RotateCcw } from "lucide-react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 extend({ Container, Graphics, Sprite, Text });
 
@@ -16,7 +16,23 @@ function DeviceOrientationSample() {
   const { alpha, beta, gamma } = useDeviceOrientation();
 
   // もだねの画像
-  const bunnyTexture = Texture.from("/device-orientation-sample/modane.png");
+  const [bunnyTexture, setBunnyTexture] = useState<Texture | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    void Assets.load<Texture>("/device-orientation-sample/modane.png").then(
+      (texture) => {
+        if (isMounted) {
+          setBunnyTexture(texture);
+        }
+      },
+    );
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   /**
    * alpha 角をラジアンに変換する計算
@@ -96,17 +112,25 @@ function DeviceOrientationSample() {
       {/* ReactPixi の描画サンプル */}
       <div className="flex flex-col gap-8">
         {/* ReactPixi で描画 (x, y 確認用) */}
-        <Application width={240} height={240} backgroundColor={0x1099bb}>
+        <Application
+          width={240}
+          height={240}
+          backgroundColor={0x1099bb}
+          autoDensity
+          resolution={window.devicePixelRatio}
+        >
           {/* メインのコンテナ */}
           <pixiContainer x={120} y={120}>
             {/* <Text text="Hello World!" anchor={0.5} /> */}
             {/* もだね */}
-            <pixiSprite
-              texture={bunnyTexture}
-              anchor={0.5}
-              x={gamma ?? 0}
-              y={beta ?? 0}
-            />
+            {bunnyTexture && (
+              <pixiSprite
+                texture={bunnyTexture}
+                anchor={0.5}
+                x={gamma ?? 0}
+                y={beta ?? 0}
+              />
+            )}
             {/* 十字線 */}
             <pixiGraphics draw={Crosshair} />
           </pixiContainer>
@@ -126,12 +150,24 @@ function DeviceOrientationSample() {
         </Application>
 
         {/* ReactPixi で描画 (rotation 確認用) */}
-        <Application width={240} height={240} backgroundColor={0x1099bb}>
+        <Application
+          width={240}
+          height={240}
+          backgroundColor={0x1099bb}
+          autoDensity
+          resolution={window.devicePixelRatio}
+        >
           {/* メインのコンテナ */}
           <pixiContainer x={120} y={120}>
             {/* <Text text="Hello World!" anchor={0.5} /> */}
             {/* もだね */}
-            <pixiSprite texture={bunnyTexture} anchor={0.5} rotation={rad} />
+            {bunnyTexture && (
+              <pixiSprite
+                texture={bunnyTexture}
+                anchor={0.5}
+                rotation={rad}
+              />
+            )}
             {/* 円 */}
             <pixiGraphics draw={Circle} />
           </pixiContainer>
