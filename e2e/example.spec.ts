@@ -20,7 +20,7 @@ test("get started link", async ({ page }) => {
 });
 
 test("has title 'KeM's Toys'", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("/");
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/KeM's Toys/);
