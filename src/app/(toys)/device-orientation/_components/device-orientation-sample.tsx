@@ -4,17 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useDeviceOrientation } from "@/hooks/use-device-orientation";
 import { requestDeviceMotionPermission } from "@/utilities/request-device-motion-permission";
-import { Container, Graphics, Sprite, Stage, Text } from "@pixi/react";
-import { TextStyle } from "@pixi/text";
+import { Application, extend } from "@pixi/react";
+import { Container, Graphics, Sprite, Text, Texture } from "pixi.js";
 import { MoveHorizontal, MoveVertical, RotateCcw } from "lucide-react";
 import { useCallback } from "react";
+
+extend({ Container, Graphics, Sprite, Text });
 
 function DeviceOrientationSample() {
   // カスタムフックからセンサ情報を取得
   const { alpha, beta, gamma } = useDeviceOrientation();
 
   // もだねの画像
-  const bunnyUrl = "/device-orientation-sample/modane.png";
+  const bunnyTexture = Texture.from("/device-orientation-sample/modane.png");
 
   /**
    * alpha 角をラジアンに変換する計算
@@ -30,52 +32,27 @@ function DeviceOrientationSample() {
   const infoTextStyle = { fontSize: 10 };
 
   // 十字線の描画設定
-  const Crosshair = useCallback(
-    (g: {
-      clear: () => void;
-      lineStyle: (arg0: number, arg1: number) => void;
-      moveTo: (arg0: number, arg1: number) => void;
-      lineTo: (arg0: number, arg1: number) => void;
-    }) => {
-      // 初期化
-      g.clear();
-      // 線の太さ, 色
-      g.lineStyle(1, 0xff0000);
-      // 横線
-      g.moveTo(-16, 0);
-      g.lineTo(16, 0);
-      // 縦線
-      g.moveTo(0, -16);
-      g.lineTo(0, 16);
-    },
-    [],
-  );
+  const Crosshair = useCallback((g: Graphics) => {
+    g.clear()
+      .setStrokeStyle({ width: 1, color: 0xff0000 })
+      .moveTo(-16, 0)
+      .lineTo(16, 0)
+      .moveTo(0, -16)
+      .lineTo(0, 16)
+      .stroke();
+  }, []);
 
   // 円の描画設定
-  const Circle = useCallback(
-    (g: {
-      clear: () => void;
-      lineStyle: (arg0: number, arg1: number) => void;
-      moveTo: (arg0: number, arg1: number) => void;
-      lineTo: (arg0: number, arg1: number) => void;
-      drawCircle: (arg0: number, arg1: number, arg2: number) => void;
-      endFill: () => void;
-    }) => {
-      g.clear();
-      // 線の太さ, 色
-      g.lineStyle(1, 0xff0000);
-      // 横線
-      g.moveTo(-40, 0);
-      g.lineTo(40, 0);
-      // 縦線
-      g.moveTo(0, -40);
-      g.lineTo(0, 40);
-      // 円の描画
-      g.drawCircle(0, 0, 32);
-      g.endFill();
-    },
-    [],
-  );
+  const Circle = useCallback((g: Graphics) => {
+    g.clear()
+      .setStrokeStyle({ width: 1, color: 0xff0000 })
+      .moveTo(-40, 0)
+      .lineTo(40, 0)
+      .moveTo(0, -40)
+      .lineTo(0, 40)
+      .circle(0, 0, 32)
+      .stroke();
+  }, []);
 
   return (
     <div>
@@ -119,59 +96,59 @@ function DeviceOrientationSample() {
       {/* ReactPixi の描画サンプル */}
       <div className="flex flex-col gap-8">
         {/* ReactPixi で描画 (x, y 確認用) */}
-        <Stage width={240} height={240} options={{ background: 0x1099bb }}>
+        <Application width={240} height={240} backgroundColor={0x1099bb}>
           {/* メインのコンテナ */}
-          <Container anchor={0.5} position={[120, 120]}>
+          <pixiContainer x={120} y={120}>
             {/* <Text text="Hello World!" anchor={0.5} /> */}
             {/* もだね */}
-            <Sprite
-              image={bunnyUrl}
+            <pixiSprite
+              texture={bunnyTexture}
               anchor={0.5}
               x={gamma ?? 0}
               y={beta ?? 0}
             />
             {/* 十字線 */}
-            <Graphics draw={Crosshair} />
-          </Container>
+            <pixiGraphics draw={Crosshair} />
+          </pixiContainer>
 
           {/* 傾き情報のコンテナ */}
-          <Container position={[5, 5]}>
-            <Text
+          <pixiContainer x={5} y={5}>
+            <pixiText
               text={`x (gamma): ${gamma}`}
-              style={new TextStyle(infoTextStyle)}
+              style={infoTextStyle}
             />
-            <Text
+            <pixiText
               text={`y (beta): ${beta}`}
               y={16}
-              style={new TextStyle(infoTextStyle)}
+              style={infoTextStyle}
             />
-          </Container>
-        </Stage>
+          </pixiContainer>
+        </Application>
 
         {/* ReactPixi で描画 (rotation 確認用) */}
-        <Stage width={240} height={240} options={{ background: 0x1099bb }}>
+        <Application width={240} height={240} backgroundColor={0x1099bb}>
           {/* メインのコンテナ */}
-          <Container anchor={0.5} position={[120, 120]}>
+          <pixiContainer x={120} y={120}>
             {/* <Text text="Hello World!" anchor={0.5} /> */}
             {/* もだね */}
-            <Sprite image={bunnyUrl} anchor={0.5} rotation={rad} />
+            <pixiSprite texture={bunnyTexture} anchor={0.5} rotation={rad} />
             {/* 円 */}
-            <Graphics draw={Circle} />
-          </Container>
+            <pixiGraphics draw={Circle} />
+          </pixiContainer>
 
           {/* 傾き情報のコンテナ */}
-          <Container position={[5, 5]}>
-            <Text
+          <pixiContainer x={5} y={5}>
+            <pixiText
               text={`alpha:${alpha}`}
-              style={new TextStyle(infoTextStyle)}
+              style={infoTextStyle}
             />
-            <Text
+            <pixiText
               text={`radian ((alpha * π) / 180):${rad}`}
               y={16}
-              style={new TextStyle(infoTextStyle)}
+              style={infoTextStyle}
             />
-          </Container>
-        </Stage>
+          </pixiContainer>
+        </Application>
       </div>
       <hr />
     </div>
